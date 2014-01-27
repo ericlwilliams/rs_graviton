@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{allcl}{../../logs/allcl.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{All Clusters fractional $\Delta$~acceptance in signal region}
+  \DTLdisplaydb{allcl}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/allcl/h_bkgds_allcl_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/allcl/h_bkgds_allcl_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+
+\end{document}

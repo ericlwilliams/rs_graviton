@@ -1,0 +1,351 @@
+//////////////////////////////////////////////////
+// Loads plot files from ../plots/ctrl_plots/...
+// Calculates scale factors in
+// ctrl_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65 || m(jj)>115
+// ctrl_highm: pt(lv)>200, pt(jj)>200, m(jj)<65 || m(jj)>115
+// lowsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65
+// highsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)>115
+// lowsb_highm: pt(lv)>200, pt(jj)>200, m(jj)<65
+// highsb_highm: pt(lv)>200, pt(jj)>200, m(jj)>115
+//////////////////////////////////////////////////
+
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <THStack.h>
+#include "TH1.h"
+#include <TFile.h>
+
+#include "../include/wjets_sf_defs.h"
+
+//////////////////////////////////////////////////
+// scale_region:
+// - "sidebands"
+//   - loads 'lowsb_lowm','highsb_lowm','lowsb_highm','highsb_higm'
+// - "inclusive"
+//   - loads 'ctrl_wjets_lowpt' (maybe 'ctrl_wjets_lowpt')
+////////////////////////////////////////////////// 
+void wjetsScaleFactors(string scale_region="sidebands"){
+
+  gROOT->SetStyle("Plain");  
+  gStyle->SetOptStat(0);
+  gStyle->SetPalette(1);
+  gStyle->SetPadTickX(1);
+  gStyle->SetPadTickY(1);
+  //gStyle->SetFillStyle(3144);
+  
+  gROOT->SetBatch();
+
+  cout.setf(ios::fixed,ios::floatfield);            // floatfield not set
+  cout.precision(3);
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsScaleFactors.C"<<endl;
+
+  // const int nProcs = 2;
+  // string procs[nProcs] = {"elec", "muon"};
+
+  string file_loc = "/Users/elw/analy/lvjj/plots/ctrl_plots/";
+
+  int cur_nprocs=-1;
+  string* procs;
+  int cur_n_control_regions=-1;
+  string* control_regions;
+  string last_cut_name;
+  if(scale_region.find("sidebands")!=string::npos){      
+
+    cur_nprocs=sideband_nprocs;
+    procs=sideband_procs;
+    control_regions=sideband_control_regions;
+    cur_n_control_regions=n_sideband_regions;
+    last_cut_name=sideband_last_cut_name;
+    
+  }else if(scale_region.find("ctrl_wjets_lowpt")!=string::npos){
+
+    cur_nprocs=wjets_nprocs;
+    procs=wjets_procs;
+    control_regions=wjets_control_regions;
+    cur_n_control_regions=n_wjets_regions;
+    last_cut_name=wjets_last_cut_name;
+    
+  } else{
+    cout<<"Unknown scale_region "<<scale_region<<" in wjetsScaleFactors"<<endl;
+    cout<<"Known regions: ctrl_wjets_lowpt && sidebands"<<endl
+    exit(0);
+  }
+  const int nProcs = cur_nprocs;
+  const int nControlRegions=cur_n_control_regions;
+
+  
+  //////////////////////////////////////////////////
+  // Load Data
+  ////////////////////////////////////////////////// 
+  
+  string data_loc = file_loc+"merged/data.lnuj.ctrl.plot.root";
+  TFile* data = TFile::Open(data_loc.c_str());
+  //////////////////////////////////////////////////
+  // Load Scaled Backgrounds
+  //////////////////////////////////////////////////   
+  string sherpa_wjets_loc = file_loc+"merged/mc.sherpa.wjets.ctrl.plot.root";
+  string alpgen_wjets_loc = file_loc+"merged/mc.alpgen.wjets.ctrl.plot.root";
+  string vv_loc = file_loc+"merged/mc.herwig.vv.ctrl.plot.root";
+  string alpgen_qcd_loc = file_loc+"merged/qcd.alpgen.ctrl.plot.root";
+  string sherpa_qcd_loc = file_loc+"merged/qcd.sherpa.ctrl.plot.root";
+  string top_loc = file_loc+"merged/mc.mcatnlo.top.ctrl.plot.root";  
+  string zjets_loc = file_loc+"merged/mc.alpgen.zjets.ctrl.plot.root";
+
+  TFile* sherpa_wjets = TFile::Open(sherpa_wjets_loc.c_str());  
+  TFile* alpgen_wjets = TFile::Open(alpgen_wjets_loc.c_str());
+  TFile* vv = TFile::Open(vv_loc.c_str());
+  TFile* alpgen_qcd = TFile::Open(alpgen_qcd_loc.c_str());
+  TFile* sherpa_qcd = TFile::Open(sherpa_qcd_loc.c_str());
+  TFile* top = TFile::Open(top_loc.c_str());
+  TFile* zjets = TFile::Open(zjets_loc.c_str());
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////// 
+  // For each control region calculate:
+  // - SF(sherpa/alpgen) = N(data)-N(non-wjets bkgd)/N(sherpa/alpgen wjets)
+  // where N is number of events (not scaled! (see wwXSec.h)) in lep_met_dijet_mt distribution
+  //////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+  // w/ histos
+  //  TH1F* h_n_data[nControlRegions][nProcs]={0.};
+  
+  float n_data[nControlRegions][nProcs]={0.};
+  float n_alpgen_bkgds[nControlRegions][nProcs]={0.};// non-wjets bkgds + qcd.alpgen
+  float n_sherpa_bkgds[nControlRegions][nProcs]={0.};// non-wjets bkgds + qcd.sherpa
+  float n_alpgen_wjets[nControlRegions][nProcs]={0.};
+  float n_sherpa_wjets[nControlRegions][nProcs]={0.};
+
+  float n_raw_data[nControlRegions][nProcs]={0.};
+  float n_raw_alpgen_bkgds[nControlRegions][nProcs]={0.};// non-wjets bkgds + qcd.alpgen
+  float n_raw_sherpa_bkgds[nControlRegions][nProcs]={0.};// non-wjets bkgds + qcd.sherpa
+  float n_raw_alpgen_wjets[nControlRegions][nProcs]={0.};
+  float n_raw_sherpa_wjets[nControlRegions][nProcs]={0.};
+
+  float n_sherpa_wjets_sf[nControlRegions][nProcs]={0.};
+  float n_alpgen_wjets_sf[nControlRegions][nProcs]={0.};
+
+  float n_sherpa_wjets_sf_rel_err[nControlRegions][nProcs]={0.};
+  float n_alpgen_wjets_sf_rel_err[nControlRegions][nProcs]={0.};
+
+  float n_sherpa_wjets_sf_abs_err[nControlRegions][nProcs]={0.};
+  float n_alpgen_wjets_sf_abs_err[nControlRegions][nProcs]={0.};
+
+  
+  
+  for(int i=0;i<nControlRegions;i++){
+
+    string cur_control_region = control_regions[i];
+
+    for(int j=0;j<nProcs;j++){
+
+      string cur_proc = procs[j];
+      
+    // for(int j=0;j<nProcs;j++){
+
+    //   string cur_proc = procs[j];
+      // 'dijet_m' in name to specify plot AFTER dijet_m cut
+      // from controlPlots.C, will change after control regions
+      // implemented in myAnalysis.cxx
+      string cur_hist_name =
+	"h_"+cur_control_region+"_"+cur_proc+"_"+last_cut_name+"_lep_met_dijet_mt";
+
+      cout<<cur_control_region<<", "<<cur_proc<<", "<<cur_hist_name<<endl;
+      
+      n_data[i][j]=((TH1F*) data->Get(cur_hist_name.c_str()))->GetEntries();
+      n_raw_data[i][j]=((TH1F*) data->Get(cur_hist_name.c_str()))->GetEntries();
+
+      // w/ histos
+      //h_n_data[i][j]=(TH1F*) data->Get(cur_hist_name.c_str());
+      // string cur_n_data_name = "h_"+cur_control_region+"_n_data";
+      // h_n_data[i][j]= new TH1F(cur_n_data_name.c_str(),cur_n_data_name.c_str(),1,0.5,1.5);
+      // h_n_data[i][j]->Sumw2();
+      // h_n_data[i][j]->Fill(1,n_data[i][j]);
+  
+      
+      // non-wjetsbkgds
+      float n_non_wjets_bkgds =
+	((TH1F*) vv->Get(cur_hist_name.c_str()))->Integral() +
+	((TH1F*) top->Get(cur_hist_name.c_str()))->Integral() +
+	((TH1F*) zjets->Get(cur_hist_name.c_str()))->Integral();
+
+      
+      n_alpgen_bkgds[i][j] = n_non_wjets_bkgds + ((TH1F*) alpgen_qcd->Get(cur_hist_name.c_str()))->Integral();
+      n_sherpa_bkgds[i][j] = n_non_wjets_bkgds + ((TH1F*) sherpa_qcd->Get(cur_hist_name.c_str()))->Integral();
+
+
+      n_alpgen_wjets[i][j]=((TH1F*) alpgen_wjets->Get(cur_hist_name.c_str()))->Integral();
+      n_sherpa_wjets[i][j]=((TH1F*) sherpa_wjets->Get(cur_hist_name.c_str()))->Integral();
+
+      n_raw_alpgen_bkgds[i][j] = n_non_wjets_bkgds + ((TH1F*) alpgen_qcd->Get(cur_hist_name.c_str()))->Integral();
+      n_raw_sherpa_bkgds[i][j] = n_non_wjets_bkgds + ((TH1F*) sherpa_qcd->Get(cur_hist_name.c_str()))->Integral();
+
+      n_raw_alpgen_wjets[i][j]=((TH1F*) alpgen_wjets->Get(cur_hist_name.c_str()))->GetEntries();
+      n_raw_sherpa_wjets[i][j]=((TH1F*) sherpa_wjets->Get(cur_hist_name.c_str()))->GetEntries();
+
+      //////////////////////////////////////////////////
+      // Calculate Scale Factor
+      ////////////////////////////////////////////////// 
+
+      n_alpgen_wjets_sf[i][j] = (n_data[i][j]-n_alpgen_bkgds[i][j])/n_alpgen_wjets[i][j];
+      n_sherpa_wjets_sf[i][j] = (n_data[i][j]-n_sherpa_bkgds[i][j])/n_sherpa_wjets[i][j];
+
+
+      //////////////////////////////////////////////////
+      // Error Propagation
+      ////////////////////////////////////////////////// 
+
+      float n_data_err = sqrt(n_raw_data[i][j]);
+      // TH1F* h_data_n = new TH1F("h_data_n","h_data_n",1,0.5,1.5);
+      // h_data_n->Fill(n_raw_data[i][j],n_data[i][j]);
+      
+      float n_alpgen_bkgds_err = sqrt(n_raw_alpgen_bkgds[i][j]);
+      float n_sherpa_bkgds_err = sqrt(n_raw_sherpa_bkgds[i][j]);
+      float n_alpgen_wjets_err = sqrt(n_raw_alpgen_wjets[i][j]);
+      float n_sherpa_wjets_err = sqrt(n_raw_sherpa_wjets[i][j]);
+
+      float n_alpgen_numerator_abs_err =
+	sqrt(n_alpgen_bkgds_err*n_alpgen_bkgds_err+n_data_err*n_data_err);
+      float n_alpgen_denominator_abs_err = n_alpgen_wjets_err;
+
+      float n_sherpa_numerator_abs_err =
+	sqrt(n_sherpa_bkgds_err*n_sherpa_bkgds_err+n_data_err*n_data_err);
+      float n_sherpa_denominator_abs_err = n_sherpa_wjets_err;
+	
+      float n_alpgen_sf_rel_err =
+	sqrt((n_alpgen_numerator_abs_err/fabs(n_raw_data[i][j]-n_raw_alpgen_bkgds[i][j])) *
+	     (n_alpgen_numerator_abs_err/fabs(n_raw_data[i][j]-n_raw_alpgen_bkgds[i][j])) +
+	     (n_alpgen_denominator_abs_err/fabs(n_raw_alpgen_wjets[i][j])) *
+	     (n_alpgen_denominator_abs_err/fabs(n_raw_alpgen_wjets[i][j])));
+
+      float n_sherpa_sf_rel_err =
+	sqrt((n_sherpa_numerator_abs_err/fabs(n_raw_data[i][j]-n_raw_sherpa_bkgds[i][j])) *
+	     (n_sherpa_numerator_abs_err/fabs(n_raw_data[i][j]-n_raw_sherpa_bkgds[i][j])) +
+	     (n_sherpa_denominator_abs_err/fabs(n_raw_sherpa_wjets[i][j])) *
+	     (n_sherpa_denominator_abs_err/fabs(n_raw_sherpa_wjets[i][j])));
+
+      
+      n_alpgen_wjets_sf_rel_err[i][j]=n_alpgen_sf_rel_err*(n_alpgen_wjets[i][j]/n_raw_alpgen_wjets[i][j]);
+      n_sherpa_wjets_sf_rel_err[i][j]=n_sherpa_sf_rel_err*(n_sherpa_wjets[i][j]/n_raw_sherpa_wjets[i][j]);
+
+
+      float n_alpgen_sf_abs_err = n_alpgen_wjets_sf_rel_err[i][j]*n_alpgen_wjets_sf[i][j];
+      float n_sherpa_sf_abs_err = n_sherpa_wjets_sf_rel_err[i][j]*n_sherpa_wjets_sf[i][j];
+
+      n_alpgen_wjets_sf_abs_err[i][j]=n_alpgen_sf_abs_err;
+      n_sherpa_wjets_sf_abs_err[i][j]=n_sherpa_sf_abs_err;
+
+      //}
+    }
+  }
+//  delete h_n_data;
+  
+  data->Close();
+  sherpa_wjets->Close();
+  alpgen_wjets->Close();
+  vv->Close();
+  sherpa_qcd->Close();
+  alpgen_qcd->Close();
+  top->Close();
+  zjets->Close();
+  
+  //////////////////////////////////////////////////
+  // Print Scale Factors
+  ////////////////////////////////////////////////// 
+  string out_file_name = "./logs/wjets_"+scale_region+"_sf.csv";
+  std::ofstream out_file(out_file_name.c_str());
+  out_file<<"scale_region,control_region,channel,alpgen_sf,alpgen_sf_err,sherpa_sf,sherpa_sf_err"<<endl;
+
+  float avg_alpgen_sf[nProcs]={0.,0.};
+  float err_alpgen_sf[nProcs]={0.,0.};
+  float alpgen_sow[nProcs]={0.,0.};
+
+  float avg_sherpa_sf[nProcs]={0.,0.};
+  float err_sherpa_sf[nProcs]={0.,0.};
+  float sherpa_sow[nProcs]={0.,0.};
+
+  cout<<"== W+Jets Scale Factors =="<<endl;
+  for(int i=0;i<nControlRegions;i++){
+
+    string cur_control_region = control_regions[i];
+    string ctrl_out_file_name = "./logs/vjets_"+cur_control_region+"_sf.csv";
+    std::ofstream ctrl_out_file(ctrl_out_file_name.c_str());
+    ctrl_out_file.precision(3);
+    ctrl_out_file.setf(ios::fixed,ios::floatfield);
+    ctrl_out_file<<"alpgen_elec,alpgen_elec_err,alpgen_muon,alpgen_muon_err,";
+    ctrl_out_file<<"sherpa_elec,sherpa_elec_err,sherpa_muon,sherpa_muon_err"<<endl;
+    cout<<"--"<<endl;
+    cout<<"Control Region: "<<cur_control_region<<endl;
+
+    for(int j=0;j<nProcs;j++){
+    
+      string cur_proc = procs[j];
+
+      avg_alpgen_sf[j]+=(n_alpgen_wjets_sf[i][j]*n_alpgen_wjets[i][j]);
+      err_alpgen_sf[j]+=pow(n_alpgen_wjets_sf_abs_err[i][j],2.);
+      alpgen_sow[j]+=n_alpgen_wjets[i][j];
+
+      avg_sherpa_sf[j]+=(n_sherpa_wjets_sf[i][j]*n_sherpa_wjets[i][j]);
+      err_sherpa_sf[j]+=pow(n_sherpa_wjets_sf_abs_err[i][j],2.);
+      sherpa_sow[j]+=n_sherpa_wjets[i][j];
+      
+      cout<<"* "<<cur_proc<<" channel *"<<endl;
+      cout<<"ALPGEN: "<<n_alpgen_wjets_sf[i][j]<<" +- "<<n_alpgen_wjets_sf_abs_err[i][j]<<" ("<<n_alpgen_wjets_sf_rel_err[i][j]*100<<"%)  (weight by: "<<n_alpgen_wjets[i][j]<<" entries)"<<endl;
+      cout<<"SHERPA: "<<n_sherpa_wjets_sf[i][j]<<" +- "<<n_sherpa_wjets_sf_abs_err[i][j]<<" ("<<n_sherpa_wjets_sf_rel_err[i][j]*100<<"%)  (weight by: "<<n_sherpa_wjets[i][j]<<" entries)"<<endl;
+          
+    out_file<<scale_region
+	    <<","<<cur_control_region
+	    <<","<<cur_proc
+	    <<","<<n_alpgen_wjets_sf[i][j]
+	    <<","<<n_alpgen_wjets_sf_abs_err[i][j]
+	    <<","<<n_sherpa_wjets_sf[i][j]
+	    <<","<<n_sherpa_wjets_sf_abs_err[i][j]<<endl;
+
+
+
+    }
+    ctrl_out_file<<n_alpgen_wjets_sf[i][0]<<","<<n_alpgen_wjets_sf_abs_err[i][0]<<","//alpgen_elec
+		 <<n_alpgen_wjets_sf[i][1]<<","<<n_alpgen_wjets_sf_abs_err[i][1]<<","//alpgen_muon
+		 <<n_sherpa_wjets_sf[i][0]<<","<<n_sherpa_wjets_sf_abs_err[i][0]<<","//sherpa_elec
+		 <<n_sherpa_wjets_sf[i][1]<<","<<n_sherpa_wjets_sf_abs_err[i][1]<<endl;//sherpa_muon
+
+    ctrl_out_file.close();
+  }
+
+  float avg_alpgen_elec_sf = avg_alpgen_sf[0]/alpgen_sow[0];
+  float err_alpgen_elec_sf = sqrt(err_alpgen_sf[0]);
+  float avg_alpgen_muon_sf = avg_alpgen_sf[1]/alpgen_sow[1];
+  float err_alpgen_muon_sf = sqrt(err_alpgen_sf[1]);
+
+  float avg_sherpa_elec_sf = avg_sherpa_sf[0]/sherpa_sow[0];
+  float err_sherpa_elec_sf = sqrt(err_sherpa_sf[0]);
+  float avg_sherpa_muon_sf = avg_sherpa_sf[1]/sherpa_sow[1];
+  float err_sherpa_muon_sf = sqrt(err_sherpa_sf[1]);
+
+  string sf_out_file_name = "./logs/vjets_avg_sf.csv";
+  std::ofstream sf_out_file(sf_out_file_name.c_str());
+  sf_out_file.precision(3);
+  sf_out_file.setf(ios::fixed,ios::floatfield);
+  sf_out_file<<"alpgen_elec,alpgen_elec_err,";
+  sf_out_file<<"alpgen_muon,alpgen_muon_err,";
+  sf_out_file<<"sherpa_elec,sherpa_elec_err,";
+  sf_out_file<<"sherpa_muon,sherpa_muon_err"<<endl;
+
+  sf_out_file<<avg_alpgen_elec_sf<<","<<err_alpgen_elec_sf<<",";
+  sf_out_file<<avg_alpgen_muon_sf<<","<<err_alpgen_muon_sf<<",";
+  sf_out_file<<avg_sherpa_elec_sf<<","<<err_sherpa_elec_sf<<",";
+  sf_out_file<<avg_sherpa_muon_sf<<","<<err_sherpa_muon_sf<<endl;
+  cout<<"Weighted averages"<<endl;
+  cout<<"alpgen_elec: "<<avg_alpgen_elec_sf<<" /\pm "<<err_alpgen_elec_sf<<endl;
+  cout<<"alpgen_muon: "<<avg_alpgen_muon_sf<<" /\pm "<<err_alpgen_muon_sf<<endl;
+  
+  cout<<"--"<<endl;
+  cout<<"data written to "<<out_file_name<<", ./logs/vjets_avg_sf.csv and ./logs/vjets_{sideband}_sf.csv"<<endl;
+  return;
+}

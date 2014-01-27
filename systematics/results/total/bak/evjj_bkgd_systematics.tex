@@ -1,0 +1,63 @@
+\documentclass[english]{beamer}
+\usefonttheme[stillsansseriftext]{serif}
+\useoutertheme{infolines} %% only for those without footer
+\usetheme[height=7mm]{Rochester}
+%\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{} %% get rid of navigation icons
+
+
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{datatool}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+
+
+
+\DTLloaddb[,keys={systematic,wjets,zjets,ttbar,singletop,ww,wz,zz},headers={Systematic,Wjets,Zjets,ttbar,singletop,WW,WZ,ZZ}]{elec_bkgd_index}{elec_bkgd_index.csv}
+
+\begin{document}
+
+\newcolumntype{d}{D{.}{.}{-1}}
+
+\begin{frame}[plain]
+
+\def\diboson{0}
+\def\na{-}
+\begin{table}[h]
+  \caption{\large{$e\nu jj$ percent $\Delta$ acceptance.}}\small
+  \begin{tabular}{l c c c c d}
+    \toprule
+    {\bf Systematic} &\multicolumn{1}{c}{\bf Wjets} &\multicolumn{1}{c}{\bf Zjets}&\multicolumn{1}{c}{\bf TTBar}&\multicolumn{1}{c}{\bf Single}&\multicolumn{1}{l}{\bf Diboson}%
+    \tabularnewline
+    & & & & \multicolumn{1}{c}{\bf Top} &%
+    \tabularnewline
+    \midrule
+
+    \DTLforeach*{elec_bkgd_index}{%
+      \systematic=systematic,\wjets=wjets,\zjets=zjets,\ttbar=ttbar,\singletop=singletop,\ww=ww,\wz=wz,\zz=zz}{%
+
+      \DTLgmul{\diboson}{0}{\diboson}
+      \ifthenelse{\DTLisnumerical{\ww}}{\DTLgadd{\diboson}{\ww}{\diboson}}{}
+      \ifthenelse{\DTLisnumerical{\wz}}{\DTLgadd{\diboson}{\wz}{\diboson}}{}
+      \ifthenelse{\DTLisnumerical{\zz}}{\DTLgadd{\diboson}{\zz}{\diboson}}{}
+      \DTLgdiv{\diboson}{\diboson}{3}
+      %\DTLgtrunc{\diboson}{\diboson}{2}
+      \DTLgmul{\diboson}{1.02}{\diboson}
+      \DTLground{\diboson}{\diboson}{2}
+      
+      \tabularnewline      
+      \systematic & \multicolumn{1}{c}{\wjets} & \wjets & \ttbar & \singletop & \DTLifeq{0}{\diboson}{~~$-$}{\diboson}} %\multicolumn{1}{l}{\diboson} }%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+\end{document}
+

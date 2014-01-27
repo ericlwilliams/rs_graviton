@@ -1,0 +1,15 @@
+idpt
+sample,el_lowm,el_highm,mu_lowm,mu_highm
+herwig.ww,0,0,0.000139076,0.00102408,
+herwig.wz,0,0,0,0.00379386,
+herwig.zz,0,0,0,0,
+mcatnlo.ttbar,0,0,5.85448e-05,0.000186728,
+mcatnlo.singletop,0,0,0.00014176,0.000323212,
+alpgen.wjets,0,0,9.25102e-05,0.000291049,
+alpgen.zjets,0,0,0.000412027,0.00373894,
+qcd.alpgen,0,0,0,nan,
+Backgrounds,=AVERAGE(B3:B6),=AVERAGE(C3:C6),=AVERAGE(D3:D6),=AVERAGE(E3:E6)
+gww.lvjj.m500.kmpl0_1,0,0,0,0.000506376,
+gww.lvjj.m1000.kmpl0_1,0,0,0,0,
+gww.lvjj.m1250.kmpl0_1,0,0,0,0,
+gww.lvjj.m1500.kmpl0_1,0,0,0,0.000909024,

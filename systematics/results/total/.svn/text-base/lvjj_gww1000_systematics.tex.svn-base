@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[margin=1cm]{geometry}
+\usepackage[font=small,labelfont=bf,tableposition=top]{caption}
+\usepackage{dcolumn}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{datatool}
+\usepackage{booktabs}
+
+
+
+\DTLloaddb[,keys={systematic,evjj,uvjj}]{gww_index}{gww_index.csv}
+
+\newcolumntype{d}{D{,}{\,,\,}{6,6}}
+
+\begin{document}
+
+\begin{table}[h]
+  \caption{\large{Acceptance systematics for RS G (M1000) sample. Shown as (electron channel, muon channel)}}\small
+  \begin{tabular}{l c c }
+    \hline
+    \hline
+        {\bf Systematic} & $e\nu jj$ & $\mu\nu jj$ %
+        \DTLforeach*{gww_index}{%
+          \systematic=systematic,\evjj=evjj,\uvjj=uvjj}{%
+          \DTLiffirstrow{\\\hline}{\tabularnewline}%
+          \DTLifeq{\systematic}{Total}{\\\hline \bf}{}%
+          \systematic & \evjj\% & \uvjj\% }%
+        \tabularnewline
+        \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
+
+
+
+
+
+

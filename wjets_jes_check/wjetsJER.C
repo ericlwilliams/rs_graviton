@@ -1,0 +1,594 @@
+#include <TCanvas.h>
+#include <TPad.h>
+#include <TProfile.h>
+#include <TFile.h>
+#include <TDirectory.h>
+#include <TBox.h>
+#include <TLine.h>
+
+#include "../include/atlasstyle-00-03-04/AtlasStyle.C";
+
+void wjetsJER(){
+
+  SetAtlasStyle();
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsJER.C"<<endl;
+
+  string save_loc = "./canvases/latest/";
+  string cur_saveas="";
+
+  TFile* wjets = (TFile*) TFile::Open("../plots/systematics_plots/merged/mc.alpgen.wjets.systematics.plot.root","READ");
+  // jer_up
+  TH1F* h_elec_jer_up_dijet_m = (TH1F*) wjets->Get("h_el_jer_up_highm_jer_dijet_m");
+  h_elec_jer_up_dijet_m->SetDirectory(0);
+  TH1F* h_muon_jer_up_dijet_m = (TH1F*) wjets->Get("h_mu_jer_up_highm_jer_dijet_m");
+  h_muon_jer_up_dijet_m->SetDirectory(0);
+  
+  // jer_down
+  TH1F* h_elec_jer_down_dijet_m = (TH1F*) wjets->Get("h_el_jer_down_highm_jer_dijet_m");
+  h_elec_jer_down_dijet_m->SetDirectory(0);
+  TH1F* h_muon_jer_down_dijet_m = (TH1F*) wjets->Get("h_mu_jer_down_highm_jer_dijet_m");
+  h_muon_jer_down_dijet_m->SetDirectory(0);
+  
+  // jer_nom
+  TH1F* h_elec_jer_nom_dijet_m = (TH1F*) wjets->Get("h_el_jer_nom_highm_jer_dijet_m");
+  h_elec_jer_nom_dijet_m->SetDirectory(0);
+  TH1F* h_muon_jer_nom_dijet_m = (TH1F*) wjets->Get("h_mu_jer_nom_highm_jer_dijet_m");
+  h_muon_jer_nom_dijet_m->SetDirectory(0);
+
+
+  int tot_bins = h_elec_jer_nom_dijet_m->GetNbinsX();
+  // Find M(jj)=65 bin
+  int lowsb_bin=-1;
+  for(int i=1;i<=tot_bins;i++){
+    if(h_elec_jer_nom_dijet_m->GetBinCenter(i)>=65){
+      lowsb_bin=i;
+      break;
+    }
+  }
+  if(lowsb_bin<0){
+    cout<<"No M(jj)=65 GeV bin found!"<<endl;
+    exit(0);
+  }
+
+  int highsb_bin=-1;
+  for(int i=1;i<=tot_bins;i++){
+    if(h_elec_jer_nom_dijet_m->GetBinCenter(i)>=115){
+      highsb_bin=i;
+      break;
+    }
+  }
+  if(highsb_bin<0){
+    cout<<"No M(jj)=65 GeV bin found!"<<endl;
+    exit(0);
+  }
+
+
+
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"M(jj)=65 GeV bin: "<<lowsb_bin<<", "<<h_elec_jer_nom_dijet_m->GetBinCenter(lowsb_bin)<<endl;
+  cout<<"M(jj)=115 GeV bin: "<<highsb_bin<<", "<<h_elec_jer_nom_dijet_m->GetBinCenter(highsb_bin)<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+
+  double elec_lowsb_nom_err = 0.;
+  double elec_lowsb_nom_count = h_elec_jer_nom_dijet_m->IntegralAndError(1,lowsb_bin,elec_lowsb_nom_err);
+
+  double elec_lowsb_up_err = 0.;
+  double elec_lowsb_up_count = h_elec_jer_up_dijet_m->IntegralAndError(1,lowsb_bin,elec_lowsb_up_err);
+
+  double elec_lowsb_down_err = 0.;
+  double elec_lowsb_down_count = h_elec_jer_down_dijet_m->IntegralAndError(1,lowsb_bin,elec_lowsb_down_err);
+
+  double elec_highsb_nom_err = 0.;
+  double elec_highsb_nom_count = h_elec_jer_nom_dijet_m->IntegralAndError(highsb_bin,tot_bins,elec_highsb_nom_err);
+
+  double elec_highsb_up_err = 0.;
+  double elec_highsb_up_count = h_elec_jer_up_dijet_m->IntegralAndError(highsb_bin,tot_bins,elec_highsb_up_err);
+
+  double elec_highsb_down_err = 0.;
+  double elec_highsb_down_count = h_elec_jer_down_dijet_m->IntegralAndError(highsb_bin,tot_bins,elec_highsb_down_err);
+
+  double elec_sig_nom_err = 0.;
+  double elec_sig_nom_count = h_elec_jer_nom_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,elec_sig_nom_err);
+
+  double elec_sig_up_err = 0.;
+  double elec_sig_up_count = h_elec_jer_up_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,elec_sig_up_err);
+
+  double elec_sig_down_err = 0.;
+  double elec_sig_down_count = h_elec_jer_down_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,elec_sig_down_err);
+
+  //cout.unsetf(ios::floatfield); 
+  cout.setf(ios::fixed,ios::floatfield);
+  std::cout.precision(2);  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%% evjj %%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"-- absolute change"<<endl;
+  cout<<"\tnom\t\t\t up\t\t\t down\t\t\t"<<endl;
+  cout<<"lowsb\t"<<elec_lowsb_nom_count<<" +- "<<elec_lowsb_nom_err<<"\t\t"
+      <<elec_lowsb_up_count<<" +- "<<elec_lowsb_up_err<<"\t\t"
+      <<elec_lowsb_down_count<<" +- "<<elec_lowsb_down_err<<endl;
+
+  cout<<"highsb\t"<<elec_highsb_nom_count<<" +- "<<elec_highsb_nom_err<<"\t\t"
+      <<elec_highsb_up_count<<" +- "<<elec_highsb_up_err<<"\t\t"
+      <<elec_highsb_down_count<<" +- "<<elec_highsb_down_err<<endl;
+
+  cout<<"sig\t"<<elec_sig_nom_count<<" +- "<<elec_sig_nom_err<<"\t\t"
+      <<elec_sig_up_count<<" +- "<<elec_sig_up_err<<"\t\t"
+      <<elec_sig_down_count<<" +- "<<elec_sig_down_err<<endl;
+
+
+  //////////////////////////////////////////////////
+  // Fractional errors
+  ////////////////////////////////////////////////// 
+
+  double elec_lowsb_up_frac = (elec_lowsb_up_count/elec_lowsb_nom_count);
+  double elec_lowsb_up_frac_err =
+    elec_lowsb_up_frac*sqrt(pow((elec_lowsb_up_err/elec_lowsb_up_count),2.)+pow((elec_lowsb_nom_err/elec_lowsb_nom_count),2.));
+
+  double elec_lowsb_down_frac = (elec_lowsb_down_count/elec_lowsb_nom_count);
+  double elec_lowsb_down_frac_err =
+    elec_lowsb_down_frac*sqrt(pow((elec_lowsb_down_err/elec_lowsb_down_count),2.)+pow((elec_lowsb_nom_err/elec_lowsb_nom_count),2.));
+
+  double elec_highsb_up_frac = (elec_highsb_up_count/elec_highsb_nom_count);
+  double elec_highsb_up_frac_err =
+    elec_highsb_up_frac*sqrt(pow((elec_highsb_up_err/elec_highsb_up_count),2.)+pow((elec_highsb_nom_err/elec_highsb_nom_count),2.));
+  
+  double elec_highsb_down_frac = (elec_highsb_down_count/elec_highsb_nom_count);
+  double elec_highsb_down_frac_err =
+    elec_highsb_down_frac*sqrt(pow((elec_highsb_down_err/elec_highsb_down_count),2.)+pow((elec_highsb_nom_err/elec_highsb_nom_count),2.));
+  
+  double elec_sig_up_frac = (elec_sig_up_count/elec_sig_nom_count);
+  double elec_sig_up_frac_err =
+    elec_sig_up_frac*sqrt(pow((elec_sig_up_err/elec_sig_up_count),2.)+pow((elec_sig_nom_err/elec_sig_nom_count),2.));
+  
+  double elec_sig_down_frac = (elec_sig_down_count/elec_sig_nom_count);
+  double elec_sig_down_frac_err =
+    elec_sig_down_frac*sqrt(pow((elec_sig_down_err/elec_sig_down_count),2.)+pow((elec_sig_nom_err/elec_sig_nom_count),2.));
+  
+  
+  std::cout.precision(2);  
+  cout<<endl;
+  cout<<"-- fractional change"<<endl;
+  cout<<"\t up\t\t\t down\t\t\t"<<endl;
+  cout<<"lowsb\t"<<elec_lowsb_up_frac<<" +- "<<elec_lowsb_up_frac_err<<"\t\t"
+      <<elec_lowsb_down_frac<<" +- "<<elec_lowsb_down_frac_err<<"\t\t"<<endl;
+
+    cout<<"highsb\t"<<elec_highsb_up_frac<<" +- "<<elec_highsb_up_frac_err<<"\t\t"
+      <<elec_highsb_down_frac<<" +- "<<elec_highsb_down_frac_err<<"\t\t"<<endl;
+
+  cout<<"sig\t"<<elec_sig_up_frac<<" +- "<<elec_sig_up_frac_err<<"\t\t"
+      <<elec_sig_down_frac<<" +- "<<elec_sig_down_frac_err<<"\t\t"<<endl;
+
+  cout<<endl;
+
+  double muon_lowsb_nom_err = 0.;
+  double muon_lowsb_nom_count = h_muon_jer_nom_dijet_m->IntegralAndError(1,lowsb_bin,muon_lowsb_nom_err);
+
+  double muon_lowsb_up_err = 0.;
+  double muon_lowsb_up_count = h_muon_jer_up_dijet_m->IntegralAndError(1,lowsb_bin,muon_lowsb_up_err);
+
+  double muon_lowsb_down_err = 0.;
+  double muon_lowsb_down_count = h_muon_jer_down_dijet_m->IntegralAndError(1,lowsb_bin,muon_lowsb_down_err);
+
+  double muon_highsb_nom_err = 0.;
+  double muon_highsb_nom_count = h_muon_jer_nom_dijet_m->IntegralAndError(highsb_bin,tot_bins,muon_highsb_nom_err);
+
+  double muon_highsb_up_err = 0.;
+  double muon_highsb_up_count = h_muon_jer_up_dijet_m->IntegralAndError(highsb_bin,tot_bins,muon_highsb_up_err);
+
+  double muon_highsb_down_err = 0.;
+  double muon_highsb_down_count = h_muon_jer_down_dijet_m->IntegralAndError(highsb_bin,tot_bins,muon_highsb_down_err);
+
+  double muon_sig_nom_err = 0.;
+  double muon_sig_nom_count = h_muon_jer_nom_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,muon_sig_nom_err);
+
+  double muon_sig_up_err = 0.;
+  double muon_sig_up_count = h_muon_jer_up_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,muon_sig_up_err);
+
+  double muon_sig_down_err = 0.;
+  double muon_sig_down_count = h_muon_jer_down_dijet_m->IntegralAndError(lowsb_bin,highsb_bin,muon_sig_down_err);
+
+  //cout.unsetf(ios::floatfield); 
+  cout.setf(ios::fixed,ios::floatfield);
+  std::cout.precision(2);  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%% uvjj %%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"-- absolute change"<<endl;
+  cout<<"\tnom\t\t\t up\t\t\t down\t\t\t"<<endl;
+  cout<<"lowsb\t"<<muon_lowsb_nom_count<<" +- "<<muon_lowsb_nom_err<<"\t\t"
+      <<muon_lowsb_up_count<<" +- "<<muon_lowsb_up_err<<"\t\t"
+      <<muon_lowsb_down_count<<" +- "<<muon_lowsb_down_err<<endl;
+
+  cout<<"highsb\t"<<muon_highsb_nom_count<<" +- "<<muon_highsb_nom_err<<"\t\t"
+      <<muon_highsb_up_count<<" +- "<<muon_highsb_up_err<<"\t\t"
+      <<muon_highsb_down_count<<" +- "<<muon_highsb_down_err<<endl;
+
+  cout<<"sig\t"<<muon_sig_nom_count<<" +- "<<muon_sig_nom_err<<"\t\t"
+      <<muon_sig_up_count<<" +- "<<muon_sig_up_err<<"\t\t"
+      <<muon_sig_down_count<<" +- "<<muon_sig_down_err<<endl;
+
+
+  //////////////////////////////////////////////////
+  // Fractional errors
+  ////////////////////////////////////////////////// 
+
+  double muon_lowsb_up_frac = (muon_lowsb_up_count/muon_lowsb_nom_count);
+  double muon_lowsb_up_frac_err =
+    muon_lowsb_up_frac*sqrt(pow((muon_lowsb_up_err/muon_lowsb_up_count),2.)+pow((muon_lowsb_nom_err/muon_lowsb_nom_count),2.));
+
+  double muon_lowsb_down_frac = (muon_lowsb_down_count/muon_lowsb_nom_count);
+  double muon_lowsb_down_frac_err =
+    muon_lowsb_down_frac*sqrt(pow((muon_lowsb_down_err/muon_lowsb_down_count),2.)+pow((muon_lowsb_nom_err/muon_lowsb_nom_count),2.));
+
+  double muon_highsb_up_frac = (muon_highsb_up_count/muon_highsb_nom_count);
+  double muon_highsb_up_frac_err =
+    muon_highsb_up_frac*sqrt(pow((muon_highsb_up_err/muon_highsb_up_count),2.)+pow((muon_highsb_nom_err/muon_highsb_nom_count),2.));
+  
+  double muon_highsb_down_frac = (muon_highsb_down_count/muon_highsb_nom_count);
+  double muon_highsb_down_frac_err =
+    muon_highsb_down_frac*sqrt(pow((muon_highsb_down_err/muon_highsb_down_count),2.)+pow((muon_highsb_nom_err/muon_highsb_nom_count),2.));
+  
+  double muon_sig_up_frac = (muon_sig_up_count/muon_sig_nom_count);
+  double muon_sig_up_frac_err =
+    muon_sig_up_frac*sqrt(pow((muon_sig_up_err/muon_sig_up_count),2.)+pow((muon_sig_nom_err/muon_sig_nom_count),2.));
+  
+  double muon_sig_down_frac = (muon_sig_down_count/muon_sig_nom_count);
+  double muon_sig_down_frac_err =
+    muon_sig_down_frac*sqrt(pow((muon_sig_down_err/muon_sig_down_count),2.)+pow((muon_sig_nom_err/muon_sig_nom_count),2.));
+  
+  
+  std::cout.precision(2);  
+  cout<<endl;
+  cout<<"-- fractional change"<<endl;
+  cout<<"\t up\t\t\t down\t\t\t"<<endl;
+  cout<<"lowsb\t"<<muon_lowsb_up_frac<<" +- "<<muon_lowsb_up_frac_err<<"\t\t"
+      <<muon_lowsb_down_frac<<" +- "<<muon_lowsb_down_frac_err<<"\t\t"<<endl;
+
+    cout<<"highsb\t"<<muon_highsb_up_frac<<" +- "<<muon_highsb_up_frac_err<<"\t\t"
+      <<muon_highsb_down_frac<<" +- "<<muon_highsb_down_frac_err<<"\t\t"<<endl;
+
+  cout<<"sig\t"<<muon_sig_up_frac<<" +- "<<muon_sig_up_frac_err<<"\t\t"
+      <<muon_sig_down_frac<<" +- "<<muon_sig_down_frac_err<<"\t\t"<<endl;
+
+  cout<<endl;
+
+
+  
+  //////////////////////////////////////////////////
+  // Plots
+  //////////////////////////////////////////////////
+  
+  TCanvas* tc_elec_jer_dijet_m = new TCanvas("tc_elec_jer_dijet_m","tc_elec_jer_dijet_m",0,0,1920,1200);
+  tc_elec_jer_dijet_m->cd();
+
+  h_elec_jer_up_dijet_m->SetLineColor(kRed);
+  h_elec_jer_up_dijet_m->Rebin(2);
+  h_elec_jer_up_dijet_m->Draw("hist");
+
+  h_elec_jer_nom_dijet_m->Rebin(2);
+  h_elec_jer_nom_dijet_m->Draw("hist same");
+
+  h_elec_jer_down_dijet_m->Rebin(2);
+  h_elec_jer_down_dijet_m->SetLineColor(kBlue);
+  h_elec_jer_down_dijet_m->Draw("hist same");
+
+  TLine comb_cut_line;
+  TBox comb_cut_box;
+
+  float comb_ymax = h_elec_jer_up_dijet_m->GetMaximum();
+  comb_cut_line=TLine(65,0,65,comb_ymax*1.05);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  double xmax = h_elec_jer_up_dijet_m->GetXaxis()->GetXmax();
+  double xmin = h_elec_jer_up_dijet_m->GetXaxis()->GetXmin();
+
+  double range = xmax-xmin;
+  comb_cut_box = TBox(65-(range/30.),0,65,comb_ymax*1.05);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  comb_cut_line=TLine(115,0,115,comb_ymax*1.05);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  comb_cut_box = TBox(115,0,115+(range/30.),comb_ymax*1.05);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  tc_elec_jer_dijet_m->Update();
+  TLegend* lgnd_elec_jer_dijet_m = new TLegend(0.80,0.70,0.9,0.90);
+  lgnd_elec_jer_dijet_m->SetFillColor(0);
+  lgnd_elec_jer_dijet_m->SetTextSize(0.04);
+  lgnd_elec_jer_dijet_m->SetBorderSize(0);
+  lgnd_elec_jer_dijet_m->AddEntry(h_elec_jer_nom_dijet_m,"Nominal","L");
+  lgnd_elec_jer_dijet_m->AddEntry(h_elec_jer_up_dijet_m,"JER up","L");
+  lgnd_elec_jer_dijet_m->AddEntry(h_elec_jer_down_dijet_m,"JER down","L");
+  lgnd_elec_jer_dijet_m->Draw();
+  
+  cur_saveas = save_loc+"h_elec_jer_dijet_m.pdf";
+  tc_elec_jer_dijet_m->SaveAs(cur_saveas.c_str());
+
+  
+  TCanvas* tc_muon_jer_dijet_m = new TCanvas("tc_muon_jer_dijet_m","tc_muon_jer_dijet_m",0,0,1920,1200);
+  tc_muon_jer_dijet_m->cd();
+
+  h_muon_jer_up_dijet_m->SetLineColor(kRed);
+  h_muon_jer_up_dijet_m->Rebin(2);
+  h_muon_jer_up_dijet_m->Draw("hist");
+
+  h_muon_jer_nom_dijet_m->Rebin(2);
+  h_muon_jer_nom_dijet_m->Draw("hist same");
+
+  h_muon_jer_down_dijet_m->Rebin(2);
+  h_muon_jer_down_dijet_m->SetLineColor(kBlue);
+  h_muon_jer_down_dijet_m->Draw("hist same");
+
+  TLine comb_cut_line;
+  TBox comb_cut_box;
+
+  float comb_ymax = h_muon_jer_up_dijet_m->GetMaximum();
+  comb_cut_line=TLine(65,0,65,comb_ymax*1.05);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  double xmax = h_muon_jer_up_dijet_m->GetXaxis()->GetXmax();
+  double xmin = h_muon_jer_up_dijet_m->GetXaxis()->GetXmin();
+
+  double range = xmax-xmin;
+  comb_cut_box = TBox(65-(range/30.),0,65,comb_ymax*1.05);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  comb_cut_line=TLine(115,0,115,comb_ymax*1.05);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  comb_cut_box = TBox(115,0,115+(range/30.),comb_ymax*1.05);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  tc_muon_jer_dijet_m->Update();
+  TLegend* lgnd_muon_jer_dijet_m = new TLegend(0.80,0.70,0.9,0.90);
+  lgnd_muon_jer_dijet_m->SetFillColor(0);
+  lgnd_muon_jer_dijet_m->SetTextSize(0.04);
+  lgnd_muon_jer_dijet_m->SetBorderSize(0);
+  lgnd_muon_jer_dijet_m->AddEntry(h_muon_jer_nom_dijet_m,"Nominal","L");
+  lgnd_muon_jer_dijet_m->AddEntry(h_muon_jer_up_dijet_m,"JER up","L");
+  lgnd_muon_jer_dijet_m->AddEntry(h_muon_jer_down_dijet_m,"JER down","L");
+  lgnd_muon_jer_dijet_m->Draw();
+  
+  cur_saveas = save_loc+"h_muon_jer_dijet_m.pdf";
+  tc_muon_jer_dijet_m->SaveAs(cur_saveas.c_str());
+
+
+  TCanvas* tc_elec_jer_ratio_dijet_m = new TCanvas("tc_elec_jer_ratio_dijet_m","tc_elec_jer_ratio_dijet_m",0,0,1920,1200);
+  tc_elec_jer_ratio_dijet_m->cd();
+
+  h_elec_jer_up_dijet_m->Rebin(5);
+  h_elec_jer_down_dijet_m->Rebin(5);
+  h_elec_jer_nom_dijet_m->Rebin(5);
+
+
+  h_elec_jer_down_dijet_m->Divide(h_elec_jer_down_dijet_m,h_elec_jer_nom_dijet_m);
+  h_elec_jer_down_dijet_m->SetLineColor(kBlue);
+  h_elec_jer_down_dijet_m->GetYaxis()->SetRangeUser(0,1.7);
+  h_elec_jer_down_dijet_m->GetXaxis()->SetTitle("M(jj) [GeV]");
+  h_elec_jer_down_dijet_m->GetYaxis()->SetTitle("Fractional JER effect");
+  
+  h_elec_jer_down_dijet_m->Draw("hist E ");
+
+  h_elec_jer_up_dijet_m->Divide(h_elec_jer_up_dijet_m,h_elec_jer_nom_dijet_m);
+  //h_elec_jer_up_dijet_m->Rebin(2);
+  h_elec_jer_up_dijet_m->SetLineColor(kRed);
+  h_elec_jer_up_dijet_m->Draw("hist E same");
+
+  
+  TLine comb_cut_line;
+  TBox comb_cut_box;
+
+  float comb_ymax = h_elec_jer_down_dijet_m->GetMaximum();
+  comb_cut_line=TLine(65,0,65,comb_ymax);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  double xmax = h_elec_jer_down_dijet_m->GetXaxis()->GetXmax();
+  double xmin = h_elec_jer_down_dijet_m->GetXaxis()->GetXmin();
+
+  double range = xmax-xmin;
+  comb_cut_box = TBox(65-(range/30.),0,65,comb_ymax);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  comb_cut_line=TLine(115,0,115,comb_ymax);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  comb_cut_box = TBox(115,0,115+(range/30.),comb_ymax);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  tc_elec_jer_ratio_dijet_m->Update();
+  TLegend* lgnd_elec_jer_ratio_dijet_m = new TLegend(0.80,0.70,0.9,0.90);
+  lgnd_elec_jer_ratio_dijet_m->SetFillColor(0);
+  lgnd_elec_jer_ratio_dijet_m->SetTextSize(0.04);
+  lgnd_elec_jer_ratio_dijet_m->SetBorderSize(0);
+  lgnd_elec_jer_ratio_dijet_m->AddEntry(h_elec_jer_up_dijet_m,"JER up","L");
+  lgnd_elec_jer_ratio_dijet_m->AddEntry(h_elec_jer_down_dijet_m,"JER down","L");
+  lgnd_elec_jer_ratio_dijet_m->Draw();
+  
+  cur_saveas = save_loc+"h_elec_jer_ratio_dijet_m.pdf";
+  tc_elec_jer_ratio_dijet_m->SaveAs(cur_saveas.c_str());
+  
+  TCanvas* tc_muon_jer_ratio_dijet_m = new TCanvas("tc_muon_jer_ratio_dijet_m","tc_muon_jer_ratio_dijet_m",0,0,1920,1200);
+  tc_muon_jer_ratio_dijet_m->cd();
+
+  h_muon_jer_up_dijet_m->Rebin(5);
+  h_muon_jer_down_dijet_m->Rebin(5);
+  h_muon_jer_nom_dijet_m->Rebin(5);
+
+
+  h_muon_jer_down_dijet_m->Divide(h_muon_jer_down_dijet_m,h_muon_jer_nom_dijet_m);
+  h_muon_jer_down_dijet_m->SetLineColor(kBlue);
+  h_muon_jer_down_dijet_m->GetYaxis()->SetRangeUser(0,1.7);
+  h_muon_jer_down_dijet_m->GetXaxis()->SetTitle("M(jj) [GeV]");
+  h_muon_jer_down_dijet_m->GetYaxis()->SetTitle("Fractional JER effect");
+  
+  h_muon_jer_down_dijet_m->Draw("hist E ");
+
+  h_muon_jer_up_dijet_m->Divide(h_muon_jer_up_dijet_m,h_muon_jer_nom_dijet_m);
+  //h_muon_jer_up_dijet_m->Rebin(2);
+  h_muon_jer_up_dijet_m->SetLineColor(kRed);
+  h_muon_jer_up_dijet_m->Draw("hist E same");
+
+  
+  TLine comb_cut_line;
+  TBox comb_cut_box;
+
+  float comb_ymax = h_muon_jer_down_dijet_m->GetMaximum();
+  comb_cut_line=TLine(65,0,65,comb_ymax);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  double xmax = h_muon_jer_down_dijet_m->GetXaxis()->GetXmax();
+  double xmin = h_muon_jer_down_dijet_m->GetXaxis()->GetXmin();
+
+  double range = xmax-xmin;
+  comb_cut_box = TBox(65-(range/30.),0,65,comb_ymax);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  comb_cut_line=TLine(115,0,115,comb_ymax);
+  comb_cut_line.SetLineWidth(2);
+  comb_cut_line.SetLineStyle(2);
+  comb_cut_line.SetLineColor(kGray+3);
+  comb_cut_line.DrawClone();
+
+  comb_cut_box = TBox(115,0,115+(range/30.),comb_ymax);
+  comb_cut_box.SetFillStyle(3345);
+  comb_cut_box.SetFillColor(kGray+2);
+  comb_cut_box.DrawClone();
+
+  tc_muon_jer_ratio_dijet_m->Update();
+  TLegend* lgnd_muon_jer_ratio_dijet_m = new TLegend(0.80,0.70,0.9,0.90);
+  lgnd_muon_jer_ratio_dijet_m->SetFillColor(0);
+  lgnd_muon_jer_ratio_dijet_m->SetTextSize(0.04);
+  lgnd_muon_jer_ratio_dijet_m->SetBorderSize(0);
+  lgnd_muon_jer_ratio_dijet_m->AddEntry(h_muon_jer_up_dijet_m,"JER up","L");
+  lgnd_muon_jer_ratio_dijet_m->AddEntry(h_muon_jer_down_dijet_m,"JER down","L");
+  lgnd_muon_jer_ratio_dijet_m->Draw();
+  
+  cur_saveas = save_loc+"h_muon_jer_ratio_dijet_m.pdf";
+  tc_muon_jer_ratio_dijet_m->SaveAs(cur_saveas.c_str());
+  
+
+
+  // TCanvas* tc_comb_jer_ratio_dijet_m = new TCanvas("tc_comb_jer_ratio_dijet_m","tc_comb_jer_ratio_dijet_m",0,0,1920,1200);
+  // tc_comb_jer_ratio_dijet_m->cd();
+
+  // // h_comb_jer_up_dijet_m->Rebin(5);
+  // // h_comb_jer_down_dijet_m->Rebin(5);
+  // // h_comb_jer_nom_dijet_m->Rebin(5);
+
+  // TH1F* h_comb_jer_up_dijet_m = (TH1F*) h_elec_jer_up_dijet_m->Clone();
+  // h_comb_jer_up_dijet_m->Add((TH1F*) h_muon_jer_up_dijet_m->Clone());
+  // h_comb_jer_up_dijet_m->Scale(h_comb_jer_up_dijet_m->Integral()/2*h_comb_jer_up_dijet_m->Integral());
+
+  // TH1F* h_comb_jer_down_dijet_m = (TH1F*) h_elec_jer_down_dijet_m->Clone();
+  // h_comb_jer_down_dijet_m->Add((TH1F*) h_muon_jer_down_dijet_m->Clone());
+
+  // TH1F* h_comb_jer_nom_dijet_m = (TH1F*) h_elec_jer_nom_dijet_m->Clone();
+  // h_comb_jer_nom_dijet_m->Add((TH1F*) h_muon_jer_nom_dijet_m->Clone());
+
+  
+  // h_comb_jer_down_dijet_m->Divide(h_comb_jer_down_dijet_m,h_comb_jer_nom_dijet_m);
+  // h_comb_jer_down_dijet_m->SetLineColor(kBlue);
+  // h_comb_jer_down_dijet_m->GetYaxis()->SetRangeUser(0,1.7);
+  // h_comb_jer_down_dijet_m->GetXaxis()->SetTitle("M(jj) [GeV]");
+  // h_comb_jer_down_dijet_m->GetYaxis()->SetTitle("Fractional JER effect");
+  
+  // h_comb_jer_down_dijet_m->Draw("hist E ");
+
+  // h_comb_jer_up_dijet_m->Divide(h_comb_jer_up_dijet_m,h_comb_jer_nom_dijet_m);
+  // //h_comb_jer_up_dijet_m->Rebin(2);
+  // h_comb_jer_up_dijet_m->SetLineColor(kRed);
+  // h_comb_jer_up_dijet_m->Draw("hist E same");
+
+  
+  // TLine comb_cut_line;
+  // TBox comb_cut_box;
+
+  // float comb_ymax = h_comb_jer_down_dijet_m->GetMaximum();
+  // comb_cut_line=TLine(65,0,65,comb_ymax);
+  // comb_cut_line.SetLineWidth(2);
+  // comb_cut_line.SetLineStyle(2);
+  // comb_cut_line.SetLineColor(kGray+3);
+  // comb_cut_line.DrawClone();
+
+  // double xmax = h_comb_jer_down_dijet_m->GetXaxis()->GetXmax();
+  // double xmin = h_comb_jer_down_dijet_m->GetXaxis()->GetXmin();
+
+  // double range = xmax-xmin;
+  // comb_cut_box = TBox(65-(range/30.),0,65,comb_ymax);
+  // comb_cut_box.SetFillStyle(3345);
+  // comb_cut_box.SetFillColor(kGray+2);
+  // comb_cut_box.DrawClone();
+
+  // comb_cut_line=TLine(115,0,115,comb_ymax);
+  // comb_cut_line.SetLineWidth(2);
+  // comb_cut_line.SetLineStyle(2);
+  // comb_cut_line.SetLineColor(kGray+3);
+  // comb_cut_line.DrawClone();
+
+  // comb_cut_box = TBox(115,0,115+(range/30.),comb_ymax);
+  // comb_cut_box.SetFillStyle(3345);
+  // comb_cut_box.SetFillColor(kGray+2);
+  // comb_cut_box.DrawClone();
+
+  // tc_comb_jer_ratio_dijet_m->Update();
+  // TLegend* lgnd_comb_jer_ratio_dijet_m = new TLegend(0.80,0.70,0.9,0.90);
+  // lgnd_comb_jer_ratio_dijet_m->SetFillColor(0);
+  // lgnd_comb_jer_ratio_dijet_m->SetTextSize(0.04);
+  // lgnd_comb_jer_ratio_dijet_m->SetBorderSize(0);
+  // lgnd_comb_jer_ratio_dijet_m->AddEntry(h_comb_jer_up_dijet_m,"JER up","L");
+  // lgnd_comb_jer_ratio_dijet_m->AddEntry(h_comb_jer_down_dijet_m,"JER down","L");
+  // lgnd_comb_jer_ratio_dijet_m->Draw();
+  
+  // cur_saveas = save_loc+"h_comb_jer_ratio_dijet_m.pdf";
+  // tc_comb_jer_ratio_dijet_m->SaveAs(cur_saveas.c_str());
+  
+
+
+  
+  gROOT->ProcessLine(".q");
+  return;
+
+}

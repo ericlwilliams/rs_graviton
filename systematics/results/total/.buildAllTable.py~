@@ -1,0 +1,4 @@
+#! /usr/bin/python
+import math
+
+out_file = open("all_index.csv","w")

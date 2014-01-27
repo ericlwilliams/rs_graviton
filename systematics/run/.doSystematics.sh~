@@ -1,0 +1,56 @@
+#!/bin/zsh -
+
+echo "Running systematics"
+echo
+
+echo "Writing and plotting\t\t - JES systematics"
+r 'runSystematics.C("jes")'
+r 'plotSystematics.C("jes")'
+
+echo "Writing and plotting\t\t - JER systematics"
+r 'runSystematics.C("jer")'
+r 'plotSystematics.C("jer")'
+
+echo "Writing and plotting\t\t - LES systematics"
+r 'runSystematics.C("les")'
+r 'plotSystematics.C("les")'
+
+echo "Writing and plotting\t\t - LER systematics"
+r 'runSystematics.C("ler")'
+r 'plotSystematics.C("ler")'
+
+echo "Writing and plotting\t\t - COEF systematics"
+r 'runSystematics.C("coef")'
+r 'plotSystematics.C("coef")'
+
+echo "Writing and plotting\t\t - SJETS systematics"
+r 'runSystematics.C("sjets")'
+r 'plotSystematics.C("sjets")'
+
+
+echo "Making Systematic PDFs"
+
+cd ../results/jes
+pdfl jes.tex
+
+cd ../jer
+pdfl jer.tex
+
+cd ../les
+pdfl les.tex
+
+cd ../ler
+pdfl ler.tex
+
+cd ../coef
+pdfl coef.tex
+
+cd ../sjets
+pdfl sjets.tex
+
+cd ../results/total
+#./joinPDF.py -o systematics.pdf ../jes/jes.pdf ../jer/jer.pdf
+src joinSystematics.sh
+cd ../../run
+
+echo "Done, see ../results/total/systematics.pdf for results"

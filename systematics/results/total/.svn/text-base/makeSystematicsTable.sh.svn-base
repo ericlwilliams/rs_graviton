@@ -1,0 +1,26 @@
+#!/bin/zsh -
+
+echo 'building full systematics data'
+python buildSystematicsTable.py
+echo 'building gww m1000 data'
+python buildGWWSystematicsTable.py
+echo 'building bkgd data'
+python buildBkgdSystematicsTable.py
+
+
+## pdf generation moved to lvjj_common!
+
+#echo 'compiling lvjj_background_systematics.tex'
+#pdfl lvjj_bkgd_systematics.tex
+#echo 'compiling evjj_background_systematics.tex'
+#pdfl evjj_bkgd_systematics.tex
+#echo 'compiling uvjj_background_systematics.tex'
+#pdfl uvjj_bkgd_systematics.tex
+#echo 'compiling lvjj_signal_systematics.tex'
+#pdfl lvjj_signal_systematics.tex
+#echo 'compiling lvjj_gww1000_systematics.tex'
+#pdfl lvjj_gww1000_systematics.tex
+
+#pdfl lvjj_systematics.tex
+
+echo 'see lvjj_common for pdf building scripts'

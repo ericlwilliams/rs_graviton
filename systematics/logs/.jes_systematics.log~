@@ -1,0 +1,30 @@
+
+Processing runCalcSystematics.C...
+calcSystematics <systematics loaded>
+== JES ==
+sample	fluc	sig
+top	up	lowm:	0.0229224
+top	down	lowm:	0.00907238
+top	avg	lowm:		0.0159974
+top	up	highm:	0.196414
+top	down	highm:	0.137695
+top	avg	highm:		0.167054
+wjets	up	lowm:	0.131613
+wjets	down	lowm:	0.0919712
+wjets	avg	lowm:		0.111792
+wjets	up	highm:	0.215157
+wjets	down	highm:	0.104506
+wjets	avg	highm:		0.159832
+zjets	up	lowm:	0.52278
+zjets	down	lowm:	0.264917
+zjets	avg	lowm:		0.393848
+zjets	up	highm:	0.436259
+zjets	down	highm:	0.0917483
+zjets	avg	highm:		0.264004
+vv	up	lowm:	0.120573
+vv	down	lowm:	0.1188
+vv	avg	lowm:		0.119686
+vv	up	highm:	0.150507
+vv	down	highm:	0.148185
+vv	avg	high:		0.149346
+..q.qq

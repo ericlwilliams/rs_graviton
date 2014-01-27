@@ -1,0 +1,71 @@
+
+Processing runCalcSystematics.C...
+calcSystematics <systematics loaded>
+== JES ==
+mcatnlo.top
+	el	sig_lowm	up: 0.02292		down: 0.00907		avg: 0.01600	
+		sig_highm	up: 0.19641		down: 0.13769		avg: 0.16705	
+
+	mu	sig_lowm	up: 0.02458		down: 0.00430		avg: 0.01444	
+		sig_highm	up: 0.13844		down: 0.09303		avg: 0.11573	
+
+alpgen.wjets
+	el	sig_lowm	up: 0.13161		down: 0.09197		avg: 0.11179	
+		sig_highm	up: 0.21516		down: 0.10451		avg: 0.15983	
+
+	mu	sig_lowm	up: 0.12974		down: 0.08684		avg: 0.10829	
+		sig_highm	up: 0.21165		down: 0.17134		avg: 0.19150	
+
+alpgen.zjets
+	el	sig_lowm	up: 0.52278		down: 0.26492		avg: 0.39385	
+		sig_highm	up: 0.43626		down: 0.09175		avg: 0.26400	
+
+	mu	sig_lowm	up: 0.23657		down: 0.11305		avg: 0.17481	
+		sig_highm	up: 0.07310		down: 0.26900		avg: 0.17105	
+
+herwig.vv
+	el	sig_lowm	up: 0.12057		down: 0.11880		avg: 0.11969	
+		sig_highm	up: 0.15051		down: 0.14819		avg: 0.14935	
+
+	mu	sig_lowm	up: 0.10810		down: 0.12164		avg: 0.11487	
+		sig_highm	up: 0.06661		down: 0.15680		avg: 0.11171	
+
+mcatnlo.top
+	el	sig_lowm	up: 0.02292		down: 0.00907		avg: 0.01600	
+		sig_highm	up: 0.19641		down: 0.13769		avg: 0.16705	
+
+	mu	sig_lowm	up: 0.02458		down: 0.00430		avg: 0.01444	
+		sig_highm	up: 0.13844		down: 0.09303		avg: 0.11573	
+
+gww.lvjj.m200.kmpl0_1
+	el	sig_lowm	up: 0.26785		down: 0.25406		avg: 0.26096	
+
+	mu	sig_lowm	up: 0.26362		down: 0.19280		avg: 0.22821	
+
+gww.lvjj.m350.kmpl0_1
+	el	sig_lowm	up: 0.07498		down: 0.06089		avg: 0.06794	
+
+	mu	sig_lowm	up: 0.05864		down: 0.08159		avg: 0.07011	
+
+gww.lvjj.m500.kmpl0_1
+	el	sig_lowm	up: 0.04623		down: 0.03499		avg: 0.04061	
+
+	mu	sig_lowm	up: 0.05476		down: 0.03291		avg: 0.04383	
+
+gww.lvjj.m750.kmpl0_1
+	el		sig_highm	up: 0.03665		down: 0.06810		avg: 0.05237	
+
+	mu		sig_highm	up: 0.05141		down: 0.03976		avg: 0.04558	
+
+gww.lvjj.m1000.kmpl0_1
+	el		sig_highm	up: 0.01064		down: 0.01533		avg: 0.01299	
+
+	mu		sig_highm	up: 0.03169		down: 0.03883		avg: 0.03526	
+
+gww.lvjj.m1250.kmpl0_1
+	el		sig_highm	up: 0.00119		down: 0.00963		avg: 0.00541	
+
+	mu		sig_highm	up: 0.00069		down: 0.01606		avg: 0.00838	
+
+
+..q.qq

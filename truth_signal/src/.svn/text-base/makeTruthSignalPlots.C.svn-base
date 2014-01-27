@@ -1,0 +1,354 @@
+#define makeTruthSignalPlots_cxx
+
+#include "makeTruthSignalPlots.h"
+#include <TH2.h>
+#include <TH1.h>
+#include <TStyle.h>
+#include <TLorentzVector.h>
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <string.h>
+
+TH1F* h_evt_n;
+TH1F* h_lep_pt_n;
+TH1F* h_qrk_pt_n;
+TH1F* h_nu_pt_n;
+TH1F* h_lv_pt_n;
+TH1F* h_dijet_pt_n;
+TH1F* h_dijet_m_n;
+
+TH1F* h_vv_m;
+TH1F* h_vv_pt;
+TH1F* h_vv_eta;
+TH1F* h_v_pt;
+TH1F* h_v_eta;
+TH1F* h_lep_pt;
+TH1F* h_lep_eta;
+TH1F* h_jet_n;
+TH1F* h_jet_pt;
+TH1F* h_jet_eta;
+TH1F* h_qrk_pt;
+TH1F* h_qrk_eta;
+TH1F* h_nu_pt;
+
+TH1F* h_cos_theta_star;
+
+TH1F* h_sig_m;
+
+const float GeV = 1000.;
+
+TFile* write_file;
+bool isCalcHep;
+
+void makeTruthSignalPlots::Begin(TTree * /*tree*/)
+{
+   // The Begin() function is called at the start of the query.
+   // When running with PROOF Begin() is only called on the client.
+   // The tree argument is deprecated (on PROOF 0 is passed).
+
+   string option = GetOption();
+
+   bool isLowM = (option.find("m500")!=string::npos);
+
+   isCalcHep= (option.find("kkg")!=string::npos);
+
+   
+   string file_loc = "../plots/"+option;
+   write_file = new TFile(file_loc.c_str(),"RECREATE");
+
+   h_evt_n = new TH1F("h_evt_n","h_evt_n",1,0.5,1.5);
+   h_lep_pt_n = new TH1F("h_lep_pt_n","h_lep_pt_n",1,0.5,1.5);
+   h_qrk_pt_n = new TH1F("h_qrk_pt_n","h_qrk_pt_n",1,0.5,1.5);
+   h_nu_pt_n = new TH1F("h_nu_pt_n","h_nu_pt_n",1,0.5,1.5);
+   h_lv_pt_n = new TH1F("h_lv_pt_n","h_lv_pt_n",1,0.5,1.5);
+   h_dijet_pt_n = new TH1F("h_dijet_pt_n","h_dijet_pt_n",1,0.5,1.5);
+   h_dijet_m_n = new TH1F("h_dijet_m_n","h_dijet_m_n",1,0.5,1.5);
+
+   double low_vv_m = (isLowM) ? 300 : 800;
+   double high_vv_m = (isLowM) ? 700 : 1200;
+   h_vv_m = new TH1F("h_vv_m","WW/WZ Boson M",40,low_vv_m,high_vv_m);
+   h_vv_pt = new TH1F("h_vv_pt","WW/WZ Boson pt",40,0,500);
+   h_vv_eta = new TH1F("h_vv_eta","WW/WZ Boson eta",40,-5.0,5.0);
+
+   double low_sig_m = (isLowM) ? 300 : 800;
+   double high_sig_m = (isLowM) ? 700 : 1200;
+   h_sig_m = new TH1F("h_sig_m","WW/WZ Boson M",40,low_sig_m,high_sig_m);
+
+   double high_v_pt = (isLowM) ? 500 : 1000;
+   h_v_pt = new TH1F("h_v_pt","W/Z Boson pt",40,0,high_v_pt);
+   h_v_eta = new TH1F("h_v_eta","W/Z Boson eta",40,-5.0,5);
+
+   double high_lep_pt = (isLowM) ? 500 : 800;
+   h_lep_pt = new TH1F("h_lep_pt","Lepton pt",40,0,high_lep_pt);
+   h_lep_eta = new TH1F("h_lep_eta","Lepton eta",40,-5,5);
+
+   h_nu_pt = new TH1F("h_nu_pt","Neutrino pt",40,0,500);
+
+   double high_qrk_pt = (isLowM) ? 500 : 800;
+   h_qrk_pt = new TH1F("h_qrk_pt","Quark pt",40,0,high_qrk_pt);
+   h_qrk_eta = new TH1F("h_qrk_eta","Quark eta",40,-5,5);
+
+   double high_jet_pt = (isLowM) ? 500 : 800;
+   h_jet_pt = new TH1F("h_jet_pt","Jet pt",40,0,high_jet_pt);
+   h_jet_eta = new TH1F("h_jet_eta","Jet eta",40,-5,5);
+   h_jet_n = new TH1F("h_jet_n","Jet N",10,0.5,10.5);
+   h_cos_theta_star = new TH1F("h_cos_theta_star","cos(#theta *)",20,-1,1);
+   
+}
+
+void makeTruthSignalPlots::SlaveBegin(TTree * /*tree*/)
+{
+   // The SlaveBegin() function is called after the Begin() function.
+   // When running with PROOF SlaveBegin() is called on each slave server.
+   // The tree argument is deprecated (on PROOF 0 is passed).
+
+   string option = GetOption();
+
+}
+
+Bool_t makeTruthSignalPlots::Process(Long64_t entry)
+{
+
+  b_mc_n->GetEntry(entry);
+  b_mc_pdgId->GetEntry(entry);
+  b_mc_pt->GetEntry(entry);
+  b_mc_m->GetEntry(entry);
+  b_mc_eta->GetEntry(entry);
+  b_mc_phi->GetEntry(entry);
+  b_mc_status->GetEntry(entry);
+  b_mc_barcode->GetEntry(entry);
+  b_jet_AntiKt4Truth_n->GetEntry(entry);
+  b_jet_AntiKt4Truth_pt->GetEntry(entry);
+  b_jet_AntiKt4Truth_eta->GetEntry(entry);
+
+  h_jet_n->Fill(jet_AntiKt4Truth_n);
+  for(int j=0;j<jet_AntiKt4Truth_n;j++){
+    h_jet_pt->Fill((*jet_AntiKt4Truth_pt)[j]/GeV);
+    h_jet_eta->Fill((*jet_AntiKt4Truth_eta)[j]);
+  }
+  
+  
+  vector<int> jet_ind;
+  vector<int> lep_ind;
+  vector<int> nu_ind;
+  vector<int> vv_ind;
+  vector<int> v_ind;
+
+
+  for(int i=0;i<mc_n;i++){
+    
+    if((*mc_status)[i]==3){
+
+      if(fabs((*mc_pdgId)[i])==24 || fabs((*mc_pdgId)[i])==23){//w/z
+	h_v_pt->Fill((*mc_pt)[i]/GeV);
+	h_v_eta->Fill((*mc_eta)[i]);
+	v_ind.push_back(i);
+      }
+      if(fabs((*mc_pdgId)[i])==11 || fabs((*mc_pdgId)[i])==13){//e/mu
+	h_lep_pt->Fill((*mc_pt)[i]/GeV);
+	h_lep_eta->Fill((*mc_eta)[i]);
+	lep_ind.push_back(i);
+      }
+      if((fabs((*mc_pdgId)[i])==3 || fabs((*mc_pdgId)[i])==4 ||
+	  fabs((*mc_pdgId)[i])==1 || fabs((*mc_pdgId)[i])==2) &&
+	 ((*mc_barcode)[i]>7)){ // jet
+	h_qrk_pt->Fill((*mc_pt)[i]/GeV);
+	h_qrk_eta->Fill((*mc_eta)[i]);
+	jet_ind.push_back(i);
+      }
+      if(fabs((*mc_pdgId)[i])==12 || fabs((*mc_pdgId)[i])==14){//nu
+	h_nu_pt->Fill((*mc_pt)[i]/GeV);
+	nu_ind.push_back(i);
+      }
+
+      
+      if(fabs((*mc_pdgId)[i])==5000039 || fabs((*mc_pdgId)[i])==34){ //5000039 -> G*
+
+	h_vv_m->Fill((*mc_m)[i]/GeV);
+	h_vv_pt->Fill((*mc_pt)[i]/GeV);
+	h_vv_eta->Fill((*mc_eta)[i]);
+	vv_ind.push_back(i);
+      }
+    }
+  }
+  int nu_n = nu_ind.size();
+  int lep_n = lep_ind.size();
+  int jet_n = jet_ind.size();
+  int vv_n = (int) vv_ind.size();
+  int v_n = v_ind.size();
+
+  h_evt_n->Fill(1.);
+
+  
+  if((nu_n==1 && lep_n==1 && jet_n==2 && vv_n==1) ||
+     (nu_n==1 && lep_n==1 && jet_n==2 && isCalcHep)){
+
+
+    int lep_idx = lep_ind.at(0);
+
+    int lead_qrk_idx =
+      ((*mc_pt)[jet_ind.at(0)] > (*mc_pt)[jet_ind.at(1)]) ?
+      jet_ind.at(0) :
+      jet_ind.at(1);
+    
+    int second_qrk_idx =
+      ((*mc_pt)[jet_ind.at(0)] > (*mc_pt)[jet_ind.at(1)]) ?
+      jet_ind.at(1) :
+      jet_ind.at(0);
+
+    int nu_idx = nu_ind.at(0);
+
+    int vv_idx = (isCalcHep) ? 0 : vv_ind.at(0);
+    
+
+    TLorentzVector lead_jet,second_jet,lep,nu,dijet,lv,vv;
+    
+    lead_jet.SetPtEtaPhiM((*mc_pt)[lead_qrk_idx],
+			  (*mc_eta)[lead_qrk_idx],
+			  (*mc_phi)[lead_qrk_idx],
+			  (*mc_m)[lead_qrk_idx]);
+
+    second_jet.SetPtEtaPhiM((*mc_pt)[second_qrk_idx],
+			    (*mc_eta)[second_qrk_idx],
+			    (*mc_phi)[second_qrk_idx],
+			    (*mc_m)[second_qrk_idx]);
+
+    dijet = lead_jet+second_jet;
+    
+    lep.SetPtEtaPhiM((*mc_pt)[lep_idx],
+		     (*mc_eta)[lep_idx],
+		     (*mc_phi)[lep_idx],
+		     (*mc_m)[lep_idx]);
+
+    nu.SetPtEtaPhiM((*mc_pt)[nu_idx],
+		    (*mc_eta)[nu_idx],
+		    (*mc_phi)[nu_idx],
+		    (*mc_m)[nu_idx]);
+    lv = lep+nu;
+    if(isCalcHep){
+      h_v_pt->Fill(lv.Pt()/GeV);
+      h_v_eta->Fill(lv.Eta());
+      
+      h_v_pt->Fill(dijet.Pt()/GeV);
+      h_v_eta->Fill(dijet.Eta());
+      
+      vv = lep+nu+dijet;
+
+      h_vv_pt->Fill(vv.Pt()/GeV);
+      h_vv_eta->Fill(vv.Eta());
+      h_vv_m->Fill(vv.M()/GeV);
+      
+    }else{
+      vv.SetPtEtaPhiM((*mc_pt)[vv_idx],
+		      (*mc_eta)[vv_idx],
+		      (*mc_phi)[vv_idx],
+		      (*mc_m)[vv_idx]);
+    }
+
+
+    //Cosine theta calc.
+    // if G*, find positive W,
+    // if W', use lv
+
+    TLorentzVector v_star;
+
+    if(isCalcHep){
+
+      v_star = ((*mc_pdgId)[lep_idx]>0) ? lv : dijet;
+      
+    }else{
+
+      if(fabs((*mc_pdgId)[vv_idx])==34){//W'
+      
+	v_star=lv;
+
+      }else{// G*
+
+	if((*mc_pdgId)[lep_idx]>0){//lv - W+
+	  v_star = lv;
+	}else{ // dijet - W+
+	  v_star = dijet;
+	}
+      }
+    }
+    v_star.Boost(- vv.BoostVector());
+
+    h_cos_theta_star->Fill(v_star.CosTheta());
+    
+    
+    bool passLepton = (((*mc_pt)[lep_idx] > 30.*GeV) &&
+		       (fabs((*mc_eta)[lep_idx]) < 2.4));
+
+    if(passLepton){
+
+      h_lep_pt_n->Fill(1.);
+
+	
+
+      bool passJet = (((*mc_pt)[lead_qrk_idx] > 100*GeV && (*mc_pt)[second_qrk_idx] > 40*GeV) &&
+		      fabs((*mc_eta)[lead_qrk_idx]) < 2.8 &&
+		      fabs((*mc_eta)[second_qrk_idx]) < 2.8);
+
+      if(passJet){
+
+	h_qrk_pt_n->Fill(1.);
+
+	bool passNeutrino = ((*mc_pt)[nu_ind.at(0)] > 30*GeV);
+
+	if(passNeutrino){
+
+	  h_nu_pt_n->Fill(1.);
+
+	  
+	  bool passLV = (lv.Pt() > 200*GeV);
+
+	  if(passLV){
+
+	    h_lv_pt_n->Fill(1.);
+
+	    bool passDijet = (dijet.Pt()>200*GeV);
+
+	    if(passDijet){
+
+	      h_dijet_pt_n->Fill(1.);
+
+	      bool passDijetM = (dijet.M()>65*GeV && dijet.M()<115*GeV);
+
+	      if(passDijetM){
+
+		h_dijet_m_n->Fill(1.);
+
+		h_sig_m->Fill((dijet+lv).M()/GeV);
+	      }
+	    }
+	  }
+	}
+      }
+    }
+  }
+
+  return kTRUE;
+}
+
+void makeTruthSignalPlots::SlaveTerminate()
+{
+   // The SlaveTerminate() function is called after all entries or objects
+   // have been processed. When running with PROOF SlaveTerminate() is called
+   // on each slave server.
+
+}
+
+void makeTruthSignalPlots::Terminate()
+{
+   // The Terminate() function is the last function to be called during
+   // a query. It always runs on the client, it can be used to present
+   // the results graphically or save the results to file.
+
+  write_file->Write();
+  write_file->Close();
+  // if(h_lep_pt) delete h_lep_pt;
+  // if(h_nu_pt) delete h_nu_pt;
+  // if(h_v_pt) delete h_v_pt;
+  
+}

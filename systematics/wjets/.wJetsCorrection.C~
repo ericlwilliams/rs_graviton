@@ -1,0 +1,72 @@
+#include "/Users/elw/analy/lnuj/include/lnuj_bkgd_list.h"
+#include "/Users/elw/analy/lnuj/include/wwFileInfo.h"
+#include <string>
+#include <TLine.h>
+
+string proc_type = "sys_wjets";
+string file_tail = ".sys.wjets.plot.root";
+
+void wJetsCorrection(){
+
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wJetsCorrection.C"<<endl;
+
+  const int nProcs=2;
+  string procs[nProcs] = {"elec","muon"};
+
+  const int nCtrls=3;
+  string ctrls[nCtrls] = {"all","ewk","ttbar"};
+
+  string wjets_alpgen = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.alpgen.wjets.sys.wjets.plot.root";
+  TFile* wjets_alpgen_file = TFile::Open(wjets_alpgen.c_str());
+  string wjets_sherpa = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.sherpa.wjets.sys.wjets.plot.root";  
+  TFile* wjets_sherpa_file = TFile::Open(wjets_sherpa.c_str());
+
+  if(!wjets_sherpa_file || !wjets_alpgen_file){
+    cout<<"alpgen or sherpa files not found"<<endl;
+    exit(-142);
+  }
+
+
+  TFile* writeFile = TFile::Open("wjets_corrections.root","UPDATE");
+  writeFile->cd();
+
+  //////////////////////////////////////////////////
+  // Eta
+  //////////////////////////////////////////////////
+  cout<<"writing sherpa/alpgen eta correction"<<endl;
+  TH1F* h_alpgen_nom_elec_jet_eta = (TH1F*) wjets_alpgen_file->Get("all/h_elec_purw_nom_jet_eta");
+  TH1F* h_sherpa_nom_elec_jet_eta = (TH1F*) wjets_sherpa_file->Get("all/h_elec_purw_nom_jet_eta");
+
+  int n_bins = ((TAxis*) h_alpgen_nom_elec_jet_eta->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_alpgen_nom_elec_jet_eta->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_alpgen_nom_elec_jet_eta->GetXaxis())->GetXmax();
+
+  TH1F* h_elec_sherpa_alpgen_jet_eta = new TH1F("h_elec_sherpa_alpgen_jet_eta","Sherpa/Alpgen eta",n_bins,x_min,x_max);
+
+  for(int b=1;b<n_bins+1;b++){
+
+    double sherpa_nom_elec_jet_eta_bin_val = h_sherpa_nom_elec_jet_eta->GetBinContent(b);
+    double rel_sherpa_nom_elec_jet_eta_bin_err =
+      h_sherpa_nom_elec_jet_eta->GetBinError(b)/sherpa_nom_elec_jet_eta_bin_val;
+    double alpgen_nom_elec_jet_eta_bin_val = h_alpgen_nom_elec_jet_eta->GetBinContent(b);
+    double rel_alpgen_nom_elec_jet_eta_bin_err =
+      h_alpgen_nom_elec_jet_eta->GetBinError(b)/alpgen_nom_elec_jet_eta_bin_val;
+
+    if(!sherpa_nom_elec_jet_eta_bin_val || !alpgen_nom_elec_jet_eta_bin_val) continue;
+    
+    double sherpa_alpgen_nom_elec_jet_eta = sherpa_nom_elec_jet_eta_bin_val/alpgen_nom_elec_jet_eta_bin_val;
+
+    double rel_sherpa_alpgen_nom_elec_jet_eta_err =
+      sqrt(pow(rel_sherpa_nom_elec_jet_eta_bin_err,2.)+pow(rel_alpgen_nom_elec_jet_eta_bin_err,2.));
+    double sherpa_alpgen_nom_elec_jet_eta_err =
+      rel_sherpa_alpgen_nom_elec_jet_eta_err*sherpa_alpgen_nom_elec_jet_eta;
+
+    h_elec_sherpa_alpgen_jet_eta->SetBinContent(b,sherpa_alpgen_nom_elec_jet_eta);
+    h_elec_sherpa_alpgen_jet_eta->SetBinError(b,sherpa_alpgen_nom_elec_jet_eta_err);
+
+  }
+
+  writeFile->Write("",TObject::kOverwrite);
+}

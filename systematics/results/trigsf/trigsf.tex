@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{trigsf}{../../logs/trigsf.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Lepton trigger scale factor, fractional $\Delta$~Acceptance in High Mass control region}
+  \DTLdisplaydb{trigsf}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/trigsf/h_bkgds_trigsf_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/trigsf/h_bkgds_trigsf_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+\end{document}

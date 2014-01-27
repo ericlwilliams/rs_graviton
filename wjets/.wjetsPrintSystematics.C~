@@ -1,0 +1,289 @@
+//////////////////////////////////////////////////
+// Loads plot files from ../plots/ctrl_plots/...
+// plots regarding wjets normalization and systematics
+//////////////////////////////////////////////////
+
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <THStack.h>
+#include "TH1.h"
+#include <TFile.h>
+
+void wjetsPrint(){
+
+  gROOT->SetStyle("Plain");  
+  gStyle->SetOptStat(0);
+  gStyle->SetPalette(1);
+  gStyle->SetPadTickX(1);
+  gStyle->SetPadTickY(1);
+  //gStyle->SetFillStyle(3144);
+  
+  gROOT->SetBatch();
+  
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsPrint.C"<<endl;
+
+  const int nProcs = 2;
+  string procs[nProcs] = {"elec", "muon"};
+
+  string file_loc = "/Users/elw/analy/lnuj/plots/ctrl_plots/";
+
+  //////////////////////////////////////////////////
+  // Load Data
+  ////////////////////////////////////////////////// 
+  
+  string data_loc = file_loc+"merged/data11.lnuj.ctrl.plot.root";
+  TFile* data = TFile::Open(data_loc.c_str());
+  //////////////////////////////////////////////////
+  // Load Scaled Backgrounds
+  //////////////////////////////////////////////////   
+  string sherpa_wjets_loc = file_loc+"merged/mc.sherpa.wjets.ctrl.plot.root";
+  string alpgen_wjets_loc = file_loc+"merged/mc.alpgen.wjets.ctrl.plot.root";
+  string vv_loc = file_loc+"merged/mc.herwig.vv.ctrl.plot.root";
+  string alpgen_qcd_loc = file_loc+"merged/qcd.alpgen.ctrl.plot.root";
+  string sherpa_qcd_loc = file_loc+"merged/qcd.sherpa.ctrl.plot.root";
+  string top_loc = file_loc+"merged/mc.mcatnlo.top.ctrl.plot.root";  
+  string zjets_loc = file_loc+"merged/mc.alpgen.zjets.ctrl.plot.root";
+
+  TFile* sherpa_wjets = TFile::Open(sherpa_wjets_loc.c_str());  
+  TFile* alpgen_wjets = TFile::Open(alpgen_wjets_loc.c_str());
+  TFile* vv = TFile::Open(vv_loc.c_str());
+  TFile* alpgen_qcd = TFile::Open(alpgen_qcd_loc.c_str());
+  TFile* sherpa_qcd = TFile::Open(sherpa_qcd_loc.c_str());
+  TFile* top = TFile::Open(top_loc.c_str());
+  TFile* zjets = TFile::Open(zjets_loc.c_str());
+
+  //////////////////////////////////////////////////
+  // Histogram selection
+  // - these histograms (in controlPlots.C) have been prepared with
+  //   more bins for rebinning and
+  // - data,  lowm/highm control regions (w/ mass cut)
+  // - mc, lowm/highm control regions (*before* mass cut)
+  ////////////////////////////////////////////////// 
+  
+  //////////////////////////////////////////////////
+  // lowm_dijet_m
+  //////////////////////////////////////////////////
+
+  TH1F* h_data_lowm_elec_dijet_m_dijet_m = (TH1F*) data->Get("h_ctrl_lowm_elec_dijet_m_dijet_m");
+  h_data_lowm_elec_dijet_m_dijet_m->Rebin(50);
+  TH1F* h_data_lowm_muon_dijet_m_dijet_m = (TH1F*) data->Get("h_ctrl_lowm_muon_dijet_m_dijet_m");
+  h_data_lowm_muon_dijet_m_dijet_m->Rebin(50);
+
+  TH1F* h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m = (TH1F*) sherpa_wjets->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m = (TH1F*) sherpa_wjets->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m = (TH1F*) alpgen_wjets->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");  
+  TH1F* h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m = (TH1F*) alpgen_wjets->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_vv_lowm_elec_dijet_pt_dijet_m = (TH1F*) vv->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_vv_lowm_muon_dijet_pt_dijet_m = (TH1F*) vv->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_top_lowm_elec_dijet_pt_dijet_m = (TH1F*) top->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_top_lowm_muon_dijet_pt_dijet_m = (TH1F*) top->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_zjets_lowm_elec_dijet_pt_dijet_m = (TH1F*) zjets->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_zjets_lowm_muon_dijet_pt_dijet_m = (TH1F*) zjets->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_sherpa_qcd_lowm_elec_dijet_pt_dijet_m = (TH1F*) sherpa_qcd->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_sherpa_qcd_lowm_muon_dijet_pt_dijet_m = (TH1F*) sherpa_qcd->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+  TH1F* h_alpgen_qcd_lowm_elec_dijet_pt_dijet_m = (TH1F*) alpgen_qcd->Get("h_ctrl_lowm_elec_dijet_pt_dijet_m");
+  TH1F* h_alpgen_qcd_lowm_muon_dijet_pt_dijet_m = (TH1F*) alpgen_qcd->Get("h_ctrl_lowm_muon_dijet_pt_dijet_m");
+
+
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_sherpa_qcd_lowm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_vv_lowm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_top_lowm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_zjets_lowm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Rebin(50);
+
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_alpgen_qcd_lowm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_vv_lowm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_top_lowm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Add(h_zjets_lowm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Rebin(50);
+  
+  TCanvas* tc_lowm_elec_dijet_m = new TCanvas("tc_lowm_elec_dijet_m","tc_lowm_elec_dijet_m",0,0,1920,1200);
+
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->SetLineColor(kBlue);
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->GetXaxis()->SetTitle("Dijet Mass");
+  h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m->Draw();
+
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->SetLineColor(kRed);
+  h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m->Draw("sames");
+
+  h_data_lowm_elec_dijet_m_dijet_m->SetMarkerStyle(8);
+  h_data_lowm_elec_dijet_m_dijet_m->Draw("sames PE");
+
+  //tc_lowm_elec_dijet_m->SetLogy();
+  tc_lowm_elec_dijet_m->Update();
+
+  TLegend* tl_lowm_elec_dijet_m = new TLegend(0.63,0.8,0.9,0.9);
+  tl_lowm_elec_dijet_m->SetFillColor(0);
+  tl_lowm_elec_dijet_m->SetTextSize(0.03);
+  tl_lowm_elec_dijet_m->AddEntry(h_data_lowm_elec_dijet_m_dijet_m,"data","L");
+  tl_lowm_elec_dijet_m->AddEntry(h_alpgen_wjets_lowm_elec_dijet_pt_dijet_m,"Bkgd w/ ALPGEN wjets","L");
+  tl_lowm_elec_dijet_m->AddEntry(h_sherpa_wjets_lowm_elec_dijet_pt_dijet_m,"Bkgd w/ SHERPA wjets","L");
+  tl_lowm_elec_dijet_m->Draw();
+    
+  string cur_saveas = "./plots/latest/h_lowm_elec_dijet_m.png";
+  tc_lowm_elec_dijet_m->SaveAs(cur_saveas.c_str());
+  
+
+  //////////////////////////////////////////////////
+  // lowm_muon_dijet_m
+  ////////////////////////////////////////////////// 
+  
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_sherpa_qcd_lowm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_vv_lowm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_top_lowm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_zjets_lowm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Rebin(50);
+
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_alpgen_qcd_lowm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_vv_lowm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_top_lowm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Add(h_zjets_lowm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Rebin(50);
+  
+  TCanvas* tc_lowm_muon_dijet_m = new TCanvas("tc_lowm_muon_dijet_m","tc_lowm_muon_dijet_m",0,0,1920,1200);
+
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->SetLineColor(kBlue);
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->GetXaxis()->SetTitle("Dijet Mass");
+  h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m->Draw();
+
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->SetLineColor(kRed);
+  h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m->Draw("sames");
+
+  h_data_lowm_muon_dijet_m_dijet_m->SetMarkerStyle(8);
+  h_data_lowm_muon_dijet_m_dijet_m->Draw("sames PE");
+
+  //tc_lowm_muon_dijet_m->SetLogy();
+  tc_lowm_muon_dijet_m->Update();
+
+
+  TLegend* tl_lowm_muon_dijet_m = new TLegend(0.63,0.8,0.9,0.9);
+  tl_lowm_muon_dijet_m->SetFillColor(0);
+  tl_lowm_muon_dijet_m->SetTextSize(0.03);
+  tl_lowm_muon_dijet_m->AddEntry(h_data_lowm_muon_dijet_m_dijet_m,"data","L");
+  tl_lowm_muon_dijet_m->AddEntry(h_alpgen_wjets_lowm_muon_dijet_pt_dijet_m,"Bkgd w/ ALPGEN wjets","L");
+  tl_lowm_muon_dijet_m->AddEntry(h_sherpa_wjets_lowm_muon_dijet_pt_dijet_m,"Bkgd w/ SHERPA wjets","L");
+  tl_lowm_muon_dijet_m->Draw();
+
+  
+  string cur_saveas = "./plots/latest/h_lowm_muon_dijet_m.png";
+  tc_lowm_muon_dijet_m->SaveAs(cur_saveas.c_str());
+  
+
+  //////////////////////////////////////////////////
+  // highm_dijet_m
+  //////////////////////////////////////////////////
+
+  TH1F* h_data_highm_elec_dijet_m_dijet_m = (TH1F*) data->Get("h_ctrl_highm_elec_dijet_m_dijet_m");
+  h_data_highm_elec_dijet_m_dijet_m->Rebin(50);
+  TH1F* h_data_highm_muon_dijet_m_dijet_m = (TH1F*) data->Get("h_ctrl_highm_muon_dijet_m_dijet_m");
+  h_data_highm_muon_dijet_m_dijet_m->Rebin(50);
+
+  TH1F* h_sherpa_wjets_highm_elec_dijet_pt_dijet_m = (TH1F*) sherpa_wjets->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_sherpa_wjets_highm_muon_dijet_pt_dijet_m = (TH1F*) sherpa_wjets->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_alpgen_wjets_highm_elec_dijet_pt_dijet_m = (TH1F*) alpgen_wjets->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");  
+  TH1F* h_alpgen_wjets_highm_muon_dijet_pt_dijet_m = (TH1F*) alpgen_wjets->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_vv_highm_elec_dijet_pt_dijet_m = (TH1F*) vv->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_vv_highm_muon_dijet_pt_dijet_m = (TH1F*) vv->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_top_highm_elec_dijet_pt_dijet_m = (TH1F*) top->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_top_highm_muon_dijet_pt_dijet_m = (TH1F*) top->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_zjets_highm_elec_dijet_pt_dijet_m = (TH1F*) zjets->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_zjets_highm_muon_dijet_pt_dijet_m = (TH1F*) zjets->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_sherpa_qcd_highm_elec_dijet_pt_dijet_m = (TH1F*) sherpa_qcd->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_sherpa_qcd_highm_muon_dijet_pt_dijet_m = (TH1F*) sherpa_qcd->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+  TH1F* h_alpgen_qcd_highm_elec_dijet_pt_dijet_m = (TH1F*) alpgen_qcd->Get("h_ctrl_highm_elec_dijet_pt_dijet_m");
+  TH1F* h_alpgen_qcd_highm_muon_dijet_pt_dijet_m = (TH1F*) alpgen_qcd->Get("h_ctrl_highm_muon_dijet_pt_dijet_m");
+
+
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Add(h_sherpa_qcd_highm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Add(h_vv_highm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Add(h_top_highm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Add(h_zjets_highm_elec_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Rebin(50);
+
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Add(h_alpgen_qcd_highm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Add(h_vv_highm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Add(h_top_highm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Add(h_zjets_highm_elec_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Rebin(50);
+  
+  TCanvas* tc_highm_elec_dijet_m = new TCanvas("tc_highm_elec_dijet_m","tc_highm_elec_dijet_m",0,0,1920,1200);
+
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->SetLineColor(kBlue);
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->GetXaxis()->SetTitle("Dijet Mass");
+  h_sherpa_wjets_highm_elec_dijet_pt_dijet_m->Draw();
+
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->SetLineColor(kRed);
+  h_alpgen_wjets_highm_elec_dijet_pt_dijet_m->Draw("sames");
+
+  h_data_highm_elec_dijet_m_dijet_m->SetMarkerStyle(8);
+  h_data_highm_elec_dijet_m_dijet_m->Draw("sames PE");
+
+  //tc_highm_elec_dijet_m->SetLogy();
+  tc_highm_elec_dijet_m->Update();
+
+
+  TLegend* tl_highm_elec_dijet_m = new TLegend(0.63,0.8,0.9,0.9);
+  tl_highm_elec_dijet_m->SetFillColor(0);
+  tl_highm_elec_dijet_m->SetTextSize(0.03);
+  tl_highm_elec_dijet_m->AddEntry(h_data_highm_elec_dijet_m_dijet_m,"data","L");
+  tl_highm_elec_dijet_m->AddEntry(h_alpgen_wjets_highm_elec_dijet_pt_dijet_m,"Bkgd w/ ALPGEN wjets","L");
+  tl_highm_elec_dijet_m->AddEntry(h_sherpa_wjets_highm_elec_dijet_pt_dijet_m,"Bkgd w/ SHERPA wjets","L");
+  tl_highm_elec_dijet_m->Draw();
+
+  
+  string cur_saveas = "./plots/latest/h_highm_elec_dijet_m.png";
+  tc_highm_elec_dijet_m->SaveAs(cur_saveas.c_str());
+  
+
+  //////////////////////////////////////////////////
+  // highm_muon_dijet_m
+  ////////////////////////////////////////////////// 
+  
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Add(h_sherpa_qcd_highm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Add(h_vv_highm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Add(h_top_highm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Add(h_zjets_highm_muon_dijet_pt_dijet_m);
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Rebin(50);
+
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Add(h_alpgen_qcd_highm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Add(h_vv_highm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Add(h_top_highm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Add(h_zjets_highm_muon_dijet_pt_dijet_m);
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Rebin(50);
+  
+  TCanvas* tc_highm_muon_dijet_m = new TCanvas("tc_highm_muon_dijet_m","tc_highm_muon_dijet_m",0,0,1920,1200);
+
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->SetLineColor(kBlue);
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->GetXaxis()->SetTitle("Dijet Mass");
+  h_sherpa_wjets_highm_muon_dijet_pt_dijet_m->Draw();
+
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->SetLineColor(kRed);
+  h_alpgen_wjets_highm_muon_dijet_pt_dijet_m->Draw("sames");
+
+  h_data_highm_muon_dijet_m_dijet_m->SetMarkerStyle(8);
+  h_data_highm_muon_dijet_m_dijet_m->Draw("sames PE");
+
+  //tc_highm_muon_dijet_m->SetLogy();
+  tc_highm_muon_dijet_m->Update();
+  
+  TLegend* tl_highm_muon_dijet_m = new TLegend(0.63,0.8,0.9,0.9);
+  tl_highm_muon_dijet_m->SetFillColor(0);
+  tl_highm_muon_dijet_m->SetTextSize(0.03);
+  tl_highm_muon_dijet_m->AddEntry(h_data_highm_muon_dijet_m_dijet_m,"data","L");
+  tl_highm_muon_dijet_m->AddEntry(h_alpgen_wjets_highm_muon_dijet_pt_dijet_m,"Bkgd w/ ALPGEN wjets","L");
+  tl_highm_muon_dijet_m->AddEntry(h_sherpa_wjets_highm_muon_dijet_pt_dijet_m,"Bkgd w/ SHERPA wjets","L");
+  tl_highm_muon_dijet_m->Draw();
+  
+  string cur_saveas = "./plots/latest/h_highm_muon_dijet_m.png";
+  tc_highm_muon_dijet_m->SaveAs(cur_saveas.c_str());
+  
+  
+}

@@ -1,0 +1,38 @@
+#! /usr/bin/python
+
+out_file = open("index.csv","w")
+
+samples = ["alpgen.wjets","algpen.zjets","mcatnlo.ttbar","mcatnlo.singletop","herwig.ww","herwig.wz","herwig.zz","gww.lvjj.m500","gww.lvjj.m1000","gww.lvjj.m1250","gww_lvjj.m1500"]
+
+systematics = ["jes","jer","les","ler","coef","sjets","idsf","recosf","trigsf"]
+
+systematics_logs = [open("../../logs/"+sys+".csv") for sys in systematics]
+
+## Write header
+out_file.write("systematic,")
+for idx,samp in enumerate(samples):
+    if idx==len(samples)-1:
+        out_file.write(samp)
+    else:
+        out_file.write(samp+",")
+out_file.write("\n")
+    
+## Print each systematic for given sample
+for ldx,log in enumerate(systematics_logs):
+    out_file.write(systematics[ldx]+",")
+    cur_log = log.readlines()
+    found_sys=0
+    for line in cur_log:
+        for samp in samples:
+            if line.find(samp)==0:
+                out_file.write(line[line.find(",")+1:line.rfind(",")]+"|"+line[line.rfind(",")+1:].rstrip("\n"))
+                found_sys+=1
+                if found_sys!=len(samples):
+                    out_file.write(",")
+    
+    out_file.write("\n")
+    
+
+out_file.write("\n")
+out_file.close()
+

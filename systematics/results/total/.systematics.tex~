@@ -1,0 +1,7 @@
+\documentclass{book}
+\usepackage{lipsum}% automated generation of text 
+
+\begin{document}
+\include{../jer/jer.tex}
+\include{../jes/jes.tex}
+\end{document}

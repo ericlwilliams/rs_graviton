@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{jes}{../../logs/jes.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{JES percent $\Delta$~Acceptance in High Mass control region}
+  \DTLdisplaydb{jes}
+\end{table}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/jes/h_bkgds_jes_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/jes/h_bkgds_jes_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/jes/rsg_m1000_kmpl0_1_jes_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/jes/rsg_m1000_kmpl0_1_jes_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{G* (M=1000) Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/jes/afii_kkg_lvjj_m1000_jes_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/jes/afii_kkg_lvjj_m1000_jes_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{G$_{kk}$ (M=1000) Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+
+\end{document}

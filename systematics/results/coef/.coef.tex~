@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{coef}{../../logs/coef.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Fractional $\Delta$~Acceptance in High Mass control region}
+  \DTLdisplaydb{coef}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/coef/h_bkgds_coef_el_highm_lep_met_dijet_mt.png}
+  \includegraphics[width=5.0truein]{../../plots/coef/h_bkgds_coef_mu_highm_lep_met_dijet_mt.png}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+
+\end{document}

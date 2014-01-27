@@ -1,0 +1,245 @@
+10
+
+dir
+0
+svn+ssh://svn.cern.ch/reps/apenson/elw/analy/LocalAnaly/trunk/lnuj/systematics/logs
+svn+ssh://svn.cern.ch/reps/apenson
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7c6e8ea0-0a27-4360-9bb0-0d873ab685f0
+
+idsf.csv
+file
+
+
+
+add
+
+allcl.csv
+file
+
+
+
+add
+
+sjets.csv
+file
+
+
+
+add
+
+jes_systematics.log
+file
+
+
+
+add
+
+intpu.csv
+file
+
+
+
+add
+
+qcd_norm.csv
+file
+
+
+
+add
+
+ttbar.csv
+file
+
+
+
+add
+
+uboy.csv
+file
+
+
+
+add
+
+topo.csv
+file
+
+
+
+add
+
+recosf.csv
+file
+
+
+
+add
+
+refutrk.csv
+file
+
+
+
+add
+
+lhco.csv
+file
+
+
+
+add
+
+vjets_norm.csv
+file
+
+
+
+add
+
+metpu.csv
+file
+
+
+
+add
+
+trigsf.csv
+file
+
+
+
+add
+
+idpt.csv
+file
+
+
+
+add
+
+jes_systematics_nomet.log
+file
+
+
+
+add
+
+test.log
+file
+
+
+
+add
+
+ootpu.csv
+file
+
+
+
+add
+
+lumi.csv
+file
+
+
+
+add
+
+emmet.csv
+file
+
+
+
+add
+
+isrfsr.csv
+file
+
+
+
+add
+
+pdfsig.csv
+file
+
+
+
+add
+
+coef.csv
+file
+
+
+
+add
+
+test.csv
+file
+
+
+
+add
+
+jer.csv
+file
+
+
+
+add
+
+jes.csv
+file
+
+
+
+add
+
+ler.csv
+file
+
+
+
+add
+
+isosf.csv
+file
+
+
+
+add
+
+les.csv
+file
+
+
+
+add
+
+mspt.csv
+file
+
+
+
+add
+

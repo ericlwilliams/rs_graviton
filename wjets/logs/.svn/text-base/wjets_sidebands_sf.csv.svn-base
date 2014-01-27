@@ -1,0 +1,3 @@
+scale_region,control_region,channel,alpgen_sf,alpgen_sf_err,sherpa_sf,sherpa_sf_err
+sidebands,lowsb_highm,comb,0.751812,0.00198343,1.05265,0.0200634
+sidebands,highsb_highm,comb,0.75179,0.00343482,1.05264,0.0347507

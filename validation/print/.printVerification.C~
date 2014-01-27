@@ -1,0 +1,73 @@
+#include <TProfile.h>
+
+void printVerification(){
+
+  //gROOT->SetStyle("Plain");  
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(1);
+  // gStyle->SetPadTickX(1);
+  //gStyle->SetPadTickY(1);
+
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In printVerfication.C"<<endl;
+
+  //////////////////////////////////////////////////
+  // Combined Streams
+  ////////////////////////////////////////////////// 
+  TFile* data_comb = (TFile*) TFile::Open("../plots/merged/data11.lnuj.verification.plot.root");
+
+  TCanvas* tc_prof_comb_evtperlumi_rnum = new TCanvas("tc_prof_comb_evtperlumi_rnum","Evt/Lumi vs Run Number (Combined)",0,0,1280,800);
+  tc_prof_comb_evtperlumi_rnum->cd();
+  TProfile* prof_comb_evtperlumi_rnum = (TProfile*) data_comb->Get("prof_evtperlumi_rnum");
+  prof_comb_evtperlumi_rnum->SetTitle("Electron and Muon Streams");
+  prof_comb_evtperlumi_rnum->GetXaxis()->SetTitle("Run Number (Electron and Muon Streams)");
+  prof_comb_evtperlumi_rnum->GetYaxis()->SetTitle("Events/pb");
+  prof_comb_evtperlumi_rnum->GetYaxis()->SetRangeUser(0,1500);
+  prof_comb_evtperlumi_rnum->Draw("P");
+
+  tc_prof_comb_evtperlumi_rnum->Update();
+  tc_prof_comb_evtperlumi_rnum->SaveAs("../canvases/latest/prof_comb_evtperlumi_rnum.png");
+
+  //////////////////////////////////////////////////
+  // Muon Stream
+  ////////////////////////////////////////////////// 
+  TFile* data_elec = (TFile*) TFile::Open("../plots/data11.elec.pu.verification.plot.root");
+
+  TCanvas* tc_prof_elec_evtperlumi_rnum = new TCanvas("tc_prof_elec_evtperlumi_rnum","Evt/Lumi vs Run Number (Electron)",0,0,1280,800);
+  tc_prof_elec_evtperlumi_rnum->cd();
+  TProfile* prof_elec_evtperlumi_rnum = (TProfile*) data_elec->Get("prof_evtperlumi_rnum");
+  prof_elec_evtperlumi_rnum->SetTitle("Electron Stream");
+  prof_elec_evtperlumi_rnum->GetXaxis()->SetTitle("Run Number (Electron Stream)");
+  prof_elec_evtperlumi_rnum->GetYaxis()->SetTitle("Events/pb");
+  prof_elec_evtperlumi_rnum->GetYaxis()->SetRangeUser(0,1500);
+  prof_elec_evtperlumi_rnum->Draw("P");
+
+  tc_prof_elec_evtperlumi_rnum->Update();
+  tc_prof_elec_evtperlumi_rnum->SaveAs("../canvases/latest/prof_elec_evtperlumi_rnum.png");
+
+
+  TFile* data_muon = (TFile*) TFile::Open("../plots/data11.muon.pu.verification.plot.root");
+
+  TCanvas* tc_prof_muon_evtperlumi_rnum = new TCanvas("tc_prof_muon_evtperlumi_rnum","Evt/Lumi vs Run Number (Muon)",0,0,1280,800);
+  tc_prof_muon_evtperlumi_rnum->cd();
+  TProfile* prof_muon_evtperlumi_rnum = (TProfile*) data_muon->Get("prof_evtperlumi_rnum");
+  prof_muon_evtperlumi_rnum->SetTitle("Muon Stream");
+  prof_muon_evtperlumi_rnum->GetXaxis()->SetTitle("Run Number (Muon Stream)");
+  prof_muon_evtperlumi_rnum->GetYaxis()->SetTitle("Events/pb");
+  prof_muon_evtperlumi_rnum->GetYaxis()->SetRangeUser(0,1500);
+  prof_muon_evtperlumi_rnum->Draw("P");
+
+  tc_prof_muon_evtperlumi_rnum->Update();
+  tc_prof_muon_evtperlumi_rnum->SaveAs("../canvases/latest/prof_muon_evtperlumi_rnum.png");
+
+
+  return;
+}

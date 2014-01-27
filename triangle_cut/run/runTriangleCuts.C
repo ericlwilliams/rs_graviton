@@ -1,0 +1,76 @@
+void runTriangleCuts(){
+
+  string file_loc = "/Users/elw/Dropbox/eMacs/analy/lvjj/files/skims/";
+
+  const int nWjets= 18;
+  string wjets_file_start = file_loc+"mc.alpgen.w";
+  string wjets_file_middle ="nu.np";
+  string wjets_file_end =".pu.skim.root";  
+  string wjets_skims[nWjets] =
+    {wjets_file_start+"e"+wjets_file_middle+"0"+wjets_file_end,
+     wjets_file_start+"e"+wjets_file_middle+"1"+wjets_file_end,
+     wjets_file_start+"e"+wjets_file_middle+"2"+wjets_file_end,
+     wjets_file_start+"e"+wjets_file_middle+"3"+wjets_file_end,
+     wjets_file_start+"e"+wjets_file_middle+"4"+wjets_file_end,
+     wjets_file_start+"e"+wjets_file_middle+"5"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"0"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"1"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"2"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"3"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"4"+wjets_file_end,
+     wjets_file_start+"u"+wjets_file_middle+"5"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"0"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"1"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"2"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"3"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"4"+wjets_file_end,
+     wjets_file_start+"t"+wjets_file_middle+"5"+wjets_file_end};
+
+  TChain *wjetsChain = new TChain("analysisTree");
+  for(int w=0;w<nWjets;w++){
+    cout<<wjets_skims[w]<<endl;
+    wjetsChain->Add(wjets_skims[w].c_str());
+  }
+
+  wjetsChain->Process("../src/triangleCuts.C+","wjets");
+
+  
+  TChain *qcdChain = new TChain("analysisTree");
+  string qcd_elec_skim = file_loc+"qcd.elec.pu.skim.root";
+  string qcd_muon_skim = file_loc+"qcd.muon.pu.skim.root";
+  qcdChain->Add(qcd_elec_skim.c_str());
+  qcdChain->Add(qcd_muon_skim.c_str());
+  
+  qcdChain->Process("../src/triangleCuts.C++","qcd");
+  
+  TChain *dataChain = new TChain("analysisTree");
+  string data_skim = file_loc+"/merged/data.lnuj.skim.root";
+  dataChain->Add(data_skim.c_str());
+  dataChain->Add(qcd_elec_skim.c_str());
+  dataChain->Add(qcd_muon_skim.c_str());
+
+  dataChain->Process("../src/triangleCuts.C++","data");
+  
+  TChain *sigChain = new TChain("analysisTree");
+  string sig_m600_skim = file_loc+"mc.wprime.wz.lvqq.m600.pu.skim.root";
+  string sig_m700_skim = file_loc+"mc.wprime.wz.lvqq.m700.pu.skim.root";
+  string sig_m800_skim = file_loc+"mc.wprime.wz.lvqq.m800.pu.skim.root";
+  string sig_m900_skim = file_loc+"mc.wprime.wz.lvqq.m900.pu.skim.root";
+  string sig_m1000_skim = file_loc+"mc.wprime.wz.lvqq.m1000.pu.skim.root";
+  string sig_m1100_skim = file_loc+"mc.wprime.wz.lvqq.m1100.pu.skim.root";
+
+  sigChain->Add(sig_m600_skim.c_str());
+  sigChain->Add(sig_m700_skim.c_str());
+  sigChain->Add(sig_m800_skim.c_str());
+  sigChain->Add(sig_m900_skim.c_str());
+  sigChain->Add(sig_m1000_skim.c_str());
+  sigChain->Add(sig_m1100_skim.c_str());
+
+  sigChain->Process("../src/triangleCuts.C++","sig");
+  
+  gROOT->ProcessLine(".q");
+  return;
+}
+  
+    
+    

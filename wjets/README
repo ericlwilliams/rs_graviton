@@ -1,0 +1,35 @@
+//////////////////////////////////////////////////
+// README file for lnuj/wjets folder
+//////////////////////////////////////////////////
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% wjetsScaleFactors.C %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Loads plot files from ../plots/ctrl_plots/...
+Calculates scale factors in
+ctrl_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65 || m(jj)>115
+ctrl_highm: pt(lv)>200, pt(jj)>200, m(jj)<65 || m(jj)>115
+lowsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65
+highsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)>115
+lowsb_highm: pt(lv)>200, pt(jj)>200, m(jj)<65
+highsb_highm: pt(lv)>200, pt(jj)>200, m(jj)>115
+
+Error propagation done 'by hand'. To be done via histos?  How to check?
+
+- run with 'sidebands' option for sideband scaleband scale factors
+- run with 'ctrl_wjets' for lowm/highm scale factors
+  - See logs/wjets_OPTION_sf.csv for scriptable outputs
+  
+- NOTE: sidebands used combined channels (el/mu) while ctrl_wjets keep separate.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% wjetsPrint.C %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+- Loads plot files from ../plots/ctrl_plots/...
+- Plots dijet_m distribution for ALPGEN/SHERPA in lowm/highm regions for summed background and data, with data blinded in signal region.  
+- To compare ALPGEN/SHERPA sideband scaling in signal region.
+
+

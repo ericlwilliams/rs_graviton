@@ -1,0 +1,489 @@
+#include "../include/wwFileInfo.h"
+#include "../include/HistogramPainter.h"
+#include <TCanvas.h>
+#include <TPad.h>
+#include <TLegend.h>
+#include <THStack.h>
+#include <TH1F.h>
+//#include <TIter.h>
+#include <TObject.h>
+#include <string>
+
+
+string plot_loc = "../canvases/latest/";
+string save_ext = ".pdf";
+
+int alpgen_color = 6;
+int sherpa_color = 7;
+int data_marker_style =8;
+int data_marker_size = 2;
+float ratio_split=0.35;
+
+//type = "ps" - preselection
+//type = "ctrl_highm" - 
+
+void wjetsPrint(string type="ps"){
+
+  
+
+  const int nProcs = 2;
+  string procs[nProcs] = {"elec", "muon"};
+
+  string event_type = type;
+
+  // ctrl_highm
+  if(event_type.find("ps")!=string::npos){
+
+    string vars[] = {"lep_met_pt","dijet_pt","dijet_m","jet_n","met","lep_met_mt","lep_pt","lead_jet_pt","lep_met_dijet_mt","avg_int_per_xing"};
+    int tmpVars = sizeof(vars)/sizeof(vars[0]);
+    const int nVars = tmpVars;  
+    string plot_vars[nVars] = {"Pt(lep,MET)","Dijet Pt","Dijet M","Jet N","MET_RefFinal","MT(lep,met)","Lepton Pt","Leading jet pt","Mt(lep,MET,dijet)","Average Interactions per Xing"};
+
+  }else if(event_type.find("ctrl_ewk")!=string::npos){
+
+    string vars[] = {"mt_dijet_pt","mt_njets","mt_met","mt_lep_met_mt","mt_lep_pt"};
+    int tmpVars = sizeof(vars)/sizeof(vars[0]);
+    const int nVars = tmpVars;  
+    string plot_vars[nVars] = {"Dijet Pt","Jet N","MET_RefFinal","MT(lep,met)","Lepton Pt"};
+
+  }else if(event_type.find("ctrl_highm")!=string::npos){
+
+    string vars[] = {"dijet_m_lep_met_pt","dijet_m_dijet_pt","dijet_m_jet_n","dijet_m_met","dijet_m_lep_met_mt","dijet_m_lep_pt","dijet_m_lead_jet_pt","dijet_m_lep_met_dijet_mt"};
+    
+    int tmpVars = sizeof(vars)/sizeof(vars[0]);
+    const int nVars = tmpVars;  
+    string plot_vars[nVars] = {"Pt(lep,MET)","Dijet Pt","Jet N","MET_RefFinal","MT(lep,met)","Lepton Pt","Leading jet pt","Mt(lep,MET,dijet)"};
+
+  }  // // ps
+
+
+  // string regions[] = {"all"}
+  // int tmpRegions = sizeof(regions)/sizeof(regions[0]);
+  // const int nRegions = tmpRegions;
+    
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsPrint.C"<<endl;
+
+  //string file_loc = "/Users/elw/analy/lvjj/plots/ctrl_plots/";
+
+  string file_loc;
+  if(event_type.find("ps")!=string::npos){
+    file_loc="/Users/elw/Dropbox/eMacs/analy/lvjj/plots/gww_plots/";
+  }else if(event_type.find("ctrl")!=string::npos){
+    file_loc="/Users/elw/Dropbox/eMacs/analy/lvjj/plots/ctrl_plots/";
+  }else{
+    cout<<"Unknown plot source type: "<<event_type<<endl;
+    exit(1);
+  }
+
+  //////////////////////////////////////////////////
+  // Load Data
+  ////////////////////////////////////////////////// 
+  string file_end;
+  if(event_type.find("ps")!=string::npos){
+    file_end=".plot.root";
+  }else if(event_type.find("ctrl")!=string::npos){
+    file_end=".ctrl.plot.root";
+  }else{
+    cout<<"Unknown plot source type: "<<event_type<<endl;
+    exit(1);
+  }
+  
+  string data_loc = file_loc+"merged/data.lnuj"+file_end;
+  TFile* data = (TFile*) TFile::Open(data_loc.c_str());
+  //////////////////////////////////////////////////
+  // Load Scaled Backgrounds
+  //////////////////////////////////////////////////
+  
+  string sherpa_wjets_loc = file_loc+"merged/mc.sherpa.wjets"+file_end;
+  string alpgen_wjets_loc = file_loc+"merged/mc.alpgen.wjets"+file_end;
+  string vv_loc = file_loc+"merged/mc.herwig.vv"+file_end;
+  string alpgen_qcd_loc = file_loc+"merged/qcd.alpgen"+file_end;
+  string sherpa_qcd_loc = file_loc+"merged/qcd.sherpa"+file_end;
+  string top_loc = file_loc+"merged/mc.mcatnlo.top"+file_end;  
+  string alpgen_zjets_loc = file_loc+"merged/mc.alpgen.zjets"+file_end;
+  string sherpa_zjets_loc = file_loc+"merged/mc.sherpa.zjets"+file_end;
+
+  TFile* sherpa_wjets = (TFile*) TFile::Open(sherpa_wjets_loc.c_str(),"READ");  
+  TFile* alpgen_wjets = (TFile*) TFile::Open(alpgen_wjets_loc.c_str(),"READ");
+  TFile* top = (TFile*) TFile::Open(top_loc.c_str(),"READ");
+  TFile* alpgen_qcd = (TFile*) TFile::Open(alpgen_qcd_loc.c_str(),"READ");
+  TFile* vv = (TFile*) TFile::Open(vv_loc.c_str(),"READ");
+  TFile* sherpa_qcd = (TFile*) TFile::Open(sherpa_qcd_loc.c_str(),"READ");
+  TFile* sherpa_zjets = (TFile*) TFile::Open(sherpa_zjets_loc.c_str(),"READ");
+  TFile* alpgen_zjets = (TFile*) TFile::Open(alpgen_zjets_loc.c_str(),"READ");
+
+
+  const int nBkgds = 2;
+  TFile* bkgd_files[nBkgds] = {vv,top};
+
+  //////////////////////////////////////////////////
+  // Histogram selection
+  ////////////////////////////////////////////////// 
+
+  
+  TH1F* h_data[nProcs][nVars];
+  TH1F* h_sherpa_bkgd[nProcs][nVars];
+  TH1F* h_alpgen_bkgd[nProcs][nVars];
+  THStack* stk_alpgen_bkgd[nProcs][nVars];
+  TH1F* h_sherpa_ratio[nProcs][nVars];
+  TH1F* h_alpgen_ratio[nProcs][nVars];
+  
+  for(int p=0;p<nProcs;p++){// e.g. elec,muon
+    string proc = procs[p];
+
+    for(int v=0;v<nVars;v++){// e.g. nocut_dijet_pt, dijet_m_lep_met_mt
+      string var = vars[v];
+
+      string hist_name;
+      if(event_type.find("ps")!=string::npos){
+	hist_name = "ps/h_"+proc+"_"+var;
+      }else if(event_type.find("ctrl")!=string::npos){
+	hist_name = "h_"+event_type+"_"+proc+"_"+var;
+	}else{
+	cout<<"Unknown plot source type: "<<event_type<<endl;
+	exit(1);
+      }
+
+      //////////////////////////////////////////////////
+      // Load data
+      //////////////////////////////////////////////////
+      //h_data[p][v] = (TH1F*) data->Get(hist_name.c_str())->Clone();
+      h_data[p][v] = (TH1F*) data->Get(hist_name.c_str());
+
+      //////////////////////////////////////////////////
+      // Load backgrounds
+      //////////////////////////////////////////////////
+      // h_sherpa/alpgen for ratios
+      //TH1F* cur_sherpa_wjets_hist = (TH1F*) sherpa_wjets->Get(hist_name.c_str())->Clone();
+      TH1F* cur_sherpa_wjets_hist = (TH1F*) sherpa_wjets->Get(hist_name.c_str());
+      h_sherpa_bkgd[p][v] = cur_sherpa_wjets_hist;
+
+      TH1F* cur_sherpa_zjets_hist = (TH1F*) sherpa_zjets->Get(hist_name.c_str());
+      ((TH1F*) h_sherpa_bkgd[p][v])->Add(cur_sherpa_zjets_hist);
+      h_sherpa_bkgd[p][v]->SetLineColor(sherpa_color);
+
+      TH1F* cur_sherpa_qcd_hist = (TH1F*) sherpa_qcd->Get(hist_name.c_str());
+      ((TH1F*) h_sherpa_bkgd[p][v])->Add(cur_sherpa_qcd_hist);
+
+      //alpgen
+      //TH1F* cur_alpgen_wjets_hist = (TH1F*) alpgen_wjets->Get(hist_name.c_str())->Clone();
+      TH1F* cur_alpgen_wjets_hist = (TH1F*) alpgen_wjets->Get(hist_name.c_str());
+      h_alpgen_bkgd[p][v] = cur_alpgen_wjets_hist;
+
+      TH1F* cur_alpgen_zjets_hist = (TH1F*) alpgen_zjets->Get(hist_name.c_str());
+      ((TH1F*) h_alpgen_bkgd[p][v])->Add(cur_alpgen_zjets_hist);
+      h_alpgen_bkgd[p][v]->SetLineColor(alpgen_color);
+
+      //TH1F* cur_alpgen_qcd_hist = (TH1F*) alpgen_qcd->Get(hist_name.c_str())->Clone();
+      TH1F* cur_alpgen_qcd_hist = (TH1F*) alpgen_qcd->Get(hist_name.c_str());
+      ((TH1F*) h_alpgen_bkgd[p][v])->Add(cur_alpgen_qcd_hist);
+      h_alpgen_bkgd[p][v]->SetLineWidth(1);
+      
+      // h_alpgen_bkgd[p][v] = (TH1F*) alpgen_wjets->Get(hist_name.c_str())->Clone();
+      // ((TH1F*) h_alpgen_bkgd[p][v])->Add((TH1F*) alpgen_qcd->Get(hist_name.c_str())->Clone());
+      // ((TH1F*) h_alpgen_bkgd[p][v])->Add((TH1F*) alpgen_zjets->Get(hist_name.c_str())->Clone());
+      // h_alpgen_bkgd[p][v]->SetLineColor(alpgen_color);
+      //
+
+	
+      string stack_name = "stk_"+event_type+"_"+proc+"_"+var;
+      stk_alpgen_bkgd[p][v] = new THStack(stack_name.c_str(),hist_name.c_str());
+
+      TH1F* vv_hist = (TH1F*) vv->Get(hist_name.c_str())->Clone();
+      //vv_hist->SetFillStyle(3013);
+      vv_hist->SetFillColor(kYellow-4);
+      vv_hist->SetLineWidth(1);
+      ((THStack*) stk_alpgen_bkgd[p][v])->Add(vv_hist,"hist");
+      // TH1F* alpgen_qcd_hist = (TH1F*) alpgen_qcd->Get(hist_name.c_str())->Clone();
+      // alpgen_qcd_hist->SetFillStyle(3003);
+      // alpgen_qcd_hist->SetFillColor(kRed);
+      // alpgen_qcd_hist->SetLineWidth(1);
+      // ((THStack*) stk_alpgen_bkgd[p][v])->Add(alpgen_qcd_hist);
+      // TH1F* alpgen_zjets_hist = (TH1F*) alpgen_zjets->Get(hist_name.c_str())->Clone();
+      // alpgen_zjets_hist->SetFillStyle(3018);
+      // alpgen_zjets_hist->SetFillColor(kYellow);
+      // alpgen_zjets_hist->SetLineWidth(1);
+      // ((THStack*) stk_alpgen_bkgd[p][v])->Add(alpgen_zjets_hist);
+      TH1F* top_hist = (TH1F*) top->Get(hist_name.c_str())->Clone();
+      //top_hist->SetFillStyle(3017);
+      top_hist->SetFillColor(kAzure+1);
+      top_hist->SetLineWidth(1);
+      ((THStack*) stk_alpgen_bkgd[p][v])->Add(top_hist,"hist");
+      // TH1F* alpgen_wjets_hist = (TH1F*) alpgen_wjets->Get(hist_name.c_str())->Clone();
+      // //top_hist->SetF(3003);
+      // alpgen_wjets_hist->SetLineColor(6);
+      // alpgen_wjets_hist->SetLineWidth(2);
+      // ((THStack*) stk_alpgen_bkgd[p][v])->Add(alpgen_wjets_hist);
+      ((THStack*) stk_alpgen_bkgd[p][v])->Add((TH1F*) ((TH1F*) h_alpgen_bkgd[p][v])->Clone(),"hist");
+
+	
+
+      //////////////////////////////////////////////////
+      // Alpgen printed as stack, to see other backgrounds
+      // Sherpa background added
+      ////////////////////////////////////////////////// 
+
+	
+      for(int b=0;b<nBkgds;b++){
+
+	TH1F* bkgd_hist = (TH1F*) ((TFile*) bkgd_files[b])->Get(hist_name.c_str());
+	((TH1F*) h_sherpa_bkgd[p][v])->Add(bkgd_hist);
+	((TH1F*) h_alpgen_bkgd[p][v])->Add(bkgd_hist);
+      }// bkds
+
+      //////////////////////////////////////////////////
+      // make ratio histogram
+      //////////////////////////////////////////////////
+	
+      int n_bins = ((TAxis*) h_data[p][v]->GetXaxis())->GetNbins();
+      float x_min = ((TAxis*) h_data[p][v]->GetXaxis())->GetXmin();
+      float x_max = ((TAxis*) h_data[p][v]->GetXaxis())->GetXmax();
+
+      string alpgen_ratio_name = "h_alpgen_ratio_"+event_type+"_"+proc+"_"+var;
+      TH1F* alpgen_ratio = new TH1F(alpgen_ratio_name.c_str(),"",n_bins,x_min,x_max);
+
+      string sherpa_ratio_name = "h_sherpa_ratio_"+event_type+"_"+proc+"_"+var;
+      TH1F* sherpa_ratio = new TH1F(sherpa_ratio_name.c_str(),"",n_bins,x_min,x_max);
+
+      for(int i=0;i<n_bins;i++){ //loop over bins
+
+	float data_count = h_data[p][v]->GetBinContent(i);
+	float data_err = h_data[p][v]->GetBinError(i);
+
+
+	// alpgen
+	float alpgen_bkgd_count= h_alpgen_bkgd[p][v]->GetBinContent(i);
+	float alpgen_bkgd_err=sqrt(alpgen_bkgd_count);
+	// Luminosity Error
+	float alpgen_lumi_error = alpgen_bkgd_count*0.037;
+	alpgen_bkgd_err = sqrt(pow(alpgen_lumi_error,2.)+pow(alpgen_bkgd_err,2.));
+
+
+	if(alpgen_bkgd_count && data_count) {
+	    
+	  //////////////////////////////////////////////////
+	  // relErr((D-B)/B) = sqrt( (Err(D-B)/(D-B))^2 + (Err(B)/B)^2)
+
+	  //Err(D-B)
+	  double comb_alpgen_bkgd_data_err =
+	    sqrt(pow(data_err,2.)+pow(alpgen_bkgd_err,2.));
+
+	  // Err(D-B)/(D-B)
+	  double rel_alpgen_bkgd_data_err =
+	    comb_alpgen_bkgd_data_err/(data_count-alpgen_bkgd_count);
+
+	  // Err(B)/B
+	  double rel_alpgen_bkgd_err =
+	    alpgen_bkgd_err/alpgen_bkgd_count;
+
+	  // relErr((D-B)/B)
+	  double rel_alpgen_ratio_err =
+	    sqrt(pow(rel_alpgen_bkgd_data_err,2.)+pow(rel_alpgen_bkgd_err,2.));
+
+	  double cur_alpgen_ratio = (data_count-alpgen_bkgd_count)/alpgen_bkgd_count;
+
+	  double cur_alpgen_ratio_err = fabs(rel_alpgen_ratio_err*cur_alpgen_ratio);
+	  alpgen_ratio->SetBinContent(i,cur_alpgen_ratio);
+	  alpgen_ratio->SetBinError(i,cur_alpgen_ratio_err);
+
+
+	}
+
+	// sherpa
+	float sherpa_bkgd_count= h_sherpa_bkgd[p][v]->GetBinContent(i);
+	float sherpa_bkgd_err=sqrt(sherpa_bkgd_count);
+	// Luminosity Error
+	float sherpa_lumi_error = sherpa_bkgd_count*0.037;
+	sherpa_bkgd_err = sqrt(pow(sherpa_lumi_error,2.)+pow(sherpa_bkgd_err,2.));
+
+
+	if(sherpa_bkgd_count && data_count) {
+	    
+	  //////////////////////////////////////////////////
+	  // relErr((D-B)/B) = sqrt( (Err(D-B)/(D-B))^2 + (Err(B)/B)^2)
+
+	  //Err(D-B)
+	  double comb_sherpa_bkgd_data_err =
+	    sqrt(pow(data_err,2.)+pow(sherpa_bkgd_err,2.));
+
+	  // Err(D-B)/(D-B)
+	  double rel_sherpa_bkgd_data_err =
+	    comb_sherpa_bkgd_data_err/(data_count-sherpa_bkgd_count);
+
+	  // Err(B)/B
+	  double rel_sherpa_bkgd_err =
+	    sherpa_bkgd_err/sherpa_bkgd_count;
+
+	  // relErr((D-B)/B)
+	  double rel_sherpa_ratio_err =
+	    sqrt(pow(rel_sherpa_bkgd_data_err,2.)+pow(rel_sherpa_bkgd_err,2.));
+
+	  double cur_sherpa_ratio = (data_count-sherpa_bkgd_count)/sherpa_bkgd_count;
+	  double cur_sherpa_ratio_err = fabs(rel_sherpa_ratio_err*cur_sherpa_ratio);
+	 
+	  sherpa_ratio->SetBinContent(i,cur_sherpa_ratio);
+	  sherpa_ratio->SetBinError(i,cur_sherpa_ratio_err);
+	}
+      }
+
+      h_sherpa_ratio[p][v] = (TH1F*) sherpa_ratio;
+      h_alpgen_ratio[p][v] = (TH1F*) alpgen_ratio;
+    }// vars
+  }// procs
+
+  //////////////////////////////////////////////////
+  // Plotting Loop
+  ////////////////////////////////////////////////// 
+
+  const int nCanvases = nProcs*nVars;
+  TCanvas* canvases[nCanvases];
+  TPad* ratio_pads[nCanvases];
+  TPad* plot_pads[nCanvases];
+
+  int c=0; //canvas index
+  for(int p=0;p<nProcs;p++){// e.g. elec,muon
+    string proc = procs[p];
+    for(int v=0;v<nVars;v++){// e.g. nocut_dijet_pt, dijet_m_lep_met_mt
+      string var = vars[v];
+      
+      string canvas_name = "tc_vjets_"+event_type+"_"+proc+"_"+var;
+	string hist_name = "h_vjets_"+event_type+"_"+proc+"_"+var;
+
+	//////////////////////////////////////////////////
+	// make canvas
+	////////////////////////////////////////////////// 
+
+	canvases[c] = 
+	  new TCanvas(canvas_name.c_str(),canvas_name.c_str(),0,0,1920,1200);
+	canvases[c]->cd();
+
+	
+	ratio_pads[c] = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,ratio_split);
+	ratio_pads[c]->SetTopMargin(0.05);
+	ratio_pads[c]->SetBottomMargin(0.31);
+	ratio_pads[c]->Draw();
+
+	plot_pads[c] = new TPad("plot_pad","plot_pad",0.01,ratio_split,0.99,0.99);
+	plot_pads[c]->SetBottomMargin(0);
+	plot_pads[c]->Draw();
+	plot_pads[c]->cd();
+	plot_pads[c]->Update();  
+     
+	
+	stk_alpgen_bkgd[p][v]->Draw();
+	((THStack*) stk_alpgen_bkgd[p][v])->SetMinimum(0.1);
+	stk_alpgen_bkgd[p][v]->Draw("hist");
+
+	//h_sherpa_bkgd[p][v]->SetLineColor(sherpa_color);
+	h_sherpa_bkgd[p][v]->SetLineWidth(1);
+	h_sherpa_bkgd[p][v]->GetXaxis()->SetTitle(plot_vars[v].c_str());
+	h_sherpa_bkgd[p][v]->Draw("hist sames");
+
+
+	h_data[p][v]->SetMarkerStyle(data_marker_style);
+	h_data[p][v]->SetMarkerSize(data_marker_size);
+	h_data[p][v]->Draw("sames PE");
+
+	cout<<vars[v]<<endl;
+	if(vars[v].find("avg_int_per_xing") == string::npos &&
+	   vars[v].find("dijet_m")==string::npos){
+	  plot_pads[c]->SetLogy();
+	}
+	canvases[c]->Update();
+
+	//////////////////////////////////////////////////
+	// make legend
+	////////////////////////////////////////////////// 
+
+	TLegend* lgnd = new TLegend(0.63,0.7,0.9,0.9);
+	lgnd->SetFillColor(0);
+	lgnd->SetTextSize(0.045);
+	lgnd->AddEntry(h_data[p][v],"data","F");
+	lgnd->AddEntry(h_sherpa_bkgd[p][v],"SHERPA (qcd,v+jets)","F");
+	lgnd->AddEntry(h_alpgen_bkgd[p][v],"ALPGEN (qcd,v+jets)","F");
+	lgnd->AddEntry(top_hist,"mc.mcatnlo.top","F");
+	lgnd->AddEntry(vv_hist,"mc.herwig.vv","F");
+	lgnd->Draw();
+	
+	//////////////////////////////////////////////////
+	// Do ratio
+	////////////////////////////////////////////////// 
+
+	ratio_pads[c]->cd();
+	ratio_pads[c]->SetGrid();
+  
+	TAxis* alpgen_ratio_xaxis= h_alpgen_ratio[p][v]->GetXaxis();
+	TAxis* alpgen_ratio_yaxis= h_alpgen_ratio[p][v]->GetYaxis();
+
+	h_alpgen_ratio[p][v]->SetMarkerStyle(20);
+	h_alpgen_ratio[p][v]->SetMarkerSize(2);
+	h_alpgen_ratio[p][v]->SetLineWidth(1);
+	h_alpgen_ratio[p][v]->SetLineColor(alpgen_color);
+
+	alpgen_ratio_xaxis->SetLabelSize(0.08);
+	alpgen_ratio_yaxis->SetLabelSize(0.08);
+    
+	alpgen_ratio_xaxis->SetTitle(plot_vars[v].c_str());
+	alpgen_ratio_xaxis->SetTitleSize(0.16);
+	alpgen_ratio_xaxis->SetTitleOffset(0.7);
+	alpgen_ratio_yaxis->SetNdivisions(4,4,4);
+	alpgen_ratio_yaxis->SetTitle("(data-MC)/MC");
+	alpgen_ratio_yaxis->SetTitleSize(0.07);
+	alpgen_ratio_yaxis->SetTitleOffset(0.36);
+
+	alpgen_ratio_yaxis->SetRangeUser(-0.5,0.5);
+	h_alpgen_ratio[p][v]->Draw("PE");
+	canvases[c]->Update();
+	
+	TAxis* sherpa_ratio_yaxis= h_sherpa_ratio[p][v]->GetYaxis();
+	h_sherpa_ratio[p][v]->SetMarkerStyle(20);
+	h_sherpa_ratio[p][v]->SetMarkerSize(2);
+	h_sherpa_ratio[p][v]->SetLineColor(sherpa_color);
+	sherpa_ratio_yaxis->SetRangeUser(-0.5,0.5);
+	h_sherpa_ratio[p][v]->Draw("PE sames");
+	canvases[c]->Update();
+
+
+
+	plot_pads[c]->cd();
+	canvases[c]->RedrawAxis();
+	double leg_x1 = lgnd->GetX1NDC();
+	double leg_y1 = lgnd->GetY1NDC();
+	double offset_x1 = -0.02;
+	double offset_y1 = 0.08;
+	// If you want to write text on the plot (e.g. integrated luminosity)
+	//string atlas_text    = "ATLAS pre-approval";
+
+	string sqrts_text    = "#sqrt{s}= 7 TeV";
+	string lumi_text     = "#int Ldt = 4.701 fb^{-1}";
+	myText(leg_x1-offset_x1, leg_y1-offset_y1, 1, sqrts_text.c_str());
+	myText(leg_x1-offset_x1 + 0.1, leg_y1-offset_y1,1,  lumi_text.c_str());
+
+
+	string cur_saveas = plot_loc+hist_name+save_ext;
+	canvases[c]->SaveAs(cur_saveas.c_str());
+	
+	++c;
+    }
+  }
+
+  sherpa_wjets->Close();
+  sherpa_zjets->Close();
+  vv->Close();
+  alpgen_qcd->Close();
+  sherpa_qcd->Close();  
+  top->Close();
+  alpgen_zjets->Close();
+  sherpa_zjets->Close();
+  
+  gROOT->ProcessLine(".q");
+}

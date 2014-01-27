@@ -1,0 +1,412 @@
+//////////////////////////////////////////////////
+// Loads plot files from ../plots/ctrl_plots/...
+// Calculates scale factors in
+// ctrl_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65 || m(jj)>115
+// ctrl_highm: pt(lv)>200, pt(jj)>200, m(jj)<65 || m(jj)>115
+// lowsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)<65
+// highsb_lowm: pt(lv)>50, pt(jj)>50, m(jj)>115
+// lowsb_highm: pt(lv)>200, pt(jj)>200, m(jj)<65
+// highsb_highm: pt(lv)>200, pt(jj)>200, m(jj)>115
+//////////////////////////////////////////////////
+
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <THStack.h>
+#include "TH1.h"
+#include <TFile.h>
+
+//#include "../include/wjets_sf_defs.h"
+
+//////////////////////////////////////////////////
+// scale_region:
+// - "sidebands"
+//   - loads 'lowsb_lowm','highsb_lowm','lowsb_highm','highsb_higm'
+// - "inclusive"
+//   - loads 'ctrl_wjets_lowpt' (maybe 'ctrl_wjets_lowpt')
+////////////////////////////////////////////////// 
+void wjetsScaleFactorsJES(string scale_region="sidebands"){
+
+  gROOT->SetStyle("Plain");  
+  gStyle->SetOptStat(0);
+  gStyle->SetPalette(1);
+  gStyle->SetPadTickX(1);
+  gStyle->SetPadTickY(1);
+  //gStyle->SetFillStyle(3144);
+  
+  gROOT->SetBatch();
+
+  cout.setf(ios::fixed,ios::floatfield);            // floatfield not set
+  cout.precision(3);
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsScaleFactorsJES.C"<<endl;
+  string save_loc = "./canvases/latest/";
+  string cur_saveas="";
+
+  // lowsb, highsb, sig
+  const int nControlRegions = 4;
+  double region_bins[nControlRegions] = {0,65,115,300};
+  
+  const int nLowSB=0;
+  const int nHighSB=1;
+  const int nSig=2;
+  
+  // const int nProcs = 2;
+  // string procs[nProcs] = {"elec", "muon"};
+
+  string file_loc = "~/Dropbox/eMacs/analy/lvjj/plots/systematics_plots/";
+
+
+  
+
+    //////////////////////////////////////////////////
+  // Load Data
+  ////////////////////////////////////////////////// 
+  string elec_nom_hist_name = "h_el_jes_nom_highm_jes_dijet_m";
+  string elec_up_hist_name = "h_el_jes_up_highm_jes_dijet_m";
+  string elec_down_hist_name = "h_el_jes_down_highm_jes_dijet_m";
+  
+  string data_loc = file_loc+"merged/data.lnuj.plot.root";
+  TFile* data = TFile::Open(data_loc.c_str());
+  TH1F* h_elec_data_jes_nom_dijet_m = (TH1F*) data->Get(elec_nom_hist_name.c_str());
+  TH1F* h_elec_data_jes_nom_rebin_dijet_m = 
+    h_elec_data_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_data_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_data_jes_nom_rebin_dijet_m->SetDirectory(0);
+
+  h_elec_data_jes_nom_dijet_m->Rebin(3);
+  TH1F* h_elec_data_jes_up_dijet_m = (TH1F*) data->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_data_jes_up_rebin_dijet_m = 
+    h_elec_data_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_data_jes_up_rebin_dijet_m",region_bins);
+  h_elec_data_jes_up_rebin_dijet_m->SetDirectory(0);
+  
+  TH1F* h_elec_data_jes_down_dijet_m = (TH1F*) data->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_data_jes_down_rebin_dijet_m = 
+    h_elec_data_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_data_jes_down_rebin_dijet_m",region_bins);
+  h_elec_data_jes_down_rebin_dijet_m->SetDirectory(0);
+  data->Close();  
+
+
+  //////////////////////////////////////////////////
+  // Load Scaled Backgrounds
+  //////////////////////////////////////////////////   
+  string wjets_loc = file_loc+"merged/mc.alpgen.wjets.systematics.plot.root";
+  string vv_loc = file_loc+"merged/mc.herwig.vv.systematics.plot.root";
+  string qcd_loc = file_loc+"merged/qcd.alpgen.systematics.plot.root";
+  string top_loc = file_loc+"merged/mc.mcatnlo.top.systematics.plot.root";  
+  string zjets_loc = file_loc+"merged/mc.alpgen.zjets.systematics.plot.root";
+
+  TFile* wjets = TFile::Open(wjets_loc.c_str(),"READ");
+  TH1F* h_elec_wjets_jes_nom_dijet_m = (TH1F*) wjets->Get(elec_nom_hist_name.c_str());
+  TH1F* h_elec_wjets_jes_nom_rebin_dijet_m = 
+    h_elec_wjets_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_wjets_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_wjets_jes_nom_rebin_dijet_m->SetDirectory(0);
+    
+  TH1F* h_elec_wjets_jes_up_dijet_m = (TH1F*) wjets->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_wjets_jes_up_rebin_dijet_m = 
+    h_elec_wjets_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_wjets_jes_up_rebin_dijet_m",region_bins);
+  h_elec_wjets_jes_up_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_wjets_jes_down_dijet_m = (TH1F*) wjets->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_wjets_jes_down_rebin_dijet_m = 
+    h_elec_wjets_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_wjets_jes_down_rebin_dijet_m",region_bins);
+  h_elec_wjets_jes_down_rebin_dijet_m->SetDirectory(0);
+  wjets->Close();
+
+  TFile* vv = TFile::Open(vv_loc.c_str(),"READ");
+  TH1F* h_elec_vv_jes_nom_dijet_m = (TH1F*) vv->Get(elec_nom_hist_name.c_str());
+  //h_elec_vv_jes_nom_dijet_m->SetDirectory(0);
+  TH1F* h_elec_vv_jes_nom_rebin_dijet_m = 
+    h_elec_vv_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_vv_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_vv_jes_nom_rebin_dijet_m->SetDirectory(0);
+  
+  TH1F* h_elec_vv_jes_up_dijet_m = (TH1F*) vv->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_vv_jes_up_rebin_dijet_m = 
+    h_elec_vv_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_vv_jes_up_rebin_dijet_m",region_bins);
+  h_elec_vv_jes_up_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_vv_jes_down_dijet_m = (TH1F*) vv->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_vv_jes_down_rebin_dijet_m = 
+    h_elec_vv_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_vv_jes_down_rebin_dijet_m",region_bins);
+  h_elec_vv_jes_down_rebin_dijet_m->SetDirectory(0);
+  vv->Close();
+
+  TFile* qcd = TFile::Open(qcd_loc.c_str(),"READ");
+  TH1F* h_elec_qcd_jes_nom_dijet_m = (TH1F*) qcd->Get(elec_nom_hist_name.c_str());
+  TH1F* h_elec_qcd_jes_nom_rebin_dijet_m = 
+    h_elec_qcd_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_qcd_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_qcd_jes_nom_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_qcd_jes_up_dijet_m = (TH1F*) qcd->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_qcd_jes_up_rebin_dijet_m = 
+    h_elec_qcd_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_qcd_jes_up_rebin_dijet_m",region_bins);
+  h_elec_qcd_jes_up_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_qcd_jes_down_dijet_m = (TH1F*) qcd->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_qcd_jes_down_rebin_dijet_m = 
+    h_elec_qcd_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_qcd_jes_down_rebin_dijet_m",region_bins);
+  h_elec_qcd_jes_down_rebin_dijet_m->SetDirectory(0);
+
+  qcd->Close();
+
+  TFile* top = TFile::Open(top_loc.c_str(),"READ");
+  TH1F* h_elec_top_jes_nom_dijet_m = (TH1F*) top->Get(elec_nom_hist_name.c_str());
+  TH1F* h_elec_top_jes_nom_rebin_dijet_m = 
+    h_elec_top_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_top_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_top_jes_nom_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_top_jes_up_dijet_m = (TH1F*) top->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_top_jes_up_rebin_dijet_m = 
+    h_elec_top_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_top_jes_up_rebin_dijet_m",region_bins);
+  h_elec_top_jes_up_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_top_jes_down_dijet_m = (TH1F*) top->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_top_jes_down_rebin_dijet_m = 
+    h_elec_top_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_top_jes_down_rebin_dijet_m",region_bins);
+  h_elec_top_jes_down_rebin_dijet_m->SetDirectory(0);
+  
+  top->Close();
+
+  TFile* zjets = TFile::Open(zjets_loc.c_str(),"READ");
+  TH1F* h_elec_zjets_jes_nom_dijet_m = (TH1F*) zjets->Get(elec_nom_hist_name.c_str());
+  TH1F* h_elec_zjets_jes_nom_rebin_dijet_m = 
+    h_elec_zjets_jes_nom_dijet_m->Rebin(nControlRegions-1,"h_elec_zjets_jes_nom_rebin_dijet_m",region_bins);
+  h_elec_zjets_jes_nom_rebin_dijet_m->SetDirectory(0);
+  
+  TH1F* h_elec_zjets_jes_up_dijet_m = (TH1F*) zjets->Get(elec_up_hist_name.c_str());
+  TH1F* h_elec_zjets_jes_up_rebin_dijet_m = 
+    h_elec_zjets_jes_up_dijet_m->Rebin(nControlRegions-1,"h_elec_zjets_jes_up_rebin_dijet_m",region_bins);
+  h_elec_zjets_jes_up_rebin_dijet_m->SetDirectory(0);
+
+  TH1F* h_elec_zjets_jes_down_dijet_m = (TH1F*) zjets->Get(elec_down_hist_name.c_str());
+  TH1F* h_elec_zjets_jes_down_rebin_dijet_m = 
+    h_elec_zjets_jes_down_dijet_m->Rebin(nControlRegions-1,"h_elec_zjets_jes_down_rebin_dijet_m",region_bins);
+  h_elec_zjets_jes_down_rebin_dijet_m->SetDirectory(0);
+  zjets->Close();
+
+
+  // Non V+jets
+    
+  TH1F* h_elec_bkgd_jes_nom_rebin_dijet_m = (TH1F*) h_elec_vv_jes_nom_rebin_dijet_m;
+  h_elec_bkgd_jes_nom_rebin_dijet_m->Add((TH1F*) h_elec_top_jes_nom_rebin_dijet_m);
+  h_elec_bkgd_jes_nom_rebin_dijet_m->Add((TH1F*) h_elec_qcd_jes_nom_rebin_dijet_m);
+  TH1F* h_elec_bkgd_jes_up_rebin_dijet_m = (TH1F*) h_elec_vv_jes_up_rebin_dijet_m;
+  h_elec_bkgd_jes_up_rebin_dijet_m->Add((TH1F*) h_elec_top_jes_up_rebin_dijet_m);
+  h_elec_bkgd_jes_up_rebin_dijet_m->Add((TH1F*) h_elec_qcd_jes_up_rebin_dijet_m);
+  TH1F* h_elec_bkgd_jes_down_rebin_dijet_m = (TH1F*) h_elec_vv_jes_down_rebin_dijet_m;
+  h_elec_bkgd_jes_down_rebin_dijet_m->Add((TH1F*) h_elec_top_jes_down_rebin_dijet_m);
+  h_elec_bkgd_jes_down_rebin_dijet_m->Add((TH1F*) h_elec_qcd_jes_down_rebin_dijet_m);
+
+  // V+jets
+  TH1F* h_elec_vjets_jes_nom_rebin_dijet_m = (TH1F*) h_elec_wjets_jes_nom_rebin_dijet_m;
+  h_elec_vjets_jes_nom_rebin_dijet_m->Add((TH1F*) h_elec_zjets_jes_nom_rebin_dijet_m);
+  TH1F* h_elec_vjets_jes_up_rebin_dijet_m = (TH1F*) h_elec_wjets_jes_up_rebin_dijet_m;
+  h_elec_vjets_jes_up_rebin_dijet_m->Add((TH1F*) h_elec_zjets_jes_up_rebin_dijet_m);
+  TH1F* h_elec_vjets_jes_down_rebin_dijet_m = (TH1F*) h_elec_wjets_jes_down_rebin_dijet_m;
+  h_elec_vjets_jes_down_rebin_dijet_m->Add((TH1F*) h_elec_zjets_jes_down_rebin_dijet_m);
+
+  
+  // SF
+  TH1F* h_elec_jes_nom_sf = (TH1F*) h_elec_data_jes_nom_rebin_dijet_m->Clone();
+  h_elec_jes_nom_sf->Add(h_elec_bkgd_jes_nom_rebin_dijet_m,-1.);
+  h_elec_jes_nom_sf->Divide(h_elec_jes_nom_sf,h_elec_vjets_jes_nom_rebin_dijet_m);
+  h_elec_jes_nom_sf->SaveAs("h_elec_jes_nom_sf.C");
+  
+  TH1F* h_elec_jes_up_sf = (TH1F*) h_elec_data_jes_up_rebin_dijet_m->Clone();
+  h_elec_jes_up_sf->Add(h_elec_bkgd_jes_up_rebin_dijet_m,-1.);
+  h_elec_jes_up_sf->Divide(h_elec_jes_up_sf,h_elec_vjets_jes_up_rebin_dijet_m);
+  h_elec_jes_up_sf->SaveAs("h_elec_jes_up_sf.C");
+  
+  TH1F* h_elec_jes_down_sf = (TH1F*) h_elec_data_jes_down_rebin_dijet_m->Clone();
+  h_elec_jes_down_sf->Add(h_elec_bkgd_jes_down_rebin_dijet_m,-1.);
+  h_elec_jes_down_sf->Divide(h_elec_jes_down_sf,h_elec_vjets_jes_down_rebin_dijet_m);
+  h_elec_jes_down_sf->SaveAs("h_elec_jes_down_sf.C");
+
+
+  //////////////////////////////////////////////////
+  // Plots
+  ////////////////////////////////////////////////// 
+  TCanvas* tc_elec_jes_sf = new TCanvas("tc_elec_jes_sf","tc_elec_jes_sf",0,0,1920,1200);
+  tc_elec_jes_sf->cd();
+
+  h_elec_jes_up_sf->GetYaxis()->SetRangeUser(0,2);
+  h_elec_jes_up_sf->SetLineColor(kRed);
+  h_elec_jes_up_sf->Draw("hist E");
+
+  h_elec_jes_nom_sf->SetLineColor(kBlack);
+  h_elec_jes_nom_sf->Draw("hist E same");
+
+  h_elec_jes_down_sf->SetLineColor(kBlue);
+  h_elec_jes_down_sf->Draw("hist E same");
+
+  tc_elec_jes_sf->Update();
+  TLegend* lgnd_elec_jes_sf = new TLegend(0.80,0.70,0.9,0.90);
+  lgnd_elec_jes_sf->SetFillColor(0);
+  lgnd_elec_jes_sf->SetTextSize(0.04);
+  lgnd_elec_jes_sf->SetBorderSize(0);
+  lgnd_elec_jes_sf->AddEntry(h_elec_jes_nom_sf,"Nominal","L");
+  lgnd_elec_jes_sf->AddEntry(h_elec_jes_up_sf,"JES up","L");
+  lgnd_elec_jes_sf->AddEntry(h_elec_jes_down_sf,"JES down","L");
+  lgnd_elec_jes_sf->Draw();
+  
+  cur_saveas = save_loc+"h_elec_jes_sf.pdf";
+  tc_elec_jes_sf->SaveAs(cur_saveas.c_str());
+
+
+
+
+
+  
+  int tot_bins = h_elec_jes_nom_sf->GetNbinsX();
+  // Find M(jj)=65 bin
+  int lowsb_bin=-1;
+  for(int i=1;i<=tot_bins;i++){
+    if(h_elec_jes_nom_sf->GetBinCenter(i)>=65){
+      lowsb_bin=i;
+      break;
+    }
+  }
+  if(lowsb_bin<0){
+    cout<<"No M(jj)=65 GeV bin found!"<<endl;
+    exit(0);
+  }
+
+  int highsb_bin=-1;
+  for(int i=1;i<=tot_bins;i++){
+    if(h_elec_jes_nom_sf->GetBinCenter(i)>=115){
+      highsb_bin=i;
+      break;
+    }
+  }
+  if(highsb_bin<0){
+    cout<<"No M(jj)=65 GeV bin found!"<<endl;
+    exit(0);
+  }
+
+    
+  double elec_jes_nom_evt_n[nControlRegions]={0.};
+  double elec_jes_nom_sf[nControlRegions]={0.};
+  double elec_jes_nom_sf_err[nControlRegions]={0.};
+
+  double elec_jes_up_evt_n[nControlRegions]={0.};
+  double elec_jes_up_sf[nControlRegions]={0.};
+  double elec_jes_up_sf_err[nControlRegions]={0.};
+
+  double elec_jes_down_evt_n[nControlRegions]={0.};
+  double elec_jes_down_sf[nControlRegions]={0.};
+  double elec_jes_down_sf_err[nControlRegions]={0.};
+
+
+
+  elec_jes_nom_sf[nLowSB] =
+    h_elec_jes_nom_sf->IntegralAndError(1,lowsb_bin,elec_jes_nom_sf_err[nLowSB]);
+  elec_jes_nom_evt_n[nLowSB] = (double) h_elec_vjets_jes_nom_rebin_dijet_m->Integral(1,lowsb_bin);
+
+
+  //cout<<"lowsb SF: "<<elec_jes_nom_sf[nLowSB]/elec_jes_nom_evt_n[nLowSB]<<" +- "<<elec_jes_nom_sf_err[nLowSB]<<" ("<<elec_jes_nom_evt_n[nLowSB]<<")"<<endl;
+  
+  // alpgen_sf[nLowSB] =
+  //   h_lowsb_alpgen_sf->IntegralAndError(1,h_lowsb_alpgen_sf->GetNbinsX(),alpgen_sf_err[nLowSB]);
+  // alpgen_evt_n[nLowSB] = (double) h_lowsb_alpgen_vjets->Integral();      
+
+  // alpgen_sf[nHighSB] =
+  //   h_highsb_alpgen_sf->IntegralAndError(1,h_highsb_alpgen_sf->GetNbinsX(),alpgen_sf_err[nHighSB]);
+  // alpgen_evt_n[nHighSB] = (double) h_highsb_alpgen_vjets->Integral();      
+  
+  // //////////////////////////////////////////////////
+  // // Print Scale Factors
+  // ////////////////////////////////////////////////// 
+  
+  // cout<<"== W+Jets Scale Factors =="<<endl;
+  // for(int i=0;i<nControlRegions;i++){
+    
+  //   string cur_control_region = control_regions[i];
+  //   string ctrl_out_file_name = "./logs/vjets_"+cur_control_region+"_sf.csv";
+  //   std::ofstream ctrl_out_file(ctrl_out_file_name.c_str());
+  //   ctrl_out_file.precision(3);
+  //   ctrl_out_file.setf(ios::fixed,ios::floatfield);
+  //   ctrl_out_file<<"alpgen_sf,alpgen_err,sherpa_sf,sherpa_err"<<endl;;
+
+  //   ctrl_out_file<<alpgen_sf[i]<<","<<alpgen_sf_err[i]<<","//alpgen
+  // 		 <<sherpa_sf[i]<<","<<sherpa_sf_err[i]<<endl;//sherpa
+
+  //   ctrl_out_file.close();
+
+  //     cout<<"* comb channel *"<<endl;
+  //     cout<<"ALPGEN: "<<alpgen_sf[i]<<" +- "<<alpgen_sf_err[i]
+  // 	  <<" ("<<(alpgen_sf_err[i]/alpgen_sf[i])*100<<"%)  (weight by: "
+  // 	  <<alpgen_evt_n[i]<<" entries)"<<endl;
+  //     // cout<<"SHERPA: "<<sherpa_sf[i]<<" +- "<<sherpa_sf_err[i]
+  //     // 	  <<" ("<<(sherpa_sf_err[i]/sherpa_sf[i])*100<<"%)  (weight by: "
+  //     // 	  <<sherpa_evt_n[i]<<" entries)"<<endl;
+  // }
+  
+  // double avg_alpgen_sf=0.;
+  // double err_alpgen_sf=0.;
+  // double alpgen_sow=0.;
+
+  // double avg_sherpa_sf=0;
+  // double err_sherpa_sf=0.;
+  // double sherpa_sow=0.;
+  
+  // cout<<"--"<<endl;
+  // cout<<"Control Region: "<<cur_control_region<<endl;
+
+  // avg_alpgen_sf=(((alpgen_sf[nLowSB]*alpgen_evt_n[nLowSB]) +
+  // 		  (alpgen_sf[nHighSB]*alpgen_evt_n[nHighSB])) /
+  // 		 (alpgen_evt_n[nLowSB]+alpgen_evt_n[nHighSB]));
+
+  // err_alpgen_sf=sqrt(pow(alpgen_sf_err[nLowSB],2.)+
+  // 		     pow(alpgen_sf_err[nHighSB],2.));
+
+  // // avg_sherpa_sf=(((sherpa_sf[nLowSB]*sherpa_evt_n[nLowSB]) +
+  // // 		  (sherpa_sf[nHighSB]*sherpa_evt_n[nHighSB])) /
+  // // 		 (sherpa_evt_n[nLowSB]+sherpa_evt_n[nHighSB]));
+  
+  // // err_sherpa_sf=sqrt(pow(sherpa_sf_err[nLowSB],2.)+
+  // // 		     pow(sherpa_sf_err[nHighSB],2.));
+
+  // double max_alpgen_sf_diff=0;
+  // double max_sherpa_sf_diff=0;
+
+  // // Find max for systematics
+
+
+  // max_alpgen_sf_diff =
+  //   (fabs(avg_alpgen_sf - alpgen_sf[nLowSB]) > fabs(avg_alpgen_sf - alpgen_sf[nHighSB])) ?
+  //   fabs(avg_alpgen_sf - alpgen_sf[nLowSB]) :
+  //   fabs(avg_alpgen_sf - alpgen_sf[nHighSB]);
+
+  // //max_alpgen_sf_diff/=avg_alpgen_sf;
+    
+  // // max_sherpa_sf_diff =
+  // //   (fabs(avg_sherpa_sf - sherpa_sf[nLowSB]) > fabs(avg_sherpa_sf - sherpa_sf[nHighSB])) ?
+  // //   fabs(avg_sherpa_sf - sherpa_sf[nLowSB]) :
+  // //   fabs(avg_sherpa_sf - sherpa_sf[nHighSB]);
+
+  // //max_sherpa_sf_diff/=avg_sherpa_sf;
+  
+  // string avg_sf_out_file_name = "./logs/vjets_avg_sf.csv";
+  // std::ofstream avg_sf_out_file(avg_sf_out_file_name.c_str());
+  // avg_sf_out_file.precision(3);
+  // avg_sf_out_file.setf(ios::fixed,ios::floatfield);
+  // avg_sf_out_file<<"alpgen_sf,alpgen_sys,alpgen_stat,";
+  // avg_sf_out_file<<"sherpa_sf,sherpa_sys,sherpa_stat"<<endl;
+
+  // avg_sf_out_file<<avg_alpgen_sf<<","<<max_alpgen_sf_diff<<","<<err_alpgen_sf<<",";
+  // avg_sf_out_file<<avg_sherpa_sf<<","<<max_sherpa_sf_diff<<","<<err_sherpa_sf<<endl;
+  // cout<<"Weighted averages"<<endl;
+  // cout<<"alpgen_sf: "<<avg_alpgen_sf<<" /\pm "<<err_alpgen_sf<<endl;
+  // cout<<"sherpa_sf: "<<avg_sherpa_sf<<" /\pm "<<err_sherpa_sf<<endl;
+  
+  // cout<<"--"<<endl;
+  // cout<<"data written to ./logs/vjets_avg_sf.csv and ./logs/vjets_{sideband}_sf.csv"<<endl;
+
+  gROOT->ProcessLine(".q");
+  return;
+}

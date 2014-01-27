@@ -1,0 +1,52 @@
+#! /usr/bin/python
+import math
+
+gww_file = open("gww_index.csv","w")
+
+## needs to match order of ../../../include/systematics_defs
+samples = ["rsg.m1000"]
+
+systematics = ["Jet Energy Scale","Jet Energy Resolution","Lepton Energy Scale","Lepton Energy Resolution","MET Clusters","MET PileUp","Identification SF","Isolation SF","Reconstruction SF","Trigger SF"]
+systematics_files = ["jes.csv","jer.csv","les.csv","ler.csv","allcl.csv","metpu.csv","idsf.csv","isosf.csv","recosf.csv","trigsf.csv"]
+
+systematics_logs = [open("../../logs/"+sys) for sys in systematics_files]
+
+## Write header
+gww_file.write("systematic,evjj,uvjj\n")
+gww_file.write("Luminosity,3.90,3.90\n")
+    
+## Print each systematic for given sample
+##lumi
+tot_evjj=math.pow(3.90,2)
+tot_uvjj=math.pow(3.90,2)
+for ldx,log in enumerate(systematics_logs):
+    gww_file.write(systematics[ldx]+",")
+    cur_log = log.readlines()
+    found_sys=0
+    for line in cur_log:
+        for samp in samples:
+            if line.find(samp)==0:
+                evjj = float(line[line.find(",")+1:line.rfind(",")])
+                uvjj = float(line[line.rfind(",")+1:])
+                tot_evjj += math.pow(evjj,2)
+                tot_uvjj += math.pow(uvjj,2)
+                towrite = line[line.find(",")+1:line.rfind(",")]+","+line[line.rfind(",")+1:].rstrip("\n")
+                gww_file.write(towrite)
+    gww_file.write("\n")
+
+
+tot_evjj += math.pow(10.0,2)
+tot_uvjj += math.pow(10.0,2)
+
+gww_file.write("PDF,1.00,1.00\n")
+tot_evjj += math.pow(1.0,2)
+tot_uvjj += math.pow(1.0,2)
+    
+tot_evjj = math.sqrt(tot_evjj)
+tot_uvjj = math.sqrt(tot_uvjj)
+gww_file.write("Total,"+str(tot_evjj)[:4]+","+str(tot_uvjj)[:4])
+
+gww_file.write("\n")
+gww_file.close()
+
+

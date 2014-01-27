@@ -1,0 +1,6 @@
+#include "../../include/systematics_defs.h"
+
+void runSystematics(string systematic="jes"){
+
+  cout.setf(ios::fixed,ios::floatfield); 
+  cout.precision(5);

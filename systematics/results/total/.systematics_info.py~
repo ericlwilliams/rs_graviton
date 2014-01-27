@@ -1,0 +1,2 @@
+systematics = ["JES","JER","LES","LER","All Clusters","Met PileUp","ID SF","Isolation SF","Reco SF","Trigger SF","ISR/FSR","Signal PDF","Luminosity","Normalisation"]
+systematics_files = ["jes.csv","jer.csv","les.csv","ler.csv","allcl.csv","metpu.csv","idsf.csv","isosf.csv","recosf.csv","trigsf.csv","isrfsr.csv","pdfsig.csv","lumi.csv","norm.csv"]

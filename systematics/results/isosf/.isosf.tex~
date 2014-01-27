@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{idsf}{../../logs/isosf.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Lepton isolation scale factor, fractional $\Delta$~Acceptance in High Mass control region}
+  \DTLdisplaydb{isosf}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/isosf/h_bkgds_isosf_el_highm_lep_met_dijet_mt.png}
+  \includegraphics[width=5.0truein]{../../plots/isosf/h_bkgds_isosf_mu_highm_lep_met_dijet_mt.png}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+\end{document}

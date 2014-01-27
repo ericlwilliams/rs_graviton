@@ -1,0 +1,73 @@
+\documentclass[8pt,english]{beamer}
+\usefonttheme[stillsansseriftext]{serif}
+\useoutertheme{infolines} %% only for those without footer
+\usetheme[height=7mm]{Rochester}
+%\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{} %% get rid of navigation icons
+
+
+\usepackage{babel}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{datatool}
+\usepackage{dcolumn}
+\usepackage{booktabs}
+
+
+
+\DTLloaddb[,keys={systematic,ww,wz,zz,ttbar,singletop,wjets,zjets,qcd,rsgM500,rsgM750,rsgM1000,rsgM1250,rsgM1500,wpM500,wpM600,wpM700,wpM800,wpM900,wpM1000,wpM1100,wpM1200,wpM1300,wpM1400,wpM1500},headers={Systematic,WW,WZ,ZZ,TTbar,SingleTop,Wjets,Zjets,QCD,rsgM500,rsgM750,rsgM1000,rsgM1250,rsgM1500,wpM500,wpM600,wpM700,wpM800,wpM900,wpM1000,wpM1100,wpM1200,wpM1300,wpM1400,wpM1500}]{index}{index.csv}
+
+\newcolumntype{d}{D{|}{\,,\,}{6,6}}
+
+\begin{document}\footnotesize
+
+\begin{frame}[plain]
+
+\begin{table}[h]
+  \caption{Percent $\Delta$ acceptance. Shown as (electron channel, muon channel)}
+  \begin{tabular}{l d d d d d}
+    \toprule
+        {\bf Systematic} &\multicolumn{1}{c}{\bf RSG m500} &\multicolumn{1}{c}{\bf RSG m750} &\multicolumn{1}{c}{\bf RSG m1000} &\multicolumn{1}{c}{\bf RSG m1250} &\multicolumn{1}{c}{\bf RSG m1500}%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{index}{%
+      \systematic=systematic,\RSGone=rsgM500,\RSGtwo=rsgM750, \RSGthree=rsgM1000, \RSGfour=rsgM1250,\RSGfive=wpM1500}{%
+      \tabularnewline
+      \systematic & (\RSGone) & (\RSGtwo) & (\RSGthree) & (\RSGfour) & (\RSGfive) }%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[plain]
+
+\begin{table}[h]
+  \caption{Percent $\Delta$ acceptance. Shown as (electron channel, muon channel)}
+  \begin{tabular}{l d d d d d}
+    \toprule
+        {\bf Systematic} &\multicolumn{1}{c}{\bf Wprime m600} &\multicolumn{1}{c}{\bf Wprime m800} &\multicolumn{1}{c}{\bf Wprime m1000} &\multicolumn{1}{c}{\bf Wprime m1200} &\multicolumn{1}{c}{\bf Wprime m1400}%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{index}{%
+      \systematic=systematic,\WPone=wpM600,\WPtwo=wpM800, \WPthree=wpM1000, \WPfour=wpM1200,\WPfive=wpM1400}{%
+      \tabularnewline
+      \systematic & (\WPone) & (\WPtwo) & (\WPthree) & (\WPfour) & (\WPfive)}%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+
+\end{table}
+
+\end{frame}
+\end{document}
+
+
+
+
+
+

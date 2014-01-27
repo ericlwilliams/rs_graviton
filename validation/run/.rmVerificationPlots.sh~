@@ -1,0 +1,4 @@
+#!/bin/bash
+
+"rm" ../plots/verification_plots/*.root
+"rm" ../plots/verification_plots/merged/*.root

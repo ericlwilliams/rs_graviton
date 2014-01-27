@@ -1,0 +1,83 @@
+#include <vector>
+
+void printEventNumbers(){
+
+  //gROOT->SetStyle("Plain");  
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(1);
+  // gStyle->SetPadTickX(1);
+  //gStyle->SetPadTickY(1);
+
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In printEventNumbers.C"<<endl;
+
+  TFile* data_elec = (TFile*) TFile::Open("../plots/data.elec.pu.verification.plot.root");
+  TFile* data_muon = (TFile*) TFile::Open("../plots/data.muon.pu.verification.plot.root");
+
+  TDirectory* dir_elec = data_elec->GetDirectory("evt_nums");
+  TDirectory* dir_muon = data_elec->GetDirectory("evt_nums");
+
+
+  dir_muon->cd();
+
+  
+  vector<TH1I*> histos;
+  
+  TDirectory *current_sourcedir = gDirectory;
+  //gain time, do not add the objects in the list in memory
+  Bool_t status = TH1::AddDirectoryStatus();
+  TH1::AddDirectory(kFALSE);
+
+  // loop over all keys in this directory
+  TChain *globChain = 0;
+  TIter nextkey( current_sourcedir->GetListOfKeys() );
+  TKey *key, *oldkey=0;
+  while ( (key = (TKey*)nextkey())) {
+
+    // //keep only the highest cycle number for each key
+    // if (oldkey && !strcmp(oldkey->GetName(),key->GetName())) continue;
+
+    // read object from first source file
+    //current_source->cd( path );
+    TObject *obj = key->ReadObj();
+
+    if ( obj->IsA()->InheritsFrom( TH1::Class() ) ) {
+      // descendant of TH1 -> merge it
+
+      TH1I* cur_hist = (TH1I*) obj;
+
+      histos.push_back(cur_hist);
+      
+
+    }
+  }
+
+  int n_hists = histos.size();
+  //const num_hists = n_hists;
+  //TCanvas* tc_evt_nums[num_hists];
+  TCanvas* tc_evt_nums;
+  for(int i=0;i<n_hists;i++){
+
+    TH1I* cur_hist = (TH1I*) histos.at(i);
+    string tc_name = Form("tc_%s",cur_hist->GetName());
+    tc_evt_nums = new TCanvas(tc_name.c_str(),tc_name.c_str(),0,0,1280,800);
+    tc_evt_nums->cd();
+    cur_hist->Draw();
+    tc_evt_nums->Update();
+
+    string tc_print_name = Form("%s.eps",cur_hist->GetName());
+    tc_print_name = "../canvases/latest/"+tc_print_name;
+    tc_evt_nums->SaveAs(tc_print_name.c_str());
+
+    delete tc_evt_nums;
+
+  }
+}

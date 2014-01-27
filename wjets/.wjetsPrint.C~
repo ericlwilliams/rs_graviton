@@ -1,0 +1,44 @@
+#include "../include/wwFileInfo.h"
+#include "../include/HistogramPainter.h"
+#include <TCanvas.h>
+#include <THStack.h>
+#include <TH1F.h>
+//#include <TIter.h>
+#include <TObject.h>
+#include <string>
+
+string color_scheme="conf";//normal, conf, thesis(?)
+
+void wjetsPrint(){
+
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wjetsPrint.C"<<endl;
+
+
+  string alp_bkgd_list[] =
+    {"qcd.alpgen",
+     "mc.alpgen.wjets",
+     "mc.herwig.vv",
+     "mc.alpgen.zjets",
+     "mc.mcatnlo.top"
+    };
+  int nAlpBkgds = sizeof(alp_bkgd_list)/sizeof(alp_bkgd_list[0]);
+
+  string shp_bkgd_list[] =
+    { "qcd.sherpa",
+      "mc.sherpa.wjets",
+      "mc.herwig.vv",
+      "mc.alpgen.zjets",
+      "mc.mcatnlo.top"
+    };
+
+    int nShpBkgds = sizeof(shp_bkgd_list)/sizeof(shp_bkgd_list[0]);
+  

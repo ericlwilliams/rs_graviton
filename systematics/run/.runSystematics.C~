@@ -1,0 +1,85 @@
+#include "../../include/systematics_defs.h"
+
+void runSystematics(string systematic="jes"){
+
+  cout.setf(ios::fixed,ios::floatfield); 
+  cout.precision(5);
+  
+  gROOT->ProcessLine(".L ../src/calcSystematics.C+");
+
+  calcSystematics* sysCalc = new calcSystematics();;
+
+  float uncertainties[nSamples][nProcs][nRegions][nCombs]={0};
+
+  string cur_sys=systematic;
+  
+  for(int s=0;s<nSamples;s++){
+    string cur_sample = samples[s];
+    for(int p=0;p<nProcs;p++){
+      string cur_proc = procs[p];
+      for(int r=0;r<nRegions;r++){
+	string cur_region = regions[r];
+	for(int c=0;c<nCombs;c++){
+	  string cur_comb=combs[c];
+
+	  uncertainties[s][p][r][c]=
+	    sysCalc->GetUncertainty(cur_sample.c_str(),cur_sys.c_str(),cur_proc.c_str(),cur_region.c_str(),cur_comb.c_str());
+
+	}
+      }
+    }
+  }
+
+  string out_file_name = "../logs/"+cur_sys+".csv";
+  
+  std::ofstream out_file(out_file_name.c_str());
+  out_file<<cur_sys<<endl;
+  out_file<<"sample"
+	 <<","
+	 <<"el_lowm"
+	 <<","
+	 <<"el_highm"
+	 <<","
+	 <<"mu_lowm"
+	 <<","
+	 <<"mu_highm"
+	 <<endl;
+  
+  cout<<"== "<<cur_sys<<" =="<<endl;
+
+  for(int s=0;s<nSamples;s++){
+    string cur_sample = samples[s];
+    cout<<cur_sample<<endl;
+    out_file<<cur_sample<<",";
+    
+    for(int p=0;p<nProcs;p++){
+      string cur_proc = procs[p];
+      cout<<"\t"<<cur_proc;
+      for(int r=0;r<nRegions;r++){
+
+	out_file<<uncertainties[s][p][r][nAvg]<<",";
+	
+	if(s>4 && s<8 && r) continue;//don't print highm for lowm signals
+	if(s>7 && !r) continue;//don't print highm for lowm signals	
+	string cur_region = regions[r];
+	string cur_tab = (r) ? "\t\t" : "\t";
+	cout<<cur_tab+cur_region;
+	for(int c=0;c<nCombs;c++){
+	  string cur_comb=combs[c];
+	  cout<<"\t"<<cur_comb<<": ";
+	  cout<<uncertainties[s][p][r][c];
+	  cout<<"\t";
+	}
+	cout<<endl;
+      }
+      cout<<endl;
+    }
+
+    out_file<<endl;
+  }
+  cout<<endl;
+  
+
+  return;
+}
+

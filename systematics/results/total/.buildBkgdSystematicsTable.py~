@@ -1,0 +1,47 @@
+#! /usr/bin/python
+## only run after index.csv is built from buildSystematicsTable.py
+import math
+
+elec_bkgd_file = open("elec_bkgd_index.csv","w")
+muon_bkgd_file = open("muon_bkgd_index.csv","w")
+
+samples = ["alpgen.wjets","alpgen.zjets","mcatnlo.ttbar","mcatnlo.singletop","herwig.ww","herwig.wz","herwig.zz"]
+
+systematics = ["Jet Energy Scale","Jet Energy Resolution","Lepton Energy Scale","Lepton Energy Resolution","MET Clusters","MET PileUp","Identification SF","Isolation SF","Reconstruction SF","Trigger SF","Luminosity"]
+
+
+index_file = open("index.csv","r")
+systematics_data = index_file.readlines()
+index_file.close()
+
+systematics = systematics_data[0].split(",")
+
+sample_inds =[]
+elec_bkgd_file.write("systematic,")
+muon_bkgd_file.write("systematic,")
+for samp_ind,samp in enumerate(samples):
+    if samp_ind==len(samples)-1:
+        elec_bkgd_file.write(samp+"\n")
+        muon_bkgd_file.write(samp+"\n")
+    else: 
+        elec_bkgd_file.write(samp+",")
+        muon_bkgd_file.write(samp+",")
+    for idx,sys in enumerate(systematics):
+        if samp==sys:
+            sample_inds.append(idx)
+        
+for systematic in systematics_data[1:]:
+    sys_vals = systematic.split(",")
+    if len(sys_vals)==1: continue
+    elec_bkgd_file.write(sys_vals[0]+",")
+    muon_bkgd_file.write(sys_vals[0]+",")
+    for sample_idx,ind in enumerate(sample_inds):
+        elec_val = sys_vals[ind].split("|")[0]
+        muon_val = sys_vals[ind].split("|")[1]        
+        if sample_idx==len(sample_inds)-1:
+            elec_bkgd_file.write(elec_val+"\n")
+            muon_bkgd_file.write(muon_val+"\n")
+        else:
+            elec_bkgd_file.write(elec_val+",")
+            muon_bkgd_file.write(muon_val+",")
+    

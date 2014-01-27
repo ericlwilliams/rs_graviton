@@ -1,0 +1,769 @@
+#define calcSystematics_cxx
+#include "calcSystematics.h"
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <TH2.h>
+#include <TH1F.h>
+#include <vector>
+#include <TStyle.h>
+#include <TMath.h>
+#include <TVector2.h>
+#include <TObjArray.h>
+#include <TLegend.h>
+#include <THStack.h>
+
+#include "../../include/atlasstyle-00-03-04/AtlasStyle.C"
+#include "../../include/lnuj_bkgd_list.h"
+#include "../../include/wwFileInfo.h"
+#include <string>
+
+string proc_type = "systematics";
+string file_tail = ".systematics.plot.root";
+
+string plot_loc = "../plots/";
+
+
+calcSystematics::calcSystematics(){
+
+  systematics_files = new TObjArray();
+  systematics_names = new vector<string>();
+  bool systematics_loaded = LoadSystematicsFiles(systematics_files,systematics_names);
+  if(!systematics_loaded){
+    cout<<"Systematics Files failed to load!"<<endl;
+    exit(0);
+  }else{
+    cout<<"calcSystematics <systematics loaded>"<<endl;
+  }
+
+  nSysFiles = systematics_files->GetEntries();
+
+}
+
+double calcSystematics::GetUncertainty(string sample,string sys,string proc,string region,string comb){
+
+  //sample - top, qcd, gww_m500, ...
+  //proc - el/mu/both (both averages?)
+  //region - sig_lowm, sig_highm, ctrl_all, ctrl_ewk
+  //comb - how to combine up/down, avg, spread, etc
+  double uncert=0.;
+
+  if(sample.find("qcd")!=string::npos) return -1;
+  //bool isSmear = (sys=="jer");
+  
+
+  // Get File
+  TFile* sample_file = (TFile*) GetSystematicsFile(sample.c_str());
+  if(!sample_file){
+    cout<<"calcSystematics::GetUncertainty: No systematics file for: "<<sample<<endl;
+    exit(0);
+  }
+
+  // string hist_nom_name = "h_"+proc+"_"+sys+"_nom_"+region+"_pass_sig";
+  // TH1F* hist_nom = (TH1F*) sample_file->Get(hist_nom_name.c_str());
+  // string hist_up_name = "h_"+proc+"_"+sys+"_up_"+region+"_pass_sig";
+  // TH1F* hist_up = (TH1F*) sample_file->Get(hist_up_name.c_str());
+  // string hist_down_name = "h_"+proc+"_"+sys+"_down_"+region+"_pass_sig";
+  // TH1F* hist_down = (TH1F*) sample_file->Get(hist_down_name.c_str());
+  string hist_nom_name = "h_"+proc+"_"+sys+"_nom_"+region+"_lep_nu_dijet_m";
+  TH1F* hist_nom = (TH1F*) sample_file->Get(hist_nom_name.c_str());
+  string hist_up_name = "h_"+proc+"_"+sys+"_up_"+region+"_lep_nu_dijet_m";
+  TH1F* hist_up = (TH1F*) sample_file->Get(hist_up_name.c_str());
+  string hist_down_name = "h_"+proc+"_"+sys+"_down_"+region+"_lep_nu_dijet_m";
+  TH1F* hist_down = (TH1F*) sample_file->Get(hist_down_name.c_str());
+
+  if(!hist_nom || !hist_up || !hist_down){
+    cout<<"calcSystematics::GetUncertainty: No systematics histogram: "<<hist_nom_name<<" in "<<sample<<endl;
+    exit(0);
+  }
+
+  float count_nom = hist_nom->Integral();
+  float count_up = hist_up->Integral();
+  float count_down = hist_down->Integral();
+
+  float fluc_up = fabs(count_up-count_nom)/count_nom;
+  float fluc_down = fabs(count_down-count_nom)/count_nom;
+
+  if(comb=="avg"){
+
+    uncert = (fluc_up+fluc_down)/2.;
+
+  }else if(comb=="up"){
+
+    uncert = fluc_up;
+
+  }else if(comb=="down"){
+
+    uncert = fluc_down;
+
+  }else{
+    cout<<"calcSystematics::GetUncertainty:: Unknown combination value: "<<comb<<endl;
+  }
+
+  //if(isSmear) uncert = fluc_up;  
+  
+  return uncert*100.;
+}
+
+
+
+TFile* calcSystematics::GetSystematicsFile(string name){
+
+  for(int f=0;f<nSysFiles;f++){
+    string cur_name = (string) systematics_names->at(f);
+    if(cur_name == name) return (TFile*) systematics_files->At(f);
+  }
+
+  return 0;
+}
+  
+
+
+bool calcSystematics::LoadSystematicsFiles(TObjArray* sys_files,vector<string>* sys_names){
+
+
+  string wjets_name = "alpgen.wjets";
+  sys_names->push_back(wjets_name);
+
+  string wjets_file_name = "mc.alpgen.wjets.systematics.plot.root";
+  wjets_file_name = file_loc+wjets_file_name;
+  TFile* wjets_file = TFile::Open(wjets_file_name.c_str());
+  sys_files->Add(wjets_file);
+  
+  string zjets_name = "alpgen.zjets";
+  sys_names->push_back(zjets_name);
+
+  string zjets_file_name ="mc.alpgen.zjets.systematics.plot.root";
+  zjets_file_name=file_loc+zjets_file_name;
+  TFile* zjets_file = TFile::Open(zjets_file_name.c_str());
+  sys_files->Add(zjets_file);
+
+  //top
+  string top_name = "mcatnlo.top";
+  sys_names->push_back(top_name);
+  
+  string top_file_name ="mc.mcatnlo.top.systematics.plot.root";
+  top_file_name=file_loc+top_file_name;
+  TFile* top_file = TFile::Open(top_file_name.c_str());
+  sys_files->Add(top_file);
+
+  //ttbar
+  string ttbar_name = "mcatnlo.ttbar";
+  sys_names->push_back(ttbar_name);
+  
+  string ttbar_file_name ="mc.mcatnlo.ttbar.systematics.plot.root";
+  ttbar_file_name=file_loc+ttbar_file_name;
+  TFile* ttbar_file = TFile::Open(ttbar_file_name.c_str());
+  sys_files->Add(ttbar_file);
+
+  //singletop
+  string singletop_name = "mcatnlo.singletop";
+  sys_names->push_back(singletop_name);
+  
+  string singletop_file_name ="mc.mcatnlo.singletop.systematics.plot.root";
+  singletop_file_name=file_loc+singletop_file_name;
+  TFile* singletop_file = TFile::Open(singletop_file_name.c_str());
+  sys_files->Add(singletop_file);
+
+  //qcd_alpgen
+  string qcd_alpgen_name = "qcd.alpgen";
+  sys_names->push_back(qcd_alpgen_name);
+  
+  string qcd_alpgen_file_name ="qcd.alpgen.systematics.plot.root";
+  qcd_alpgen_file_name=file_loc+qcd_alpgen_file_name;
+  TFile* qcd_alpgen_file = TFile::Open(qcd_alpgen_file_name.c_str());
+  sys_files->Add(qcd_alpgen_file);
+
+  // //qcd_sherpa
+  // string qcd_sherpa_name = "qcd.sherpa";
+  // sys_names->push_back(qcd_sherpa_name);
+  
+  // string qcd_sherpa_file_name ="qcd.sherpa.systematics.plot.root";
+  // qcd_sherpa_file_name=file_loc+qcd_sherpa_file_name;
+  // TFile* qcd_sherpa_file = TFile::Open(qcd_sherpa_file_name.c_str());
+  // sys_files->Add(qcd_sherpa_file);
+
+
+  //vv
+  string vv_name = "herwig.vv";
+  sys_names->push_back(vv_name);
+  
+  string vv_file_name = file_loc+"mc.herwig.vv.systematics.plot.root";
+  TFile* vv_file = TFile::Open(vv_file_name.c_str());
+  sys_files->Add(vv_file);
+
+  //ww
+  string ww_name = "herwig.ww";
+  sys_names->push_back(ww_name);
+  
+  string ww_file_name = file_loc+"mc.herwig.ww.systematics.plot.root";
+  TFile* ww_file = TFile::Open(ww_file_name.c_str());
+  sys_files->Add(ww_file);
+
+  //wz
+  string wz_name = "herwig.wz";
+  sys_names->push_back(wz_name);
+  
+  string wz_file_name = file_loc+"mc.herwig.wz.systematics.plot.root";
+  TFile* wz_file = TFile::Open(wz_file_name.c_str());
+  sys_files->Add(wz_file);
+
+
+  //zz
+  string zz_name = "herwig.zz";
+  sys_names->push_back(zz_name);
+  
+  string zz_file_name = file_loc+"mc.herwig.zz.systematics.plot.root";
+  TFile* zz_file = TFile::Open(zz_file_name.c_str());
+  sys_files->Add(zz_file);
+
+
+  // //vv
+  // string qcd_name = "qcd";
+  // sys_names->push_back(qcd_name);
+
+  // string qcd_file_name ="qcd.systematics.plot.root";
+  // qcd_file_name=file_loc+qcd_file_name;
+  // TFile* qcd_file = TFile::Open(qcd_file_name.c_str());
+  // sys_files->Add(qcd_file);
+
+  //Signals
+
+  // //m200
+  // string gww_m200_name = "gww.lvjj.m200.kmpl0_1";
+  // sys_names->push_back(gww_m200_name);
+  
+  // string gww_m200_file_name =
+  //   file_loc+"mc.gww.lvjj.m200.kmpl0_1.systematics.plot.root";
+  // TFile* gww_m200_file = TFile::Open(gww_m200_file_name.c_str());
+  // sys_files->Add(gww_m200_file);
+
+
+  // //m350
+  // string gww_m350_name = "gww.lvjj.m350.kmpl0_1";
+  // sys_names->push_back(gww_m350_name);
+
+  // string gww_m350_file_name =
+  //   file_loc+"mc.gww.lvjj.m350.kmpl0_1.systematics.plot.root";
+  // TFile* gww_m350_file = TFile::Open(gww_m350_file_name.c_str());
+  // sys_files->Add(gww_m350_file);
+
+  //m500
+  string gww_m500_name = "rsg.m500.kmpl0_1";
+  sys_names->push_back(gww_m500_name);
+
+  string gww_m500_file_name =
+    file_loc+"mc.rsg.m500.kmpl0_1.systematics.plot.root";
+  TFile* gww_m500_file = TFile::Open(gww_m500_file_name.c_str());
+  sys_files->Add(gww_m500_file);
+
+  //m750
+  string gww_m750_name = "rsg.m750.kmpl0_1";
+  sys_names->push_back(gww_m750_name);
+  
+  string gww_m750_file_name =
+    file_loc+"mc.rsg.m750.kmpl0_1.systematics.plot.root";
+  TFile* gww_m750_file = TFile::Open(gww_m750_file_name.c_str());
+  sys_files->Add(gww_m750_file);
+
+  //m1000
+  string gww_m1000_name = "rsg.m1000.kmpl0_1";
+  sys_names->push_back(gww_m1000_name);
+  
+  string gww_m1000_file_name =
+    file_loc+"mc.rsg.m1000.kmpl0_1.systematics.plot.root";
+  TFile* gww_m1000_file = TFile::Open(gww_m1000_file_name.c_str());
+  sys_files->Add(gww_m1000_file);
+
+  //m1250
+  string gww_m1250_name = "rsg.m1250.kmpl0_1";
+  sys_names->push_back(gww_m1250_name);
+    
+  string gww_m1250_file_name =
+    file_loc+"mc.rsg.m1250.kmpl0_1.systematics.plot.root";
+  TFile* gww_m1250_file = TFile::Open(gww_m1250_file_name.c_str());
+  sys_files->Add(gww_m1250_file);
+
+  //m1500
+  string gww_m1500_name = "rsg.m1500.kmpl0_1";
+  sys_names->push_back(gww_m1500_name);
+    
+  string gww_m1500_file_name =
+    file_loc+"mc.rsg.m1500.kmpl0_1.systematics.plot.root";
+  TFile* gww_m1500_file = TFile::Open(gww_m1500_file_name.c_str());
+  sys_files->Add(gww_m1500_file);
+
+
+  //m500
+  string wprime_m500_name = "wprime.wz.m500";
+  sys_names->push_back(wprime_m500_name);
+    
+  string wprime_m500_file_name =
+    file_loc+"mc.wprime.wz.m500.systematics.plot.root";
+  TFile* wprime_m500_file = TFile::Open(wprime_m500_file_name.c_str());
+  sys_files->Add(wprime_m500_file);
+
+  //m600
+  string wprime_m600_name = "wprime.wz.m600";
+  sys_names->push_back(wprime_m600_name);
+    
+  string wprime_m600_file_name =
+    file_loc+"mc.wprime.wz.m600.systematics.plot.root";
+  TFile* wprime_m600_file = TFile::Open(wprime_m600_file_name.c_str());
+  sys_files->Add(wprime_m600_file);
+
+  //m700
+  string wprime_m700_name = "wprime.wz.m700";
+  sys_names->push_back(wprime_m700_name);
+    
+  string wprime_m700_file_name =
+    file_loc+"mc.wprime.wz.m700.systematics.plot.root";
+  TFile* wprime_m700_file = TFile::Open(wprime_m700_file_name.c_str());
+  sys_files->Add(wprime_m700_file);
+
+  //m800
+  string wprime_m800_name = "wprime.wz.m800";
+  sys_names->push_back(wprime_m800_name);
+    
+  string wprime_m800_file_name =
+    file_loc+"mc.wprime.wz.m800.systematics.plot.root";
+  TFile* wprime_m800_file = TFile::Open(wprime_m800_file_name.c_str());
+  sys_files->Add(wprime_m800_file);
+
+
+  //m900
+  string wprime_m900_name = "wprime.wz.m900";
+  sys_names->push_back(wprime_m900_name);
+    
+  string wprime_m900_file_name =
+    file_loc+"mc.wprime.wz.m900.systematics.plot.root";
+  TFile* wprime_m900_file = TFile::Open(wprime_m900_file_name.c_str());
+  sys_files->Add(wprime_m900_file);
+
+  //m1000
+  string wprime_m1000_name = "wprime.wz.m1000";
+  sys_names->push_back(wprime_m1000_name);
+    
+  string wprime_m1000_file_name =
+    file_loc+"mc.wprime.wz.m1000.systematics.plot.root";
+  TFile* wprime_m1000_file = TFile::Open(wprime_m1000_file_name.c_str());
+  sys_files->Add(wprime_m1000_file);
+
+  //m1100
+  string wprime_m1100_name = "wprime.wz.m1100";
+  sys_names->push_back(wprime_m1100_name);
+    
+  string wprime_m1100_file_name =
+    file_loc+"mc.wprime.wz.m1100.systematics.plot.root";
+  TFile* wprime_m1100_file = TFile::Open(wprime_m1100_file_name.c_str());
+  sys_files->Add(wprime_m1100_file);
+
+  //m1200
+  string wprime_m1200_name = "wprime.wz.m1200";
+  sys_names->push_back(wprime_m1200_name);
+    
+  string wprime_m1200_file_name =
+    file_loc+"mc.wprime.wz.m1200.systematics.plot.root";
+  TFile* wprime_m1200_file = TFile::Open(wprime_m1200_file_name.c_str());
+  sys_files->Add(wprime_m1200_file);
+
+  //m1300
+  string wprime_m1300_name = "wprime.wz.m1300";
+  sys_names->push_back(wprime_m1300_name);
+    
+  string wprime_m1300_file_name =
+    file_loc+"mc.wprime.wz.m1300.systematics.plot.root";
+  TFile* wprime_m1300_file = TFile::Open(wprime_m1300_file_name.c_str());
+  sys_files->Add(wprime_m1300_file);
+
+  //m1400
+  string wprime_m1400_name = "wprime.wz.m1400";
+  sys_names->push_back(wprime_m1400_name);
+    
+  string wprime_m1400_file_name =
+    file_loc+"mc.wprime.wz.m1400.systematics.plot.root";
+  TFile* wprime_m1400_file = TFile::Open(wprime_m1400_file_name.c_str());
+  sys_files->Add(wprime_m1400_file);
+
+  //m1500
+  string wprime_m1500_name = "wprime.wz.m1500";
+  sys_names->push_back(wprime_m1500_name);
+    
+  string wprime_m1500_file_name =
+    file_loc+"mc.wprime.wz.m1500.systematics.plot.root";
+  TFile* wprime_m1500_file = TFile::Open(wprime_m1500_file_name.c_str());
+  sys_files->Add(wprime_m1500_file);
+
+
+  
+  bool bkgds_loaded = (vv_file && /*qcd_file &&*/ top_file &&
+  		       zjets_file && wjets_file);
+
+  // bool signals_loaded = (gww_m200_file && gww_m350_file && gww_m500_file &&
+  // 		       gww_m750_file && gww_m1000_file && gww_m1250_file);
+  //bool signals_loaded = (gww_m500_file && gww_m1000_file && gww_m1500_file && gww_m1250_file);
+  bool signals_loaded = (true);
+  		       
+
+  return (bkgds_loaded && signals_loaded);
+  
+}
+
+void calcSystematics::MakePlot(string sample_name,string systematic_name,string var_name,string proc_name){
+
+  SetAtlasStyle();
+  gROOT->SetBatch();
+
+  
+  string test_name = sample_name;
+  std::replace(test_name.begin(),test_name.end(),'.','_');
+  string plot_name = test_name+"_"+systematic_name+"_"+proc_name+"_"+var_name;
+
+  TFile* sample_file = (TFile*) GetSystematicsFile(sample_name.c_str());
+
+  TCanvas* plot_canvas = new TCanvas(plot_name.c_str(),plot_name.c_str(),0,0,1920,1200);
+ 
+  string hist_name[nMods];
+  TH1F* hists[nMods];
+
+  int max_mod=-1;
+  float max_integral=-1;
+  for(int m=0;m<nMods;m++){
+    hist_name[m]= Form("h_%s_%s_%s_%s",proc_name.c_str(),systematic_name.c_str(),mods[m].c_str(),var_name.c_str());
+    hists[m] = (TH1F*) sample_file->Get(hist_name[m].c_str());
+    //Rebin(4) new, sets bin size 80 (was 70)
+    //cout<<"mod: "<<mods[m]<<", "<<hist_name[m]<<", "<<((TH1F*) hists[m])->GetNbinsX()<<endl;
+
+    ((TH1F*) hists[m])->Rebin(4);
+
+    //cout<<"--> "<<((TH1F*) hists[m])->GetNbinsX()<<endl;
+
+    hists[m]->SetLineWidth(2);
+    
+
+    if(hists[m]->Integral() > max_integral){
+      max_mod=m;
+      max_integral = hists[m]->Integral();
+    }
+    if(!hists[m]){
+      cout<<"calcSystematics::MakePlot No histogram: "<<hist_name[m]<<"in "<<sample_file->GetName()<<endl;
+      exit(0);
+    }
+  }
+
+  hists[nUp]->SetTitle("");
+  hists[nNom]->SetTitle("");
+  hists[nDown]->SetTitle("");
+
+  hists[nDown]->GetXaxis()->SetTitle("M(l#nu jj) [GeV]");
+  hists[nUp]->GetXaxis()->SetTitle("M(l#nu jj) [GeV]");
+  hists[nNom]->GetXaxis()->SetTitle("M(l#nu jj) [GeV]");
+
+  hists[nUp]->SetLineColor(kRed);
+  hists[nDown]->SetLineColor(kBlue);
+
+  if(max_mod==nNom){
+
+
+    hists[nNom]->Draw("hist");
+    hists[nUp]->Draw("hist sames");
+    hists[nDown]->Draw("hist sames");
+
+  }else if(max_mod==nUp){
+
+
+    hists[nUp]->Draw("hist");
+    hists[nNom]->Draw("hist sames");
+    hists[nDown]->Draw("hist sames");
+
+  }else if(max_mod==nDown){
+
+    hists[nDown]->Draw("hist");
+    hists[nUp]->Draw("hist sames");
+    hists[nNom]->Draw("hist sames");
+
+  }else{
+    cout<<"calcSystematics::MakePlot error finding histogram to print first!"<<endl;
+    exit(0);
+  }
+
+  //plot_canvas->SetLogy();
+  plot_canvas->Update();
+
+
+  TLegend* plot_legend = new TLegend(0.7,0.75,0.9,0.9,systematic_name.c_str());
+  plot_legend->SetFillColor(0);
+  plot_legend->SetTextSize(0.03);
+
+  char lgndNameUp[100];
+  sprintf(lgndNameUp,"%s,  %.3f","up",hists[nUp]->Integral());
+  plot_legend->AddEntry(hists[nUp],lgndNameUp,"F");
+  char lgndNameNom[100];
+  sprintf(lgndNameNom,"%s,  %.3f","nom",hists[nNom]->Integral());
+  plot_legend->AddEntry(hists[nNom],lgndNameNom,"F");
+  char lgndNameDown[100];
+  sprintf(lgndNameDown,"%s,  %.3f","down",hists[nDown]->Integral());
+  plot_legend->AddEntry(hists[nDown],lgndNameDown,"F");
+  
+  plot_legend->Draw();
+
+  plot_canvas->Update();
+  
+  string cur_plot_loc = plot_loc+systematic_name+"/"+plot_name+".pdf";
+  plot_canvas->SaveAs(cur_plot_loc.c_str());
+
+  return ;  
+}
+
+
+
+void calcSystematics::MakeSmearPlot(string smear,string sample_name,string var_name,string proc_name){
+
+  string plot_name = sample_name+"_"+proc_name+"_"+var_name;
+
+  TFile* sample_file = (TFile*) GetSystematicsFile(sample_name.c_str());
+
+  TCanvas* plot_canvas = new TCanvas(plot_name.c_str(),plot_name.c_str(),0,0,1920,1200);
+
+  const int nSmearMods=2;
+  string smear_modulations[nSmearMods]={"nom","smear"};
+  string hist_name[nSmearMods];
+  TH1F* hists[nSmearMods];
+
+  for(int m=0;m<nSmearMods;m++){
+
+    hist_name[m]= Form("h_%s_%s_%s_%s",proc_name.c_str(),smear.c_str(),smear_modulations[m].c_str(),var_name.c_str());
+
+    hists[m] = (TH1F*) sample_file->Get(hist_name[m].c_str());
+    hists[m]->SetLineWidth(2);
+
+    if(!hists[m]){
+      cout<<"calcSystematics::MakePlot No histogram: "<<hist_name[m]<<"in "<<sample_file->GetName()<<endl;
+      exit(0);
+    }
+  }
+
+  //hists[nUp]->SetLineColor(kRed);
+  hists[1]->SetLineColor(kRed);
+
+  hists[1]->Draw("hist");
+  hists[0]->Draw("hist sames");
+
+  plot_canvas->SetLogy();
+  plot_canvas->Update();
+
+
+  TLegend* plot_legend = new TLegend(0.7,0.75,0.9,0.9,smear.c_str());
+  plot_legend->SetFillColor(0);
+  plot_legend->SetTextSize(0.03);
+
+  char lgndNameUp[100];
+  sprintf(lgndNameUp,"%s,  %.4f",smear_modulations[1].c_str(),hists[1]->Integral());
+  plot_legend->AddEntry(hists[nUp],lgndNameUp,"F");
+  char lgndNameNom[100];
+  sprintf(lgndNameNom,"%s,  %.4f",smear_modulations[0].c_str(),hists[0]->Integral());
+  plot_legend->AddEntry(hists[nNom],lgndNameNom,"F");
+  
+  plot_legend->Draw();
+
+  plot_canvas->Update();
+  
+  string cur_plot_loc = plot_loc+smear+"/"+plot_name+".pdf";
+  plot_canvas->SaveAs(cur_plot_loc.c_str());
+  
+  return ;  
+}
+
+
+
+void calcSystematics::PlotBackgrounds(string cur_sys,string cur_proc,string var_name,int n_bkgds,string bkgds[]){
+
+  SetAtlasStyle();
+  gROOT->SetBatch();
+
+  string hist_name = "h_bkgds_"+cur_sys+"_"+cur_proc+"_"+var_name;
+  
+  TCanvas* hist_canvas = new TCanvas(hist_name.c_str(),hist_name.c_str(),0,0,1920,1200);
+
+  TH1F* bkgd_nom_hist;
+  TH1F* bkgd_up_hist;
+  TH1F* bkgd_down_hist;
+
+  // const int nSigs=n_sigs;
+  // TH1F* sig_nom_hist[nSigs];
+  // TH1F* sig_up_hist[nSigs];
+  // TH1F* sig_down_hist[nSigs];
+
+   
+  for(int b=0;b<n_bkgds;b++){
+
+    TFile* cur_bkgd_file = (TFile*) GetSystematicsFile(bkgds[b].c_str());
+
+    string cur_nom_hist_name = "h_"+cur_proc+"_"+cur_sys+"_nom_"+var_name;
+    TH1F* cur_nom_hist = (TH1F*) cur_bkgd_file->Get(cur_nom_hist_name.c_str());
+    //if(cur_nom_hist->GetNbinsX()!=36) cur_nom_hist->Rebin(4);
+    
+    string cur_up_hist_name = "h_"+cur_proc+"_"+cur_sys+"_up_"+var_name;
+    TH1F* cur_up_hist = (TH1F*) cur_bkgd_file->Get(cur_up_hist_name.c_str());
+    //if(cur_up_hist->GetNbinsX()!=36) cur_up_hist->Rebin(4);
+    
+    string cur_down_hist_name = "h_"+cur_proc+"_"+cur_sys+"_down_"+var_name;
+    TH1F* cur_down_hist = (TH1F*) cur_bkgd_file->Get(cur_down_hist_name.c_str());
+    //if(cur_down_hist->GetNbinsX()!=36) cur_down_hist->Rebin(4);
+    
+    if(b==0){
+      bkgd_nom_hist=cur_nom_hist;
+      bkgd_up_hist=cur_up_hist;
+      bkgd_down_hist=cur_down_hist;
+    }else{
+      bkgd_nom_hist->Add(cur_nom_hist);
+      bkgd_up_hist->Add(cur_up_hist);
+      bkgd_down_hist->Add(cur_down_hist);      
+    }
+  }
+
+
+  bkgd_nom_hist->SetLineWidth(2);
+  bkgd_up_hist->SetLineColor(kRed);
+  bkgd_up_hist->SetLineWidth(2);
+  bkgd_down_hist->SetLineColor(kBlue);
+  bkgd_down_hist->SetLineWidth(2);
+  
+  hist_canvas->cd();
+  bkgd_up_hist->SetTitle("");
+  bkgd_up_hist->Draw("hist");
+  bkgd_nom_hist->Draw("hist sames");
+  bkgd_down_hist->Draw("hist sames");
+  hist_canvas->SetLogy();
+
+
+  TLegend* plot_legend = new TLegend(0.7,0.75,0.9,0.9,cur_sys.c_str());
+  plot_legend->SetFillColor(0);
+  plot_legend->SetTextSize(0.03);
+
+  char lgndNameUp[100];
+  sprintf(lgndNameUp,"%s,  %.4f","up",bkgd_up_hist->Integral());
+  plot_legend->AddEntry(bkgd_up_hist,lgndNameUp,"F");
+  char lgndNameNom[100];
+  sprintf(lgndNameNom,"%s,  %.4f","nom",bkgd_nom_hist->Integral());
+  plot_legend->AddEntry(bkgd_nom_hist,lgndNameNom,"F");
+  char lgndNameDown[100];
+  sprintf(lgndNameDown,"%s,  %.4f","down",bkgd_down_hist->Integral());
+  plot_legend->AddEntry(bkgd_down_hist,lgndNameDown,"F");
+  
+  plot_legend->Draw();
+
+
+  hist_canvas->Update();
+
+  
+  string cur_plot_loc = plot_loc+cur_sys+"/"+hist_name+".pdf";
+  hist_canvas->SaveAs(cur_plot_loc.c_str());
+  
+  return ;  
+}
+
+void calcSystematics::PlotSmearBackgrounds(string smear,string cur_proc,string var_name,int n_bkgds,string bkgds[]){
+
+  string hist_name = "h_bkgds_"+smear+"_"+cur_proc+"_"+var_name;
+  
+  TCanvas* hist_canvas = new TCanvas(hist_name.c_str(),hist_name.c_str(),0,0,1920,1200);
+
+  TH1F* bkgd_nom_hist;
+  TH1F* bkgd_smear_hist;
+
+  for(int b=0;b<n_bkgds;b++){
+
+    TFile* cur_bkgd_file = (TFile*) GetSystematicsFile(bkgds[b].c_str());
+
+    string cur_nom_hist_name = "h_"+cur_proc+"_"+smear+"_nom_"+var_name;
+    TH1F* cur_nom_hist = (TH1F*) cur_bkgd_file->Get(cur_nom_hist_name.c_str());
+
+    string cur_smear_hist_name = "h_"+cur_proc+"_"+smear+"_smear_"+var_name;
+    TH1F* cur_smear_hist = (TH1F*) cur_bkgd_file->Get(cur_smear_hist_name.c_str());
+
+    if(b==0){
+      bkgd_nom_hist=cur_nom_hist;
+      bkgd_smear_hist=cur_smear_hist;
+    }else{
+      bkgd_nom_hist->Add(cur_nom_hist);
+      bkgd_smear_hist->Add(cur_smear_hist);
+    }
+  }
+  bkgd_nom_hist->SetLineWidth(2);
+  bkgd_smear_hist->SetLineColor(kRed);
+  bkgd_smear_hist->SetLineWidth(2);
+  
+  hist_canvas->cd();
+  bkgd_smear_hist->Draw("hist");
+  bkgd_nom_hist->Draw("hist sames");
+  hist_canvas->SetLogy();
+
+
+  TLegend* plot_legend = new TLegend(0.7,0.75,0.9,0.9,smear.c_str());
+  plot_legend->SetFillColor(0);
+  plot_legend->SetTextSize(0.03);
+
+  char lgndNameUp[100];
+  sprintf(lgndNameUp,"%s,  %.4f","smear",bkgd_smear_hist->Integral());
+  plot_legend->AddEntry(bkgd_smear_hist,lgndNameUp,"F");
+  char lgndNameNom[100];
+  sprintf(lgndNameNom,"%s,  %.4f","nom",bkgd_nom_hist->Integral());
+  plot_legend->AddEntry(bkgd_nom_hist,lgndNameNom,"F");
+  
+  plot_legend->Draw();
+
+
+  hist_canvas->Update();
+
+  
+  string cur_plot_loc = plot_loc+smear+"/"+hist_name+".pdf";
+  hist_canvas->SaveAs(cur_plot_loc.c_str());
+  
+  return ;  
+}
+
+
+
+double calcSystematics::GetSmearUncertainty(string smear,string sample,string proc,string region){
+
+  //smear - jer,msup,idlow...
+  //sample - top, qcd, gww_m500, ...
+  //proc - el/mu/both (both averages?)
+  //region - sig_lowm, sig_highm, ctrl_all, ctrl_ewk
+  //comb - how to combine up/down, avg, spread, etc
+  double uncert=0.;
+
+
+  // Get File
+  TFile* sample_file = (TFile*) GetSystematicsFile(sample.c_str());
+  if(!sample_file){
+    cout<<"calcSystematics::GetUncertainty: No systematics file for: "<<sample<<endl;
+    exit(0);
+  }
+
+  string hist_nom_name = "h_"+proc+"_"+smear+"_nom_"+region+"_pass_sig";
+  TH1F* hist_nom = (TH1F*) sample_file->Get(hist_nom_name.c_str());
+  string hist_smear_name = "h_"+proc+"_"+smear+"_smear_"+region+"_pass_sig";
+  TH1F* hist_smear = (TH1F*) sample_file->Get(hist_smear_name.c_str());
+  // string hist_down_name = "h_"+proc+"_"+sys+"_down_"+region+"_pass_sig";
+  // TH1F* hist_down = (TH1F*) sample_file->Get(hist_down_name.c_str());
+
+  if(!hist_nom || !hist_smear){
+    cout<<"calcSystematics::GetUncertainty: No systematics histogram: "<<hist_nom_name
+	<<" or "<<hist_smear_name
+	<<" in "<<sample_file->GetName()<<endl;
+    exit(0);
+  }
+
+
+  float count_nom = hist_nom->Integral();
+  float count_smear = hist_smear->Integral();
+
+   float fluc = fabs(count_smear-count_nom)/count_nom;
+
+   uncert = fluc;
+
+   return uncert;
+
+}

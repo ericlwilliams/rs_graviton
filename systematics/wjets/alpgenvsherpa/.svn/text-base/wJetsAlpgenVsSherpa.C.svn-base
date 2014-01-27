@@ -1,0 +1,1903 @@
+#include "/Users/elw/analy/lnuj/include/lnuj_bkgd_list.h"
+#include "/Users/elw/analy/lnuj/include/wwFileInfo.h"
+#include <string>
+
+string proc_type = "sys_wjets";
+string file_tail = ".sys.wjets.plot.root";
+
+void wJetsAlpgenVsSherpa(){
+
+  gROOT->SetStyle("Plain");  
+  gStyle->SetOptStat(0);
+  gStyle->SetPalette(1);
+  gStyle->SetPadTickX(1);
+  gStyle->SetPadTickY(1);
+  //gStyle->SetFillStyle(3144);
+  
+  //gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In wJets.C"<<endl;
+
+  const int nProcs=2;
+  string procs[nProcs] = {"elec","muon"};
+
+  const int nCtrls=4;
+  string ctrls[nCtrls] = {"all","ewk","ttbar","boost1"};
+
+  string wjets_alpgen = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.alpgen.wjets.sys.wjets.plot.root";
+  TFile* wjets_alpgen_file = TFile::Open(wjets_alpgen.c_str());
+  string wjets_sherpa = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.sherpa.wjets.sys.wjets.plot.root";  
+  TFile* wjets_sherpa_file = TFile::Open(wjets_sherpa.c_str());
+  // Backgrounds
+  string top_mcatnlo = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.mcatnlo.top.sys.wjets.plot.root";
+  TFile* top_mcatnlo_file = TFile::Open(top_mcatnlo.c_str());
+
+  string zjets_alpgen = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.alpgen.zjets.sys.wjets.plot.root";
+  TFile* zjets_alpgen_file = TFile::Open(zjets_alpgen.c_str());
+  
+  string vv_herwig = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/mc.herwig.vv.sys.wjets.plot.root";
+  TFile* vv_herwig_file = TFile::Open(vv_herwig.c_str());
+  
+  string qcd_alpgen = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/qcd.alpgen.sys.wjets.plot.root";  
+  TFile* qcd_alpgen_file = TFile::Open(qcd_alpgen.c_str());
+
+  string qcd_sherpa = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/qcd.sherpa.sys.wjets.plot.root";  
+  TFile* qcd_sherpa_file = TFile::Open(qcd_sherpa.c_str());
+
+  
+  string data = "/Users/elw/analy/lnuj/plots/sys_wjets_plots/merged/data.lnuj.plot.root";  
+  TFile* data_file = TFile::Open(data.c_str());
+
+  
+  if(!wjets_sherpa_file || !wjets_alpgen_file ||
+     !top_mcatnlo_file || !data_file ||
+     !zjets_alpgen_file || !vv_herwig_file ||
+     !qcd_alpgen_file || !qcd_sherpa_file) {
+    cout<<"alpgen or sherpa files not found"<<endl;
+    exit(-142);
+  }
+
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc01
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc01_title = "Lead Jet Pt (elec) all";
+  string tc01_name = "tc01";
+  TCanvas* tc01 = new TCanvas(tc01_name.c_str(),tc01_title.c_str(),0,0,1920,1200);
+  tc01->cd();
+
+  TPad* tc01_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc01_pad01->SetTopMargin(0.05);
+  tc01_pad01->SetBottomMargin(0.31);
+  tc01_pad01->Draw();
+
+  TPad* tc01_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc01_pad02->SetBottomMargin(0.0005);
+  tc01_pad02->SetLogy();
+  tc01_pad02->Draw();
+  tc01_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_elec_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_sherpa_nom_elec_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  
+  h_all_alpgen_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_all_alpgen_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_alpgen_nom_elec_lead_jet_pt->SetTitle("");
+  h_all_alpgen_nom_elec_lead_jet_pt->Draw("PE");
+
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerColor(kRed);
+  h_all_sherpa_nom_elec_lead_jet_pt->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc01 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc01->SetFillColor(0);
+  lgnd_tc01->SetTextSize(0.03);
+  lgnd_tc01->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_elec_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc01->AddEntry(h_all_alpgen_nom_elec_lead_jet_pt,lgnd_alpgen_nom_elec_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_elec_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc01->AddEntry(h_all_sherpa_nom_elec_lead_jet_pt,lgnd_sherpa_nom_elec_lead_jet_pt_name,"p");
+
+  lgnd_tc01->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc01_pad01->cd();
+  tc01_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc01_ratio_alpgen_sherpa_lead_jet_pt_name = "tc01_ratio_alpgen_sherpa_lead_jet_pt";
+  TH1F* h_all_ratio_alpgen_sherpa_lead_jet_pt = new TH1F(tc01_ratio_alpgen_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis = h_all_ratio_alpgen_sherpa_lead_jet_pt->GetXaxis();
+  TAxis* h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis = h_all_ratio_alpgen_sherpa_lead_jet_pt->GetYaxis();
+  
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc01_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc01_alpgen_nom_bin_n=h_all_alpgen_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc01_alpgen_nom_bin_err=h_all_alpgen_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc01_sherpa_nom_bin_n=h_all_sherpa_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc01_sherpa_nom_bin_err=h_all_sherpa_nom_elec_lead_jet_pt->GetBinError(b);    
+
+
+    if(tc01_alpgen_nom_bin_n && tc01_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc01_abs_alpgen_sherpa_err = sqrt(pow(tc01_alpgen_nom_bin_err,2.)+pow(tc01_sherpa_nom_bin_err,2.));
+      double tc01_rel_alpgen_sherpa_err = tc01_abs_alpgen_sherpa_err/(tc01_alpgen_nom_bin_n-tc01_sherpa_nom_bin_n);
+      double tc01_rel_sherpa_err = tc01_sherpa_nom_bin_err/tc01_sherpa_nom_bin_n;
+      
+      double tc01_rel_ratio_alpgen_sherpa_lead_jet_pt_err = sqrt(pow(tc01_rel_alpgen_sherpa_err,2.)+pow(tc01_rel_sherpa_err,2.));
+
+      double tc01_alpgen_sherpa_ratio = (tc01_alpgen_nom_bin_n-tc01_sherpa_nom_bin_n)/tc01_sherpa_nom_bin_n;
+
+      double tc01_alpgen_sherpa_ratio_err = fabs(tc01_rel_ratio_alpgen_sherpa_lead_jet_pt_err*tc01_alpgen_sherpa_ratio);
+
+      h_all_ratio_alpgen_sherpa_lead_jet_pt->SetBinContent(b,tc01_alpgen_sherpa_ratio);
+      h_all_ratio_alpgen_sherpa_lead_jet_pt->SetBinError(b,tc01_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->Draw("PE");
+  
+  tc01->Update();
+
+  tc01->SaveAs("./plots/latest/all_elec_lead_jet_pt.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc01_5
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc01_5_title = "Lead Jet Pt (elec) w/ Data all";
+  string tc01_5_name = "tc01_5";
+  TCanvas* tc01_5 = new TCanvas(tc01_5_name.c_str(),tc01_5_title.c_str(),0,0,1920,1200);
+  tc01_5->cd();
+
+  TPad* tc01_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc01_5_pad01->SetTopMargin(0.05);
+  tc01_5_pad01->SetBottomMargin(0.31);
+  tc01_5_pad01->Draw();
+
+  TPad* tc01_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc01_5_pad02->SetBottomMargin(0.0005);
+  tc01_5_pad02->SetLogy();
+  tc01_5_pad02->Draw();
+  tc01_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_elec_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_sherpa_nom_elec_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_data_elec_lead_jet_pt = (TH1F*) data_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+
+  TH1F* h_all_top_elec_lead_jet_pt = (TH1F*) top_mcatnlo_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_zjets_elec_lead_jet_pt = (TH1F*) zjets_alpgen_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_vv_elec_lead_jet_pt = (TH1F*) vv_herwig_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_qcd_alpgen_elec_lead_jet_pt = (TH1F*) qcd_alpgen_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_all_qcd_sherpa_elec_lead_jet_pt = (TH1F*) qcd_sherpa_file->Get("all/h_elec_purw_nom_lead_jet_pt");
+  
+
+  //Add Backgrounds
+  h_all_alpgen_nom_elec_lead_jet_pt->Add(h_all_top_elec_lead_jet_pt);
+  h_all_alpgen_nom_elec_lead_jet_pt->Add(h_all_zjets_elec_lead_jet_pt);
+  h_all_alpgen_nom_elec_lead_jet_pt->Add(h_all_vv_elec_lead_jet_pt);
+  h_all_alpgen_nom_elec_lead_jet_pt->Add(h_all_qcd_alpgen_elec_lead_jet_pt);
+  
+  h_all_alpgen_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_all_alpgen_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_alpgen_nom_elec_lead_jet_pt->SetTitle("");
+  h_all_alpgen_nom_elec_lead_jet_pt->Draw("PE");
+
+
+  //Add Backgrounds
+  h_all_sherpa_nom_elec_lead_jet_pt->Add(h_all_top_elec_lead_jet_pt);
+  h_all_sherpa_nom_elec_lead_jet_pt->Add(h_all_zjets_elec_lead_jet_pt);
+  h_all_sherpa_nom_elec_lead_jet_pt->Add(h_all_vv_elec_lead_jet_pt);
+  h_all_sherpa_nom_elec_lead_jet_pt->Add(h_all_qcd_sherpa_elec_lead_jet_pt);
+
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_sherpa_nom_elec_lead_jet_pt->SetMarkerColor(kRed);
+  h_all_sherpa_nom_elec_lead_jet_pt->Draw("PE sames");
+
+  h_all_data_elec_lead_jet_pt->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc01_5 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc01_5->SetFillColor(0);
+  lgnd_tc01_5->SetTextSize(0.03);
+  lgnd_tc01_5->SetBorderSize(0);
+
+  char lgnd_data_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_data_elec_lead_jet_pt_name,"%s,  %.2f","DATA",h_all_data_elec_lead_jet_pt->Integral());
+  lgnd_tc01_5->AddEntry(h_all_data_elec_lead_jet_pt,lgnd_data_elec_lead_jet_pt_name,"f");
+
+  char lgnd_alpgen_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_elec_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc01_5->AddEntry(h_all_alpgen_nom_elec_lead_jet_pt,lgnd_alpgen_nom_elec_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_elec_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc01_5->AddEntry(h_all_sherpa_nom_elec_lead_jet_pt,lgnd_sherpa_nom_elec_lead_jet_pt_name,"p");
+
+  lgnd_tc01_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc01_5_pad01->cd();
+  tc01_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc01_5_ratio_data_alpgen_lead_jet_pt_name = "tc01_5_ratio_data_alpgen_lead_jet_pt";
+  TH1F* h_all_ratio_data_alpgen_lead_jet_pt = new TH1F(tc01_5_ratio_data_alpgen_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_alpgen_lead_jet_pt->SetMarkerStyle(8);
+  //h_all_ratio_data_alpgen_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_data_alpgen_lead_jet_pt_xaxis = h_all_ratio_data_alpgen_lead_jet_pt->GetXaxis();
+  TAxis* h_all_ratio_data_alpgen_lead_jet_pt_yaxis = h_all_ratio_data_alpgen_lead_jet_pt->GetYaxis();
+  
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitle("(data-MC)/MC");
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc01_5_ratio_data_sherpa_lead_jet_pt_name = "tc01_5_ratio_data_sherpa_lead_jet_pt";
+  TH1F* h_all_ratio_data_sherpa_lead_jet_pt = new TH1F(tc01_5_ratio_data_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_all_ratio_data_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  
+  double tc01_5_data_alpgen_ratio=0.;
+  double tc01_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc01_5_alpgen_nom_bin_n=h_all_alpgen_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc01_5_alpgen_nom_bin_err=h_all_alpgen_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc01_5_data_bin_n=h_all_data_elec_lead_jet_pt->GetBinContent(b);
+    double tc01_5_data_bin_err=h_all_data_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc01_5_sherpa_nom_bin_n=h_all_sherpa_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc01_5_sherpa_nom_bin_err=h_all_sherpa_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    if(tc01_5_data_bin_n && tc01_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc01_5_abs_data_alpgen_err = sqrt(pow(tc01_5_data_bin_err,2.)+pow(tc01_5_alpgen_nom_bin_err,2.));
+      double tc01_5_rel_data_alpgen_err = tc01_5_abs_data_alpgen_err/(tc01_5_data_bin_n-tc01_5_alpgen_nom_bin_n);
+      double tc01_5_rel_alpgen_err = tc01_5_alpgen_nom_bin_err/tc01_5_alpgen_nom_bin_n;
+      
+      double tc01_5_rel_ratio_data_alpgen_lead_jet_pt_err = sqrt(pow(tc01_5_rel_data_alpgen_err,2.)+pow(tc01_5_rel_alpgen_err,2.));
+
+      double tc01_5_data_alpgen_ratio = (tc01_5_data_bin_n-tc01_5_alpgen_nom_bin_n)/tc01_5_alpgen_nom_bin_n;
+
+      double tc01_5_data_alpgen_ratio_err = fabs(tc01_5_rel_ratio_data_alpgen_lead_jet_pt_err*tc01_5_data_alpgen_ratio);
+
+      h_all_ratio_data_alpgen_lead_jet_pt->SetBinContent(b,tc01_5_data_alpgen_ratio);
+      h_all_ratio_data_alpgen_lead_jet_pt->SetBinError(b,tc01_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc01_5_data_bin_n && tc01_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc01_5_abs_data_sherpa_err = sqrt(pow(tc01_5_data_bin_err,2.)+pow(tc01_5_sherpa_nom_bin_err,2.));
+      double tc01_5_rel_data_sherpa_err = tc01_5_abs_data_sherpa_err/(tc01_5_data_bin_n-tc01_5_sherpa_nom_bin_n);
+      double tc01_5_rel_sherpa_err = tc01_5_sherpa_nom_bin_err/tc01_5_sherpa_nom_bin_n;
+      
+      double tc01_5_rel_ratio_data_sherpa_lead_jet_pt_err = sqrt(pow(tc01_5_rel_data_sherpa_err,2.)+pow(tc01_5_rel_sherpa_err,2.));
+
+      double tc01_5_data_sherpa_ratio = (tc01_5_data_bin_n-tc01_5_sherpa_nom_bin_n)/tc01_5_sherpa_nom_bin_n;
+
+      double tc01_5_data_sherpa_ratio_err = fabs(tc01_5_rel_ratio_data_sherpa_lead_jet_pt_err*tc01_5_data_sherpa_ratio);
+
+      h_all_ratio_data_sherpa_lead_jet_pt->SetBinContent(b,tc01_5_data_sherpa_ratio);
+      h_all_ratio_data_sherpa_lead_jet_pt->SetBinError(b,tc01_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_all_ratio_data_alpgen_lead_jet_pt->Draw("PE");
+  h_all_ratio_data_sherpa_lead_jet_pt->Draw("PE sames");
+  
+  tc01_5->Update();
+
+  tc01_5->SaveAs("./plots/latest/all_data_elec_lead_jet_pt.png");
+    
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc02
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc02_title = "Lead Jet Pt (muon) all";
+  string tc02_name = "tc02";
+  TCanvas* tc02 = new TCanvas(tc02_name.c_str(),tc02_title.c_str(),0,0,1920,1200);
+  tc02->cd();
+
+  TPad* tc02_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc02_pad01->SetTopMargin(0.05);
+  tc02_pad01->SetBottomMargin(0.31);
+  tc02_pad01->Draw();
+
+  TPad* tc02_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc02_pad02->SetBottomMargin(0.0005);
+  tc02_pad02->SetLogy();
+  tc02_pad02->Draw();
+  tc02_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_muon_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_sherpa_nom_muon_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  
+  h_all_alpgen_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_all_alpgen_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_alpgen_nom_muon_lead_jet_pt->SetTitle("");
+  h_all_alpgen_nom_muon_lead_jet_pt->Draw("PE");
+
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerColor(kRed);
+  h_all_sherpa_nom_muon_lead_jet_pt->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc02 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc02->SetFillColor(0);
+  lgnd_tc02->SetTextSize(0.03);
+  lgnd_tc02->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_muon_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc02->AddEntry(h_all_alpgen_nom_muon_lead_jet_pt,lgnd_alpgen_nom_muon_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_muon_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc02->AddEntry(h_all_sherpa_nom_muon_lead_jet_pt,lgnd_sherpa_nom_muon_lead_jet_pt_name,"p");
+
+  lgnd_tc02->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc02_pad01->cd();
+  tc02_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc02_ratio_alpgen_sherpa_lead_jet_pt_name = "tc02_ratio_alpgen_sherpa_lead_jet_pt";
+  TH1F* h_all_ratio_alpgen_sherpa_lead_jet_pt = new TH1F(tc02_ratio_alpgen_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis = h_all_ratio_alpgen_sherpa_lead_jet_pt->GetXaxis();
+  TAxis* h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis = h_all_ratio_alpgen_sherpa_lead_jet_pt->GetYaxis();
+  
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc02_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc02_alpgen_nom_bin_n=h_all_alpgen_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc02_alpgen_nom_bin_err=h_all_alpgen_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc02_sherpa_nom_bin_n=h_all_sherpa_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc02_sherpa_nom_bin_err=h_all_sherpa_nom_muon_lead_jet_pt->GetBinError(b);    
+
+
+    if(tc02_alpgen_nom_bin_n && tc02_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc02_abs_alpgen_sherpa_err = sqrt(pow(tc02_alpgen_nom_bin_err,2.)+pow(tc02_sherpa_nom_bin_err,2.));
+      double tc02_rel_alpgen_sherpa_err = tc02_abs_alpgen_sherpa_err/(tc02_alpgen_nom_bin_n-tc02_sherpa_nom_bin_n);
+      double tc02_rel_sherpa_err = tc02_sherpa_nom_bin_err/tc02_sherpa_nom_bin_n;
+      
+      double tc02_rel_ratio_alpgen_sherpa_lead_jet_pt_err = sqrt(pow(tc02_rel_alpgen_sherpa_err,2.)+pow(tc02_rel_sherpa_err,2.));
+
+      double tc02_alpgen_sherpa_ratio = (tc02_alpgen_nom_bin_n-tc02_sherpa_nom_bin_n)/tc02_sherpa_nom_bin_n;
+
+      double tc02_alpgen_sherpa_ratio_err = fabs(tc02_rel_ratio_alpgen_sherpa_lead_jet_pt_err*tc02_alpgen_sherpa_ratio);
+
+      h_all_ratio_alpgen_sherpa_lead_jet_pt->SetBinContent(b,tc02_alpgen_sherpa_ratio);
+      h_all_ratio_alpgen_sherpa_lead_jet_pt->SetBinError(b,tc02_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_all_ratio_alpgen_sherpa_lead_jet_pt->Draw("PE");
+  
+  tc02->Update();
+
+  tc02->SaveAs("./plots/latest/all_muon_lead_jet_pt.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc02_5
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc02_5_title = "Lead Jet Pt (muon) w/ Data all";
+  string tc02_5_name = "tc02_5";
+  TCanvas* tc02_5 = new TCanvas(tc02_5_name.c_str(),tc02_5_title.c_str(),0,0,1920,1200);
+  tc02_5->cd();
+
+  TPad* tc02_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc02_5_pad01->SetTopMargin(0.05);
+  tc02_5_pad01->SetBottomMargin(0.31);
+  tc02_5_pad01->Draw();
+
+  TPad* tc02_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc02_5_pad02->SetBottomMargin(0.0005);
+  tc02_5_pad02->SetLogy();
+  tc02_5_pad02->Draw();
+  tc02_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_muon_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_sherpa_nom_muon_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_data_muon_lead_jet_pt = (TH1F*) data_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+
+  TH1F* h_all_top_muon_lead_jet_pt = (TH1F*) top_mcatnlo_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_zjets_muon_lead_jet_pt = (TH1F*) zjets_alpgen_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_vv_muon_lead_jet_pt = (TH1F*) vv_herwig_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_qcd_alpgen_muon_lead_jet_pt = (TH1F*) qcd_alpgen_file->Get("all/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_all_qcd_sherpa_muon_lead_jet_pt = (TH1F*) qcd_sherpa_file->Get("all/h_muon_purw_nom_lead_jet_pt");  
+  
+
+  //Add Backgrounds
+  h_all_alpgen_nom_muon_lead_jet_pt->Add(h_all_top_muon_lead_jet_pt);
+  h_all_alpgen_nom_muon_lead_jet_pt->Add(h_all_zjets_muon_lead_jet_pt);
+  h_all_alpgen_nom_muon_lead_jet_pt->Add(h_all_vv_muon_lead_jet_pt);
+  h_all_alpgen_nom_muon_lead_jet_pt->Add(h_all_qcd_alpgen_muon_lead_jet_pt);
+  
+  h_all_alpgen_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_all_alpgen_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_alpgen_nom_muon_lead_jet_pt->SetTitle("");
+  h_all_alpgen_nom_muon_lead_jet_pt->Draw("PE");
+
+
+  //Add Backgrounds
+  h_all_sherpa_nom_muon_lead_jet_pt->Add(h_all_top_muon_lead_jet_pt);
+  h_all_sherpa_nom_muon_lead_jet_pt->Add(h_all_zjets_muon_lead_jet_pt);
+  h_all_sherpa_nom_muon_lead_jet_pt->Add(h_all_vv_muon_lead_jet_pt);
+  h_all_sherpa_nom_muon_lead_jet_pt->Add(h_all_qcd_sherpa_muon_lead_jet_pt);
+
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_all_sherpa_nom_muon_lead_jet_pt->SetMarkerColor(kRed);
+  h_all_sherpa_nom_muon_lead_jet_pt->Draw("PE sames");
+
+  h_all_data_muon_lead_jet_pt->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc02_5 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc02_5->SetFillColor(0);
+  lgnd_tc02_5->SetTextSize(0.03);
+  lgnd_tc02_5->SetBorderSize(0);
+
+  char lgnd_data_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_data_muon_lead_jet_pt_name,"%s,  %.2f","DATA",h_all_data_muon_lead_jet_pt->Integral());
+  lgnd_tc02_5->AddEntry(h_all_data_muon_lead_jet_pt,lgnd_data_muon_lead_jet_pt_name,"f");
+
+  char lgnd_alpgen_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_muon_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc02_5->AddEntry(h_all_alpgen_nom_muon_lead_jet_pt,lgnd_alpgen_nom_muon_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_muon_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc02_5->AddEntry(h_all_sherpa_nom_muon_lead_jet_pt,lgnd_sherpa_nom_muon_lead_jet_pt_name,"p");
+
+  lgnd_tc02_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc02_5_pad01->cd();
+  tc02_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc02_5_ratio_data_alpgen_lead_jet_pt_name = "tc02_5_ratio_data_alpgen_lead_jet_pt";
+  TH1F* h_all_ratio_data_alpgen_lead_jet_pt = new TH1F(tc02_5_ratio_data_alpgen_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_alpgen_lead_jet_pt->SetMarkerStyle(8);
+  //h_all_ratio_data_alpgen_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_data_alpgen_lead_jet_pt_xaxis = h_all_ratio_data_alpgen_lead_jet_pt->GetXaxis();
+  TAxis* h_all_ratio_data_alpgen_lead_jet_pt_yaxis = h_all_ratio_data_alpgen_lead_jet_pt->GetYaxis();
+  
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_all_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitle("(data-MC)/MC");
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_data_alpgen_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc02_5_ratio_data_sherpa_lead_jet_pt_name = "tc02_5_ratio_data_sherpa_lead_jet_pt";
+  TH1F* h_all_ratio_data_sherpa_lead_jet_pt = new TH1F(tc02_5_ratio_data_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_all_ratio_data_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  
+  double tc02_5_data_alpgen_ratio=0.;
+  double tc02_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc02_5_alpgen_nom_bin_n=h_all_alpgen_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc02_5_alpgen_nom_bin_err=h_all_alpgen_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc02_5_data_bin_n=h_all_data_muon_lead_jet_pt->GetBinContent(b);
+    double tc02_5_data_bin_err=h_all_data_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc02_5_sherpa_nom_bin_n=h_all_sherpa_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc02_5_sherpa_nom_bin_err=h_all_sherpa_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    if(tc02_5_data_bin_n && tc02_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc02_5_abs_data_alpgen_err = sqrt(pow(tc02_5_data_bin_err,2.)+pow(tc02_5_alpgen_nom_bin_err,2.));
+      double tc02_5_rel_data_alpgen_err = tc02_5_abs_data_alpgen_err/(tc02_5_data_bin_n-tc02_5_alpgen_nom_bin_n);
+      double tc02_5_rel_alpgen_err = tc02_5_alpgen_nom_bin_err/tc02_5_alpgen_nom_bin_n;
+      
+      double tc02_5_rel_ratio_data_alpgen_lead_jet_pt_err = sqrt(pow(tc02_5_rel_data_alpgen_err,2.)+pow(tc02_5_rel_alpgen_err,2.));
+
+      double tc02_5_data_alpgen_ratio = (tc02_5_data_bin_n-tc02_5_alpgen_nom_bin_n)/tc02_5_alpgen_nom_bin_n;
+
+      double tc02_5_data_alpgen_ratio_err = fabs(tc02_5_rel_ratio_data_alpgen_lead_jet_pt_err*tc02_5_data_alpgen_ratio);
+
+      h_all_ratio_data_alpgen_lead_jet_pt->SetBinContent(b,tc02_5_data_alpgen_ratio);
+      h_all_ratio_data_alpgen_lead_jet_pt->SetBinError(b,tc02_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc02_5_data_bin_n && tc02_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc02_5_abs_data_sherpa_err = sqrt(pow(tc02_5_data_bin_err,2.)+pow(tc02_5_sherpa_nom_bin_err,2.));
+      double tc02_5_rel_data_sherpa_err = tc02_5_abs_data_sherpa_err/(tc02_5_data_bin_n-tc02_5_sherpa_nom_bin_n);
+      double tc02_5_rel_sherpa_err = tc02_5_sherpa_nom_bin_err/tc02_5_sherpa_nom_bin_n;
+      
+      double tc02_5_rel_ratio_data_sherpa_lead_jet_pt_err = sqrt(pow(tc02_5_rel_data_sherpa_err,2.)+pow(tc02_5_rel_sherpa_err,2.));
+
+      double tc02_5_data_sherpa_ratio = (tc02_5_data_bin_n-tc02_5_sherpa_nom_bin_n)/tc02_5_sherpa_nom_bin_n;
+
+      double tc02_5_data_sherpa_ratio_err = fabs(tc02_5_rel_ratio_data_sherpa_lead_jet_pt_err*tc02_5_data_sherpa_ratio);
+
+      h_all_ratio_data_sherpa_lead_jet_pt->SetBinContent(b,tc02_5_data_sherpa_ratio);
+      h_all_ratio_data_sherpa_lead_jet_pt->SetBinError(b,tc02_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_all_ratio_data_alpgen_lead_jet_pt->Draw("PE");
+  h_all_ratio_data_sherpa_lead_jet_pt->Draw("PE sames");
+  
+  tc02_5->Update();
+
+  tc02_5->SaveAs("./plots/latest/all_data_muon_lead_jet_pt.png");
+    
+
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc03
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc03_title = "Lead Jet Pt (elec) ewk";
+  string tc03_name = "tc03";
+  TCanvas* tc03 = new TCanvas(tc03_name.c_str(),tc03_title.c_str(),0,0,1920,1200);
+  tc03->cd();
+
+  TPad* tc03_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc03_pad01->SetTopMargin(0.05);
+  tc03_pad01->SetBottomMargin(0.31);
+  tc03_pad01->Draw();
+
+  TPad* tc03_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc03_pad02->SetBottomMargin(0.0005);
+  tc03_pad02->SetLogy();
+  tc03_pad02->Draw();
+  tc03_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_ewk_alpgen_nom_elec_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_sherpa_nom_elec_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetTitle("");
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Draw("PE");
+
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerColor(kRed);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc03 = new TLegend(0.75,0.65,0.88,0.85);
+  lgnd_tc03->SetFillColor(0);
+  lgnd_tc03->SetTextSize(0.03);
+  lgnd_tc03->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_elec_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_ewk_alpgen_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc03->AddEntry(h_ewk_alpgen_nom_elec_lead_jet_pt,lgnd_alpgen_nom_elec_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_elec_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_ewk_sherpa_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc03->AddEntry(h_ewk_sherpa_nom_elec_lead_jet_pt,lgnd_sherpa_nom_elec_lead_jet_pt_name,"p");
+
+  lgnd_tc03->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc03_pad01->cd();
+  tc03_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc03_ratio_alpgen_sherpa_lead_jet_pt_name = "tc03_ratio_alpgen_sherpa_lead_jet_pt";
+  TH1F* h_ewk_ratio_alpgen_sherpa_lead_jet_pt = new TH1F(tc03_ratio_alpgen_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis = h_ewk_ratio_alpgen_sherpa_lead_jet_pt->GetXaxis();
+  TAxis* h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis = h_ewk_ratio_alpgen_sherpa_lead_jet_pt->GetYaxis();
+  
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc03_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc03_alpgen_nom_bin_n=h_ewk_alpgen_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc03_alpgen_nom_bin_err=h_ewk_alpgen_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc03_sherpa_nom_bin_n=h_ewk_sherpa_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc03_sherpa_nom_bin_err=h_ewk_sherpa_nom_elec_lead_jet_pt->GetBinError(b);    
+
+
+    if(tc03_alpgen_nom_bin_n && tc03_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc03_abs_alpgen_sherpa_err = sqrt(pow(tc03_alpgen_nom_bin_err,2.)+pow(tc03_sherpa_nom_bin_err,2.));
+      double tc03_rel_alpgen_sherpa_err = tc03_abs_alpgen_sherpa_err/(tc03_alpgen_nom_bin_n-tc03_sherpa_nom_bin_n);
+      double tc03_rel_sherpa_err = tc03_sherpa_nom_bin_err/tc03_sherpa_nom_bin_n;
+      
+      double tc03_rel_ratio_alpgen_sherpa_lead_jet_pt_err = sqrt(pow(tc03_rel_alpgen_sherpa_err,2.)+pow(tc03_rel_sherpa_err,2.));
+
+      double tc03_alpgen_sherpa_ratio = (tc03_alpgen_nom_bin_n-tc03_sherpa_nom_bin_n)/tc03_sherpa_nom_bin_n;
+
+      double tc03_alpgen_sherpa_ratio_err = fabs(tc03_rel_ratio_alpgen_sherpa_lead_jet_pt_err*tc03_alpgen_sherpa_ratio);
+
+      h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetBinContent(b,tc03_alpgen_sherpa_ratio);
+      h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetBinError(b,tc03_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->Draw("PE");
+  
+  tc03->Update();
+
+  tc03->SaveAs("./plots/latest/ewk_elec_lead_jet_pt.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc03_5
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc03_5_title = "Lead Jet Pt (elec) w/ Data ewk";
+  string tc03_5_name = "tc03_5";
+  TCanvas* tc03_5 = new TCanvas(tc03_5_name.c_str(),tc03_5_title.c_str(),0,0,1920,1200);
+  tc03_5->cd();
+
+  TPad* tc03_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc03_5_pad01->SetTopMargin(0.05);
+  tc03_5_pad01->SetBottomMargin(0.31);
+  tc03_5_pad01->Draw();
+
+  TPad* tc03_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc03_5_pad02->SetBottomMargin(0.0005);
+  tc03_5_pad02->SetLogy();
+  tc03_5_pad02->Draw();
+  tc03_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_ewk_alpgen_nom_elec_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_sherpa_nom_elec_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_data_elec_lead_jet_pt = (TH1F*) data_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+
+  TH1F* h_ewk_top_elec_lead_jet_pt = (TH1F*) top_mcatnlo_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_zjets_elec_lead_jet_pt = (TH1F*) zjets_alpgen_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_vv_elec_lead_jet_pt = (TH1F*) vv_herwig_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_qcd_alpgen_elec_lead_jet_pt = (TH1F*) qcd_alpgen_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_qcd_sherpa_elec_lead_jet_pt = (TH1F*) qcd_sherpa_file->Get("ewk/h_elec_purw_nom_lead_jet_pt");  
+
+  //Add Backgrounds
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Add(h_ewk_top_elec_lead_jet_pt);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Add(h_ewk_zjets_elec_lead_jet_pt);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Add(h_ewk_vv_elec_lead_jet_pt);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Add(h_ewk_qcd_alpgen_elec_lead_jet_pt);
+  
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_alpgen_nom_elec_lead_jet_pt->SetTitle("");
+  h_ewk_alpgen_nom_elec_lead_jet_pt->Draw("PE");
+
+
+  //Add Backgrounds
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Add(h_ewk_top_elec_lead_jet_pt);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Add(h_ewk_zjets_elec_lead_jet_pt);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Add(h_ewk_vv_elec_lead_jet_pt);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Add(h_ewk_qcd_sherpa_elec_lead_jet_pt);
+
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->SetMarkerColor(kRed);
+  h_ewk_sherpa_nom_elec_lead_jet_pt->Draw("PE sames");
+
+  h_ewk_data_elec_lead_jet_pt->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc03_5 = new TLegend(0.75,0.65,0.88,0.85);
+  lgnd_tc03_5->SetFillColor(0);
+  lgnd_tc03_5->SetTextSize(0.03);
+  lgnd_tc03_5->SetBorderSize(0);
+
+  char lgnd_data_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_data_elec_lead_jet_pt_name,"%s,  %.2f","DATA",h_ewk_data_elec_lead_jet_pt->Integral());
+  lgnd_tc03_5->AddEntry(h_ewk_data_elec_lead_jet_pt,lgnd_data_elec_lead_jet_pt_name,"f");
+
+  char lgnd_alpgen_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_elec_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_ewk_alpgen_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc03_5->AddEntry(h_ewk_alpgen_nom_elec_lead_jet_pt,lgnd_alpgen_nom_elec_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_elec_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_elec_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_ewk_sherpa_nom_elec_lead_jet_pt->Integral());
+  lgnd_tc03_5->AddEntry(h_ewk_sherpa_nom_elec_lead_jet_pt,lgnd_sherpa_nom_elec_lead_jet_pt_name,"p");
+
+  lgnd_tc03_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc03_5_pad01->cd();
+  tc03_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_ewk_alpgen_nom_elec_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc03_5_ratio_data_alpgen_lead_jet_pt_name = "tc03_5_ratio_data_alpgen_lead_jet_pt";
+  TH1F* h_ewk_ratio_data_alpgen_lead_jet_pt = new TH1F(tc03_5_ratio_data_alpgen_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_data_alpgen_lead_jet_pt->SetMarkerStyle(8);
+  //h_ewk_ratio_data_alpgen_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis = h_ewk_ratio_data_alpgen_lead_jet_pt->GetXaxis();
+  TAxis* h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis = h_ewk_ratio_data_alpgen_lead_jet_pt->GetYaxis();
+  
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitle("(data-MC)/MC");
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc03_5_ratio_data_sherpa_lead_jet_pt_name = "tc03_5_ratio_data_sherpa_lead_jet_pt";
+  TH1F* h_ewk_ratio_data_sherpa_lead_jet_pt = new TH1F(tc03_5_ratio_data_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_data_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_ewk_ratio_data_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  
+  double tc03_5_data_alpgen_ratio=0.;
+  double tc03_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc03_5_alpgen_nom_bin_n=h_ewk_alpgen_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc03_5_alpgen_nom_bin_err=h_ewk_alpgen_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc03_5_data_bin_n=h_ewk_data_elec_lead_jet_pt->GetBinContent(b);
+    double tc03_5_data_bin_err=h_ewk_data_elec_lead_jet_pt->GetBinError(b);    
+
+    double tc03_5_sherpa_nom_bin_n=h_ewk_sherpa_nom_elec_lead_jet_pt->GetBinContent(b);
+    double tc03_5_sherpa_nom_bin_err=h_ewk_sherpa_nom_elec_lead_jet_pt->GetBinError(b);    
+
+    if(tc03_5_data_bin_n && tc03_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc03_5_abs_data_alpgen_err = sqrt(pow(tc03_5_data_bin_err,2.)+pow(tc03_5_alpgen_nom_bin_err,2.));
+      double tc03_5_rel_data_alpgen_err = tc03_5_abs_data_alpgen_err/(tc03_5_data_bin_n-tc03_5_alpgen_nom_bin_n);
+      double tc03_5_rel_alpgen_err = tc03_5_alpgen_nom_bin_err/tc03_5_alpgen_nom_bin_n;
+      
+      double tc03_5_rel_ratio_data_alpgen_lead_jet_pt_err = sqrt(pow(tc03_5_rel_data_alpgen_err,2.)+pow(tc03_5_rel_alpgen_err,2.));
+
+      double tc03_5_data_alpgen_ratio = (tc03_5_data_bin_n-tc03_5_alpgen_nom_bin_n)/tc03_5_alpgen_nom_bin_n;
+
+      double tc03_5_data_alpgen_ratio_err = fabs(tc03_5_rel_ratio_data_alpgen_lead_jet_pt_err*tc03_5_data_alpgen_ratio);
+
+      h_ewk_ratio_data_alpgen_lead_jet_pt->SetBinContent(b,tc03_5_data_alpgen_ratio);
+      h_ewk_ratio_data_alpgen_lead_jet_pt->SetBinError(b,tc03_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc03_5_data_bin_n && tc03_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc03_5_abs_data_sherpa_err = sqrt(pow(tc03_5_data_bin_err,2.)+pow(tc03_5_sherpa_nom_bin_err,2.));
+      double tc03_5_rel_data_sherpa_err = tc03_5_abs_data_sherpa_err/(tc03_5_data_bin_n-tc03_5_sherpa_nom_bin_n);
+      double tc03_5_rel_sherpa_err = tc03_5_sherpa_nom_bin_err/tc03_5_sherpa_nom_bin_n;
+      
+      double tc03_5_rel_ratio_data_sherpa_lead_jet_pt_err = sqrt(pow(tc03_5_rel_data_sherpa_err,2.)+pow(tc03_5_rel_sherpa_err,2.));
+
+      double tc03_5_data_sherpa_ratio = (tc03_5_data_bin_n-tc03_5_sherpa_nom_bin_n)/tc03_5_sherpa_nom_bin_n;
+
+      double tc03_5_data_sherpa_ratio_err = fabs(tc03_5_rel_ratio_data_sherpa_lead_jet_pt_err*tc03_5_data_sherpa_ratio);
+
+      h_ewk_ratio_data_sherpa_lead_jet_pt->SetBinContent(b,tc03_5_data_sherpa_ratio);
+      h_ewk_ratio_data_sherpa_lead_jet_pt->SetBinError(b,tc03_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_ewk_ratio_data_alpgen_lead_jet_pt->Draw("PE");
+  h_ewk_ratio_data_sherpa_lead_jet_pt->Draw("PE sames");
+  
+  tc03_5->Update();
+
+  tc03_5->SaveAs("./plots/latest/ewk_data_elec_lead_jet_pt.png");
+    
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc04
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc04_title = "Lead Jet Pt (muon) ewk";
+  string tc04_name = "tc04";
+  TCanvas* tc04 = new TCanvas(tc04_name.c_str(),tc04_title.c_str(),0,0,1920,1200);
+  tc04->cd();
+
+  TPad* tc04_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc04_pad01->SetTopMargin(0.05);
+  tc04_pad01->SetBottomMargin(0.31);
+  tc04_pad01->Draw();
+
+  TPad* tc04_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc04_pad02->SetBottomMargin(0.0005);
+  tc04_pad02->SetLogy();
+  tc04_pad02->Draw();
+  tc04_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_ewk_alpgen_nom_muon_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_sherpa_nom_muon_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetTitle("");
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Draw("PE");
+
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerColor(kRed);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc04 = new TLegend(0.75,0.65,0.88,0.85);
+  lgnd_tc04->SetFillColor(0);
+  lgnd_tc04->SetTextSize(0.03);
+  lgnd_tc04->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_muon_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_ewk_alpgen_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc04->AddEntry(h_ewk_alpgen_nom_muon_lead_jet_pt,lgnd_alpgen_nom_muon_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_muon_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_ewk_sherpa_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc04->AddEntry(h_ewk_sherpa_nom_muon_lead_jet_pt,lgnd_sherpa_nom_muon_lead_jet_pt_name,"p");
+
+  lgnd_tc04->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc04_pad01->cd();
+  tc04_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc04_ratio_alpgen_sherpa_lead_jet_pt_name = "tc04_ratio_alpgen_sherpa_lead_jet_pt";
+  TH1F* h_ewk_ratio_alpgen_sherpa_lead_jet_pt = new TH1F(tc04_ratio_alpgen_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis = h_ewk_ratio_alpgen_sherpa_lead_jet_pt->GetXaxis();
+  TAxis* h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis = h_ewk_ratio_alpgen_sherpa_lead_jet_pt->GetYaxis();
+  
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc04_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc04_alpgen_nom_bin_n=h_ewk_alpgen_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc04_alpgen_nom_bin_err=h_ewk_alpgen_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc04_sherpa_nom_bin_n=h_ewk_sherpa_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc04_sherpa_nom_bin_err=h_ewk_sherpa_nom_muon_lead_jet_pt->GetBinError(b);    
+
+
+    if(tc04_alpgen_nom_bin_n && tc04_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc04_abs_alpgen_sherpa_err = sqrt(pow(tc04_alpgen_nom_bin_err,2.)+pow(tc04_sherpa_nom_bin_err,2.));
+      double tc04_rel_alpgen_sherpa_err = tc04_abs_alpgen_sherpa_err/(tc04_alpgen_nom_bin_n-tc04_sherpa_nom_bin_n);
+      double tc04_rel_sherpa_err = tc04_sherpa_nom_bin_err/tc04_sherpa_nom_bin_n;
+      
+      double tc04_rel_ratio_alpgen_sherpa_lead_jet_pt_err = sqrt(pow(tc04_rel_alpgen_sherpa_err,2.)+pow(tc04_rel_sherpa_err,2.));
+
+      double tc04_alpgen_sherpa_ratio = (tc04_alpgen_nom_bin_n-tc04_sherpa_nom_bin_n)/tc04_sherpa_nom_bin_n;
+
+      double tc04_alpgen_sherpa_ratio_err = fabs(tc04_rel_ratio_alpgen_sherpa_lead_jet_pt_err*tc04_alpgen_sherpa_ratio);
+
+      h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetBinContent(b,tc04_alpgen_sherpa_ratio);
+      h_ewk_ratio_alpgen_sherpa_lead_jet_pt->SetBinError(b,tc04_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_ewk_ratio_alpgen_sherpa_lead_jet_pt->Draw("PE");
+  
+  tc04->Update();
+
+  tc04->SaveAs("./plots/latest/ewk_muon_lead_jet_pt.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc04_5
+  // lead_jet_pt: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc04_5_title = "Lead Jet Pt (muon) w/ Data ewk";
+  string tc04_5_name = "tc04_5";
+  TCanvas* tc04_5 = new TCanvas(tc04_5_name.c_str(),tc04_5_title.c_str(),0,0,1920,1200);
+  tc04_5->cd();
+
+  TPad* tc04_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc04_5_pad01->SetTopMargin(0.05);
+  tc04_5_pad01->SetBottomMargin(0.31);
+  tc04_5_pad01->Draw();
+
+  TPad* tc04_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc04_5_pad02->SetBottomMargin(0.0005);
+  tc04_5_pad02->SetLogy();
+  tc04_5_pad02->Draw();
+  tc04_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_ewk_alpgen_nom_muon_lead_jet_pt = (TH1F*) wjets_alpgen_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_sherpa_nom_muon_lead_jet_pt = (TH1F*) wjets_sherpa_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_data_muon_lead_jet_pt = (TH1F*) data_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+
+  TH1F* h_ewk_top_muon_lead_jet_pt = (TH1F*) top_mcatnlo_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_zjets_muon_lead_jet_pt = (TH1F*) zjets_alpgen_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_vv_muon_lead_jet_pt = (TH1F*) vv_herwig_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_qcd_alpgen_muon_lead_jet_pt = (TH1F*) qcd_alpgen_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");
+  TH1F* h_ewk_qcd_sherpa_muon_lead_jet_pt = (TH1F*) qcd_sherpa_file->Get("ewk/h_muon_purw_nom_lead_jet_pt");  
+  
+
+  //Add Backgrounds
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Add(h_ewk_top_muon_lead_jet_pt);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Add(h_ewk_zjets_muon_lead_jet_pt);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Add(h_ewk_vv_muon_lead_jet_pt);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Add(h_ewk_qcd_alpgen_muon_lead_jet_pt);
+  
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_alpgen_nom_muon_lead_jet_pt->SetTitle("");
+  h_ewk_alpgen_nom_muon_lead_jet_pt->Draw("PE");
+
+
+  //Add Backgrounds
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Add(h_ewk_top_muon_lead_jet_pt);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Add(h_ewk_zjets_muon_lead_jet_pt);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Add(h_ewk_vv_muon_lead_jet_pt);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Add(h_ewk_qcd_sherpa_muon_lead_jet_pt);
+
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerStyle(20);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerSize(1.2);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->SetMarkerColor(kRed);
+  h_ewk_sherpa_nom_muon_lead_jet_pt->Draw("PE sames");
+
+  h_ewk_data_muon_lead_jet_pt->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc04_5 = new TLegend(0.75,0.65,0.88,0.85);
+  lgnd_tc04_5->SetFillColor(0);
+  lgnd_tc04_5->SetTextSize(0.03);
+  lgnd_tc04_5->SetBorderSize(0);
+
+  char lgnd_data_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_data_muon_lead_jet_pt_name,"%s,  %.2f","DATA",h_ewk_data_muon_lead_jet_pt->Integral());
+  lgnd_tc04_5->AddEntry(h_ewk_data_muon_lead_jet_pt,lgnd_data_muon_lead_jet_pt_name,"f");
+
+  char lgnd_alpgen_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_alpgen_nom_muon_lead_jet_pt_name,"%s,  %.2f","ALPGEN (nom)",h_ewk_alpgen_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc04_5->AddEntry(h_ewk_alpgen_nom_muon_lead_jet_pt,lgnd_alpgen_nom_muon_lead_jet_pt_name,"p");
+
+  char lgnd_sherpa_nom_muon_lead_jet_pt_name[20];
+  sprintf(lgnd_sherpa_nom_muon_lead_jet_pt_name,"%s,  %.2f","SHERPA (nom)",h_ewk_sherpa_nom_muon_lead_jet_pt->Integral());
+  lgnd_tc04_5->AddEntry(h_ewk_sherpa_nom_muon_lead_jet_pt,lgnd_sherpa_nom_muon_lead_jet_pt_name,"p");
+
+  lgnd_tc04_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc04_5_pad01->cd();
+  tc04_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_ewk_alpgen_nom_muon_lead_jet_pt->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc04_5_ratio_data_alpgen_lead_jet_pt_name = "tc04_5_ratio_data_alpgen_lead_jet_pt";
+  TH1F* h_ewk_ratio_data_alpgen_lead_jet_pt = new TH1F(tc04_5_ratio_data_alpgen_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_data_alpgen_lead_jet_pt->SetMarkerStyle(8);
+  //h_ewk_ratio_data_alpgen_lead_jet_pt->SetMarkerColor(kRed);
+
+  TAxis* h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis = h_ewk_ratio_data_alpgen_lead_jet_pt->GetXaxis();
+  TAxis* h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis = h_ewk_ratio_data_alpgen_lead_jet_pt->GetYaxis();
+  
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetLabelSize(0.08);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetLabelSize(0.08);
+
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitle("lead jet pt");
+  h_ewk_ratio_data_alpgen_lead_jet_pt_xaxis->SetTitleSize(0.07);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetNdivisions(4,4,4);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitle("(data-MC)/MC");
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleSize(0.07);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetTitleOffset(0.36);
+  h_ewk_ratio_data_alpgen_lead_jet_pt_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc04_5_ratio_data_sherpa_lead_jet_pt_name = "tc04_5_ratio_data_sherpa_lead_jet_pt";
+  TH1F* h_ewk_ratio_data_sherpa_lead_jet_pt = new TH1F(tc04_5_ratio_data_sherpa_lead_jet_pt_name.c_str(),"",n_bins,x_min,x_max);
+  h_ewk_ratio_data_sherpa_lead_jet_pt->SetMarkerStyle(8);
+  h_ewk_ratio_data_sherpa_lead_jet_pt->SetMarkerColor(kRed);
+
+  
+  double tc04_5_data_alpgen_ratio=0.;
+  double tc04_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc04_5_alpgen_nom_bin_n=h_ewk_alpgen_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc04_5_alpgen_nom_bin_err=h_ewk_alpgen_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc04_5_data_bin_n=h_ewk_data_muon_lead_jet_pt->GetBinContent(b);
+    double tc04_5_data_bin_err=h_ewk_data_muon_lead_jet_pt->GetBinError(b);    
+
+    double tc04_5_sherpa_nom_bin_n=h_ewk_sherpa_nom_muon_lead_jet_pt->GetBinContent(b);
+    double tc04_5_sherpa_nom_bin_err=h_ewk_sherpa_nom_muon_lead_jet_pt->GetBinError(b);    
+
+    if(tc04_5_data_bin_n && tc04_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc04_5_abs_data_alpgen_err = sqrt(pow(tc04_5_data_bin_err,2.)+pow(tc04_5_alpgen_nom_bin_err,2.));
+      double tc04_5_rel_data_alpgen_err = tc04_5_abs_data_alpgen_err/(tc04_5_data_bin_n-tc04_5_alpgen_nom_bin_n);
+      double tc04_5_rel_alpgen_err = tc04_5_alpgen_nom_bin_err/tc04_5_alpgen_nom_bin_n;
+      
+      double tc04_5_rel_ratio_data_alpgen_lead_jet_pt_err = sqrt(pow(tc04_5_rel_data_alpgen_err,2.)+pow(tc04_5_rel_alpgen_err,2.));
+
+      double tc04_5_data_alpgen_ratio = (tc04_5_data_bin_n-tc04_5_alpgen_nom_bin_n)/tc04_5_alpgen_nom_bin_n;
+
+      double tc04_5_data_alpgen_ratio_err = fabs(tc04_5_rel_ratio_data_alpgen_lead_jet_pt_err*tc04_5_data_alpgen_ratio);
+
+      h_ewk_ratio_data_alpgen_lead_jet_pt->SetBinContent(b,tc04_5_data_alpgen_ratio);
+      h_ewk_ratio_data_alpgen_lead_jet_pt->SetBinError(b,tc04_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc04_5_data_bin_n && tc04_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc04_5_abs_data_sherpa_err = sqrt(pow(tc04_5_data_bin_err,2.)+pow(tc04_5_sherpa_nom_bin_err,2.));
+      double tc04_5_rel_data_sherpa_err = tc04_5_abs_data_sherpa_err/(tc04_5_data_bin_n-tc04_5_sherpa_nom_bin_n);
+      double tc04_5_rel_sherpa_err = tc04_5_sherpa_nom_bin_err/tc04_5_sherpa_nom_bin_n;
+      
+      double tc04_5_rel_ratio_data_sherpa_lead_jet_pt_err = sqrt(pow(tc04_5_rel_data_sherpa_err,2.)+pow(tc04_5_rel_sherpa_err,2.));
+
+      double tc04_5_data_sherpa_ratio = (tc04_5_data_bin_n-tc04_5_sherpa_nom_bin_n)/tc04_5_sherpa_nom_bin_n;
+
+      double tc04_5_data_sherpa_ratio_err = fabs(tc04_5_rel_ratio_data_sherpa_lead_jet_pt_err*tc04_5_data_sherpa_ratio);
+
+      h_ewk_ratio_data_sherpa_lead_jet_pt->SetBinContent(b,tc04_5_data_sherpa_ratio);
+      h_ewk_ratio_data_sherpa_lead_jet_pt->SetBinError(b,tc04_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_ewk_ratio_data_alpgen_lead_jet_pt->Draw("PE");
+  h_ewk_ratio_data_sherpa_lead_jet_pt->Draw("PE sames");
+  
+  tc04_5->Update();
+
+  tc04_5->SaveAs("./plots/latest/ewk_data_muon_lead_jet_pt.png");
+    
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc05
+  // jet_n: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc05_title = "Jet N (elec) all";
+  string tc05_name = "tc05";
+  TCanvas* tc05 = new TCanvas(tc05_name.c_str(),tc05_title.c_str(),0,0,1920,1200);
+  tc05->cd();
+
+  TPad* tc05_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc05_pad01->SetTopMargin(0.05);
+  tc05_pad01->SetBottomMargin(0.31);
+  tc05_pad01->Draw();
+
+  TPad* tc05_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc05_pad02->SetBottomMargin(0.0005);
+  tc05_pad02->SetLogy();
+  tc05_pad02->Draw();
+  tc05_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_elec_jet_n = (TH1F*) wjets_alpgen_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_sherpa_nom_elec_jet_n = (TH1F*) wjets_sherpa_file->Get("all/h_elec_purw_nom_jet_n");
+  
+  h_all_alpgen_nom_elec_jet_n->SetMarkerStyle(20);
+  h_all_alpgen_nom_elec_jet_n->SetMarkerSize(1.2);
+  h_all_alpgen_nom_elec_jet_n->SetTitle("");
+  h_all_alpgen_nom_elec_jet_n->Draw("PE");
+
+  h_all_sherpa_nom_elec_jet_n->SetMarkerStyle(20);
+  h_all_sherpa_nom_elec_jet_n->SetMarkerSize(1.2);
+  h_all_sherpa_nom_elec_jet_n->SetMarkerColor(kRed);
+  h_all_sherpa_nom_elec_jet_n->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc05 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc05->SetFillColor(0);
+  lgnd_tc05->SetTextSize(0.03);
+  lgnd_tc05->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_elec_jet_n_name[20];
+  sprintf(lgnd_alpgen_nom_elec_jet_n_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_elec_jet_n->Integral());
+  lgnd_tc05->AddEntry(h_all_alpgen_nom_elec_jet_n,lgnd_alpgen_nom_elec_jet_n_name,"p");
+
+  char lgnd_sherpa_nom_elec_jet_n_name[20];
+  sprintf(lgnd_sherpa_nom_elec_jet_n_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_elec_jet_n->Integral());
+  lgnd_tc05->AddEntry(h_all_sherpa_nom_elec_jet_n,lgnd_sherpa_nom_elec_jet_n_name,"p");
+
+  lgnd_tc05->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc05_pad01->cd();
+  tc05_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc05_ratio_alpgen_sherpa_jet_n_name = "tc05_ratio_alpgen_sherpa_jet_n";
+  TH1F* h_all_ratio_alpgen_sherpa_jet_n = new TH1F(tc05_ratio_alpgen_sherpa_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_alpgen_sherpa_jet_n->SetMarkerStyle(8);
+  h_all_ratio_alpgen_sherpa_jet_n->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_alpgen_sherpa_jet_n_xaxis = h_all_ratio_alpgen_sherpa_jet_n->GetXaxis();
+  TAxis* h_all_ratio_alpgen_sherpa_jet_n_yaxis = h_all_ratio_alpgen_sherpa_jet_n->GetYaxis();
+  
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetLabelSize(0.08);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetTitle("lead_jet_n");
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc05_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc05_alpgen_nom_bin_n=h_all_alpgen_nom_elec_jet_n->GetBinContent(b);
+    double tc05_alpgen_nom_bin_err=h_all_alpgen_nom_elec_jet_n->GetBinError(b);    
+
+    double tc05_sherpa_nom_bin_n=h_all_sherpa_nom_elec_jet_n->GetBinContent(b);
+    double tc05_sherpa_nom_bin_err=h_all_sherpa_nom_elec_jet_n->GetBinError(b);    
+
+
+    if(tc05_alpgen_nom_bin_n && tc05_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc05_abs_alpgen_sherpa_err = sqrt(pow(tc05_alpgen_nom_bin_err,2.)+pow(tc05_sherpa_nom_bin_err,2.));
+      double tc05_rel_alpgen_sherpa_err = tc05_abs_alpgen_sherpa_err/(tc05_alpgen_nom_bin_n-tc05_sherpa_nom_bin_n);
+      double tc05_rel_sherpa_err = tc05_sherpa_nom_bin_err/tc05_sherpa_nom_bin_n;
+      
+      double tc05_rel_ratio_alpgen_sherpa_jet_n_err = sqrt(pow(tc05_rel_alpgen_sherpa_err,2.)+pow(tc05_rel_sherpa_err,2.));
+
+      double tc05_alpgen_sherpa_ratio = (tc05_alpgen_nom_bin_n-tc05_sherpa_nom_bin_n)/tc05_sherpa_nom_bin_n;
+
+      double tc05_alpgen_sherpa_ratio_err = fabs(tc05_rel_ratio_alpgen_sherpa_jet_n_err*tc05_alpgen_sherpa_ratio);
+
+      h_all_ratio_alpgen_sherpa_jet_n->SetBinContent(b,tc05_alpgen_sherpa_ratio);
+      h_all_ratio_alpgen_sherpa_jet_n->SetBinError(b,tc05_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_all_ratio_alpgen_sherpa_jet_n->Draw("PE");
+  
+  tc05->Update();
+
+  tc05->SaveAs("./plots/latest/all_elec_jet_n.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc05_5
+  // jet_n: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc05_5_title = "Jet N (elec) w/ Data all";
+  string tc05_5_name = "tc05_5";
+  TCanvas* tc05_5 = new TCanvas(tc05_5_name.c_str(),tc05_5_title.c_str(),0,0,1920,1200);
+  tc05_5->cd();
+
+  TPad* tc05_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc05_5_pad01->SetTopMargin(0.05);
+  tc05_5_pad01->SetBottomMargin(0.31);
+  tc05_5_pad01->Draw();
+
+  TPad* tc05_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc05_5_pad02->SetBottomMargin(0.0005);
+  tc05_5_pad02->SetLogy();
+  tc05_5_pad02->Draw();
+  tc05_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_elec_jet_n = (TH1F*) wjets_alpgen_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_sherpa_nom_elec_jet_n = (TH1F*) wjets_sherpa_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_data_elec_jet_n = (TH1F*) data_file->Get("all/h_elec_purw_nom_jet_n");
+
+  TH1F* h_all_top_elec_jet_n = (TH1F*) top_mcatnlo_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_zjets_elec_jet_n = (TH1F*) zjets_alpgen_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_vv_elec_jet_n = (TH1F*) vv_herwig_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_qcd_alpgen_elec_jet_n = (TH1F*) qcd_alpgen_file->Get("all/h_elec_purw_nom_jet_n");
+  TH1F* h_all_qcd_sherpa_elec_jet_n = (TH1F*) qcd_sherpa_file->Get("all/h_elec_purw_nom_jet_n");
+  
+
+  //Add Backgrounds
+  h_all_alpgen_nom_elec_jet_n->Add(h_all_top_elec_jet_n);
+  h_all_alpgen_nom_elec_jet_n->Add(h_all_zjets_elec_jet_n);
+  h_all_alpgen_nom_elec_jet_n->Add(h_all_vv_elec_jet_n);
+  h_all_alpgen_nom_elec_jet_n->Add(h_all_qcd_alpgen_elec_jet_n);
+  
+  h_all_alpgen_nom_elec_jet_n->SetMarkerStyle(20);
+  h_all_alpgen_nom_elec_jet_n->SetMarkerSize(1.2);
+  h_all_alpgen_nom_elec_jet_n->SetTitle("");
+  h_all_alpgen_nom_elec_jet_n->Draw("PE");
+
+
+  //Add Backgrounds
+  h_all_sherpa_nom_elec_jet_n->Add(h_all_top_elec_jet_n);
+  h_all_sherpa_nom_elec_jet_n->Add(h_all_zjets_elec_jet_n);
+  h_all_sherpa_nom_elec_jet_n->Add(h_all_vv_elec_jet_n);
+  h_all_sherpa_nom_elec_jet_n->Add(h_all_qcd_sherpa_elec_jet_n);
+
+  h_all_sherpa_nom_elec_jet_n->SetMarkerStyle(20);
+  h_all_sherpa_nom_elec_jet_n->SetMarkerSize(1.2);
+  h_all_sherpa_nom_elec_jet_n->SetMarkerColor(kRed);
+  h_all_sherpa_nom_elec_jet_n->Draw("PE sames");
+
+  h_all_data_elec_jet_n->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc05_5 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc05_5->SetFillColor(0);
+  lgnd_tc05_5->SetTextSize(0.03);
+  lgnd_tc05_5->SetBorderSize(0);
+
+  char lgnd_data_elec_jet_n_name[20];
+  sprintf(lgnd_data_elec_jet_n_name,"%s,  %.2f","DATA",h_all_data_elec_jet_n->Integral());
+  lgnd_tc05_5->AddEntry(h_all_data_elec_jet_n,lgnd_data_elec_jet_n_name,"f");
+
+  char lgnd_alpgen_nom_elec_jet_n_name[20];
+  sprintf(lgnd_alpgen_nom_elec_jet_n_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_elec_jet_n->Integral());
+  lgnd_tc05_5->AddEntry(h_all_alpgen_nom_elec_jet_n,lgnd_alpgen_nom_elec_jet_n_name,"p");
+
+  char lgnd_sherpa_nom_elec_jet_n_name[20];
+  sprintf(lgnd_sherpa_nom_elec_jet_n_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_elec_jet_n->Integral());
+  lgnd_tc05_5->AddEntry(h_all_sherpa_nom_elec_jet_n,lgnd_sherpa_nom_elec_jet_n_name,"p");
+
+  lgnd_tc05_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc05_5_pad01->cd();
+  tc05_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_elec_jet_n->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc05_5_ratio_data_alpgen_jet_n_name = "tc05_5_ratio_data_alpgen_jet_n";
+  TH1F* h_all_ratio_data_alpgen_jet_n = new TH1F(tc05_5_ratio_data_alpgen_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_alpgen_jet_n->SetMarkerStyle(8);
+  //h_all_ratio_data_alpgen_jet_n->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_data_alpgen_jet_n_xaxis = h_all_ratio_data_alpgen_jet_n->GetXaxis();
+  TAxis* h_all_ratio_data_alpgen_jet_n_yaxis = h_all_ratio_data_alpgen_jet_n->GetYaxis();
+  
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetLabelSize(0.08);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetTitle("lead_jet_n");
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitle("(data-MC)/MC");
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc05_5_ratio_data_sherpa_jet_n_name = "tc05_5_ratio_data_sherpa_jet_n";
+  TH1F* h_all_ratio_data_sherpa_jet_n = new TH1F(tc05_5_ratio_data_sherpa_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_sherpa_jet_n->SetMarkerStyle(8);
+  h_all_ratio_data_sherpa_jet_n->SetMarkerColor(kRed);
+
+  
+  double tc05_5_data_alpgen_ratio=0.;
+  double tc05_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc05_5_alpgen_nom_bin_n=h_all_alpgen_nom_elec_jet_n->GetBinContent(b);
+    double tc05_5_alpgen_nom_bin_err=h_all_alpgen_nom_elec_jet_n->GetBinError(b);    
+
+    double tc05_5_data_bin_n=h_all_data_elec_jet_n->GetBinContent(b);
+    double tc05_5_data_bin_err=h_all_data_elec_jet_n->GetBinError(b);    
+
+    double tc05_5_sherpa_nom_bin_n=h_all_sherpa_nom_elec_jet_n->GetBinContent(b);
+    double tc05_5_sherpa_nom_bin_err=h_all_sherpa_nom_elec_jet_n->GetBinError(b);    
+
+    if(tc05_5_data_bin_n && tc05_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc05_5_abs_data_alpgen_err = sqrt(pow(tc05_5_data_bin_err,2.)+pow(tc05_5_alpgen_nom_bin_err,2.));
+      double tc05_5_rel_data_alpgen_err = tc05_5_abs_data_alpgen_err/(tc05_5_data_bin_n-tc05_5_alpgen_nom_bin_n);
+      double tc05_5_rel_alpgen_err = tc05_5_alpgen_nom_bin_err/tc05_5_alpgen_nom_bin_n;
+      
+      double tc05_5_rel_ratio_data_alpgen_jet_n_err = sqrt(pow(tc05_5_rel_data_alpgen_err,2.)+pow(tc05_5_rel_alpgen_err,2.));
+
+      double tc05_5_data_alpgen_ratio = (tc05_5_data_bin_n-tc05_5_alpgen_nom_bin_n)/tc05_5_alpgen_nom_bin_n;
+
+      double tc05_5_data_alpgen_ratio_err = fabs(tc05_5_rel_ratio_data_alpgen_jet_n_err*tc05_5_data_alpgen_ratio);
+
+      h_all_ratio_data_alpgen_jet_n->SetBinContent(b,tc05_5_data_alpgen_ratio);
+      h_all_ratio_data_alpgen_jet_n->SetBinError(b,tc05_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc05_5_data_bin_n && tc05_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc05_5_abs_data_sherpa_err = sqrt(pow(tc05_5_data_bin_err,2.)+pow(tc05_5_sherpa_nom_bin_err,2.));
+      double tc05_5_rel_data_sherpa_err = tc05_5_abs_data_sherpa_err/(tc05_5_data_bin_n-tc05_5_sherpa_nom_bin_n);
+      double tc05_5_rel_sherpa_err = tc05_5_sherpa_nom_bin_err/tc05_5_sherpa_nom_bin_n;
+      
+      double tc05_5_rel_ratio_data_sherpa_jet_n_err = sqrt(pow(tc05_5_rel_data_sherpa_err,2.)+pow(tc05_5_rel_sherpa_err,2.));
+
+      double tc05_5_data_sherpa_ratio = (tc05_5_data_bin_n-tc05_5_sherpa_nom_bin_n)/tc05_5_sherpa_nom_bin_n;
+
+      double tc05_5_data_sherpa_ratio_err = fabs(tc05_5_rel_ratio_data_sherpa_jet_n_err*tc05_5_data_sherpa_ratio);
+
+      h_all_ratio_data_sherpa_jet_n->SetBinContent(b,tc05_5_data_sherpa_ratio);
+      h_all_ratio_data_sherpa_jet_n->SetBinError(b,tc05_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_all_ratio_data_alpgen_jet_n->Draw("PE");
+  h_all_ratio_data_sherpa_jet_n->Draw("PE sames");
+  
+  tc05_5->Update();
+
+  tc05_5->SaveAs("./plots/latest/all_data_elec_jet_n.png");
+    
+  // //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc06
+  // jet_n: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc06_title = "Jet N (muon) all";
+  string tc06_name = "tc06";
+  TCanvas* tc06 = new TCanvas(tc06_name.c_str(),tc06_title.c_str(),0,0,1920,1200);
+  tc06->cd();
+
+  TPad* tc06_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc06_pad01->SetTopMargin(0.05);
+  tc06_pad01->SetBottomMargin(0.31);
+  tc06_pad01->Draw();
+
+  TPad* tc06_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc06_pad02->SetBottomMargin(0.0005);
+  tc06_pad02->SetLogy();
+  tc06_pad02->Draw();
+  tc06_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_muon_jet_n = (TH1F*) wjets_alpgen_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_sherpa_nom_muon_jet_n = (TH1F*) wjets_sherpa_file->Get("all/h_muon_purw_nom_jet_n");
+  
+  h_all_alpgen_nom_muon_jet_n->SetMarkerStyle(20);
+  h_all_alpgen_nom_muon_jet_n->SetMarkerSize(1.2);
+  h_all_alpgen_nom_muon_jet_n->SetTitle("");
+  h_all_alpgen_nom_muon_jet_n->Draw("PE");
+
+  h_all_sherpa_nom_muon_jet_n->SetMarkerStyle(20);
+  h_all_sherpa_nom_muon_jet_n->SetMarkerSize(1.2);
+  h_all_sherpa_nom_muon_jet_n->SetMarkerColor(kRed);
+  h_all_sherpa_nom_muon_jet_n->Draw("PE sames");
+
+
+  //Legend
+  TLegend* lgnd_tc06 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc06->SetFillColor(0);
+  lgnd_tc06->SetTextSize(0.03);
+  lgnd_tc06->SetBorderSize(0);
+
+
+  char lgnd_alpgen_nom_muon_jet_n_name[20];
+  sprintf(lgnd_alpgen_nom_muon_jet_n_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_muon_jet_n->Integral());
+  lgnd_tc06->AddEntry(h_all_alpgen_nom_muon_jet_n,lgnd_alpgen_nom_muon_jet_n_name,"p");
+
+  char lgnd_sherpa_nom_muon_jet_n_name[20];
+  sprintf(lgnd_sherpa_nom_muon_jet_n_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_muon_jet_n->Integral());
+  lgnd_tc06->AddEntry(h_all_sherpa_nom_muon_jet_n,lgnd_sherpa_nom_muon_jet_n_name,"p");
+
+  lgnd_tc06->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc06_pad01->cd();
+  tc06_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetXmax();
+
+  // alp-sherp/sherp
+  string tc06_ratio_alpgen_sherpa_jet_n_name = "tc06_ratio_alpgen_sherpa_jet_n";
+  TH1F* h_all_ratio_alpgen_sherpa_jet_n = new TH1F(tc06_ratio_alpgen_sherpa_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_alpgen_sherpa_jet_n->SetMarkerStyle(8);
+  h_all_ratio_alpgen_sherpa_jet_n->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_alpgen_sherpa_jet_n_xaxis = h_all_ratio_alpgen_sherpa_jet_n->GetXaxis();
+  TAxis* h_all_ratio_alpgen_sherpa_jet_n_yaxis = h_all_ratio_alpgen_sherpa_jet_n->GetYaxis();
+  
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetLabelSize(0.08);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetTitle("lead_jet_n");
+  h_all_ratio_alpgen_sherpa_jet_n_xaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitle("(alpgen-MC)/MC");
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitleSize(0.07);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_alpgen_sherpa_jet_n_yaxis->SetRangeUser(-1,1);
+
+  
+  double tc06_alpgen_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc06_alpgen_nom_bin_n=h_all_alpgen_nom_muon_jet_n->GetBinContent(b);
+    double tc06_alpgen_nom_bin_err=h_all_alpgen_nom_muon_jet_n->GetBinError(b);    
+
+    double tc06_sherpa_nom_bin_n=h_all_sherpa_nom_muon_jet_n->GetBinContent(b);
+    double tc06_sherpa_nom_bin_err=h_all_sherpa_nom_muon_jet_n->GetBinError(b);    
+
+
+    if(tc06_alpgen_nom_bin_n && tc06_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc06_abs_alpgen_sherpa_err = sqrt(pow(tc06_alpgen_nom_bin_err,2.)+pow(tc06_sherpa_nom_bin_err,2.));
+      double tc06_rel_alpgen_sherpa_err = tc06_abs_alpgen_sherpa_err/(tc06_alpgen_nom_bin_n-tc06_sherpa_nom_bin_n);
+      double tc06_rel_sherpa_err = tc06_sherpa_nom_bin_err/tc06_sherpa_nom_bin_n;
+      
+      double tc06_rel_ratio_alpgen_sherpa_jet_n_err = sqrt(pow(tc06_rel_alpgen_sherpa_err,2.)+pow(tc06_rel_sherpa_err,2.));
+
+      double tc06_alpgen_sherpa_ratio = (tc06_alpgen_nom_bin_n-tc06_sherpa_nom_bin_n)/tc06_sherpa_nom_bin_n;
+
+      double tc06_alpgen_sherpa_ratio_err = fabs(tc06_rel_ratio_alpgen_sherpa_jet_n_err*tc06_alpgen_sherpa_ratio);
+
+      h_all_ratio_alpgen_sherpa_jet_n->SetBinContent(b,tc06_alpgen_sherpa_ratio);
+      h_all_ratio_alpgen_sherpa_jet_n->SetBinError(b,tc06_alpgen_sherpa_ratio_err);
+    }
+    
+
+  }
+
+
+  h_all_ratio_alpgen_sherpa_jet_n->Draw("PE");
+  
+  tc06->Update();
+
+  tc06->SaveAs("./plots/latest/all_muon_jet_n.png");
+    
+  //NEXT
+  
+  //////////////////////////////////////////////////
+  // tc06_5
+  // jet_n: sherpa/alpgen+wjrw
+  //////////////////////////////////////////////////
+  
+  string tc06_5_title = "Jet N (muon) w/ Data all";
+  string tc06_5_name = "tc06_5";
+  TCanvas* tc06_5 = new TCanvas(tc06_5_name.c_str(),tc06_5_title.c_str(),0,0,1920,1200);
+  tc06_5->cd();
+
+  TPad* tc06_5_pad01 = new TPad("ratio_pad","ratio_pad",0.01,0.01,0.99,0.35);
+  tc06_5_pad01->SetTopMargin(0.05);
+  tc06_5_pad01->SetBottomMargin(0.31);
+  tc06_5_pad01->Draw();
+
+  TPad* tc06_5_pad02 = new TPad("plot_pad","plot_pad",0.01,0.35,0.99,0.99);
+  tc06_5_pad02->SetBottomMargin(0.0005);
+  tc06_5_pad02->SetLogy();
+  tc06_5_pad02->Draw();
+  tc06_5_pad02->cd();
+
+  // Plots
+  
+  TH1F* h_all_alpgen_nom_muon_jet_n = (TH1F*) wjets_alpgen_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_sherpa_nom_muon_jet_n = (TH1F*) wjets_sherpa_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_data_muon_jet_n = (TH1F*) data_file->Get("all/h_muon_purw_nom_jet_n");
+
+  TH1F* h_all_top_muon_jet_n = (TH1F*) top_mcatnlo_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_zjets_muon_jet_n = (TH1F*) zjets_alpgen_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_vv_muon_jet_n = (TH1F*) vv_herwig_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_qcd_alpgen_muon_jet_n = (TH1F*) qcd_alpgen_file->Get("all/h_muon_purw_nom_jet_n");
+  TH1F* h_all_qcd_sherpa_muon_jet_n = (TH1F*) qcd_sherpa_file->Get("all/h_muon_purw_nom_jet_n");
+  
+
+  //Add Backgrounds
+  h_all_alpgen_nom_muon_jet_n->Add(h_all_top_muon_jet_n);
+  h_all_alpgen_nom_muon_jet_n->Add(h_all_zjets_muon_jet_n);
+  h_all_alpgen_nom_muon_jet_n->Add(h_all_vv_muon_jet_n);
+  h_all_alpgen_nom_muon_jet_n->Add(h_all_qcd_alpgen_muon_jet_n);
+  
+  h_all_alpgen_nom_muon_jet_n->SetMarkerStyle(20);
+  h_all_alpgen_nom_muon_jet_n->SetMarkerSize(1.2);
+  h_all_alpgen_nom_muon_jet_n->SetTitle("");
+  h_all_alpgen_nom_muon_jet_n->Draw("PE");
+
+
+  //Add Backgrounds
+  h_all_sherpa_nom_muon_jet_n->Add(h_all_top_muon_jet_n);
+  h_all_sherpa_nom_muon_jet_n->Add(h_all_zjets_muon_jet_n);
+  h_all_sherpa_nom_muon_jet_n->Add(h_all_vv_muon_jet_n);
+  h_all_sherpa_nom_muon_jet_n->Add(h_all_qcd_sherpa_muon_jet_n);
+
+  h_all_sherpa_nom_muon_jet_n->SetMarkerStyle(20);
+  h_all_sherpa_nom_muon_jet_n->SetMarkerSize(1.2);
+  h_all_sherpa_nom_muon_jet_n->SetMarkerColor(kRed);
+  h_all_sherpa_nom_muon_jet_n->Draw("PE sames");
+
+  h_all_data_muon_jet_n->Draw("sames");
+
+
+  //Legend
+  TLegend* lgnd_tc06_5 = new TLegend(0.15,0.15,0.28,0.35);
+  lgnd_tc06_5->SetFillColor(0);
+  lgnd_tc06_5->SetTextSize(0.03);
+  lgnd_tc06_5->SetBorderSize(0);
+
+  char lgnd_data_muon_jet_n_name[20];
+  sprintf(lgnd_data_muon_jet_n_name,"%s,  %.2f","DATA",h_all_data_muon_jet_n->Integral());
+  lgnd_tc06_5->AddEntry(h_all_data_muon_jet_n,lgnd_data_muon_jet_n_name,"f");
+
+  char lgnd_alpgen_nom_muon_jet_n_name[20];
+  sprintf(lgnd_alpgen_nom_muon_jet_n_name,"%s,  %.2f","ALPGEN (nom)",h_all_alpgen_nom_muon_jet_n->Integral());
+  lgnd_tc06_5->AddEntry(h_all_alpgen_nom_muon_jet_n,lgnd_alpgen_nom_muon_jet_n_name,"p");
+
+  char lgnd_sherpa_nom_muon_jet_n_name[20];
+  sprintf(lgnd_sherpa_nom_muon_jet_n_name,"%s,  %.2f","SHERPA (nom)",h_all_sherpa_nom_muon_jet_n->Integral());
+  lgnd_tc06_5->AddEntry(h_all_sherpa_nom_muon_jet_n,lgnd_sherpa_nom_muon_jet_n_name,"p");
+
+  lgnd_tc06_5->Draw();
+  
+  //////////////////////////////////////////////////
+  //Ratio
+  ////////////////////////////////////////////////// 
+
+  tc06_5_pad01->cd();
+  tc06_5_pad01->SetGrid();
+
+  int n_bins = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetNbins();
+  double x_min = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetXmin();
+  double x_max = ((TAxis*) h_all_alpgen_nom_muon_jet_n->GetXaxis())->GetXmax();
+
+  // data-alpgen(nom)/alpgen(nom)
+  string tc06_5_ratio_data_alpgen_jet_n_name = "tc06_5_ratio_data_alpgen_jet_n";
+  TH1F* h_all_ratio_data_alpgen_jet_n = new TH1F(tc06_5_ratio_data_alpgen_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_alpgen_jet_n->SetMarkerStyle(8);
+  //h_all_ratio_data_alpgen_jet_n->SetMarkerColor(kRed);
+
+  TAxis* h_all_ratio_data_alpgen_jet_n_xaxis = h_all_ratio_data_alpgen_jet_n->GetXaxis();
+  TAxis* h_all_ratio_data_alpgen_jet_n_yaxis = h_all_ratio_data_alpgen_jet_n->GetYaxis();
+  
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetLabelSize(0.08);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetLabelSize(0.08);
+
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetTitle("lead_jet_n");
+  h_all_ratio_data_alpgen_jet_n_xaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetNdivisions(4,4,4);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitle("(data-MC)/MC");
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitleSize(0.07);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetTitleOffset(0.36);
+  h_all_ratio_data_alpgen_jet_n_yaxis->SetRangeUser(-1,1);
+
+  // data-sherpa(nom)/sherpa(nom)
+  string tc06_5_ratio_data_sherpa_jet_n_name = "tc06_5_ratio_data_sherpa_jet_n";
+  TH1F* h_all_ratio_data_sherpa_jet_n = new TH1F(tc06_5_ratio_data_sherpa_jet_n_name.c_str(),"",n_bins,x_min,x_max);
+  h_all_ratio_data_sherpa_jet_n->SetMarkerStyle(8);
+  h_all_ratio_data_sherpa_jet_n->SetMarkerColor(kRed);
+
+  
+  double tc06_5_data_alpgen_ratio=0.;
+  double tc06_5_data_sherpa_ratio=0.;
+  
+  for(int b=1;b<n_bins+1;b++){
+
+    double tc06_5_alpgen_nom_bin_n=h_all_alpgen_nom_muon_jet_n->GetBinContent(b);
+    double tc06_5_alpgen_nom_bin_err=h_all_alpgen_nom_muon_jet_n->GetBinError(b);    
+
+    double tc06_5_data_bin_n=h_all_data_muon_jet_n->GetBinContent(b);
+    double tc06_5_data_bin_err=h_all_data_muon_jet_n->GetBinError(b);    
+
+    double tc06_5_sherpa_nom_bin_n=h_all_sherpa_nom_muon_jet_n->GetBinContent(b);
+    double tc06_5_sherpa_nom_bin_err=h_all_sherpa_nom_muon_jet_n->GetBinError(b);    
+
+    if(tc06_5_data_bin_n && tc06_5_alpgen_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc06_5_abs_data_alpgen_err = sqrt(pow(tc06_5_data_bin_err,2.)+pow(tc06_5_alpgen_nom_bin_err,2.));
+      double tc06_5_rel_data_alpgen_err = tc06_5_abs_data_alpgen_err/(tc06_5_data_bin_n-tc06_5_alpgen_nom_bin_n);
+      double tc06_5_rel_alpgen_err = tc06_5_alpgen_nom_bin_err/tc06_5_alpgen_nom_bin_n;
+      
+      double tc06_5_rel_ratio_data_alpgen_jet_n_err = sqrt(pow(tc06_5_rel_data_alpgen_err,2.)+pow(tc06_5_rel_alpgen_err,2.));
+
+      double tc06_5_data_alpgen_ratio = (tc06_5_data_bin_n-tc06_5_alpgen_nom_bin_n)/tc06_5_alpgen_nom_bin_n;
+
+      double tc06_5_data_alpgen_ratio_err = fabs(tc06_5_rel_ratio_data_alpgen_jet_n_err*tc06_5_data_alpgen_ratio);
+
+      h_all_ratio_data_alpgen_jet_n->SetBinContent(b,tc06_5_data_alpgen_ratio);
+      h_all_ratio_data_alpgen_jet_n->SetBinError(b,tc06_5_data_alpgen_ratio_err);
+    }
+    
+    if(tc06_5_data_bin_n && tc06_5_sherpa_nom_bin_n) {
+
+      // //Error calc (see histogrampainter for clarification)
+      double tc06_5_abs_data_sherpa_err = sqrt(pow(tc06_5_data_bin_err,2.)+pow(tc06_5_sherpa_nom_bin_err,2.));
+      double tc06_5_rel_data_sherpa_err = tc06_5_abs_data_sherpa_err/(tc06_5_data_bin_n-tc06_5_sherpa_nom_bin_n);
+      double tc06_5_rel_sherpa_err = tc06_5_sherpa_nom_bin_err/tc06_5_sherpa_nom_bin_n;
+      
+      double tc06_5_rel_ratio_data_sherpa_jet_n_err = sqrt(pow(tc06_5_rel_data_sherpa_err,2.)+pow(tc06_5_rel_sherpa_err,2.));
+
+      double tc06_5_data_sherpa_ratio = (tc06_5_data_bin_n-tc06_5_sherpa_nom_bin_n)/tc06_5_sherpa_nom_bin_n;
+
+      double tc06_5_data_sherpa_ratio_err = fabs(tc06_5_rel_ratio_data_sherpa_jet_n_err*tc06_5_data_sherpa_ratio);
+
+      h_all_ratio_data_sherpa_jet_n->SetBinContent(b,tc06_5_data_sherpa_ratio);
+      h_all_ratio_data_sherpa_jet_n->SetBinError(b,tc06_5_data_sherpa_ratio_err);
+    }
+    
+  }
+
+
+
+  h_all_ratio_data_alpgen_jet_n->Draw("PE");
+  h_all_ratio_data_sherpa_jet_n->Draw("PE sames");
+  
+  tc06_5->Update();
+
+  tc06_5->SaveAs("./plots/latest/all_data_muon_jet_n.png");
+    
+
+
+  // wjets_alpgen_file->Close();
+  // wjets_sherpa_file->Close();
+  // top_mcatnlo_file->Close();
+  // zjets_alpgen_file->Close();
+  // vv_herwig_file->Close();
+  // qcd_alpgen_file->Close();
+  // qcd_sherpa_file->Close();
+  // data_file->Close();
+  return;
+}

@@ -1,0 +1,42 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[margin=1cm]{geometry}
+\usepackage[font=small,labelfont=bf,tableposition=top]{caption}
+\usepackage{dcolumn}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{datatool}
+\usepackage{booktabs}
+
+
+
+\DTLloaddb[,keys={systematic,ww,wz,zz,ttbar,singletop,wjets,zjets},headers={Systematic,WW,WZ,ZZ,TTbar,SingleTop,Wjets,Zjets}]{index}{index.csv}
+
+\newcolumntype{d}{D{|}{\,,\,}{6,6}}
+
+\begin{document}
+
+
+\begin{table}[h]
+  \caption{\large{Percent $\Delta$ acceptance. Shown as (electron channel, muon channel)}}\small
+  \begin{tabular}{l d d d d d}
+    \toprule
+    {\bf Systematic} &\multicolumn{1}{c}{\bf Wjets} &\multicolumn{1}{c}{\bf Zjets}&\multicolumn{1}{c}{\bf TTBar}%
+    &\multicolumn{1}{c}{\bf WW}&\multicolumn{1}{c}{\bf WZ}%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{index}{%
+      \systematic=systematic,\wjets=wjets,\zjets=zjets,\ttbar=ttbar,\ww=ww,\wz=wz}{%
+      \tabularnewline
+      \systematic & (\wjets) & (\zjets) & (\ttbar) & (\ww) & (\wz) }%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\end{document}
+
+

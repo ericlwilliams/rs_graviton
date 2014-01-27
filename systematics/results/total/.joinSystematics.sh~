@@ -1,0 +1,3 @@
+#!/bin/zsh -
+
+./joinPDF.py -o systematics.pdf ../jes/jes.pdf ../jer/jer.pdf

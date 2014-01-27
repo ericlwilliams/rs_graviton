@@ -1,0 +1,5 @@
+makeSystematicsTable.sh -- INCOMPLETE 2012-01-30
+
+- runs buildSystematicsIndex.py
+  - creates index.csv by re-arranging all the individual systematic files in systematics/logs
+- compiles lvjj_systematics.tex which reads index.csv

@@ -1,0 +1,108 @@
+#define verificationPlots_cxx
+#include "verificationPlots.h"
+#include <TH2.h>
+#include <TProfile.h>
+#include <TStyle.h>
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <map>
+#include "../../include/wwVarInfo.h"
+//#include "defs.h"
+
+TProfile* prof_evtperlumi_rnum;// fill(rnum,1/lumi)
+TProfile* prof_rlumi_rnum;// fill(rnum,1/lumi)
+TH1* h_run_lumi;
+
+
+map<int,float> m_rnum_evtperlumi;
+map<int,float> m_rnum_evts;
+
+
+TFile* verificationFile;
+int evt_n;
+bool is_data;
+void verificationPlots::Begin(TTree * /*tree*/)
+{
+   TString option = GetOption();
+   cout<<"verificationPlots::Begin: "<<option<<endl;
+
+  string test_option = (string) option;
+  is_data = (test_option.find("data11")!=string::npos);
+
+  string curFile = (string) option;
+  string curPlotFile= curFile+".verification.plot.root";
+
+  curPlotFile="../plots/"+curPlotFile;
+
+  verificationFile = (TFile*) TFile::Open(curPlotFile.c_str(),"RECREATE");
+
+  //////////////////////////////////////////////////
+  // Initialize Histograms
+  //////////////////////////////////////////////////
+
+  prof_evtperlumi_rnum = new TProfile("prof_evtperlumi_rnum","Evt/Lumi vs Run Number",1400,176e3,190e3,0,5000);
+  prof_rlumi_rnum = new TProfile("prof_rlumi_rnum","Lumi vs Run Number",1400,176e3,190e3,0,100);
+
+
+  h_run_lumi = new TH1F("h_run_lumi","Luminosity per Run",100,0,100);
+  
+  verificationFile->cd();
+  evt_n=0;
+}
+
+void verificationPlots::SlaveBegin(TTree * /*tree*/)
+{
+   TString option = GetOption();
+
+}
+
+Bool_t verificationPlots::Process(Long64_t entry)
+{
+
+  //////////////////////////////////////////////////
+  // Load variables
+  ////////////////////////////////////////////////// 
+
+  b_RunNum->GetEntry(entry);
+  b_RunLumi->GetEntry(entry);
+
+  h_run_lumi->Fill(RunLumi);
+  prof_rlumi_rnum->Fill(RunNum,RunLumi);
+  m_rnum_evtperlumi[RunNum]+=(1/RunLumi);
+  m_rnum_evts[RunNum]++;
+
+
+  
+  ++evt_n;
+
+  return kTRUE;
+}
+
+void verificationPlots::SlaveTerminate()
+{
+
+}
+
+void verificationPlots::Terminate()
+{
+
+  map<int,float>::iterator m_end = m_rnum_evtperlumi.end();
+  for(map<int,float>::iterator m_it=m_rnum_evtperlumi.begin(); m_it != m_end; ++m_it) {
+    prof_evtperlumi_rnum->Fill(m_it->first,m_it->second,m_rnum_evts[m_it->first]);
+  }
+
+
+  cout<<"Total ";
+  if(is_data){
+    cout<<"Data ";
+  }else{
+    cout<<"MC ";
+  }
+  cout<<"Events processed: "<<evt_n<<endl;  
+  
+  verificationFile->Write("",TObject::kOverwrite);
+  verificationFile->Close();
+
+}

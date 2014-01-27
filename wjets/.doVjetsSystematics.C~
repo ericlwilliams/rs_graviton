@@ -1,0 +1,14 @@
+#include "../include/systematics_bkgd_list.h"
+
+void doVjetsSystematics(string cur_file){
+
+  
+  
+  string cur_file_loc = "../plots/systematics_plots/merged/"+cur_file+".systematics.plot.root";
+
+  
+
+
+
+  return;
+}

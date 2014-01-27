@@ -1,0 +1,26 @@
+#include "../include/wwFileInfo.h"
+#include "../include/HistogramPainter.h"
+#include <TCanvas.h>
+#include <TPad.h>
+#include <TLegend.h>
+#include <THStack.h>
+#include <TH1F.h>
+//#include <TIter.h>
+#include <TObject.h>
+#include <string>
+
+
+string plot_loc = "../canvases/latest/";
+string save_ext = ".pdf";
+
+int alpgen_color = 6;
+int sherpa_color = 7;
+int data_marker_style =8;
+int data_marker_size = 2;
+float ratio_split=0.35;
+
+//type = "ps" - preselection
+//type = "ctrl_highm" - 
+
+void wjetsPrintNormalizationSystematics(){
+

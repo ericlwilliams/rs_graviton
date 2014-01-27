@@ -1,0 +1,9 @@
+** Derived from ps_systematics.pdf
+
+Sample | evjj (%) | uvjj (%)
+---------------------------
+W+jets | 10.66 | 10.5
+Z+jets | 11.2 | 11.5
+Top | 9.23 | 9.04
+Diboson | 12.2 | 12.48
+

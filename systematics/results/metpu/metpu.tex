@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{datatool}
+
+\DTLloaddb[noheader,headers={samples,enujj,munujj}]{metpu}{../../logs/metpu.csv}
+
+\begin{document}
+
+\begin{table}[htbp]
+  \centering
+  \caption{MET pileup fractional $\Delta$~acceptance in signal region}
+  \DTLdisplaydb{metpu}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=5.0truein]{../../plots/metpu/h_bkgds_metpu_el_highm_lep_nu_dijet_m.pdf}
+  \includegraphics[width=5.0truein]{../../plots/metpu/h_bkgds_metpu_mu_highm_lep_nu_dijet_m.pdf}
+  
+  \caption{Transverse mass of the system for electron (top) and muon (bottom) channels}
+\end{figure}
+
+
+\end{document}

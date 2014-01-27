@@ -1,0 +1,13 @@
+JER
+Sample,Electron Channel Low Mass Signal Region %,Electron Channel High Mass Signal Region %,Muon Channel Low Mass Signal Region %,Muon Channel High Mass Signal Region %
+mcatnlo.top,5.93585,3.4915,4.13832,1.22529,
+alpgen.wjets,7.8836,2.7045,5.8314,1.22318,
+alpgen.zjets,22.4219,0,12.9788,6.31034,
+herwig.vv,6.13501,1.62666,4.63219,2.07065,
+qcd,21.0559,2.85715,21.3178,0,
+gww.lvjj.m200.kmpl0_1,0.274201,nan,15.1653,0,
+gww.lvjj.m350.kmpl0_1,3.3946,0.0793245,1.97562,0,
+gww.lvjj.m500.kmpl0_1,2.71805,3.28015,0.643284,0.294715,
+gww.lvjj.m750.kmpl0_1,6.40433,0.360997,0.859714,0.537008,
+gww.lvjj.m1000.kmpl0_1,8.79373,0.322893,4.04408,0.227171,
+gww.lvjj.m1250.kmpl0_1,3.37201,0.858483,4.47816,1.89794,
