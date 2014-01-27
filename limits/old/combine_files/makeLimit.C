@@ -1,0 +1,226 @@
+//////////////////////////////////////////////////
+// Script to make root files to be read by runLimit
+// e.g. gww_met25_ptlv150_ptjj250_lep_met_dijet_mt:
+//       - signal500, data, background
+//       - signal750, data, background
+//       - signal1000, data, background
+//////////////////////////////////////////////////
+
+#include "../../include/limit_bkgd_list.h"
+#include "../../include/wwFileInfo.h"
+#include "../../include/limits_info.h"
+#include <iostream>
+#include <iomanip>
+
+const int nProcs = 2;
+string procs[nProcs] = {"elec","muon"};
+
+TH1F* h_limit_plots[nLimitCuts][nLimitVars][nProcs];
+
+void makeLimit(bool doData=false){
+
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In makeLimit.C"<<endl;
+  cout<<"doData: "<<doData<<endl;
+
+  string proc_name,hist_name;
+  
+  for(int pr=0;pr<nProcs;pr++){
+
+    hist_name = "h_"+procs[pr];
+    proc_name = (procs[pr]=="elec") ? "evjj_" : "mvjj_";
+    //proc_name=procs[pr];
+    
+    string cut_name;
+    for(int lc=0;lc<nLimitCuts;lc++){
+      
+      cut_name = Form("ptlv%d_ptjj%d_%dmjj%d",ptlv_cut[lc],ptjj_cut[lc],min_mjj_cut,max_mjj_cut);
+
+      string cur_hist_name;
+      for(int lv=0;lv<nLimitVars;lv++){
+	
+	string cur_limit_var = limit_vars[lv];
+	
+	string new_file_name = proc_name+cut_name+"_"+cur_limit_var;
+
+	cur_hist_name = hist_name+"_"+cut_name+"_"+cur_limit_var;
+
+	new_file_name="../limit_files/"+new_file_name+".root";
+
+	cout<<"Opening: "<<new_file_name<<endl;
+	TFile* new_file = TFile::Open(new_file_name.c_str(),"RECREATE");
+	//new_file->cd();
+
+	//TH1F* h_signal500;
+	// TH1F* h_signal750;
+	// TH1F* h_signal1000;
+	// TH1F* h_signal1250;
+
+	
+	// Make new file. cd()
+	// 
+	// Loop over merged files
+	// Retreive histogram
+	// Rename either signal%d, data or background
+	// special case if adding to background
+	//
+	// Write new file
+
+	TH1F* h_background;
+	
+	string file_loc = "../../plots/limit_plots/merged/";
+	for(int s=0;s<limit_nBkgds;s++){
+
+	  string cur_file = file_loc+limit_bkgd_list[s];
+	  cur_file+=".limit.plot.root";
+
+	  //	  cout<<cur_file<<endl;
+	  
+	  TFile* cur_plot_file = TFile::Open(cur_file.c_str());
+
+	  //get cur_hist_name
+	  if(!cur_plot_file){
+	    cout<<"No file "<<cur_file<<endl;
+	    return;
+	  }
+
+	  TH1F* cur_plot_hist = (TH1F*) cur_plot_file->Get(cur_hist_name.c_str());
+
+	  if(!cur_plot_hist){
+	    cout<<"No histogram "<<cur_hist_name<<" in "<<cur_file<<endl;
+	    return;
+	  }
+
+	  //cur_plot_hist->SetDirectory(0);
+	  string cur_bkgd = limit_bkgd_list[s];
+
+	  if(cur_bkgd=="mc.gww.lvjj.m200.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m200_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m350.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m350_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m500.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m500_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m750.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m750_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m1000.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m1000_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m1250.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m1250_kMpl0_1");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m1500.kmpl0_1") {cur_plot_hist->SetName("gww_lvjj_m1500_kMpl0_1");}	  
+
+	  else if(cur_bkgd=="mc.gww.lvjj.m200.kmpl0_01") {cur_plot_hist->SetName("gww_lvjj_m200_kMpl0_01");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m350.kmpl0_01") {cur_plot_hist->SetName("gww_lvjj_m350_kMpl0_01");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m500.kmpl0_01") {cur_plot_hist->SetName("gww_lvjj_m500_kMpl0_01");}
+	  else if(cur_bkgd=="mc.gww.lvjj.m750.kmpl0_01") {cur_plot_hist->SetName("gww_lvjj_m750_kMpl0_01");}
+
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m500") {cur_plot_hist->SetName("wprime_lvjj_m500");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m600") {cur_plot_hist->SetName("wprime_lvjj_m600");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m700") {cur_plot_hist->SetName("wprime_lvjj_m700");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m800") {cur_plot_hist->SetName("wprime_lvjj_m800");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m900") {cur_plot_hist->SetName("wprime_lvjj_m900");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1000") {cur_plot_hist->SetName("wprime_lvjj_m1000");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1100") {cur_plot_hist->SetName("wprime_lvjj_m1100");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1200") {cur_plot_hist->SetName("wprime_lvjj_m1200");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1300") {cur_plot_hist->SetName("wprime_lvjj_m1300");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1400") {cur_plot_hist->SetName("wprime_lvjj_m1400");}
+	  else if(cur_bkgd=="mc.wprime.wz.lvqq.m1500") {cur_plot_hist->SetName("wprime_lvjj_m1500");}
+	  
+
+	  else if(cur_bkgd=="mc.mcatnlo.ttbar") {cur_plot_hist->SetName("ttbar");}
+	  else if(cur_bkgd=="mc.mcatnlo.top") {cur_plot_hist->SetName("top");}
+	  else if(cur_bkgd=="mc.herwig.vv") {cur_plot_hist->SetName("vv");}
+	  else if(cur_bkgd=="mc.mcatnlo.singletop") {cur_plot_hist->SetName("singletop");}
+	  else if(cur_bkgd=="mc.alpgen.wjets") {cur_plot_hist->SetName("wjets");}
+	  else if(cur_bkgd=="mc.sherpa.wjets") {cur_plot_hist->SetName("wjets");}
+	  else if(cur_bkgd=="mc.alpgen.zjets") {cur_plot_hist->SetName("zjets");}
+	  else if(cur_bkgd=="mc.herwig.ww") {cur_plot_hist->SetName("ww");}
+	  else if(cur_bkgd=="mc.herwig.wz") {cur_plot_hist->SetName("wz");}
+	  else if(cur_bkgd=="mc.herwig.zz") {cur_plot_hist->SetName("zz");}
+	  else if(cur_bkgd=="qcd") {cur_plot_hist->SetName("qcd");}	  
+	  
+	  else{// Need to add it to background histogram
+
+	    cout<<"Unable to assign name to "<<cur_bkgd<<endl;
+	    exit(0);
+
+	  }
+
+	  cur_plot_hist->Sumw2();
+	  
+
+	  if((cur_bkgd.find("mc.gww")==string::npos) &&
+	     (cur_bkgd.find("mc.wprime")==string::npos)){ //Add to background, if background
+
+	    TH1F* test_background = (TH1F*) new_file->Get("background");
+
+	    if(!test_background){
+	      h_background = (TH1F*) cur_plot_hist->Clone();
+	      h_background->SetName("background");
+	      h_background->SetDirectory(new_file);
+	    }else{
+	      h_background = (TH1F*) new_file->Get("background");
+	      h_background->Add(cur_plot_hist);
+	    }
+	  }
+
+
+	  cur_plot_hist->SetDirectory(new_file);
+	  new_file->Delete(cur_hist_name.c_str());
+	  cur_plot_file->Close();
+	  delete cur_plot_file;
+	}
+
+	//////////////////////////////////////////////////
+	// Data
+	////////////////////////////////////////////////// 
+	string data_file = "data11.lnuj.limit.plot.root";
+	string data_loc = file_loc+data_file;
+
+	TFile* cur_data_file = cur_data_file = TFile::Open(data_loc.c_str());
+
+	if(doData && !cur_data_file){
+	  cout<<"No data file "<<data_file<<endl;
+	  return;
+	}
+
+	TH1F* cur_data_hist = (doData) ?
+	  (TH1F*) cur_data_file->Get(cur_hist_name.c_str()) :
+	  (TH1F*) h_background->Clone();// if !doData, set background histogram to data
+
+		
+	if(!cur_data_hist){
+	  cout<<"No histogram "<<cur_data_hist<<" in "<<data_file<<endl;
+	  return;
+	}
+
+	cur_data_hist->SetName("data");
+	cur_data_hist->SetDirectory(new_file);
+	new_file->Delete(cur_hist_name.c_str());
+
+	
+	
+	new_file->Write("",TObject::kOverwrite);
+
+
+	cur_data_file->Close();
+	delete cur_data_file;
+
+	if(h_background) delete h_background;
+	  
+	new_file->Close();
+	delete new_file;
+	
+      } // loop over background
+
+    } // loop over variables
+  } // loop over cuts
+  
+    // TObjArray* wwFileInfos=new TObjArray();
+    // string file_loc = "../plots/limit_plots/merged/";
+    // for(int s=0;s<nBkgds;s++){
+
+    //   string cur_file = file_loc+bkgd_list[s];
+    //   cur_file+=".plot.root";
+
+    //   cout<<cur_file<<endl;
+    //   //cout<<cur_file<<", find('gww') : "<<(cur_file.find("gww")==string::npos)<<endl;
+
+    // }
+
+  return;
+}

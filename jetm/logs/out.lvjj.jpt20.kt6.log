@@ -1,0 +1,28 @@
+chainMaker::Add(../procLists/mcLists/mc10b/mc.gww.lvjj.m200.kmpl0_1.pu.list)
+fraction_one_jet: 0.0765871, 0.0208651
+fraction_merged: 0.00220059, 0.123091
+fraction_unmerged: 0.305948, 0.0104393
+chainMaker::Add(./mc.gww.lvjj.m350.kmpl0_1.pu.list)
+fraction_one_jet: 0.0310145, 0.0327913
+fraction_merged: 0.0150737, 0.047036
+fraction_unmerged: 0.281198, 0.0108902
+chainMaker::Add(../procLists/mcLists/mc10b/mc.gww.lvjj.m500.kmpl0_1.pu.list)
+fraction_one_jet: 0.0408299, 0.0285831
+fraction_merged: 0.0883648, 0.0194294
+fraction_unmerged: 0.254086, 0.011458
+chainMaker::Add(../procLists/mcLists/mc10b/mc.gww.lvjj.m750.kmpl0_1.pu.list)
+fraction_one_jet: 0.0723559, 0.0214768
+fraction_merged: 0.445116, 0.00865906
+fraction_unmerged: 0.098388, 0.0184177
+chainMaker::Add(./mc.gww.lvjj.m1000.kmpl0_1.pu.list)
+fraction_one_jet: 0.0843124, 0.0198968
+fraction_merged: 0.651202, 0.00715931
+fraction_unmerged: 0.0514686, 0.0254658
+chainMaker::Add(../procLists/mcLists/mc10b/mc.gww.lvjj.m1250.kmpl0_1.pu.list)
+fraction_one_jet: 0.0990786, 0.0183556
+fraction_merged: 0.728201, 0.00677068
+fraction_unmerged: 0.0294766, 0.0336527
+chainMaker::Add(../procLists/mcLists/mc10b/mc.gww.lvjj.m1500.kmpl0_1.pu.list)
+fraction_one_jet: 0.108282, 0.0175655
+fraction_merged: 0.785807, 0.00652051
+fraction_unmerged: 0.0215496, 0.039375

@@ -1,0 +1,735 @@
+#ifndef wwVarInfo_h
+#define wwVarInfo_h
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+#include <string.h>
+#include <TMath.h>
+
+class wwVarInfo : public TObject {
+
+  int n_bins;
+  double x_min;
+  double x_max;
+  string var_name;
+  string var_title;
+  bool log_y;
+  string x_label;
+  
+ public:
+  wwVarInfo(string string);
+  string GetVariableName();
+  string GetVariableTitle();
+
+  bool DoLogy();
+  string GetXLabel();
+  double GetXMax();
+  double GetXMin();
+  int GetNBins();
+};
+
+wwVarInfo::wwVarInfo(string varName){
+  var_name=varName;
+  x_label="";
+  log_y=true;
+
+
+  
+  if(var_name=="met_proj"){
+
+    var_title="METproj";
+    n_bins=150;
+    x_min=0.;
+    x_max=200;
+    
+
+  }else if(var_name=="jet_n"){
+
+    var_title="Jet N";
+    n_bins=12;
+    x_min=-0.5;
+    x_max=12.5;
+    x_label="Jet N";
+
+  }else if(var_name=="lead_jet_pt"){
+
+    var_title="Lead Jet Pt";
+    n_bins=12;
+    x_min=-0.5;
+    x_max=12.5;
+    x_label="Lead Jet Pt [GeV]";
+
+  }else if(var_name=="lead_jet_eta"){
+
+    var_title="Lead Jet Eta";
+    n_bins=12;
+    x_min=-0.5;
+    x_max=12.5;
+    x_label="Lead Jet Eta";
+  }else if(var_name=="second_jet_pt"){
+
+    var_title="Second Jet Pt";
+    n_bins=12;
+    x_min=-0.5;
+    x_max=12.5;
+    x_label="Second Jet Pt [GeV]";
+
+  }else if(var_name=="second_jet_eta"){
+
+    var_title="Second Jet Eta";
+    n_bins=12;
+    x_min=-0.5;
+    x_max=12.5;
+    x_label="Second Jet Eta";
+
+  }else if(var_name=="jet_dr"){
+
+    var_title="dR(jet,jet)";
+    n_bins=60;
+    x_min=0;
+    x_max=2*TMath::Pi();
+    x_label="dR(jet,jet)";
+
+
+  }else if(var_name=="lep_met_dphi"){
+
+    var_title="dPhi(met,lep)";
+    n_bins=30;
+    x_min=0;
+    x_max=2*TMath::Pi();
+    x_label="dPhi(met,lep)";
+    //log_y=false;
+
+  }else if(var_name=="lead_jet_met_dphi"){
+
+    var_title="dPhi(met,jet)";
+    n_bins=30;
+    x_min=0;
+    x_max=1.5*TMath::Pi();
+    x_label="dPhi(met,jet)";
+    log_y=false;
+    
+  }else if(var_name=="jet_m"){
+
+    var_title="Jet Mass";
+
+    n_bins=30;
+    x_min=0;
+    x_max=160;
+    x_label="Jet Mass [GeV]";
+
+  }else if(var_name=="zoom_jet_m"){
+
+    var_title="Jet Mass";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Jet Mass [GeV]";
+    log_y=false;
+
+  }else if(var_name=="dijet_m_dijet_m"){
+
+
+    var_title="Dijet M";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Dijet Mass [GeV]";
+    log_y=true;
+
+  }else if(var_name=="dijet_m_zoom_dijet_m"){
+
+
+    var_title="Dijet M";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Dijet Mass [GeV]";
+    log_y=false;
+
+  }else if(var_name=="highm_elec_dijet_m_dijet_m"){
+
+
+    var_title="Dijet M";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Dijet Mass [GeV]";
+    log_y=false;
+
+  }else if(var_name=="lowm_muon_dijet_m_dijet_m"){
+
+
+    var_title="Dijet M";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Dijet Mass [GeV]";
+    log_y=false;
+
+    
+  }else if(var_name=="highm_muon_dijet_m_dijet_m"){
+
+
+    var_title="Dijet M";
+
+    n_bins=30;
+    x_min=40;
+    x_max=100;
+    x_label="Dijet Mass [GeV]";
+    log_y=false;
+
+    
+  }else if(var_name=="dijet_m"){
+
+    var_title="DiJet Mass";
+
+    n_bins=50;
+    x_min=0;
+    x_max=300;
+    x_label="M(j,j) [GeV]";
+    log_y=false;
+    
+  }else if(var_name=="dijet_pt"){
+
+    var_title="DiJet Pt";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="p_{T}(j,j) [GeV]";
+
+  }else if(var_name.find("zoom_dijet_m")!=string::npos){
+
+    var_title="DiJet M";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="M(j,j) [GeV]";
+
+  }else if(var_name.find("dijet_m_met")!=string::npos){
+
+    var_title="MEt";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="E_{t}^{miss} [GeV]";
+
+  }else if(var_name=="dijet_dr"){
+
+    var_title="DiJet Dr";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="dR(jet,jet)";
+
+  }else if(var_name.find("dijet_dphi")!=string::npos){
+
+    var_title="DiJet dPhi";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="dPhi(jet,jet)";
+
+  }else if(var_name=="dijet_m_dijet_pt"){
+
+    var_title="DiJet Pt";
+
+    n_bins=150;
+    x_min=0;
+    x_max=900;
+    x_label="p_{T}(j,j) [GeV]";
+
+  }else if(var_name=="sig_jet_m"){
+
+    var_title="Signal Jet Mass";
+
+    n_bins=50;
+    x_min=0;
+    x_max=300;
+    x_label="Signal Jet Mass [GeV]";
+
+  }else if(var_name=="lep_met_pt"){
+
+    var_title="Pt(lep+met)";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Pt(lep+met)";
+
+  }else if(var_name=="dijet_m_lep_met_pt"){
+
+    var_title="Pt(lep+met)";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Pt(lep+met)";
+
+  }else if(var_name=="ewk_elec_mt_lep_met_mt"){
+
+    var_title="Mt(el+met)";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Mt(el+met) [GeV]";
+
+  }else if(var_name=="ewk_muon_mt_lep_met_mt"){
+
+    var_title="Mt(mu+met)";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Mt(mu+met) [GeV]";
+
+  }else if(var_name=="ewk_elec_mt_lep_pt"){
+
+    var_title="Electron Pt";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Electron Pt [GeV]";
+
+  }else if(var_name=="ewk_muon_mt_lep_pt"){
+
+    var_title="Muon Pt";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Muon Pt [GeV]";
+
+  }else if(var_name=="ewk_elec_mt_met"){
+
+    var_title="MET";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="MET [GeV]";
+
+  }else if(var_name=="ewk_muon_mt_met"){
+
+    var_title="MET";
+
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="MET [GeV]";
+
+  }else if(var_name=="jet_pt"){
+
+    var_title="Jet Pt";
+    n_bins=150;
+    x_min=0;
+    x_max=450;
+    x_label="Jet Pt [GeV]";
+
+  }else if(var_name=="lep_pt"){
+
+    var_title="Lepton Pt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Pt [GeV]";
+
+  }else if(var_name=="dijet_m_lep_pt"){
+
+    var_title="Lepton Pt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Pt [GeV]";
+
+  }else if(var_name=="dijet_m_lead_jet_pt"){
+
+    var_title="Lead Jet Pt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lead Jet Pt [GeV]";
+
+  }else if(var_name=="dijet_m_lt"){
+
+    var_title="Lt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="MET + Lepton Pt [GeV]";
+
+  }else if(var_name=="dijet_m_ht"){
+
+    var_title="Ht";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="#Sigma Jet Pt [GeV]";
+
+  }else if(var_name=="dijet_m_st"){
+
+    var_title="St";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="MET + Lepton Pt + #Sigma Jet Pt [GeV]";
+
+  }else if(var_name=="lep_pt_gt2j"){
+
+    var_title="Lepton Pt (jet_n > 2)";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Pt (jet_n > 2) [GeV]";
+
+  }else if(var_name=="lep_pt_eq2j"){
+
+    var_title="Lepton Pt (jet_n == 2)";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Pt (jet_n == 2) [GeV]";
+
+  }else if(var_name=="lep_absz0"){
+
+    var_title="|Z0|";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton |Z0| [mm]";
+
+  }else if(var_name=="lep_d0sig"){
+
+    var_title="d0sig";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton d0sig";
+
+  }else if(var_name=="lep_calo_iso"){
+
+    var_title="Lepton Relative Calorimeter Isolation";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Relative Calo Iso (pile up corrected)";
+  }else if(var_name=="lep_track_iso"){
+
+    var_title="Lepton Relative Track Isolation";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Relative Track Iso";
+
+  }else if(var_name=="lep_eta"){
+
+    var_title="Lepton Eta";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Eta";
+
+  }else if(var_name=="lep_phi"){
+
+    var_title="Lepton Phi";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Lepton Phi";
+
+  }else if(var_name=="lvjj_met"){
+
+    var_title="MEt";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="MEt [GeV]";
+    //log_y=false;
+
+  }else if(var_name=="met"){
+
+    var_title="MEt";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="MEt [GeV]";
+    //log_y=false;
+
+  }else if(var_name.find("loose_met")!=string::npos){
+
+    var_title="MEt";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="MEt [GeV]";
+    log_y=false;
+
+  }else if(var_name=="lvjj_set"){
+
+    var_title="SumEt";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="SumEt [GeV]";
+    //log_y=false;
+
+  }else if(var_name=="met_met"){
+
+    var_title="MEt";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="MEt [GeV]";
+    //log_y=false;
+  }else if(var_name=="nocut_lvjj_met"){
+
+    var_title="MEt (nocut)";
+    n_bins=30;
+    x_min=0;
+    x_max=120;
+    x_label="MEt [GeV]";
+    log_y=false;
+  
+  }else if(var_name=="lvjj_vxp_n"){
+
+    var_title="Vertex Multiplicity";
+    n_bins=18;
+    x_min=0.5;
+    x_max=18.5;
+    x_label="Vertex N";
+
+  }else if(var_name=="avg_int_per_xing"){
+
+    var_title="Average Interactions per Crossing";
+    n_bins=18;
+    x_min=0.5;
+    x_max=18.5;
+    x_label="Avg Int per Xing";
+    log_y=false;
+    
+  }else if(var_name=="nrw_avg_int_per_xing"){
+
+    var_title="Average Interactions per Crossing (no reweighting)";
+    n_bins=18;
+    x_min=0.5;
+    x_max=18.5;
+    x_label="Avg Int per Xing (no reweighting)";
+
+  }else if(var_name=="lvjj_met_proj"){
+
+    var_title="MEt Proj";
+    n_bins=100;
+    x_min=0;
+    x_max=500;
+    x_label="MEt Proj [GeV]";
+
+  }else if(var_name=="lvjj_lt"){
+
+    var_title="Lt";
+    n_bins=150;
+    x_min=0;
+    x_max=650;
+    x_label="Lt [GeV]";
+
+  }else if(var_name=="lvjj_mt"){
+
+    var_title="Mt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Mt [GeV]";
+
+  }else if(var_name=="lep_met_mt"){
+
+    var_title="Mt(lep+met)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss}) [GeV]";
+    //log_y=false;
+
+  }else if(var_name=="met_lep_met_mt"){
+
+    var_title="Mt(lep+met)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss}) [GeV]";
+    //log_y=false;
+    
+  }else if(var_name=="met_lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss},j,j) [GeV]";
+    //log_y=false;
+  }else if(var_name=="dijet_m_lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss},j,j) [GeV]";
+    //log_y=false;
+    
+  }else if(var_name=="dijet_m_lep_nu_dijet_m"){
+
+    var_title="M(l#nu jj)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M(l#nu jj) [GeV]";
+    //log_y=false;
+    
+  }else if(var_name=="lep_met_jet_mt"){
+
+    var_title="Mt(lep+met+lead jet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss},j,j) [GeV]";
+
+  }else if(var_name=="lep_nu_jet_m"){
+
+    var_title="M(lep+met+lead jet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M(lep,E_{T}^{miss},jet) [GeV]";
+
+  }else if(var_name=="lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss},j,j) [GeV]";
+
+  }else if(var_name=="dijet_m_lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(lep,E_{T}^{miss},j,j) [GeV]";
+
+  }else if(var_name=="elec_dijet_m_lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(e,E_{T}^{miss},j,j) [GeV]";
+  }else if(var_name=="muon_dijet_m_lep_met_dijet_mt"){
+
+    var_title="Mt(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}({#mu},E_{T}^{miss},j,j) [GeV]";
+
+  }else if(var_name=="signal_lep_met_dijet_mt"){
+
+    var_title=
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M_{T}(l,#nu,j,j) [GeV]";
+
+  }else if(var_name=="lep_nu_dijet_m"){
+
+    var_title="M(lep+met+dijet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M(lep+met+dijet) [GeV]";
+
+  }else if(var_name=="lep_met_sig_jet_mt"){
+
+    var_title="Mt(lep+met+(sig)jet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="Mt(lep+met+(sig)jet) [GeV]";
+
+  }else if(var_name=="lep_nu_sig_jet_m"){
+
+    var_title="M(lep+met+(sig)jet)";
+    n_bins=1500;
+    x_min=0;
+    x_max=500;
+    x_label="M(lep+met+(sig)jet) [GeV]";
+
+  }else if(var_name=="lvjj_ht"){
+
+    var_title="Ht";
+    n_bins=150;
+    x_min=0;
+    x_max=600;
+    x_label="Ht [GeV]";
+
+  }else if(var_name=="lvjj_st"){
+
+    var_title="St";
+    n_bins=150;
+    x_min=0;
+    x_max=800;
+    x_label="St [GeV]";
+
+  }else if(var_name=="pt"){
+
+    var_title="Lepton Pt";
+    n_bins=150;
+    x_min=0;
+    x_max=500;
+    x_label="Pt [GeV]";
+
+  }else{
+    cout<<"Variable "<<var_name<<" not recognized in wwVarInfo.h"<<endl;
+  }
+}
+
+string wwVarInfo::GetVariableName(){
+  return var_name;
+}
+
+
+string wwVarInfo::GetVariableTitle(){
+  return var_title;
+}
+
+string wwVarInfo::GetXLabel(){
+  return x_label;
+}
+
+double wwVarInfo::GetXMax(){
+  return x_max;
+}
+
+double wwVarInfo::GetXMin(){
+  return x_min;
+}
+
+int wwVarInfo::GetNBins(){
+  return n_bins;
+}
+bool wwVarInfo::DoLogy(){
+  return log_y;
+}
+
+#endif

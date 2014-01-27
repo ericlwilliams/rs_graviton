@@ -1,0 +1,466 @@
+RandomDataPeriod has been initialised with a total lumi of 1023.89.
+the input tree name is physics
+
+inputName: data11.rel17.180400.egamma.skim.list
+inputTreeName: physics
+outputFileName: ./skims/data11.rel17.180400.egamma.skim.root
+outputTreeName: analysisTree
+goodRunsList: ../WWGRLs/data11_7TeV.periodAllYear_DetStatus-v18-pro08-04_CoolRunQuery-00-03-98_WZjets_allchannels_NOB2.xml
+cutFileName: cutFile
+thinList: thinList
+leafList: readLeafList
+plotFileName: plotFile
+isMC: false
+
+chainMaker::Add(data11.rel17.180400.egamma.skim.list)
+Building chain of root files listed in data11.rel17.180400.egamma.skim.list containing the physics tree
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00001.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00001.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00001.output.root: not a TStreamerInfo object
+Error in <TChain::AddFile>: cannot find tree with name physicsTrigDec in file /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00001.output.root
+no physicsTrigDec tree found, will assume all trigger info is in the primary input tree
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00002.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00002.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00003.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00003.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00004.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00004.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00005.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00005.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00006.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00006.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00007.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00007.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00008.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00008.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00009.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00009.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00010.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00010.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00011.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00011.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00012.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00012.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00013.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00013.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00014.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00014.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00015.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00015.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00016.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00016.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00017.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00017.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00018.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00018.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00019.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00019.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00020.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00020.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00024.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00024.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00025.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00025.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00027.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00027.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00028.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00028.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00029.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00029.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00030.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00030.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00031.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00031.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00032.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00032.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00033.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00033.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00034.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00034.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00035.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00035.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00036.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00036.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00037.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00037.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00038.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00038.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00039.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00039.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00040.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00040.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00041.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00041.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00043.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00043.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00044.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00044.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00045.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00045.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00046.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00046.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00047.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00047.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00048.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00048.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00049.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00049.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00050.output.root/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00050.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFraction_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFractionError_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Not enough information to calculate prefactor alphaC: Setting alphaC = 1!
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph rSample_rIncl_AntiKt4Topo_EMJES in input file JESUncertainty.root! Setting response_sample/r_incl = 1!
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Initializing the MultijetJESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Uncertainty for AntiKt4EMJESTopoJets
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Using uncertainty in ATLAS-CONF-2011-032 from JESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: For data produced with rel 16 (full 2010 dataset and MC)
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+JERProvider initialized:  Collection name = AntiKt4TopoJES
+thinList not found, will not automatically save any read variables to analysisTree
+could not open newLeafList
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Running physics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TPileupReweighter not loaded for data!
+doPileUpReWeight = 1
+doLeptonSmearing = 1
+doScaleFactor = 1
+doJES = 1
+doJER = 1
+doMetTopo = 0
+isMC = 0
+isData = 1
+isQCD = 0
+isDataEgamma = 1
+isDataMuons = 0
+isSig = 0
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00001.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Error in <TTree::SetBranchStatus>: unknown branch -> mcevt_weight
+WARNING: Leaf mcevt_weight has gone missing. It will be ignored, but check that you aren't using it!
+RunNumber = 180400
+1 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00002.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00003.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00004.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00005.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+100001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00006.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00007.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00008.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00009.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+200001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00010.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00011.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00012.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00013.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+RunNumber = 180481
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00014.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+300001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00015.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00016.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00017.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00018.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+400001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00019.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00020.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00024.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00025.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+500001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00027.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00028.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+RunNumber = 180400
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00029.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00030.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00031.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00032.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00033.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00034.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00035.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00036.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00037.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00038.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+RunNumber = 180481
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00039.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00040.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00041.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00043.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00044.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00045.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00046.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00047.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00048.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00049.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel17/NTUP_SMWZ/tgadfort_skims/user.tgadfort.test11/user.tgadfort.001890._00050.output.root: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+
+VxpSel::PrintInfo()
+Vertex Selection
+=========================
+vtx_all:	2618268
+vtx_iso_ntrks:	4
+vtx_ntrks:	4
+vtx_jes_ntrks:	4
+=========================
+
+
+JetMet::PrintInfo()
+-
+Jet Counting and MET Cleaning
+=========================
+jet_n:		2571810
+jet_pos_e:	2571810
+jet_em_pt:	1165039
+jet_em_eta:	1089613
+jet_clean:	1085118
+jet_overlap:	863201
+good_jet_n:	863201
+=========================
+
+
+LepCtr::PrintInfo()
+--
+*Analysis* Electron Selection
+=========================
+el_all:		2539654
+el_author:	1234730
+el_oq:		1232368
+el_eta:		1194380
+el_medium:	478972
+el_veto_pt:	448576
+el_pt:		284239
+el_d0sig:	257409
+el_absz0:	251344
+el_blayer:	251344
+el_tight:	43192
+el_iso:		31043
+el_pix_hits:	31043
+el_jet_dr:	0
+el_overlap:	31040
+=========================
+
+*Analysis* Muon Selection
+=========================
+mu_all:		46158
+mu_author:	23849
+mu_eta:		21695
+mu_veto_pt:	1169
+mu_pt:		732
+mu_absz0:	730
+mu_absd0:	611
+mu_blayer:	610
+mu_jet_dr:	0
+mu_pix_hits:	273
+mu_iso:		273
+mu_sct_hits:	272
+mu_holes:	272
+mu_trt_hits:	272
+
+LepCtr::PrintInfo()
+--
+*Veto* Electron Selection
+=========================
+el_all:		2539654
+el_author:	1234730
+el_oq:		1232368
+el_eta:		1194380
+el_medium:	478972
+el_veto_pt:	448576
+el_pt:		0
+el_d0sig:	406394
+el_absz0:	395587
+el_blayer:	221802
+el_tight:	0
+el_iso:		0
+el_pix_hits:	221802
+el_jet_dr:	0
+el_overlap:	221715
+=========================
+
+*Veto* Muon Selection
+=========================
+mu_all:		46158
+mu_author:	23849
+mu_eta:		21695
+mu_veto_pt:	1169
+mu_pt:		0
+mu_absz0:	1162
+mu_absd0:	956
+mu_blayer:	954
+mu_jet_dr:	0
+mu_pix_hits:	954
+mu_iso:		0
+mu_sct_hits:	952
+mu_holes:	952
+mu_trt_hits:	946
+
+EvtCtr::PrintInfo()
+--
+Event Pre-Selection
+=========================
+n_events:	521970
+n_unique:	521619
+n_grl:		439301
+n_lar_err:	439248
+n_lar_hole_err:	438766
+n_el_jet_dr:	439193
+n_mu_jet_dr:	438609
+n_met_clean:	437234
+n_pos_sumet:	436058
+n_vxp_sel:	436058
+n_trig_sel:	415192
+n_el_trig_sel:	415192
+n_mu_trig_sel:	910
+_-_
+n_mc_weight:		521970
+n_pu_weight:		521970
+n_lep_id_sf:		439301
+n_lep_down_id_sf:	439301
+n_lep_up_id_sf:		439301
+n_lep_reco_sf:		439301
+n_lep_down_reco_sf:	439301
+n_lep_up_reco_sf:	439301
+n_trig_sf:		439301
+n_trig_up_sf:		442523
+n_trig_down_sf:		435992
+n_sow:			521970
+=========================
+
+--
+Electron Event Selection
+=========================
+n_one_el:	18571
+n_two_el_veto:	18571
+n_mu_veto:	18571
+n_el_met_cut:	12814
+n_el_jet==0:	915
+n_el_jet==1:	2658
+n_el_jet>=2:	9241
+n_el_ctrl_all: 5362
+--
+Low Mass Signal Cuts
+n_el_lowm_ptlv: 2716
+n_el_lowm_ptjj: 2243
+n_el_lowm_mjj: 551
+--
+High Mass Signal Cuts
+n_el_highm_ptlv: 80
+n_el_highm_ptjj: 61
+n_el_highm_mjj: 11
+=========================
+
+--
+Muon Event Selection
+=========================
+n_one_mu:	109
+n_two_mu_veto:	109
+n_el_veto:	109
+n_mu_met_cut:	79
+n_mu_jet==0:	2
+n_mu_jet==1:	8
+n_mu_jet>=2:	69
+n_mu_ctrl_all: 51
+--
+Low Mass Signal Cuts
+n_mu_lowm_ptlv: 31
+n_mu_lowm_ptjj: 25
+n_mu_lowm_mjj: 9
+--
+High Mass Signal Cuts
+n_mu_highm_ptlv: 1
+n_mu_highm_ptjj: 0
+n_mu_highm_mjj: 0
+=========================
+
+Total Events Processed: 521969
+Writing out text file goodLeaves, listing all leaves that were defined in every input file run over

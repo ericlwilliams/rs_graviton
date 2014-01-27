@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+scp ./* $KA:~/analy/lvjj_files/limit_files/

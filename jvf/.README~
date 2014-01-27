@@ -1,0 +1,7 @@
+//////////////////////////////////////////////////
+// Study to motivate use of JVF cut in rel17 analysis
+// uses skims made with no jvf cut applied
+// ../files/skims_nojvf
+// For both skims his package makes
+// 	- jet_n vs. <mu> 
+//////////////////////////////////////////////////

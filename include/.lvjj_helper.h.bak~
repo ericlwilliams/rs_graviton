@@ -1,0 +1,18 @@
+#include <TMath.h>
+
+// Unblind 1fb-1 of randomly selected data:
+bool doPartialUnblind=true;
+
+bool passElecTri(int is_elec, float lepton_met_dphi, float rf_met){
+
+  float elec_x1=40.0;
+  float elec_y1=2.0;
+  float elec_x2=75.;
+  float elec_y2=TMath::Pi();
+  float elec_slope = (elec_y2-elec_y1) / (elec_x2-elec_x1);
+
+  bool pass_elec_tri = (is_elec!=0) ?  (lepton_met_dphi < elec_slope*(rf_met-elec_x1)+elec_y1) : true;
+
+  return pass_elec_tri;
+
+}

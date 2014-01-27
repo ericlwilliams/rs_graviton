@@ -1,0 +1,11 @@
+Systematics (as of 2012-01-25)
+
+All systematics propigated to MET using MissingETUtility-00-02-08/
+
+= JES =
+Jet Energy Scale
+JetUncertainties-00-03-04-02: JetUncertaintyProvider (LC jets), MultiJetUncertaityProvider (EM+JES jets)
+
+= JER =
+Jet Energy Resolution
+JetResolution-00-00-09: JERProvider

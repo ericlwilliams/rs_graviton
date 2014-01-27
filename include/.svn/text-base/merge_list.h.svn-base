@@ -1,0 +1,90 @@
+#include<string>
+string merge_list[] = {
+
+  /* "mc.fs.kkg.m300", */
+  /* "mc.afii.kkg.m300", */
+
+  /* "mc.fs.kkg.m900", */
+  /* "mc.afii.kkg.m900", */
+
+  /* "mc.fs.kkg.m1500", */
+  /* "mc.afii.kkg.m1500" */
+  
+  "qcd.alpgen",
+  "qcd.sherpa",
+  //"qcd.pythia",
+
+  "mc.alpgen.wjets",
+  "mc.sherpa.wjets",
+  //"mc.pythia.wjets",
+
+  "mc.herwig.vv",
+
+  "mc.alpgen.zjets",
+  "mc.sherpa.zjets",
+  //"mc.pythia.zjets",
+  
+  //"mc.mcatnlo.ttbar",
+  "mc.mcatnlo.top",
+  //"mc.mcatnlo.singletop"
+
+  /* "mc.acer.lessps.top", */
+  /* "mc.acer.moreps.top", */
+
+  "mc.rsg.m500.kmpl0_1",
+  "mc.rsg.m750.kmpl0_1",
+  "mc.rsg.m1000.kmpl0_1",
+  "mc.rsg.m1250.kmpl0_1",
+  "mc.rsg.m1500.kmpl0_1",
+
+  /* "mc.gww.lvjj.m500.kmpl0_1", */
+  /* "mc.gww.lvjj.m750.kmpl0_1", */
+  /* "mc.gww.lvjj.m1000.kmpl0_1", */
+  /* "mc.gww.lvjj.m1250.kmpl0_1", */
+  /* "mc.gww.lvjj.m1500.kmpl0_1", */
+
+  
+  "mc.wprime.wz.m500",
+  "mc.wprime.wz.m600",
+  "mc.wprime.wz.m700",
+  "mc.wprime.wz.m800",
+  "mc.wprime.wz.m900",
+  "mc.wprime.wz.m1000",
+  "mc.wprime.wz.m1100",
+  "mc.wprime.wz.m1200",
+  "mc.wprime.wz.m1300",
+  "mc.wprime.wz.m1400",
+  "mc.wprime.wz.m1500"
+
+  
+  /* "mc.gww.lvjj.m500.kmpl0_1", */
+  /* "mc.gww.lvjj.m750.kmpl0_1",   */
+  /* "mc.gww.lvjj.m1000.kmpl0_1",  */
+  /* "mc.gww.lvjj.m1250.kmpl0_1",  */
+  /* "mc.gww.lvjj.m1500.kmpl0_1",  */
+
+  
+  /* "mc.gzz.lljj.m500.kmpl0_1", */
+  /* "mc.gzz.lljj.m750.kmpl0_1", */
+  /* "mc.gzz.lljj.m1000.kmpl0_1", */
+  /* "mc.gzz.lljj.m1250.kmpl0_1", */
+  /* "mc.gzz.lljj.m1500.kmpl0_1", */
+
+  /* "mc.wprime.wz.lvqq.m500", */
+  /* "mc.wprime.wz.lvqq.m600", */
+  /* "mc.wprime.wz.lvqq.m700", */
+  /* "mc.wprime.wz.lvqq.m800", */
+  /* "mc.wprime.wz.lvqq.m900", */
+  /* "mc.wprime.wz.lvqq.m1000", */
+  /* "mc.wprime.wz.lvqq.m1100", */
+  /* "mc.wprime.wz.lvqq.m1200", */
+  /* "mc.wprime.wz.lvqq.m1300", */
+  /* "mc.wprime.wz.lvqq.m1400", */
+  /* "mc.wprime.wz.lvqq.m1500" */
+
+
+  
+};
+
+int nBkgds = sizeof(merge_list)/sizeof(merge_list[0]);
+

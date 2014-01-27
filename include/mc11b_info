@@ -1,0 +1,141 @@
+** mc.alpgen.wenu.np0 **
+n_events	3338885.0
+n_sow		3338495.22
+** mc.alpgen.wenu.np1 **
+n_events	2499645.0
+n_sow		2499613.64
+** mc.alpgen.wenu.np2 **
+n_events	2789331.0
+n_sow		2822675.58
+** mc.alpgen.wenu.np3 **
+n_events	1008947.0
+n_sow		1008929.75
+** mc.alpgen.wenu.np4 **
+n_events	230000.0
+n_sow		230228.43
+** mc.alpgen.wenu.np5 **
+n_events	69999.0
+n_sow		69997.65
+** mc.alpgen.wtnu.np0 **
+n_events	3408296.0
+n_sow		3408354.95
+** mc.alpgen.wtnu.np1 **
+n_events	2499194.0
+n_sow		2499191.85
+** mc.alpgen.wtnu.np2 **
+n_events	3766986.0
+n_sow		3766962.04
+** mc.alpgen.wtnu.np3 **
+n_events	1009946.0
+n_sow		1009937.22
+** mc.alpgen.wtnu.np4 **
+n_events	248998.0
+n_sow		249000.42
+** mc.alpgen.wtnu.np5 **
+n_events	65000.0
+n_sow		64998.76
+** mc.alpgen.wunu.np0 **
+n_events	3442942.0
+n_sow		3441418.24
+** mc.alpgen.wunu.np1 **
+n_events	2499593.0
+n_sow		2499607.68
+** mc.alpgen.wunu.np2 **
+n_events	3748737.0
+n_sow		3748037.79
+** mc.alpgen.wunu.np3 **
+n_events	1009446.0
+n_sow		1009446.53
+** mc.alpgen.wunu.np4 **
+n_events	254950.0
+n_sow		254953.65
+** mc.alpgen.wunu.np5 **
+n_events	70000.0
+n_sow		70001.6
+** mc.alpgen.zee.np0 **
+n_events	6507284.0
+n_sow		6503711.68
+** mc.alpgen.zee.np1 **
+n_events	1334897.0
+n_sow		1334896.19
+** mc.alpgen.zee.np2 **
+n_events	384999.0
+n_sow		383848.47
+** mc.alpgen.zee.np3 **
+n_events	110000.0
+n_sow		110000.27
+** mc.alpgen.zee.np4 **
+n_events	30000.0
+n_sow		29999.4
+** mc.alpgen.zee.np5 **
+n_events	10000.0
+n_sow		9999.8
+** mc.alpgen.ztt.np0 **
+n_events	9943182.0
+n_sow		9925296.6
+** mc.alpgen.ztt.np1 **
+n_events	3334137.0
+n_sow		3334128.98
+** mc.alpgen.ztt.np2 **
+n_events	1004847.0
+n_sow		1004836.84
+** mc.alpgen.ztt.np3 **
+n_events	0.0
+n_sow		0.0
+** mc.alpgen.ztt.np4 **
+n_events	144999.0
+n_sow		144998.99
+** mc.alpgen.ztt.np5 **
+n_events	10000.0
+n_sow		9999.5
+** mc.alpgen.zuu.np0 **
+n_events	6617230.0
+n_sow		6617431.6
+** mc.alpgen.zuu.np1 **
+n_events	1334296.0
+n_sow		1334267.99
+** mc.alpgen.zuu.np2 **
+n_events	384947.0
+n_sow		385844.57
+** mc.alpgen.zuu.np3 **
+n_events	110000.0
+n_sow		110002.2
+** mc.alpgen.zuu.np4 **
+n_events	30000.0
+n_sow		29998.95
+** mc.alpgen.zuu.np5 **
+n_events	10000.0
+n_sow		9999.6
+** mc.herwig.ww **
+n_events	2469244.0
+n_sow		2468430.55
+** mc.herwig.wz **
+n_events	249949.0
+n_sow		249954.24
+** mc.herwig.zz **
+n_events	249999.0
+n_sow		249997.95
+** mc.mcatnlo.st.schan.enu **
+n_events	299948.0
+n_sow		253409.67
+** mc.mcatnlo.st.schan.tnu **
+n_events	299899.0
+n_sow		253512.12
+** mc.mcatnlo.st.schan.unu **
+n_events	299998.0
+n_sow		253590.35
+** mc.mcatnlo.st.tchan.enu **
+n_events	0.0
+n_sow		0.0
+** mc.mcatnlo.st.tchan.tnu **
+n_events	0.0
+n_sow		0.0
+** mc.mcatnlo.st.tchan.unu **
+n_events	0.0
+n_sow		0.0
+** mc.mcatnlo.st.wt **
+n_events	899694.0
+n_sow		797016.2
+** mc.mcatnlo.t1 **
+n_events	14290839.0
+n_sow		11045284.7

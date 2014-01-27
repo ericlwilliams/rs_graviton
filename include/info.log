@@ -1,0 +1,246 @@
+** mc.alpgen.wenu.np0 **
+
+** mc.alpgen.wenu.np1 **
+
+n_sow		2499123.5
+** mc.alpgen.wenu.np2 **
+
+tot_nevts=3768632.0;
+
+** mc.alpgen.wenu.np3 **;
+tot_nevts=1008947.0;
+
+** mc.alpgen.wenu.np4 **;
+tot_nevts=250000.0;
+
+** mc.alpgen.wenu.np5 **;
+tot_nevts=69999.0;
+
+** mc.alpgen.wtnu.np0 **;
+tot_nevts=3398296.0;
+
+** mc.alpgen.wtnu.np1 **;
+tot_nevts=2499194.0;
+
+** mc.alpgen.wtnu.np2 **;
+tot_nevts=3680986.0;
+
+** mc.alpgen.wtnu.np3 **;
+tot_nevts=1009946.0;
+
+** mc.alpgen.wtnu.np4 **;
+tot_nevts=249998.0;
+
+** mc.alpgen.wtnu.np5 **;
+tot_nevts=65000.0;
+
+** mc.alpgen.wunu.np0 **;
+tot_nevts=3462942.0;
+
+** mc.alpgen.wunu.np1 **;
+tot_nevts=2498593.0;
+
+** mc.alpgen.wunu.np2 **;
+tot_nevts=3768737.0;
+
+** mc.alpgen.wunu.np3 **;
+tot_nevts=1008446.0;
+
+** mc.alpgen.wunu.np4 **;
+tot_nevts=254950.0;
+
+** mc.alpgen.wunu.np5 **;
+tot_nevts=70000.0;
+
+** mc.alpgen.zee.np0 **;
+tot_nevts=6618284.0;
+
+** mc.alpgen.zee.np1 **;
+tot_nevts=1334897.0;
+
+** mc.alpgen.zee.np2 **;
+tot_nevts=809999.0;
+
+** mc.alpgen.zee.np3 **;
+tot_nevts=220000.0;
+
+** mc.alpgen.zee.np4 **;
+tot_nevts=60000.0;
+
+** mc.alpgen.zee.np5 **;
+tot_nevts=20000.0;
+
+** mc.alpgen.ztt.np0 **;
+tot_nevts=10343179.0;
+
+** mc.alpgen.ztt.np1 **;
+tot_nevts=3334137.0;
+
+** mc.alpgen.ztt.np2 **;
+tot_nevts=1004847.0;
+
+** mc.alpgen.ztt.np3 **;
+tot_nevts=509847.0;
+
+** mc.alpgen.ztt.np4 **;
+tot_nevts=144999.0;
+
+** mc.alpgen.ztt.np5 **;
+tot_nevts=45000.0;
+
+** mc.alpgen.zuu.np0 **;
+tot_nevts=6555230.0;
+
+** mc.alpgen.zuu.np1 **;
+tot_nevts=1334296.0;
+
+** mc.alpgen.zuu.np2 **;
+tot_nevts=404947.0;
+
+** mc.alpgen.zuu.np3 **;
+tot_nevts=110000.0;
+
+** mc.alpgen.zuu.np4 **;
+tot_nevts=30000.0;
+
+** mc.alpgen.zuu.np5 **;
+tot_nevts=10000.0;
+
+** mc.gww.lvjj.m1000.kmpl0_1 **;
+tot_nevts=30000.0;
+evt_weight=29996.55;
+** mc.gww.lvjj.m1250.kmpl0_1 **;
+tot_nevts=30000.0;
+evt_weight=29996.62;
+** mc.gww.lvjj.m1500.kmpl0_1 **;
+tot_nevts=30000.0;
+evt_weight=29996.21;
+** mc.gww.lvjj.m200.kmpl0_01 **;
+tot_nevts=29899.0;
+evt_weight=29914.61;
+** mc.gww.lvjj.m200.kmpl0_1 **;
+tot_nevts=29800.0;
+evt_weight=29596.08;
+** mc.gww.lvjj.m350.kmpl0_01 **;
+tot_nevts=30000.0;
+evt_weight=29996.63;
+** mc.gww.lvjj.m350.kmpl0_1 **;
+tot_nevts=29900.0;
+evt_weight=29872.84;
+** mc.gww.lvjj.m500.kmpl0_01 **;
+tot_nevts=30000.0;
+evt_weight=29996.67;
+** mc.gww.lvjj.m500.kmpl0_1 **;
+tot_nevts=30000.0;
+evt_weight=29996.91;
+** mc.gww.lvjj.m750.kmpl0_01 **;
+tot_nevts=29999.0;
+evt_weight=29995.73;
+** mc.gww.lvjj.m750.kmpl0_1 **;
+tot_nevts=30000.0;
+evt_weight=29996.47;
+
+** mc.herwig.ww **;
+tot_nevts=999999.0;
+
+** mc.herwig.wz **;
+tot_nevts=999896.0;
+
+** mc.herwig.zz **;
+tot_nevts=249999.0;
+
+** mc.mcatnlo.st.schan.enu **;
+tot_nevts=299948.0;
+
+** mc.mcatnlo.st.schan.tnu **;
+tot_nevts=299899.0;
+
+** mc.mcatnlo.st.schan.unu **;
+tot_nevts=299998.0;
+
+** mc.mcatnlo.st.tchan.enu **;
+tot_nevts=299998.0;
+
+** mc.mcatnlo.st.tchan.tnu **;
+tot_nevts=299999.0;
+
+** mc.mcatnlo.st.tchan.unu **;
+tot_nevts=299999.0;
+
+** mc.mcatnlo.st.wt **;
+tot_nevts=899694.0;
+
+** mc.mcatnlo.t1 **;
+tot_nevts=999992.0;
+
+** mc.pythia.wenu **;
+tot_nevts=999996.0;
+evt_weight=999879.31;
+** mc.pythia.wtnu **;
+tot_nevts=497000.0;
+evt_weight=496889.57;
+** mc.pythia.wunu **;
+tot_nevts=999999.0;
+evt_weight=999879.66;
+** mc.pythia.zee **;
+tot_nevts=1099996.0;
+evt_weight=1099867.75;
+** mc.pythia.ztt **;
+tot_nevts=495347.0;
+evt_weight=495345.93;
+** mc.pythia.zuu **;
+tot_nevts=899997.0;
+evt_weight=899890.08;
+
+** mc.sherpa.wenu **;
+tot_nevts=1699846.0;
+
+** mc.sherpa.wtnu **;
+tot_nevts=1699496.0;
+
+** mc.sherpa.wunu **;
+tot_nevts=1699694.0;
+
+
+** mc.sherpa.zee **;
+tot_nevts=1999196.0;
+evt_weight=1019530.73;
+** mc.sherpa.ztt **;
+tot_nevts=159949.0;
+evt_weight=81633.45;
+** mc.sherpa.zuu **;
+tot_nevts=1999294.0;
+evt_weight=1020116.01;
+** mc.wprime.wz.lvqq.m1000 **;
+tot_nevts=10000.0;
+evt_weight=9998.87;
+** mc.wprime.wz.lvqq.m1100 **;
+tot_nevts=10000.0;
+evt_weight=9998.92;
+** mc.wprime.wz.lvqq.m1200 **;
+tot_nevts=10000.0;
+evt_weight=9998.8;
+** mc.wprime.wz.lvqq.m1300 **;
+tot_nevts=10000.0;
+evt_weight=9998.84;
+** mc.wprime.wz.lvqq.m1400 **;
+tot_nevts=10000.0;
+evt_weight=9998.82;
+** mc.wprime.wz.lvqq.m1500 **;
+tot_nevts=10000.0;
+evt_weight=9998.8;
+** mc.wprime.wz.lvqq.m500 **;
+tot_nevts=10000.0;
+evt_weight=9998.87;
+** mc.wprime.wz.lvqq.m600 **;
+tot_nevts=10000.0;
+evt_weight=9998.86;
+** mc.wprime.wz.lvqq.m700 **;
+tot_nevts=9999.0;
+evt_weight=9997.87;
+** mc.wprime.wz.lvqq.m800 **;
+tot_nevts=10000.0;
+evt_weight=9998.82;
+** mc.wprime.wz.lvqq.m900 **;
+tot_nevts=10000.0;
+evt_weight=9998.81;

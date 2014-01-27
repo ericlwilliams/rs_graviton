@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <string>
+
+const float lep_pt_cut=30.;
+const float lead_jet_pt_cut=100.;
+const float jet_pt_cut=40.;
+const float met_cut=40.;
+
+
+const int nSys=15;
+string systs[nSys] = {"jes","jer","les","ler","idsf","isosf","recosf","trigsf","ootpu","intpu","coef","sjets","allcl","metpu","vjets"};
+/* const int nSys=2; */
+/* string systs[nSys] = {"jes","jer"}; */
+int nJES=0;
+int nJER=1;
+int nLES=2;
+int nLER=3;
+int nIDSF=4;
+int nISOSF=5;
+int nRECOSF=6;
+int nTRIGSF=7;
+int nOOTPU=8;
+int nINTPU=9;
+int nCOEF=10;
+int nSJETS=11;
+int nALLCL=12;
+int nMETPU=13;
+int nVJETS=14;
+
+/* const int nSamples =14; */
+/* string samples[nSamples] = {"herwig.ww","herwig.wz","herwig.zz","mcatnlo.ttbar", */
+/* 			    "mcatnlo.singletop","alpgen.wjets","alpgen.zjets","qcd.alpgen", */
+/* 			    "gww.lvjj.m750.kmpl0_1","gww.lvjj.m200.kmpl0_1","gww.lvjj.m350.kmpl0_1", */
+/* 			    "gww.lvjj.m500.kmpl0_1","gww.lvjj.m1000.kmpl0_1","gww.lvjj.m1250.kmpl0_1"}; */
+const int nSamples =26;
+string samples[nSamples] = {"herwig.ww","herwig.wz","herwig.zz","herwig.vv",
+			    "mcatnlo.ttbar","mcatnlo.top",
+			    "mcatnlo.singletop","alpgen.wjets","alpgen.zjets","qcd.alpgen",
+			    "rsg.m500.kmpl0_1","rsg.m750.kmpl0_1",
+			    "rsg.m1000.kmpl0_1","rsg.m1250.kmpl0_1","rsg.m1500.kmpl0_1",
+			    "wprime.wz.m500","wprime.wz.m600","wprime.wz.m700",
+			    "wprime.wz.m800","wprime.wz.m900","wprime.wz.m1000",
+			    "wprime.wz.m1100","wprime.wz.m1200",
+			    "wprime.wz.m1300","wprime.wz.m1400","wprime.wz.m1500"};
+
+const int nProcs=2;
+string procs[nProcs] = {"el","mu"};
+
+/* const int nRegions =2; */
+/* string regions[nRegions] = {"lowm","highm"}; */
+/* int nLowM=0; */
+/* int nHighM=1; */
+
+const int nRegions =1;
+string regions[nRegions] = {"highm"};
+int nHighM=0;
+int nSigWW=1;
+
+/* int nSigWZ=1; */
+
+/* const int nRegions =1; */
+/* string regions[nRegions] = {"highm"}; */
+/* int nHighM=0; */
+/* int nLowM=1; */
+
+const int nCombs=3;
+string combs[nCombs] = {"up","down","avg"};
+//int nUp=0;
+//int nDown=1;
+int nCombAvg=2;
+
+const int nMods=3;
+string modulations[nMods] = {"nom","up","down"};
+int nNom=0;
+int nUp=1;
+int nDown=2;

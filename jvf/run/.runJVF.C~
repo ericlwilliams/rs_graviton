@@ -1,0 +1,37 @@
+#include "../include/lnuj_skim_list.h"
+
+void runGWW(){
+
+  cout<<"RUN rmGWWPlots.sh FIRST!"<<endl;
+
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In runGWW.C"<<endl;
+  cout<<"Running over "<<nSkims<<" skims"<<endl;
+  cout<<endl;
+
+  TChain *jvfSkimChain;
+  string file;
+  for(int s=0;s<nSkims;s++){
+
+    jvfSkimChain=new TChain("analysisTree");
+    //tmp
+    string cur_jvf_skim = "../files/skims/"+skim_list[s];
+    cur_jvf_skim+=".skim.root";
+    cout<<"jvfSkimChain->Add("<<cur_jvf_skim.c_str()<<")"<<endl;;
+    jvfSkimChain->Add(cur_jvf_skim.c_str());
+
+    file=skim_list[s]+",jvf";
+
+    jvfSkimChain->Process("../src/jvf.C+",file.c_str());
+	
+    
+  }
+  
+  delete skimChain;
+  cout<<"Histogram files written to ../plots"<<endl;
+  cout<<"Don't forget to merge histograms!"<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  gROOT->ProcessLine(".q");
+  return;
+}

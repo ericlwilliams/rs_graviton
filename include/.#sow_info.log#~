@@ -1,0 +1,130 @@
+** mc.alpgen.wenu.np1 **
+
+
+** mc.alpgen.wenu.np2 **
+
+
+** mc.alpgen.wenu.np3 **
+
+
+** mc.alpgen.wenu.np4 **
+
+
+** mc.alpgen.wenu.np5 **
+
+** mc.alpgen.wtnu.np0 **
+
+
+** mc.alpgen.wtnu.np1 **
+
+
+** mc.alpgen.wtnu.np3 **
+
+
+** mc.alpgen.wtnu.np4 **
+
+
+** mc.alpgen.wtnu.np5 **
+
+** mc.alpgen.wunu.np0 **
+
+
+** mc.alpgen.wunu.np1 **
+
+
+** mc.alpgen.wunu.np2 **
+
+
+** mc.alpgen.wunu.np3 **
+
+
+** mc.alpgen.wunu.np4 **
+
+
+** mc.alpgen.wunu.np5 **
+
+
+** mc.alpgen.zee.np0 **
+
+
+** mc.alpgen.zee.np1 **
+
+
+** mc.alpgen.zee.np2 **
+
+
+** mc.alpgen.zee.np3 **
+
+
+** mc.alpgen.zee.np4 **
+
+
+** mc.alpgen.zee.np5 **
+
+
+** mc.alpgen.ztt.np0 **
+
+
+** mc.alpgen.ztt.np1 **
+
+
+** mc.alpgen.ztt.np2 **
+
+
+** mc.alpgen.ztt.np3 **
+
+
+** mc.alpgen.ztt.np4 **
+
+
+** mc.alpgen.ztt.np5 **
+
+
+** mc.alpgen.zuu.np0 **
+
+
+** mc.alpgen.zuu.np1 **
+
+
+** mc.alpgen.zuu.np2 **
+tot_nevts = 404947.0;
+evt_weight =  = 404947.67;
+** mc.alpgen.zuu.np3 **
+tot_nevts = 110000.0;
+evt_weight =  = 110002.29;
+** mc.alpgen.zuu.np4 **
+tot_nevts = 30000.0;
+evt_weight =  = 29999.2;
+** mc.alpgen.zuu.np5 **
+tot_nevts = 10000.0;
+evt_weight =  = 9999.52;
+** mc.herwig.ww **
+tot_nevts = 999999.0;
+evt_weight =  = 999973.06;
+** mc.herwig.wz **
+tot_nevts = 999896.0;
+evt_weight =  = 999896.89;
+** mc.herwig.zz **
+tot_nevts = 249999.0;
+evt_weight =  = 249998.67;
+** mc.mcatnlo.st.schan.enu **
+tot_nevts = 299948.0;
+evt_weight =  = 253476.74;
+** mc.mcatnlo.st.schan.tnu **
+tot_nevts = 299899.0;
+evt_weight =  = 253429.12;
+** mc.mcatnlo.st.schan.unu **
+tot_nevts = 299998.0;
+evt_weight =  = 253651.13;
+** mc.mcatnlo.st.tchan.enu **
+tot_nevts = 299998.0;
+evt_weight =  = 177220.88;
+** mc.mcatnlo.st.tchan.tnu **
+tot_nevts = 299999.0;
+evt_weight =  = 176550.57;
+** mc.mcatnlo.st.tchan.unu **
+tot_nevts = 299999.0;
+evt_weight =  = 176862.58;
+** mc.mcatnlo.t1 **
+tot_nevts = 999992.0;
+evt_weight =  = 772700.8;

@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <string>
+
+
+
+
+const int nSys=10;
+string systs[nSys] = {"jes","les","ler","idsf","recosf","trigsf","mspt","idpt","jer","topo"};
+int nJES=0;
+int nLES=1;
+int nLER=2;
+int nIDSF=3;
+int nRECOSF=4;
+int nTRIGSF=5;
+int nMSPT=6;
+int nIDPT=7;
+int nJER=8;
+int nTOPO=9;
+
+
+const int nSamples =10;
+string samples[nSamples] = {"mcatnlo.top","alpgen.wjets","alpgen.zjets","herwig.vv",
+			    "gww.lvjj.m200.kmpl0_1","gww.lvjj.m350.kmpl0_1","gww.lvjj.m500.kmpl0_1",
+			    "gww.lvjj.m750.kmpl0_1","gww.lvjj.m1000.kmpl0_1","gww.lvjj.m1250.kmpl0_1"};
+
+const int nProcs=2;
+string procs[nProcs] = {"el","mu"};
+
+const int nRegions =2;
+string regions[nRegions] = {"lowm","highm"};
+int nLowM=0;
+int nHighM=1;
+
+
+const int nCombs=3;
+string combs[nCombs] = {"up","down","avg"};
+//int nUp=0;
+//int nDown=1;
+int nAvg=2;
+
+const int nMods=3;
+string modulations[nMods] = {"nom","up","down"};
+int nNom=0;
+int nUp=1;
+int nDown=2;

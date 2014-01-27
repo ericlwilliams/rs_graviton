@@ -1,0 +1,144 @@
+(d_chi) is my significance histogram
+
+bool neglectUncertainty =3D false;
+   =20
+  int Nbins =3D d_chi->GetNbinsX();
+for (int i=3D1; i<=3D Nbins; ++i) { // SKIP UNDER- AND OVER-FLOWS
+  if (data->GetBinContent(i)<=3D0) continue;
+     =20
+	unsigned nObs =3D (int) data->GetBinContent(i);
+  float nExp =3D back->GetBinContent(i);
+  if ( nExp < 0.1 ) { d_chi->SetBinContent(i, 0.0); continue; }
+  float vrnc =3D back->GetBinError(i);
+
+  double fracsys_lumi =3D 0.039;
+  double var_sys_lumi =3D nExp * fracsys_lumi;
+
+  double fracsys =3D 0.1;
+  double var_sys =3D nExp * fracsys;
+     =20
+	//cout << vrnc/nExp << "\t" << var_sys/nExp << "\t" << nExp << =
+	endl;
+
+  vrnc *=3D vrnc; // variance
+  var_sys *=3D var_sys;
+  var_sys_lumi *=3D var_sys_lumi;
+  float sig_sys =3D 0;
+  float sig =3D 0;
+  float pValue_sys =3D 0.0;
+  float pValue =3D 0.0;
+  if (vrnc + var_sys + var_sys_lumi > 0 ) {
+    // account for systematic uncertainty
+    pValue_sys =3D pValuePoissonError(nObs, nExp, vrnc + var_sys + =
+				      var_sys_lumi);
+    if ( pValue_sys <=3D 0.0 ) { sig_sys =3D 0.0; }
+    else { if (pValue_sys<0.5) sig_sys =3D =
+				 pValueToSignificance(pValue_sys, (nObs>nExp)); }
+=09
+   pValue =3D pValuePoissonError(nObs, nExp, vrnc+var_sys_lumi);
+    if ( pValue <=3D 0.0 ) { sig =3D 0.0; }
+    else { if (pValue<0.5) sig =3D pValueToSignificance(pValue, =
+							(nObs>nExp)); }
+  }
+  else {
+    // assume perfect knowledge of Poisson parameter
+    pValue_sys =3D pValuePoisson(nObs,nExp);
+    if ( pValue_sys <=3D 0.0 ) { sig_sys =3D 0.0; }
+    else { if (pValue_sys<0.5) sig_sys =3D =
+				 pValueToSignificance(pValue_sys, (nObs>nExp)); }
+=09
+   pValue =3D pValuePoisson(nObs,nExp);
+    if ( pValue <=3D 0.0 ) { sig =3D 0.0; }
+    else { if (pValue<0.5) sig =3D pValueToSignificance(pValue, =
+							(nObs>nExp)); }
+  }
+
+  d_chi->SetBinContent(i, sig);
+  d_chi_sys->SetBinContent(i, sig_sys);
+
+
+
+  where the functions are defined as:
+
+
+
+  double pValuePoisson(unsigned nObs,    // observed counts
+		       double nExp)      // Poisson parameter
+  {
+    if (nObs>nExp) // excess
+      return 1-ROOT::Math::inc_gamma_c(nObs,nExp);
+    else // deficit
+      return ROOT::Math::inc_gamma_c(nObs+1,nExp);
+    /*
+    double fact=3D1;
+    double sum=3D1;
+    double pwr=3D1;
+    unsigned stop=3DnObs;
+    if (nObs<nExp) ++stop;
+    for (unsigned u=3D1; u<stop; ++u) {
+    fact *=3D u;
+    pwr *=3D nExp;
+    sum +=3D pwr/fact;
+    }
+    if (nObs<nExp) return sum*exp(-nExp);
+    return 1 - sum*exp(-nExp);
+    */
+  }
+=09
+=09
+
+
+   double pValuePoissonError(unsigned nObs, // observed counts
+			     double E,      // expected counts
+			     double V)      // variance of expectation
+   {
+     if (E<=3D0 || V<=3D0) {
+       cerr << "ERROR in pValuePoissonError(): expectation and variance =
+must be positive" << endl;
+       cerr << "Nobs =3D " << nObs << endl;
+       cerr << "Exp  =3D " << E << endl;
+       cerr << "Var  =3D " << V << endl;
+       return 0;
+     }
+     double B =3D E/V;
+     double A =3D E*B;
+=09
+     // relative syst =3D sqrt(V)/E =3D 1/sqrt(A)
+     // relative stat =3D 1/sqrt(nObs)
+     // if syst < 0.1*stat there is no need for syst:
+     // save a bit of CPU time :-)
+     if (A>100*nObs) return pValuePoisson(nObs,E);
+=09
+     // explicit treatment for systematics:
+     unsigned stop=3DnObs;
+     if (nObs>E) --stop;
+=09
+     /// NB: must work in log-scale otherwise troubles!
+     double logProb =3D A*log(B/(1+B));
+     double sum=3Dexp(logProb); // P(n=3D0)
+     for (unsigned u=3D1; u<stop; ++u) {
+       logProb +=3D log((A+u-1)/(u*(1+B)));
+       sum +=3D exp(logProb);
+     }
+     if (nObs>E)  // excess
+       return 1-sum;
+     else  // deficit
+       return sum;
+   }
+
+  double pValueToSignificance(double p,     // p-value
+			      bool excess)  // false if deficit
+  {
+    if (p<0 || p>1) {
+      cerr << "ERROR: p-value must belong to [0,1] but input value is " << =
+	p << endl;
+      return 0;
+    }
+=09
+   if (excess)=20
+		 return ROOT::Math::normal_quantile(1-p,1);
+   else
+     return ROOT::Math::normal_quantile(p,1);
+  }
+=09
+

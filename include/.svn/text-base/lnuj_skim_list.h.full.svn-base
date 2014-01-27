@@ -1,0 +1,124 @@
+string skim_list[] = {
+
+  "merged/data.lnuj",
+
+  "mc.pythia.jetjet.j1.pu",
+  "mc.pythia.jetjet.j2.pu",
+  "mc.pythia.jetjet.j3.pu",
+  "mc.pythia.jetjet.j4.pu",
+  
+  /* "mc.alpgen.ww.lnulnu.np0.pu", */
+  /* "mc.alpgen.ww.lnulnu.np1.pu", */
+  /* "mc.alpgen.ww.lnulnu.np2.pu", */
+  /* "mc.alpgen.ww.lnulnu.np3.pu", */
+
+  "mc.gww.m500.pu",
+  "mc.gww.m750.pu",
+  "mc.gww.m1000.pu",
+  "mc.gww.m1250.pu",
+  
+  /* "mc.gzz.m500.pu", */
+  /* "mc.gzz.m750.pu", */
+  /* "mc.gzz.m1000.pu", */
+  /* "mc.gzz.m1250.pu", */
+  
+  "mc.herwig.ww.pu",
+  
+  "mc.alpgen.wbb.np0.pu",
+  "mc.alpgen.wbb.np1.pu",
+  "mc.alpgen.wbb.np2.pu",
+  "mc.alpgen.wbb.np3.pu",
+
+
+  "mc.herwig.wz.pu",
+
+  /* "mc.alpgen.wz.incl.np0.pu", */
+  /* "mc.alpgen.wz.incl.np1.pu", */
+  /* "mc.alpgen.wz.incl.np2.pu", */
+  /* "mc.alpgen.wz.incl.np3.pu", */
+
+  "mc.herwig.zz.pu",
+  
+  /* "mc.alpgen.zz.incl.np0.pu", */
+  /* "mc.alpgen.zz.incl.np1.pu", */
+  /* "mc.alpgen.zz.incl.np2.pu", */
+  /* "mc.alpgen.zz.incl.np3.pu", */
+  
+  "mc.mcatnlo.st.schan.enu.pu",
+  "mc.mcatnlo.st.schan.tnu.pu",
+  "mc.mcatnlo.st.schan.unu.pu",
+  "mc.mcatnlo.st.tchan.enu.pu",
+  "mc.mcatnlo.st.tchan.tnu.pu",
+  "mc.mcatnlo.st.tchan.unu.pu",
+  "mc.mcatnlo.st.wt.pu",
+
+  "mc.alpgen.wenu.np0.pu",
+  "mc.alpgen.wenu.np1.pu",
+  "mc.alpgen.wenu.np2.pu",
+  "mc.alpgen.wenu.np3.pu",
+  "mc.alpgen.wenu.np4.pu",
+  "mc.alpgen.wenu.np5.pu",
+
+  "mc.alpgen.wunu.np0.pu",
+  "mc.alpgen.wunu.np1.pu",
+  "mc.alpgen.wunu.np2.pu",
+  "mc.alpgen.wunu.np3.pu",
+  "mc.alpgen.wunu.np4.pu",
+  "mc.alpgen.wunu.np5.pu",
+
+  "mc.alpgen.wtnu.np0.pu",
+  "mc.alpgen.wtnu.np1.pu",
+  "mc.alpgen.wtnu.np2.pu",
+  "mc.alpgen.wtnu.np3.pu",
+  "mc.alpgen.wtnu.np4.pu",
+  "mc.alpgen.wtnu.np5.pu",
+
+  "mc.alpgen.zee.np0.pu",
+  "mc.alpgen.zee.np1.pu",
+  "mc.alpgen.zee.np2.pu",
+  "mc.alpgen.zee.np3.pu",
+  "mc.alpgen.zee.np4.pu",
+  "mc.alpgen.zee.np5.pu",
+
+  "mc.alpgen.zuu.np0.pu",
+  "mc.alpgen.zuu.np1.pu",
+  "mc.alpgen.zuu.np2.pu",
+  "mc.alpgen.zuu.np3.pu",
+  "mc.alpgen.zuu.np4.pu",
+  "mc.alpgen.zuu.np5.pu",
+
+  "mc.alpgen.ztt.np0.pu",
+  "mc.alpgen.ztt.np1.pu",
+  "mc.alpgen.ztt.np2.pu",
+  "mc.alpgen.ztt.np3.pu",
+  "mc.alpgen.ztt.np4.pu",
+  "mc.alpgen.ztt.np5.pu",
+
+  "mc.alpgen.zee.lowm.np0.pu",
+  "mc.alpgen.zee.lowm.np1.pu",
+  "mc.alpgen.zee.lowm.np2.pu",
+  "mc.alpgen.zee.lowm.np3.pu",
+  "mc.alpgen.zee.lowm.np4.pu",
+  "mc.alpgen.zee.lowm.np5.pu",
+
+  "mc.alpgen.zuu.lowm.np0.pu",
+  "mc.alpgen.zuu.lowm.np1.pu",
+  "mc.alpgen.zuu.lowm.np2.pu",
+  "mc.alpgen.zuu.lowm.np3.pu",
+  "mc.alpgen.zuu.lowm.np4.pu",
+  "mc.alpgen.zuu.lowm.np5.pu",
+
+  "mc.alpgen.ztt.lowm.np0.pu",
+  "mc.alpgen.ztt.lowm.np1.pu",
+  "mc.alpgen.ztt.lowm.np2.pu",
+  "mc.alpgen.ztt.lowm.np3.pu",
+  "mc.alpgen.ztt.lowm.np4.pu",
+  "mc.alpgen.ztt.lowm.np5.pu",
+
+  "mc.mcatnlo.t1.pu"
+
+			 
+};
+
+int nSkims = sizeof(skim_list)/sizeof(skim_list[0]);
+

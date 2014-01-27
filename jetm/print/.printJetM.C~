@@ -1,0 +1,35 @@
+#include <TMultiGraph.h>
+#include <TGraphErrors.h>
+
+void printJetM(bool drawData=true){
+
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In printJetM.C"<<endl;
+
+  // Copy info from ../logs/*
+
+  const int nMasses=7;
+  float jetm_xaxis[nMasses] = {200,350,500,750,1000,1250,1500};
+  
+  float jpt30_kt6_one_jet[nMasses] =
+    {0.225894,0.108684,0.108947,0.162067,0.186015,0.198191,0.209415};
+  float jpt30_kt6_merged[nMasses] =
+    {0.00220059,0.0150737,0.0883648,0.445116,0.651202,0.728201,0.785807};
+  float jpt30_kt6_unmerged[nMasses] =
+    {0.216524,0.248116,0.230669,0.0828689,0.0432577,0.0227333,0.0166383};
+
+
+  TGraphErrors* jetm_jpt30_kt6_one_jet = new TGraphErrors(nMasses,jetm_xaxis,jpt30_kt6_one_jet);
+
+  
+  
+
+}

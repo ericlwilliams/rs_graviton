@@ -1,0 +1,372 @@
+** mc.afii.kkg.lvjj.m1000 **
+n_events		15000.0
+n_sow			14995.9
+** mc.afii.kkg.lvjj.m1100 **
+n_events		15000.0
+n_sow			14996.0
+** mc.afii.kkg.lvjj.m1200 **
+n_events		15000.0
+n_sow			14995.69
+** mc.afii.kkg.lvjj.m1300 **
+n_events		15000.0
+n_sow			14996.03
+** mc.afii.kkg.lvjj.m1400 **
+n_events		15000.0
+n_sow			14995.71
+** mc.afii.kkg.lvjj.m1500 **
+n_events		15000.0
+n_sow			14995.35
+** mc.afii.kkg.lvjj.m500 **
+n_events		15000.0
+n_sow			14995.76
+** mc.afii.kkg.lvjj.m600 **
+n_events		14999.0
+n_sow			14994.65
+** mc.afii.kkg.lvjj.m700 **
+n_events		15000.0
+n_sow			14995.59
+** mc.afii.kkg.lvjj.m800 **
+n_events		15000.0
+n_sow			14995.59
+** mc.afii.kkg.lvjj.m900 **
+n_events		15000.0
+n_sow			14995.59
+** mc.alpgen.wbb.np0 **
+n_events		474997.0
+n_sow			454355.0
+** mc.alpgen.wbb.np1 **
+n_events		205000.0
+n_sow			200710.6
+** mc.alpgen.wbb.np2 **
+n_events		174499.0
+n_sow			198071.1
+** mc.alpgen.wbb.np3 **
+n_events		69999.0
+n_sow			66110.8
+** mc.alpgen.wcc.np0 **
+n_events		1274846.0
+n_sow			1211600.2
+** mc.alpgen.wcc.np1 **
+n_events		1049847.0
+n_sow			967711.8
+** mc.alpgen.wcc.np2 **
+n_events		524947.0
+n_sow			476959.1
+** mc.alpgen.wcc.np3 **
+n_events		170000.0
+n_sow			147513.5
+** mc.alpgen.wc.np0 **
+n_events		6467837.0
+n_sow			6444666.27
+** mc.alpgen.wc.np1 **
+n_events		2069646.0
+n_sow			2044502.8
+** mc.alpgen.wc.np2 **
+n_events		519998.0
+n_sow			507482.7
+** mc.alpgen.wc.np3 **
+n_events		115000.0
+n_sow			110848.1
+** mc.alpgen.wc.np4 **
+n_events		30000.0
+n_sow			28491.93
+** mc.alpgen.wenu.np0 **
+n_events		6952874.0
+n_sow			6951424.98
+** mc.alpgen.wenu.np1 **
+n_events		4998487.0
+n_sow			4997213.03
+** mc.alpgen.wenu.np2 **
+n_events		3768632.0
+n_sow			3767685.48
+** mc.alpgen.wenu.np3 **
+n_events		1008947.0
+n_sow			1008668.1
+** mc.alpgen.wenu.np4 **
+n_events		250000.0
+n_sow			249949.98
+** mc.alpgen.wenu.np5 **
+n_events		69999.0
+n_sow			69984.48
+** mc.alpgen.wtnu.np0 **
+n_events		3418296.0
+n_sow			3417521.4
+** mc.alpgen.wtnu.np1 **
+n_events		2499194.0
+n_sow			2498692.2
+** mc.alpgen.wtnu.np2 **
+n_events		3750986.0
+n_sow			3751431.3
+** mc.alpgen.wtnu.np3 **
+n_events		1009946.0
+n_sow			1009715.4
+** mc.alpgen.wtnu.np4 **
+n_events		249998.0
+n_sow			249950.57
+** mc.alpgen.wtnu.np5 **
+n_events		65000.0
+n_sow			64986.44
+** mc.alpgen.wunu.np0 **
+n_events		6962239.0
+n_sow			6960393.29
+** mc.alpgen.wunu.np1 **
+n_events		2498593.0
+n_sow			2497927.89
+** mc.alpgen.wunu.np2 **
+n_events		3768737.0
+n_sow			3767819.31
+** mc.alpgen.wunu.np3 **
+n_events		1008446.0
+n_sow			1008207.55
+** mc.alpgen.wunu.np4 **
+n_events		254950.0
+n_sow			254907.59
+** mc.alpgen.wunu.np5 **
+n_events		70000.0
+n_sow			69985.41
+** mc.alpgen.zee.np0 **
+n_events		6618284.0
+n_sow			6617088.28
+** mc.alpgen.zee.np1 **
+n_events		1334897.0
+n_sow			1335251.36
+** mc.alpgen.zee.np2 **
+n_events		2004195.0
+n_sow			2004099.5
+** mc.alpgen.zee.np3 **
+n_events		549949.0
+n_sow			549808.7
+** mc.alpgen.zee.np4 **
+n_events		149948.0
+n_sow			149917.03
+** mc.alpgen.zee.np5 **
+n_events		50000.0
+n_sow			49989.42
+** mc.alpgen.ztt.np0 **
+n_events		10613179.0
+n_sow			10611547.19
+** mc.alpgen.ztt.np1 **
+n_events		3334137.0
+n_sow			3333599.36
+** mc.alpgen.ztt.np2 **
+n_events		1004847.0
+n_sow			1004573.6
+** mc.alpgen.ztt.np3 **
+n_events		509847.0
+n_sow			509683.4
+** mc.alpgen.ztt.np4 **
+n_events		144999.0
+n_sow			144968.57
+** mc.alpgen.ztt.np5 **
+n_events		45000.0
+n_sow			44991.05
+** mc.alpgen.zuu.np0 **
+n_events		6615230.0
+n_sow			6613423.1
+** mc.alpgen.zuu.np1 **
+n_events		1334296.0
+n_sow			1334004.0
+** mc.alpgen.zuu.np2 **
+n_events		1999941.0
+n_sow			1999499.9
+** mc.alpgen.zuu.np3 **
+n_events		549896.0
+n_sow			549780.5
+** mc.alpgen.zuu.np4 **
+n_events		150000.0
+n_sow			149968.26
+** mc.alpgen.zuu.np5 **
+n_events		50000.0
+n_sow			49989.08
+** mc.gww.lvjj.m1000.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.56
+** mc.gww.lvjj.m1250.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.69
+** mc.gww.lvjj.m1500.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.71
+** mc.gww.lvjj.m200.kmpl0_01 **
+n_events		29899.0
+n_sow			29892.58
+** mc.gww.lvjj.m200.kmpl0_1 **
+n_events		29800.0
+n_sow			29793.65
+** mc.gww.lvjj.m350.kmpl0_01 **
+n_events		30000.0
+n_sow			29993.75
+** mc.gww.lvjj.m350.kmpl0_1 **
+n_events		29900.0
+n_sow			29894.25
+** mc.gww.lvjj.m500.kmpl0_01 **
+n_events		30000.0
+n_sow			29994.08
+** mc.gww.lvjj.m500.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.52
+** mc.gww.lvjj.m750.kmpl0_01 **
+n_events		29999.0
+n_sow			29992.8
+** mc.gww.lvjj.m750.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.57
+** mc.gzz.lljj.m1000.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.73
+** mc.gzz.lljj.m1250.kmpl0_1 **
+n_events		30000.0
+n_sow			29993.68
+** mc.gzz.lljj.m1500.kmpl0_1 **
+n_events		30000.0
+n_sow			29994.07
+** mc.gzz.lljj.m500.kmpl0_01 **
+n_events		29998.0
+n_sow			29991.21
+** mc.gzz.lljj.m500.kmpl0_1 **
+n_events		29900.0
+n_sow			29893.89
+** mc.gzz.lljj.m750.kmpl0_01 **
+n_events		29998.0
+n_sow			29991.53
+** mc.gzz.lljj.m750.kmpl0_1 **
+n_events		29999.0
+n_sow			29991.97
+** mc.herwig.ww **
+n_events		2489244.0
+n_sow			2488752.0
+** mc.herwig.wz **
+n_events		999896.0
+n_sow			999623.22
+** mc.herwig.zz **
+n_events		249999.0
+n_sow			249951.05
+** mc.mcatnlo.st.schan.enu **
+n_events		299948.0
+n_sow			253351.72
+** mc.mcatnlo.st.schan.tnu **
+n_events		299899.0
+n_sow			253450.26
+** mc.mcatnlo.st.schan.unu **
+n_events		299998.0
+n_sow			253534.73
+** mc.mcatnlo.st.tchan.enu **
+n_events		299998.0
+n_sow			177148.92
+** mc.mcatnlo.st.tchan.tnu **
+n_events		299999.0
+n_sow			176463.27
+** mc.mcatnlo.st.tchan.unu **
+n_events		299999.0
+n_sow			176850.0
+** mc.mcatnlo.st.wt **
+n_events		899694.0
+n_sow			796798.1
+** mc.mcatnlo.t1 **
+n_events		7639186.0
+n_sow			5901485.5
+** mc.sherpa.wenu **
+n_events		1699846.0
+n_sow			864267.73
+** mc.sherpa.wtnu **
+n_events		1699496.0
+n_sow			863585.39
+** mc.sherpa.wunu **
+n_events		1699694.0
+n_sow			863376.9
+** mc.sherpa.zee **
+n_events		1999196.0
+n_sow			1019507.75
+** mc.sherpa.ztt **
+n_events		159949.0
+n_sow			81643.88
+** mc.sherpa.zuu **
+n_events		1999294.0
+n_sow			1019797.41
+** mc.wprime.wz.lvqq.m1000 **
+n_events		10000.0
+n_sow			9997.75
+** mc.wprime.wz.lvqq.m1100 **
+n_events		10000.0
+n_sow			9997.89
+** mc.wprime.wz.lvqq.m1200 **
+n_events		10000.0
+n_sow			9997.93
+** mc.wprime.wz.lvqq.m1300 **
+n_events		10000.0
+n_sow			9998.09
+** mc.wprime.wz.lvqq.m1400 **
+n_events		10000.0
+n_sow			9997.97
+** mc.wprime.wz.lvqq.m1500 **
+n_events		10000.0
+n_sow			9997.93
+** mc.wprime.wz.lvqq.m500 **
+n_events		10000.0
+n_sow			9997.75
+** mc.wprime.wz.lvqq.m600 **
+n_events		10000.0
+n_sow			9997.77
+** mc.wprime.wz.lvqq.m700 **
+n_events		9999.0
+n_sow			9996.89
+** mc.wprime.wz.lvqq.m800 **
+n_events		10000.0
+n_sow			9997.97
+** mc.wprime.wz.lvqq.m900 **
+n_events		10000.0
+n_sow			9998.01
+** mc.wprime.wz.qqee.m1100 **
+n_events		9998.0
+n_sow			9995.98
+** mc.wprime.wz.qqee.m1200 **
+n_events		10000.0
+n_sow			9997.79
+** mc.wprime.wz.qqee.m1300 **
+n_events		10000.0
+n_sow			9997.96
+** mc.wprime.wz.qqee.m1400 **
+n_events		10000.0
+n_sow			9997.75
+** mc.wprime.wz.qqee.m500 **
+n_events		10000.0
+n_sow			9997.77
+** mc.wprime.wz.qqee.m600 **
+n_events		10000.0
+n_sow			9997.95
+** mc.wprime.wz.qqee.m700 **
+n_events		9998.0
+n_sow			9995.83
+** mc.wprime.wz.qqee.m800 **
+n_events		10000.0
+n_sow			9997.8
+** mc.wprime.wz.qqee.m900 **
+n_events		9998.0
+n_sow			9995.96
+** mc.wprime.wz.qquu.m1100 **
+n_events		10000.0
+n_sow			9997.95
+** mc.wprime.wz.qquu.m1200 **
+n_events		10000.0
+n_sow			9998.0
+** mc.wprime.wz.qquu.m1300 **
+n_events		10000.0
+n_sow			9997.8
+** mc.wprime.wz.qquu.m1400 **
+n_events		10000.0
+n_sow			9997.71
+** mc.wprime.wz.qquu.m500 **
+n_events		10000.0
+n_sow			9997.97
+** mc.wprime.wz.qquu.m600 **
+n_events		10000.0
+n_sow			9997.97
+** mc.wprime.wz.qquu.m700 **
+n_events		10000.0
+n_sow			9997.75
+** mc.wprime.wz.qquu.m800 **
+n_events		10000.0
+n_sow			9997.95
+** mc.wprime.wz.qquu.m900 **
+n_events		10000.0
+n_sow			9997.95

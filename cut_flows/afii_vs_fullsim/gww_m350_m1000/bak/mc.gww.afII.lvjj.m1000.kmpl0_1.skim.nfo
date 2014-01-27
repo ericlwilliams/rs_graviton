@@ -1,0 +1,254 @@
+RandomDataPeriod has been initialised with a total lumi of 1023.89.
+the input tree name is physics
+
+inputName: ./mc.gww.afII.lvjj.m1000.kmpl0_1.pu.list
+inputTreeName: physics
+outputFileName: /a/data2/xenia/users/elw/mc/skims/lnuj/mc.gww.afII.lvjj.m1000.kmpl0_1.pu.skim.root
+outputTreeName: analysisTree
+goodRunsList: ../WWGRLs/data11_7TeV.periodAllYear_DetStatus-v18-pro08-04_CoolRunQuery-00-03-98_WZjets_allchannels_NOB2.xml
+cutFileName: cutFile
+thinList: thinList
+leafList: readLeafList
+plotFileName: plotFile
+isMC: true
+
+chainMaker::Add(./mc.gww.afII.lvjj.m1000.kmpl0_1.pu.list)
+Building chain of root files listed in ./mc.gww.afII.lvjj.m1000.kmpl0_1.pu.list containing the physics tree
+adding /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000001.root.2/physics to chain.
+Warning in <TClass::TClass>: no dictionary for class AttributeListLayout is available
+Warning in <TClass::TClass>: no dictionary for class pair<string,string> is available
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000001.root.2: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000001.root.2: not a TStreamerInfo object
+Error in <TChain::AddFile>: cannot find tree with name physicsTrigDec in file /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000001.root.2
+no physicsTrigDec tree found, will assume all trigger info is in the primary input tree
+adding /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000002.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000001.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000001.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000002.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFraction_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFractionError_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Not enough information to calculate prefactor alphaC: Setting alphaC = 1!
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph rSample_rIncl_AntiKt4Topo_EMJES in input file JESUncertainty.root! Setting response_sample/r_incl = 1!
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Initializing the MultijetJESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Uncertainty for AntiKt4EMJESTopoJets
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Using uncertainty in ATLAS-CONF-2011-032 from JESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: For data produced with rel 16 (full 2010 dataset and MC)
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+JERProvider initialized:  Collection name = AntiKt4TopoJES
+thinList not found, will not automatically save any read variables to analysisTree
+could not open newLeafList
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Running physics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Warning in <TFile::ReadStreamerInfo>: ./InteractionsperCrossing/ilumicalc_histograms_EF_e20_medium_179710-184169.root: not a TStreamerInfo object
+doPileUpReWeight = 1
+doLeptonSmearing = 1
+doScaleFactor = 1
+doJES = 1
+doJER = 1
+doMetTopo = 1
+isMC = 1
+isData = 0
+isQCD = 0
+isDataEgamma = 0
+isDataMuons = 0
+isSig = 1
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000001.root.2: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+RunNumber = 145156
+1 events processed
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145156.PythiaGWW_evjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531786_00/NTUP_SMWZ.531786._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000001.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+RunNumber = 145157
+Warning in <TFile::ReadStreamerInfo>: /data/users/elw/mc/mc11a/signals/mc10_7TeV.145157.PythiaGWW_mvjj_m1000_kMpl0_1.merge.NTUP_SMWZ.e907_a126_r2300_p605_tid531785_00/NTUP_SMWZ.531785._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+
+VxpSel::PrintInfo()
+Vertex Selection
+=========================
+vtx_all:	215719
+vtx_iso_ntrks:	5
+vtx_ntrks:	5
+vtx_jes_ntrks:	4
+=========================
+
+
+JetMet::PrintInfo()
+-
+Jet Counting and MET Cleaning
+=========================
+jet_n:		454884
+jet_pos_e:	454884
+jet_em_pt:	117087
+jet_em_eta:	110256
+jet_clean:	110256
+jet_overlap:	98704
+good_jet_n:	98704
+=========================
+
+
+LepCtr::PrintInfo()
+--
+*Analysis* Electron Selection
+=========================
+el_all:		401380
+el_author:	161975
+el_oq:		157988
+el_eta:		150321
+el_medium:	13668
+el_veto_pt:	12104
+el_pt:		11934
+el_d0sig:	11705
+el_absz0:	11702
+el_blayer:	11702
+el_tight:	10474
+el_iso:		10002
+el_pix_hits:	10002
+el_jet_dr:	0
+el_overlap:	9989
+=========================
+
+*Analysis* Muon Selection
+=========================
+mu_all:		19562
+mu_author:	16295
+mu_eta:		16046
+mu_veto_pt:	13303
+mu_pt:		12995
+mu_absz0:	12993
+mu_absd0:	12901
+mu_blayer:	12811
+mu_jet_dr:	0
+mu_pix_hits:	12390
+mu_iso:		12410
+mu_sct_hits:	12358
+mu_holes:	12358
+mu_trt_hits:	12334
+
+LepCtr::PrintInfo()
+--
+*Veto* Electron Selection
+=========================
+el_all:		401380
+el_author:	161975
+el_oq:		157988
+el_eta:		150321
+el_medium:	13668
+el_veto_pt:	12104
+el_pt:		0
+el_d0sig:	11869
+el_absz0:	11866
+el_blayer:	11630
+el_tight:	0
+el_iso:		0
+el_pix_hits:	11630
+el_jet_dr:	0
+el_overlap:	11556
+=========================
+
+*Veto* Muon Selection
+=========================
+mu_all:		19562
+mu_author:	16295
+mu_eta:		16046
+mu_veto_pt:	13303
+mu_pt:		0
+mu_absz0:	13301
+mu_absd0:	13179
+mu_blayer:	13086
+mu_jet_dr:	0
+mu_pix_hits:	13055
+mu_iso:		0
+mu_sct_hits:	13020
+mu_holes:	13020
+mu_trt_hits:	12996
+
+EvtCtr::PrintInfo()
+--
+Event Pre-Selection
+=========================
+n_events:	30000
+n_unique:	30000
+n_grl:		30000
+n_lar_err:	30000
+n_lar_hole_err:	29991
+n_el_jet_dr:	29995
+n_mu_jet_dr:	27623
+n_met_clean:	0
+n_pos_sumet:	27609
+n_vxp_sel:	27609
+n_trig_sel:	21388
+n_el_trig_sel:	12734
+n_mu_trig_sel:	8782
+_-_
+n_mc_weight:		30000
+n_pu_weight:		29902.3
+n_lep_id_sf:		30291.7
+n_lep_down_id_sf:	29969.6
+n_lep_up_id_sf:		30637.1
+n_lep_reco_sf:		29840
+n_lep_down_reco_sf:	29679
+n_lep_up_reco_sf:	30007.8
+n_trig_sf:		30225.4
+n_trig_up_sf:		30537.7
+n_trig_down_sf:		29915.1
+n_sow:			29902.3
+=========================
+
+--
+Electron Event Selection
+=========================
+n_one_el:	10088.3
+n_two_el_veto:	10088.3
+n_mu_veto:	10088.3
+n_el_met_cut:	9572.23
+n_el_jet==0:	13.4464
+n_el_jet==1:	1330.79
+n_el_jet>=2:	8227.96
+n_el_ctrl_all: 7201.7
+--
+Low Mass Signal Cuts
+n_el_lowm_ptlv: 7193.32
+n_el_lowm_ptjj: 7174.22
+n_el_lowm_mjj: 2501.55
+--
+High Mass Signal Cuts
+n_el_highm_ptlv: 6714.46
+n_el_highm_ptjj: 6617.38
+n_el_highm_mjj: 2349.17
+=========================
+
+--
+Muon Event Selection
+=========================
+n_one_mu:	8423.81
+n_two_mu_veto:	8423.81
+n_el_veto:	8423.81
+n_mu_met_cut:	8134.42
+n_mu_jet==0:	17.4986
+n_mu_jet==1:	1167.11
+n_mu_jet>=2:	6949.8
+n_mu_ctrl_all: 6081.22
+--
+Low Mass Signal Cuts
+n_mu_lowm_ptlv: 6072.84
+n_mu_lowm_ptjj: 6067.81
+n_mu_lowm_mjj: 2207.66
+--
+High Mass Signal Cuts
+n_mu_highm_ptlv: 5581.86
+n_mu_highm_ptjj: 5495.58
+n_mu_highm_mjj: 2012.5
+=========================
+
+Total Events Processed: 29999
+Writing out text file goodLeaves, listing all leaves that were defined in every input file run over

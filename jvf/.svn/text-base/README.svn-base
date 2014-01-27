@@ -1,0 +1,12 @@
+//////////////////////////////////////////////////
+// Study to motivate use of JVF cut in rel17 analysis
+// Moved to lnuj/run lnuj/src/ lnuj/merge/jvf_merge.sh, etc
+// lnuj/run:
+//	runJVF.C runs ../src/jvf.C over both ../files/skims_jvf and
+//	../files/skims_nojvf (Make sure they are up to date!)
+// lnuj/merge:
+//	jvf_merge.sh merges plots in ../plots/jvf_plots and
+//	../plots/nojvf_plots
+// lnuj/print:
+//	jvfPrint
+//////////////////////////////////////////////////

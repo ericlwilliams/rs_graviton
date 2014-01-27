@@ -1,0 +1,18 @@
+** mc.pythia.wenu **
+n_events	999996.0
+n_sow		999805.5
+** mc.pythia.wtnu **
+n_events	497000.0
+n_sow		496896.7
+** mc.pythia.wunu **
+n_events	999999.0
+n_sow		999784.0
+** mc.pythia.zee **
+n_events	1099996.0
+n_sow		1099751.5
+** mc.pythia.ztt **
+n_events	495347.0
+n_sow		495224.2
+** mc.pythia.zuu **
+n_events	899997.0
+n_sow		899773.8

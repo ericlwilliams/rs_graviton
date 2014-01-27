@@ -1,0 +1,64 @@
+Systematics (as of 2012-01-25)
+
+All systematics propigated to MET using MissingETUtility-00-02-08/
+
+= JES =
+Jet Energy Scale
+JetUncertainties-00-03-04-02: 
+- JetUncertaintyProvider (LC jets), 
+  - https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/JESUncertaintyProvider
+- MultiJetUncertaityProvider (EM+JES jets)
+  - https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/MultijetJESUncertaintyProvider
+
+= JER =
+Jet Energy Resolution
+Resolution smearing applied to all jets
+Systematic is modulation on top of smearing
+Need systematic for JES on/off?
+JetResolution-00-00-09: 
+- JERProvider
+  - https://twiki.cern.ch/twiki/bin/view/Main/JetEnergyResolutionProvider
+
+= LES =
+Lepton Energy Scale
+- Electrons
+  - egammaAnalysisUtils-00-02-59
+  - Data
+    - EnergyRescaler.applyEnergyCorrections for syst
+  - MC
+    - EnergyRescaler.applyEneryCorrections && getError for syst
+  - https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/EnergyRescaler
+
+- Muons
+  - MuonMomentumCorrections-00-05-00
+  - Energy Scale in SmearingClass w/out method, change soon?
+  - https://twiki.cern.ch/twiki/bin/viewauth/AtlasProtected/MCPAnalysisGuidelinesRel17MC11a
+
+= LER =
+Lepton Energy Resolution
+- Electrons
+  - egammaAnalysisUtils-00-02-59
+  - eRescaler.getSmearingCorrections for syst
+- Muons
+  - MuonMomentumCorrections-00-05-00
+  - Choose 'worst' of ms/id resolution scalings
+  - SmearingClass.PTVar
+
+
+== ALLCL ==
+'All clusters'
+Coherently varies cell out and soft jets terms
+
+== METPU ==
+6.6% pileup uncertainty propagated to met
+
+%-- Not used --%
+  
+= COEF =
+CellOut Energy Flow
+Provided by METUtility
+
+= SJETS =
+Soft Jets
+Provided by METUtility
+  

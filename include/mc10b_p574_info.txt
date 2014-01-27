@@ -1,0 +1,171 @@
+#MCID           Sample                Generator      Nevts(Total)   Nevts(Weight)  k-factor       FilterEff(gen) Xsection(pb)   ConfigTag  
+
+#WZ
+105941         ZW+->lnull            MC@NLO         24995          18515          1.0            1.0            0.15924        r2302_r2300_p574_tid368450
+105971         ZW-->lnull            MC@NLO         99972          73994          1.0            1.0            0.08605        r2302_r2300_p574_tid368461
+106024         ZW+->taunull          MC@NLO         24994          18608          1.0            1.0            0.07962        r2302_r2300_p574_tid368484
+106027         ZW-->taunull          MC@NLO         24997          18417          1.0            1.0            0.04302        r2302_r2300_p574_tid368487
+105940         ZW+->lnuqq            MC@NLO         24989          18693          1.0            1.0            1.6889         r2302_r2300_p574_tid368449
+105970         ZW-->lnuqq            MC@NLO         24993          18637          1.0            1.0            0.91264        r2302_r2300_p574_tid368460
+105942         ZW+->qqll             MC@NLO         24992          18560          1.0            1.0            0.49836        r2302_r2300_p574_tid368451
+105972         ZW-->qqll             MC@NLO         99968          73944          1.0            1.0            0.2693         r2302_r2300_p574_tid368462
+106025         ZW+->lnutautau        MC@NLO         24992          18722          1.0            1.0            0.07962        r2302_r2300_p574_tid368485
+106028         ZW-->lnutautau        MC@NLO         24993          18573          1.0            1.0            0.04302        r2302_r2300_p574_tid368488
+106026         ZW+->taunutautau      MC@NLO         24990          18622          1.0            1.0            0.03981        r2302_r2300_p574_tid368486
+106029         ZW-->taunutautau      MC@NLO         24941          18539          1.0            1.0            0.02151        r2302_r2300_p574_tid368489
+113190         ZW+->qqtautau         MC@NLO         24987          18687          1.0            1.0            0.24918        r2302_r2300_p574_tid369698
+113191         ZW-->qqtautau         MC@NLO         24989          18469          1.0            1.0            0.13465        r2302_r2300_p574_tid369699
+
+#WW
+105921         qq->WpWm->eenunu      MC@NLO         149972         106566         1.0            1.0            0.524          r2302_r2300_p574_tid368428
+105921         qq->WpWm->eenunu      MC@NLO         49988          35532          1.0            1.0            0.524          r2302_r2300_p574_tid368429
+105922         qq->WpWm->emununu     MC@NLO         149973         106427         1.0            1.0            0.524          r2302_r2300_p574_tid368430
+105922         qq->WpWm->emununu     MC@NLO         49987          35397          1.0            1.0            0.524          r2302_r2300_p574_tid368431
+105923         qq->WpWm->etaununu    MC@NLO         149971         105997         1.0            1.0            0.524          r2302_r2300_p574_tid368432
+105923         qq->WpWm->etaununu    MC@NLO         49995          35421          1.0            1.0            0.524          r2302_r2300_p574_tid368433
+105924         qq->WpWm->mumununu    MC@NLO         149964         106180         1.0            1.0            0.524          r2302_r2300_p574_tid368434
+105924         qq->WpWm->mumununu    MC@NLO         49992          35566          1.0            1.0            0.524          r2302_r2300_p574_tid368435
+105925         qq->WpWm->muenunu     MC@NLO         149971         105883         1.0            1.0            0.524          r2302_r2300_p574_tid368436
+105925         qq->WpWm->muenunu     MC@NLO         49990          35406          1.0            1.0            0.524          r2302_r2300_p574_tid368437
+105926         qq->WpWm->mutaununu   MC@NLO         149971         106991         1.0            1.0            0.524          r2302_r2300_p574_tid368438
+105926         qq->WpWm->mutaununu   MC@NLO         49989          35523          1.0            1.0            0.524          r2302_r2300_p574_tid368439
+105927         qq->WpWm->tautaununu  MC@NLO         149972         106252         1.0            1.0            0.524          r2302_r2300_p574_tid368440
+105927         qq->WpWm->tautaununu  MC@NLO         49994          35574          1.0            1.0            0.524          r2302_r2300_p574_tid368441
+105928         qq->WpWm->tauenunu    MC@NLO         149969         105789         1.0            1.0            0.524          r2302_r2300_p574_tid368442
+105928         qq->WpWm->tauenunu    MC@NLO         49989          35501          1.0            1.0            0.524          r2302_r2300_p574_tid368443
+105929         qq->WpWm->taumununu   MC@NLO         149971         106141         1.0            1.0            0.524          r2302_r2300_p574_tid368444
+105929         qq->WpWm->taumununu   MC@NLO         49986          35308          1.0            1.0            0.524          r2302_r2300_p574_tid368445
+
+106011         gg->WpWm->eenunu      gg2WW0240      9998           9998           1.0            0.9885         0.0155         r2302_r2300_p574_tid368471
+106012         gg->WpWm->emununu     gg2WW0240      9999           9999           1.0            0.9893         0.0155         r2302_r2300_p574_tid368472
+106013         gg->WpWm->etaununu    gg2WW0240      9997           9997           1.0            0.9231         0.0155         r2302_r2300_p574_tid368473
+106014         gg->WpWm->mumununu    gg2WW0240      9998           9998           1.0            0.9897         0.0155         r2302_r2300_p574_tid368474
+106015         gg->WpWm->muenunu     gg2WW0240      9998           9998           1.0            0.9888         0.0155         r2302_r2300_p574_tid368475
+106016         gg->WpWm->mutaununu   gg2WW0240      9997           9997           1.0            0.9281         0.0155         r2302_r2300_p574_tid368476
+106017         gg->WpWm->tautaununu  gg2WW0240      9998           9998           1.0            0.3268         0.0155         r2302_r2300_p574_tid368477
+106018         gg->WpWm->tauenunu    gg2WW0240      9997           9997           1.0            0.9236         0.0155         r2302_r2300_p574_tid368478
+106019         gg->WpWm->taumununu   gg2WW0240      9998           9998           1.0            0.9272         0.0155         r2302_r2300_p574_tid368479
+
+105985         WW                    Herwig         249915         249915         1.48           0.38863        29.592         r2302_r2300_p574_tid368464
+
+#ZZ
+105986         ZZ                    Herwig         249906         249906         1.2            1.0            0.977          r2302_r2300_p574_tid368465
+
+#ZZ special samples
+105931	ZZ_llll		       MC@NLO	   99982	???	      1		1     0.02436 
+109292	zz4l_3MLFElecMu	       Pythia	   149969	149969	      1.5 	0.6235 0.07494 	    
+107650 	ZeeNp0_pt20	       AlpgenJimmy 6582268	6582268	      1.26 	1     664.1		    
+107651 	ZeeNp1_pt20	       AlpgenJimmy 1323746 	1323746       1.26 	1     132.462 	    
+107652 	ZeeNp2_pt20	       AlpgenJimmy 404873 	404873        1.26 	1     40.226		    
+107653 	ZeeNp3_pt20	       AlpgenJimmy 109942 	109942        1.26 	1     11.138		    
+107654 	ZeeNp4_pt20	       AlpgenJimmy 29992        29992         1.26 	1     3.12818 	    
+107655 	ZeeNp5_pt20	       AlpgenJimmy 8992         8992          1.26 	1     0.753425 	    
+107660 	ZmumuNp0_pt20	       AlpgenJimmy 6619010 	6619010       1.26 	1     663.79		    
+107661 	ZmumuNp1_pt20	       AlpgenJimmy 1334723 	1334723       1.26 	1     132.95		    
+107662 	ZmumuNp2_pt20	       AlpgenJimmy 403886 	403886        1.26 	1     40.375		    
+107663 	ZmumuNp3_pt20	       AlpgenJimmy 109954 	109954        1.26 	1     11.161		    
+107664 	ZmumuNp4_pt20	       AlpgenJimmy 29978        29978         1.26 	1     2.8987		    
+107665 	ZmumuNp5_pt20	       AlpgenJimmy 9993         9993          1.26 	1     0.75662 	    
+109380 	ZeebbNp0_3Leptons      AlpgenJimmy 199948 	199948        ???	0.09  6.37		 	
+109381 	ZeebbNp1_3Leptons      AlpgenJimmy 99975        99975         ???	0.14  2.39		 	 
+109382 	ZeebbNp2_3Leptons      AlpgenJimmy 39986        39986         ???	0.16  0.859		 	 
+109383 	ZeebbNp3_3Leptons      AlpgenJimmy 19987        19987         ???	0.19  0.379		 	 
+109385 	ZmumubbNp0_3Leptons    AlpgenJimmy 199948 	199948        ???	0.09  6.34		 	 
+109386 	ZmumubbNp1_3Leptons    AlpgenJimmy 99975        99975         ???	0.14  2.45		 	 
+109387 	ZmumubbNp2_3Leptons    AlpgenJimmy 39982        39982         ???	0.16  0.858		 	 
+109388 	ZmumubbNp3_3Leptons    AlpgenJimmy 19988    	19988         ???	0.2   0.376			  
+
+#Z+jets
+107650         ZeeNp0                Alpgen         6612265        6612265        1.26           1.0            6.6410E+2      r2302_r2300_p574_tid368622
+107651         ZeeNp1                Alpgen         1323746        1323746        1.26           1.0            1.32462E+2     r2302_r2300_p574_tid368623
+107652         ZeeNp2                Alpgen         404873         404873         1.26           1.0            4.0226E+1      r2302_r2300_p574_tid368624
+107653         ZeeNp3                Alpgen         109942         109942         1.26           1.0            1.1138E+1      r2302_r2300_p574_tid368625
+107654         ZeeNp4                Alpgen         29992          29992          1.26           1.0            3.12818E+0     r2302_r2300_p574_tid368626
+107655         ZeeNp5                Alpgen         8992           8992           1.26           1.0            7.53425E-1     r2302_r2300_p574_tid368627
+107660         ZmumuNp0              Alpgen         6619010        6619010        1.26           1.0            6.6379E+2      r2302_r2300_p574_tid368628
+107661         ZmumuNp1              Alpgen         1334723        1334723        1.26           1.0            1.3295E+2      r2302_r2300_p574_tid368629
+107662         ZmumuNp2              Alpgen         403886         403886         1.26           1.0            4.0375E+1      r2302_r2300_p574_tid368630
+107663         ZmumuNp3              Alpgen         109954         109954         1.26           1.0            1.1161E+1      r2302_r2300_p574_tid368631
+107664         ZmumuNp4              Alpgen         29978          29978          1.26           1.0            2.8987E+0      r2302_r2300_p574_tid368632
+107665         ZmumuNp5              Alpgen         9993           9993           1.26           1.0            7.5662E-1      r2302_r2300_p574_tid368633
+
+116250         ZeeNp0_M10to40_pt20   AlpgenJimmy    999859         999859         1.22           1.0            3051.62        r2302_r2300_p574_tid370022
+116251         ZeeNp1_M10to40_pt20   AlpgenJimmy    299940         299940         1.22           1.0            87.87          r2302_r2300_p574_tid370023
+116252         ZeeNp2_M10to40_pt20   AlpgenJimmy    499880         499880         1.22           1.0            41.10          r2302_r2300_p574_tid370024
+116253         ZeeNp3_M10to40_pt20   AlpgenJimmy    149940         149940         1.22           1.0            8.46           r2302_r2300_p574_tid370025
+116254         ZeeNp4_M10to40_pt20   AlpgenJimmy    39973          39973          1.22           1.0            1.84           r2302_r2300_p574_tid370026
+116255         ZeeNp5_M10to40_pt20   AlpgenJimmy    9995           9995           1.22           1.0            0.46           r2302_r2300_p574_tid370027
+116260         ZmmNp0_M10to40_pt20   AlpgenJimmy    999869         999869         1.22           1.0            3051.62        r2302_r2300_p574_tid370028
+116261         ZmmNp1_M10to40_pt20   AlpgenJimmy    299890         299890         1.22           1.0            87.87          r2302_r2300_p574_tid370029
+116262         ZmmNp2_M10to40_pt20   AlpgenJimmy    499864         499864         1.22           1.0            40.95          r2302_r2300_p574_tid370030
+116263         ZmmNp3_M10to40_pt20   AlpgenJimmy    149939         149939         1.22           1.0            8.41           r2302_r2300_p574_tid370031
+116264         ZmmNp4_M10to40_pt20   AlpgenJimmy    39988          39988          1.22           1.0            1.85           r2302_r2300_p574_tid370032
+116265         ZmmNp5_M10to40_pt20   AlpgenJimmy    9996           9996           1.22           1.0            0.46           r2302_r2300_p574_tid370033
+
+106052         Ztautau               Pythia         1998042        1998042        1.15           1.0            8.56967E+2     r2310_r2300_p574_tid368498
+107055         DYLowMtautau_M10      Pythia         199981         199981         1.15           1.0            3.4540E+0      r2301_r2300_p574_tid368568
+107055         DYLowMtautau_M10      Pythia         1799825        1799825        1.15           1.0            3.4540E+0      r2301_r2300_p574_tid368569
+
+#ttbar
+105200         ttbar                 MC@NLO         199861         154875         1.0            0.5562         1.6457E+2      r2302_r2300_p574_tid368278
+105200         ttbar                 MC@NLO         799471         618113         1.0            0.5562         1.6457E+2      r2302_r2300_p574_tid368279
+105200         ttbar                 MC@NLO         499655         385811         1.0            0.5562         1.6457E+2      r2302_r2300_p574_tid368280
+
+#single top
+108340         tchan->e              MC@NLO         9996           5908           1.0            1.0            7.1522E+0      r2302_r2300_p574_tid368752
+108340         tchan->e              MC@NLO         189939         112581         1.0            1.0            7.1522E+0      r2302_r2300_p574_tid368753
+108340         tchan->e              MC@NLO         99962          59150          1.0            1.0            7.1522E+0      r2302_r2300_p574_tid368754
+108341         tchan->mu             MC@NLO         9994           5966           1.0            1.0            7.1767E+0      r2302_r2300_p574_tid368755
+108341         tchan->mu             MC@NLO         189928         112418         1.0            1.0            7.1767E+0      r2302_r2300_p574_tid368756
+108341         tchan->mu             MC@NLO         99957          59105          1.0            1.0            7.1767E+0      r2302_r2300_p574_tid368757
+108342         tchan->tau            MC@NLO         9995           5939           1.0            1.0            7.1277E+0      r2302_r2300_p574_tid368758
+108342         tchan->tau            MC@NLO         189926         112114         1.0            1.0            7.1277E+0      r2302_r2300_p574_tid368759
+108342         tchan->tau            MC@NLO         99958          59266          1.0            1.0            7.1277E+0      r2302_r2300_p574_tid368760
+108343         schan->e              MC@NLO         9992           8420           1.0            1.0            4.6856E-1      r2302_r2300_p574_tid368761
+108343         schan->e              MC@NLO         289839         245401         1.0            1.0            4.6856E-1      r2302_r2300_p574_tid368762
+108344         schan->mu             MC@NLO         9991           8449           1.0            1.0            4.6837E-1      r2302_r2300_p574_tid368763
+108344         schan->mu             MC@NLO         289886         245116         1.0            1.0            4.6837E-1      r2302_r2300_p574_tid368764
+108345         schan->tau            MC@NLO         9997           8495           1.0            1.0            4.6978E-1      r2302_r2300_p574_tid368765
+108345         schan->tau            MC@NLO         289867         245151         1.0            1.0            4.6978E-1      r2302_r2300_p574_tid368766
+108346         Wt                    MC@NLO         14985          13265          1.0            1.0            1.3102E+1      r2302_r2300_p574_tid368767
+108346         Wt                    MC@NLO         14997          11909          1.0            1.0            1.3102E+1      r2302_r2300_p574_tid368768
+108346         Wt                    MC@NLO         239834         212450         1.0            1.0            1.3102E+1      r2302_r2300_p574_tid368769
+
+#W+jets
+#<e600 for Np0,1; and e760 for Np>=2>
+107680         WenuNp0               Alpgen         1382306        1382306        1.21           1.0            6.8705E+3      r2302_r2300_p574_tid368640
+107680         WenuNp0               Alpgen         2022733        2022733        1.21           1.0            6.8705E+3      r2302_r2300_p574_tid368641
+107681         WenuNp1               Alpgen         258454         258454         1.21           1.0            1.2930E+3      r2302_r2300_p574_tid368642
+107681         WenuNp1               Alpgen         382907         382907         1.21           1.0            1.2930E+3      r2302_r2300_p574_tid368643
+107682         WenuNp2               Alpgen         3768265        3768265        1.21           1.0            3.7660E+2      r2302_r2300_p574_tid368646
+107683         WenuNp3               Alpgen         1009641        1009641        1.21           1.0            1.0129E+2      r2302_r2300_p574_tid368647
+107684         WenuNp4               Alpgen         249869         249869         1.21           1.0            2.5246E+1      r2302_r2300_p574_tid368649
+107685         WenuNp5               Alpgen         69953          69953          1.21           1.0            7.1239E+0      r2302_r2300_p574_tid368650
+
+107690         WmunuNp0              Alpgen         1386814        1386814        1.21           1.0            6.8711E+3      r2302_r2300_p574_tid368651
+107690         WmunuNp0              Alpgen         2079709        2079709        1.21           1.0            6.8711E+3      r2302_r2300_p574_tid368652
+107691         WmunuNp1              Alpgen         255942         255942         1.21           1.0            1.2947E+3      r2302_r2300_p574_tid368653
+107691         WmunuNp1              Alpgen         385925         385925         1.21           1.0            1.2947E+3      r2302_r2300_p574_tid368654
+107692         WmunuNp2              Alpgen         3768893        3768893        1.21           1.0            3.7608E+2      r2302_r2300_p574_tid368657
+107693         WmunuNp3              Alpgen         1009589        1009589        1.21           1.0            1.0072E+2      r2302_r2300_p574_tid368660
+107694         WmunuNp4              Alpgen         254879         254879         1.21           1.0            2.5993E+1      r2302_r2300_p574_tid368663
+107695         WmunuNp5              Alpgen         69958          69958          1.21           1.0            7.1300E+0      r2302_r2300_p574_tid368664
+
+106022         Wtaunu_1Lepton        Pythia         998368         998368         1.17           8.765778e-01   8.91633E+3     r2302_r2300_p574_tid368482
+#* Actual xs for this is 8.91633E+3*0.35 (tau is forced to decay into e/mu)
+
+#W/Z+Gamma
+106001         gammaWp(e)            PythiaMadG     49998          49998          1.0            1.0            28.0           r2302_r2300_p574_tid368467
+106002         gammaWp(mu)           PythiaMadG     49995          49995          1.0            1.0            28.0           r2302_r2300_p574_tid368468
+106003         gammaWp(tau)          PythiaMadG     46996          46996          1.0            1.0            25.4           r2302_r2300_p574_tid368469
+108288         gammaWm(e)            PythiaMadG     49995          49995          1.0            1.0            18.53          r2302_r2300_p574_tid368728
+108289         gammaWm(mu)           PythiaMadG     49996          49996          1.0            1.0            18.62          r2302_r2300_p574_tid368729
+108290         gammaWm(tau)          PythiaMadG     49996          49996          1.0            1.0            16.8           r2302_r2300_p574_tid368730
+108323         gammaZ(ee)            PythiaMadG     49997          49997          1.0            1.0            9.63           r2302_r2300_p574_tid368741
+108324         gammaZ(mumu)          PythiaMadG     49995          49995          1.0            1.0            9.63           r2302_r2300_p574_tid368742
+108325         gammaZ(tautau)        PythiaMadG     49997          49997          1.0            0.15           9.41           r2302_r2300_p574_tid368743
+
+# Dijet
+105757         bbcc_mu10mu10X        PythiaB        297118         297118         1.0            1.0            2.8303E+3      r2302_r2300_p574_tid368382
+105758         bbcc_mu10e10X         PythiaB        796391         796391         1.0            1.0            4.0171E+3      r2302_r2300_p574_tid368383
+105759         bbcc_e10e10X          PythiaB        290326         290326         1.0            3.1913E-03     5.3058E+5      r2302_r2300_p574_tid368384

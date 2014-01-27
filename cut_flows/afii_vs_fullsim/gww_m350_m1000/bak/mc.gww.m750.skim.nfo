@@ -1,0 +1,16 @@
+RandomDataPeriod has been initialised with a total lumi of 205.113.
+the input tree name is physics
+
+inputName: ../procLists/mcLists/mc10/mc.gww.m750.pu.list
+inputTreeName: physics
+outputFileName: /a/data2/xenia/users/elw/mc/skims/lnuj/mc.gww.m750.pu.skim.root
+outputTreeName: analysisTree
+goodRunsList: ../WWGRLs/data11_7TeV.periodAllYear_DetStatus-v13-pro08-02_Top_allchannels.xml
+cutFileName: cutFile
+thinList: thinList
+plotFileName: plotFile
+isMC: true
+
+chainMaker::Add(../procLists/mcLists/mc10/mc.gww.m750.pu.list)
+Building chain of root files listed in ../procLists/mcLists/mc10/mc.gww.m750.pu.list containing the physics tree
+adding /a/data2/xenia/users/elw/mc/GWW_m750.D3PD.root/physics to chain.

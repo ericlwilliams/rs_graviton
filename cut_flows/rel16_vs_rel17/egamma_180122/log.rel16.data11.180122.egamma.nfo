@@ -1,0 +1,608 @@
+RandomDataPeriod has been initialised with a total lumi of 1023.89.
+the input tree name is physics
+
+inputName: data11.rel16.180122.egamma.list
+inputTreeName: physics
+outputFileName: ./skims/data11.rel16.180122.egamma.root
+outputTreeName: analysisTree
+goodRunsList: ../WWGRLs/data11_7TeV.periodAllYear_DetStatus-v18-pro08-04_CoolRunQuery-00-03-98_WZjets_allchannels_NOB2.xml
+cutFileName: cutFile
+thinList: thinList
+leafList: readLeafList
+plotFileName: plotFile
+isMC: false
+
+chainMaker::Add(data11.rel16.180122.egamma.list)
+Building chain of root files listed in data11.rel16.180122.egamma.list containing the physics tree
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000001.root.1/physics to chain.
+Warning in <TClass::TClass>: no dictionary for class AttributeListLayout is available
+Warning in <TClass::TClass>: no dictionary for class pair<string,string> is available
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000001.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000001.root.1: not a TStreamerInfo object
+Error in <TChain::AddFile>: cannot find tree with name physicsTrigDec in file /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000001.root.1
+no physicsTrigDec tree found, will assume all trigger info is in the primary input tree
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000002.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000003.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000003.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000004.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000004.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000005.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000005.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000006.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000006.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000007.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000007.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000008.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000008.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000009.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000009.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000010.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000010.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000011.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000011.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000012.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000012.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000013.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000013.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000014.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000014.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000015.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000015.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000016.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000016.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000017.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000017.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000018.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000018.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000019.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000019.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000020.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000020.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000021.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000021.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000022.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000022.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000023.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000023.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000024.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000024.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000025.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000025.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000026.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000026.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000027.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000027.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000028.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000028.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000029.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000029.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000030.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000030.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000031.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000031.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000032.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000032.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000033.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000033.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000034.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000034.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000035.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000035.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000036.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000036.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000037.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000037.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000038.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000038.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000039.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000039.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000040.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000040.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000041.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000041.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000042.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000042.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000043.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000043.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000044.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000044.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000045.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000045.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000046.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000046.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000047.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000047.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000048.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000048.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000049.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000049.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000050.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000050.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000051.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000051.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000052.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000052.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000053.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000053.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000054.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000054.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000055.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000055.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000056.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000056.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000057.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000057.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000058.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000058.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000059.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000059.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000060.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000060.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000061.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000061.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000062.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000062.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000063.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000063.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000064.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000064.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000065.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000065.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000066.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000066.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000067.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000067.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000068.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000068.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000069.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000069.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000070.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000070.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000071.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000071.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+adding /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000072.root.1/physics to chain.
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000072.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFraction_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph gluonFractionError_AntiKt4Topo_EMJES in input file JESUncertainty.root
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Not enough information to calculate prefactor alphaC: Setting alphaC = 1!
+Warning in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::SetInputCollection()>: Problem finding Required Input Graph rSample_rIncl_AntiKt4Topo_EMJES in input file JESUncertainty.root! Setting response_sample/r_incl = 1!
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Initializing the MultijetJESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Uncertainty for AntiKt4EMJESTopoJets
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: Using uncertainty in ATLAS-CONF-2011-032 from JESUncertaintyProvider tool
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: For data produced with rel 16 (full 2010 dataset and MC)
+Info in <MultijetJESUncertaintyProvider::MultijetJESUncertaintyProvider::init()>: ===================================
+JERProvider initialized:  Collection name = AntiKt4TopoJES
+thinList not found, will not automatically save any read variables to analysisTree
+could not open newLeafList
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Running physics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TPileupReweighter not loaded for data!
+doPileUpReWeight = 1
+doLeptonSmearing = 1
+doScaleFactor = 1
+doJES = 1
+doJER = 1
+doMetTopo = 0
+isMC = 0
+isData = 1
+isQCD = 0
+isDataEgamma = 1
+isDataMuons = 0
+isSig = 0
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000001.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Error in <TTree::SetBranchStatus>: unknown branch -> mcevt_weight
+WARNING: Leaf mcevt_weight has gone missing. It will be ignored, but check that you aren't using it!
+RunNumber = 180122
+1 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000002.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000003.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000004.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000005.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000006.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000007.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+100001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000008.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000009.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000010.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000011.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000012.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+200001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000013.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000014.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000015.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000016.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000017.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000018.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+300001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000019.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000020.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000021.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000022.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000023.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+400001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000024.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000025.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000026.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000027.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000028.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000029.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+500001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000030.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000031.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000032.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000033.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000034.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+600001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000035.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000036.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000037.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000038.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000039.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000040.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+700001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000041.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000042.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000043.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000044.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000045.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+800001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000046.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000047.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000048.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000049.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000050.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+900001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000051.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000052.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000053.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000054.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000055.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+1000001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000056.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000057.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000058.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000059.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000060.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+1100001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000061.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000062.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000063.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000064.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000065.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+1200001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000066.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000067.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000068.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000069.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000070.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+1300001 events processed
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000071.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+Warning in <TFile::ReadStreamerInfo>: /a/data2/xenia/users/elw/data/data11/rel16/NTUP_SMWZ/data11_7TeV.00180122.physics_Egamma.merge.NTUP_SMWZ.f367_m806_p605_tid440608_00/NTUP_SMWZ.440608._000072.root.1: not a TStreamerInfo object
+Error in <TClass::Load>: dictionary of class TTreeIndex not found
+
+VxpSel::PrintInfo()
+Vertex Selection
+=========================
+vtx_all:	5890246
+vtx_iso_ntrks:	6
+vtx_ntrks:	6
+vtx_jes_ntrks:	5
+=========================
+
+
+JetMet::PrintInfo()
+-
+Jet Counting and MET Cleaning
+=========================
+jet_n:		9579764
+jet_pos_e:	9579764
+jet_em_pt:	2715999
+jet_em_eta:	2555066
+jet_clean:	2544089
+jet_overlap:	2407424
+good_jet_n:	2407424
+=========================
+
+
+LepCtr::PrintInfo()
+--
+*Analysis* Electron Selection
+=========================
+el_all:		5115670
+el_author:	2838343
+el_oq:		2829309
+el_eta:		2660276
+el_medium:	565420
+el_veto_pt:	254263
+el_pt:		139548
+el_d0sig:	128470
+el_absz0:	126636
+el_blayer:	126636
+el_tight:	38587
+el_iso:		30530
+el_pix_hits:	30530
+el_jet_dr:	0
+el_overlap:	30529
+=========================
+
+*Analysis* Muon Selection
+=========================
+mu_all:		146050
+mu_author:	80835
+mu_eta:		76257
+mu_veto_pt:	1245
+mu_pt:		862
+mu_absz0:	860
+mu_absd0:	671
+mu_blayer:	669
+mu_jet_dr:	0
+mu_pix_hits:	228
+mu_iso:		228
+mu_sct_hits:	228
+mu_holes:	228
+mu_trt_hits:	227
+
+LepCtr::PrintInfo()
+--
+*Veto* Electron Selection
+=========================
+el_all:		5115670
+el_author:	2838343
+el_oq:		2829309
+el_eta:		2660276
+el_medium:	565420
+el_veto_pt:	254263
+el_pt:		0
+el_d0sig:	233461
+el_absz0:	229427
+el_blayer:	136695
+el_tight:	0
+el_iso:		0
+el_pix_hits:	136695
+el_jet_dr:	0
+el_overlap:	136687
+=========================
+
+*Veto* Muon Selection
+=========================
+mu_all:		146050
+mu_author:	80835
+mu_eta:		76257
+mu_veto_pt:	1245
+mu_pt:		0
+mu_absz0:	1243
+mu_absd0:	961
+mu_blayer:	955
+mu_jet_dr:	0
+mu_pix_hits:	950
+mu_iso:		0
+mu_sct_hits:	948
+mu_holes:	948
+mu_trt_hits:	947
+
+EvtCtr::PrintInfo()
+--
+Event Pre-Selection
+=========================
+n_events:	1.34601e+06
+n_unique:	1.33872e+06
+n_grl:		1.21154e+06
+n_lar_err:	1.2115e+06
+n_lar_hole_err:	1.211e+06
+n_el_jet_dr:	1.21148e+06
+n_mu_jet_dr:	1.21085e+06
+n_met_clean:	1.20486e+06
+n_pos_sumet:	1.20306e+06
+n_vxp_sel:	1.19997e+06
+n_trig_sel:	317317
+n_el_trig_sel:	317317
+n_mu_trig_sel:	175
+_-_
+n_mc_weight:		1.34601e+06
+n_pu_weight:		1.34601e+06
+n_lep_id_sf:		1.21154e+06
+n_lep_down_id_sf:	1.21154e+06
+n_lep_up_id_sf:		1.21154e+06
+n_lep_reco_sf:		1.21154e+06
+n_lep_down_reco_sf:	1.21154e+06
+n_lep_up_reco_sf:	1.21154e+06
+n_trig_sf:		1.21154e+06
+n_trig_up_sf:		1.21476e+06
+n_trig_down_sf:		1.20823e+06
+n_sow:			1.34601e+06
+=========================
+
+--
+Electron Event Selection
+=========================
+n_one_el:	27873
+n_two_el_veto:	27873
+n_mu_veto:	27873
+n_el_met_cut:	19322
+n_el_jet==0:	13225
+n_el_jet==1:	4109
+n_el_jet>=2:	1988
+n_el_ctrl_all: 740
+--
+Low Mass Signal Cuts
+n_el_lowm_ptlv: 353
+n_el_lowm_ptjj: 308
+n_el_lowm_mjj: 75
+--
+High Mass Signal Cuts
+n_el_highm_ptlv: 22
+n_el_highm_ptjj: 17
+n_el_highm_mjj: 4
+=========================
+
+--
+Muon Event Selection
+=========================
+n_one_mu:	11
+n_two_mu_veto:	11
+n_el_veto:	11
+n_mu_met_cut:	8
+n_mu_jet==0:	1
+n_mu_jet==1:	3
+n_mu_jet>=2:	4
+n_mu_ctrl_all: 3
+--
+Low Mass Signal Cuts
+n_mu_lowm_ptlv: 3
+n_mu_lowm_ptjj: 3
+n_mu_lowm_mjj: 0
+--
+High Mass Signal Cuts
+n_mu_highm_ptlv: 0
+n_mu_highm_ptjj: 0
+n_mu_highm_mjj: 0
+=========================
+
+Total Events Processed: 1346012
+Writing out text file goodLeaves, listing all leaves that were defined in every input file run over
