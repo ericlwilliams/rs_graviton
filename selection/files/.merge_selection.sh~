@@ -1,0 +1,19 @@
+#!/bin/zsh -
+
+## Merges selection plot files without any xsec info
+## Results should only be plotted with ->Scale(1)
+
+echo "Merging sel.alpgen.wjets"
+hadd -f ../../plots/selection_plots/merged/sel.alpgen.wjets.selection.root ../files/mc.sel.alpgen.w*
+echo "Merging sel.alpgen.zjets"
+hadd -f ../../plots/selection_plots/merged/sel.alpgen.zjets.selection.root ../files/mc.sel.alpgen.z*
+echo "Merging sel.mcatnlo.top"
+hadd -f ../../plots/selection_plots/merged/sel.mcatnlo.top.selection.root ../files/mc.sel.mcatnlo.*
+echo "Merging sel.herwig.vv"
+hadd -f ../../plots/selection_plots/merged/sel.herwig.vv.selection.root ../files/mc.sel.herwig.*
+echo "Merging data"
+hadd -f ../../plots/selection_plots/merged/sel.data.selection.root ../files/data.sel.*
+#echo "Copying gww signal plots"
+#cp ../../plots/selection_plots/mc.sel.gww* ../files/merged/
+#echo "Copying wprime signal plots"
+#cp ../../plots/selection_plots/mc.sel.wprime* ../files/merged/

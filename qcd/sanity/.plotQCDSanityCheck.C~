@@ -1,0 +1,9 @@
+void plotQCDSanityCheck(){
+
+  TFile* qcd_noscale = TFile::Open("./plots/qcd.noscale.root");
+  TFile* qcd_scale = TFile::Open("./plots/qcd.scale.root");
+
+
+  
+  return;
+}

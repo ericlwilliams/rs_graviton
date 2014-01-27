@@ -1,0 +1,156 @@
+#include "../include/print_list.h"
+#include "../include/wwFileInfo.h"
+#include "../include/HistogramPainter.h"
+#include <string>
+#include <TLine.h>
+
+string proc_type="jvf";
+string print_type=".png";
+string color_scheme="conf";//normal, conf, thesis(?)
+
+void printJVF(bool drawData=true){
+
+  // gROOT->SetStyle("Plain");  
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(1);
+  // gStyle->SetPadTickX(1);
+  // gStyle->SetPadTickY(1);
+
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In printJVF.C"<<endl;
+
+  const int nProcs = 2;
+  string procs[nProcs] = {"elec", "muon"};
+
+
+  string jvf_file_loc = "/Users/elw/analy/lnuj/plots/jvf_plots/";
+  string nojvf_file_loc = "/Users/elw/analy/lnuj/plots/nojvf_plots/";
+
+  //////////////////////////////////////////////////
+  // Load Data
+  ////////////////////////////////////////////////// 
+  
+  string jvf_data_loc = jvf_file_loc+"merged/data11.lnuj.plot.jvf.root";
+  TFile* jvf_data = TFile::Open(jvf_data_loc.c_str());
+
+  string nojvf_data_loc = nojvf_file_loc+"merged/data11.lnuj.plot.nojvf.root";
+  TFile* nojvf_data = TFile::Open(nojvf_data_loc.c_str());
+  //////////////////////////////////////////////////
+  // Load Scaled Backgrounds
+  //////////////////////////////////////////////////   
+  string jvf_alpgen_wjets_loc = jvf_file_loc+"merged/mc.alpgen.wjets.jvf.root";
+  string jvf_vv_loc = jvf_file_loc+"merged/mc.herwig.vv.jvf.root";
+  string jvf_alpgen_qcd_loc = jvf_file_loc+"merged/qcd.alpgen.jvf.root";
+  string jvf_top_loc = jvf_file_loc+"merged/mc.mcatnlo.top.jvf.root";  
+  string jvf_zjets_loc = jvf_file_loc+"merged/mc.alpgen.zjets.jvf.root";
+
+  string nojvf_alpgen_wjets_loc = nojvf_file_loc+"merged/mc.alpgen.wjets.nojvf.root";
+  string nojvf_vv_loc = nojvf_file_loc+"merged/mc.herwig.vv.nojvf.root";
+  string nojvf_alpgen_qcd_loc = nojvf_file_loc+"merged/qcd.alpgen.nojvf.root";
+  string nojvf_top_loc = nojvf_file_loc+"merged/mc.mcatnlo.top.nojvf.root";  
+  string nojvf_zjets_loc = nojvf_file_loc+"merged/mc.alpgen.zjets.nojvf.root";
+
+  TFile* jvf_alpgen_wjets = TFile::Open(jvf_alpgen_wjets_loc.c_str());
+  TFile* jvf_vv = TFile::Open(jvf_vv_loc.c_str());
+  TFile* jvf_alpgen_qcd = TFile::Open(jvf_alpgen_qcd_loc.c_str());
+  TFile* jvf_top = TFile::Open(jvf_top_loc.c_str());
+  TFile* jvf_zjets = TFile::Open(jvf_zjets_loc.c_str());
+
+  TFile* nojvf_alpgen_wjets = TFile::Open(nojvf_alpgen_wjets_loc.c_str());
+  TFile* nojvf_vv = TFile::Open(nojvf_vv_loc.c_str());
+  TFile* nojvf_alpgen_qcd = TFile::Open(nojvf_alpgen_qcd_loc.c_str());
+  TFile* nojvf_top = TFile::Open(nojvf_top_loc.c_str());
+  TFile* nojvf_zjets = TFile::Open(nojvf_zjets_loc.c_str());
+
+
+
+  //////////////////////////////////////////////////
+  // h_elec_jet_n
+  ////////////////////////////////////////////////// 
+
+  //jvf
+  TH1F* h_data_jvf_elec_jet_n = jvf_data->Get("h_elec_jet_n");
+
+  TH1F* h_bkgd_jvf_elec_jet_n = jvf_alpgen_wjets->Get("h_elec_jet_n");
+  h_bkgd_jvf_elec_jet_n->Add((TH1F*)jvf_vv->Get("h_elec_jet_n"));
+  h_bkgd_jvf_elec_jet_n->Add((TH1F*)jvf_alpgen_qcd->Get("h_elec_jet_n"));
+  h_bkgd_jvf_elec_jet_n->Add((TH1F*)jvf_top->Get("h_elec_jet_n"));
+  h_bkgd_jvf_elec_jet_n->Add((TH1F*)jvf_zjets->Get("h_elec_jet_n"));
+
+  //nojvf
+  TH1F* h_data_nojvf_elec_jet_n = jvf_data->Get("h_elec_jet_n");
+
+  TH1F* h_bkgd_nojvf_elec_jet_n = nojvf_alpgen_wjets->Get("h_elec_jet_n");
+  h_bkgd_nojvf_elec_jet_n->Add((TH1F*)nojvf_vv->Get("h_elec_jet_n"));
+  h_bkgd_nojvf_elec_jet_n->Add((TH1F*)nojvf_alpgen_qcd->Get("h_elec_jet_n"));
+  h_bkgd_nojvf_elec_jet_n->Add((TH1F*)nojvf_top->Get("h_elec_jet_n"));
+  h_bkgd_nojvf_elec_jet_n->Add((TH1F*)nojvf_zjets->Get("h_elec_jet_n"));
+
+  // data plots
+  TCanvas* tc_data_elec_jet_n
+    = new TCanvas("tc_data_elec_jet_n","tc_data_elec_jet_n",0,0,1920,1200);
+  tc_data_elec_jet_n->cd();
+
+  h_data_jvf_elec_jet_n->SetLineColor(kRed);
+  h_data_jvf_elec_jet_n->SetTitle("w/ JVF Cut");
+  h_data_jvf_elec_jet_n->Draw();
+
+  h_data_nojvf_elec_jet_n->SetTitle("no JVF Cut");
+  h_data_nojvf_elec_jet_n->SetLineColor(kBlue);
+  h_data_nojvf_elec_jet_n->Draw("sames");
+
+
+  TLegend* tl_data_elec_jet_n = new TLegend(0.63,0.8,0.9,0.9);
+  tl_data_elec_jet_n->SetFillColor(0);
+  tl_data_elec_jet_n->SetTextSize(0.03);
+  tl_data_elec_jet_n->SetHeader("Data");
+  tl_data_elec_jet_n->AddEntry(h_data_jvf_elec_jet_n);
+  tl_data_elec_jet_n->AddEntry(h_data_nojvf_elec_jet_n);
+  tl_data_elec_jet_n->Draw();
+
+  tc_data_elec_jet_n->Update();
+  tc_data_elec_jet_n->SetLogy();
+  
+  string cur_saveas = "../canvases/latest/h_jvf_data_elec_jet_n.eps";
+  tc_data_elec_jet_n->SaveAs(cur_saveas.c_str());
+
+  
+  // bkgd plots
+  TCanvas* tc_bkgd_elec_jet_n
+    = new TCanvas("tc_bkgd_elec_jet_n","tc_bkgd_elec_jet_n",0,0,1920,1200);
+  tc_bkgd_elec_jet_n->cd();
+
+  h_bkgd_jvf_elec_jet_n->SetLineColor(kRed);
+  h_bkgd_jvf_elec_jet_n->SetTitle("w/ JVF Cut");
+  h_bkgd_jvf_elec_jet_n->Draw();
+
+  h_bkgd_nojvf_elec_jet_n->SetTitle("no JVF Cut");
+  h_bkgd_nojvf_elec_jet_n->SetLineColor(kBlue);
+  h_bkgd_nojvf_elec_jet_n->Draw("sames");
+
+  TLegend* tl_bkgd_elec_jet_n = new TLegend(0.63,0.8,0.9,0.9);
+  tl_bkgd_elec_jet_n->SetFillColor(0);
+  tl_bkgd_elec_jet_n->SetTextSize(0.03);
+  tl_bkgd_elec_jet_n->SetHeader("Backgrounds");
+  tl_bkgd_elec_jet_n->AddEntry(h_bkgd_jvf_elec_jet_n);
+  tl_bkgd_elec_jet_n->AddEntry(h_bkgd_nojvf_elec_jet_n);
+  tl_bkgd_elec_jet_n->Draw();
+
+
+  tc_bkgd_elec_jet_n->Update();
+  tc_bkgd_elec_jet_n->SetLogy();
+  
+  string cur_saveas = "../canvases/latest/h_jvf_bkgd_elec_jet_n.eps";
+  tc_bkgd_elec_jet_n->SaveAs(cur_saveas.c_str());
+  
+  
+}
+

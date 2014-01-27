@@ -1,0 +1,1013 @@
+#define skimmedGWW_cxx
+#include "skimmedGWW.h"
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <TH2.h>
+#include <TH1.h>
+#include <TStyle.h>
+#include <TMath.h>
+#include <TVector2.h>
+#include <TRandom3.h>
+#include <TLorentzVector.h>
+#include "defs.h"
+
+bool doWJetsScale=false;
+bool doAlpgenReweighting=true;
+bool doPartialUnblind=true;// unblind 1fb-1
+
+float sow;
+float sowjet;
+
+TRandom3* m_rand;
+
+TH1F* h_evt_n[nCtrls];
+TH1F* h_evt_pu_weight[nCtrls];
+
+TH1F* h_sig_evt_n[nCtrls][nProcs];
+TH1F* h_sig_lep_nu_dijet_m[nCtrls][nProcs];
+
+TH2F* scat_lep_met_dphi_met[nCtrls][nProcs];
+TH1F* h_lep_pt[nCtrls][nProcs];
+//TH1F* h_lep_sig_diff_qoverp[nCtrls][nProcs];
+TH1F* h_lep_pt_eq2j[nCtrls][nProcs];
+TH1F* h_lep_pt_gt2j[nCtrls][nProcs];
+
+TH1F* h_lep_eta[nCtrls][nProcs];
+TH1F* h_lep_phi[nCtrls][nProcs];
+TH1F* h_lep_calo_iso[nCtrls][nProcs];
+TH1F* h_lep_track_iso[nCtrls][nProcs];
+TH1F* h_lep_d0sig[nCtrls][nProcs];
+TH1F* h_lep_absz0[nCtrls][nProcs];
+TH1F* h_lep_met_dphi[nCtrls][nProcs];
+TH1F* h_lep_nu_dr[nCtrls][nProcs];
+TH1F* h_lead_jet_met_dphi[nCtrls][nProcs];
+
+TH1F* h_lep_lead_jet_dr[nCtrls][nProcs];
+TH1F* h_lep_second_jet_dr[nCtrls][nProcs];
+TH1F* h_lep_third_jet_dr[nCtrls][nProcs];
+TH1F* h_lep_fourth_jet_dr[nCtrls][nProcs];
+
+
+TH1F* h_met_phi[nCtrls][nProcs];
+
+
+TH1F* h_jet_n[nCtrls][nProcs];
+TH1F* h_jet_m[nCtrls][nProcs];
+TH1F* h_lead_jet_pt[nCtrls][nProcs];
+TH1F* h_lead_jet_eta[nCtrls][nProcs];
+TH1F* h_second_jet_pt[nCtrls][nProcs];
+TH1F* h_second_jet_eta[nCtrls][nProcs];
+TH1F* h_zoom_jet_m[nCtrls][nProcs];
+TH1F* h_dijet_m[nCtrls][nProcs];
+TH1F* h_sig_jet_m[nCtrls][nProcs];
+
+TH1F* h_dijet_dr[nCtrls][nProcs];
+TH1F* h_dijet_dr_norwt[nCtrls][nProcs];
+TH1F* h_dijet_dr_eq2j[nCtrls][nProcs];
+TH1F* h_dijet_dr_gt2j[nCtrls][nProcs];
+TH1F* h_dijet_dr_hmu[nCtrls][nProcs];
+TH1F* h_dijet_dr_lmu[nCtrls][nProcs];
+
+TH1F* h_dijet_dphi[nCtrls][nProcs];
+TH1F* h_dijet_dphi_eq2j[nCtrls][nProcs];
+TH1F* h_dijet_dphi_gt2j[nCtrls][nProcs];
+
+TH1F* h_dijet_deta[nCtrls][nProcs];
+TH1F* h_dijet_deta_eq2j[nCtrls][nProcs];
+TH1F* h_dijet_deta_gt2j[nCtrls][nProcs];
+
+TH1F* h_lep_met_mt[nCtrls][nProcs];
+TH1F* h_lep_met_mt_eq2j[nCtrls][nProcs];
+TH1F* h_lep_met_mt_gt2j[nCtrls][nProcs];
+
+TH1F* h_rwt_lep_met_pt[nCtrls][nProcs];
+TH1F* h_rwt_dijet_pt[nCtrls][nProcs];
+
+TH1F* h_lep_met_pt[nCtrls][nProcs];
+TH1F* h_dijet_pt[nCtrls][nProcs];
+
+TH1F* h_lep_met_jet_mt[nCtrls][nProcs];
+TH1F* h_lep_met_dijet_mt[nCtrls][nProcs];
+TH1F* h_lep_nu_dijet_m[nCtrls][nProcs];
+
+TH1F* h_lep_met_sig_jet_mt[nCtrls][nProcs];
+
+TH1F* h_vxp_n[nCtrls][nProcs];
+TH1F* h_avg_int_per_xing[nCtrls][nProcs];
+TH1F* h_nrw_avg_int_per_xing[nCtrls][nProcs];
+TH1F* h_nrw_vxp_n[nCtrls][nProcs];
+
+TH1F* h_met_2j[nCtrls][nProcs];
+TH1F* h_met_3j[nCtrls][nProcs];
+TH1F* h_met_4j[nCtrls][nProcs];
+
+TH1F* h_met[nCtrls][nProcs];
+TH1F* h_set[nCtrls][nProcs];
+
+TH1F* h_lt[nCtrls][nProcs];
+TH1F* h_ht[nCtrls][nProcs];
+TH1F* h_st[nCtrls][nProcs];
+
+int evt_n;
+
+
+TFile* plotFile;
+string cur_option;
+bool is_data;
+void skimmedGWW::Begin(TTree * /*tree*/)
+{
+
+   TString option = GetOption();
+   //cout<<"In skimmedGWW::Begin"<<endl;
+   cout<<"skimmedGWW::Begin: "<<option<<endl;
+
+   cur_option=option;
+
+   is_data = (cur_option.find("data")!=string::npos);
+   TH1::SetDefaultSumw2(kTRUE);
+   sow=0.;
+   sowjet=0.;
+   evt_n=0;
+   string curFile = (string) option;
+   string curPlotFile= curFile+".plot.root";
+
+   m_rand = new TRandom3();
+   
+   curPlotFile="../plots/gww_plots/"+curPlotFile;
+
+   plotFile = (TFile*) TFile::Open(curPlotFile.c_str(),"RECREATE");
+   plotFile->cd();
+
+   
+   for(int c=0;c<nCtrls;c++){//control regions
+     plotFile->mkdir(ctrls[c].c_str());
+     plotFile->cd(ctrls[c].c_str());
+
+
+     string evt_n_name = "h_"+ctrls[c]+"_evt_n";
+     string evt_n_title = evt_n_name;
+     h_evt_n[c] = new TH1F(evt_n_name.c_str(),evt_n_title.c_str(),1,0.5,1.5);
+     string evt_pu_weight_name = "h_"+ctrls[c]+"_evt_pu_weight";
+     string evt_pu_weight_title = evt_pu_weight_name;
+     h_evt_pu_weight[c] = new TH1F(evt_pu_weight_name.c_str(),evt_pu_weight_title.c_str(),18,-1.5,16.5);
+
+     
+     for(int i=0;i<nProcs;i++){
+
+       string h_proc = "h_"+procs[i];
+       string scat_proc = "scat_"+procs[i];
+       bool isEWK = (ctrls[c]=="ewk");//for axis rescaling
+       
+       
+       string lep_met_dphi_met_name = scat_proc+"_lep_met_dphi_met";
+       string lep_met_dphi_met_title = lep_met_dphi_met_name;
+       scat_lep_met_dphi_met[c][i] =
+	 new TH2F(lep_met_dphi_met_name.c_str(),lep_met_dphi_met_title.c_str(),
+		  30,0,300,30,0,TMath::Pi());
+
+       string sig_evt_n_name = h_proc+"_sig_evt_n";
+       string sig_evt_n_title = sig_evt_n_name;
+       h_sig_evt_n[c][i] = new TH1F(sig_evt_n_name.c_str(),sig_evt_n_title.c_str(),1,0.5,1.5);
+
+       float lep_pt_max_x = (isEWK) ? 100 : 500;
+       int lep_pt_bin_n = (isEWK) ? 30 : 50;
+       string lep_pt_name = h_proc+"_lep_pt";
+       string lep_pt_title = lep_pt_name;
+       h_lep_pt[c][i] = new TH1F(lep_pt_name.c_str(),lep_pt_title.c_str(),lep_pt_bin_n,0,lep_pt_max_x);
+
+       // string lep_sig_diff_qoverp_name = h_proc+"_lep_sig_diff_qoverp";
+       // string lep_sig_diff_qoverp_title = lep_sig_diff_qoverp_name;
+       // h_lep_sig_diff_qoverp[c][i] = new TH1F(lep_sig_diff_qoverp_name.c_str(),lep_sig_diff_qoverp_title.c_str(),30,-15,15);
+
+       float lep_pt_eq2j_max_x = (isEWK) ? 100 : 500;
+       int lep_pt_eq2j_bin_n = (isEWK) ? 30 : 50;
+       string lep_pt_eq2j_name = h_proc+"_lep_pt_eq2j";
+       string lep_pt_eq2j_title = lep_pt_eq2j_name;
+       h_lep_pt_eq2j[c][i] = new TH1F(lep_pt_eq2j_name.c_str(),lep_pt_eq2j_title.c_str(),lep_pt_eq2j_bin_n,0,lep_pt_eq2j_max_x);
+
+       float lep_pt_gt2j_max_x = (isEWK) ? 100 : 500;
+       int lep_pt_gt2j_bin_n = (isEWK) ? 30 : 50;
+       string lep_pt_gt2j_name = h_proc+"_lep_pt_gt2j";
+       string lep_pt_gt2j_title = lep_pt_gt2j_name;
+       h_lep_pt_gt2j[c][i] = new TH1F(lep_pt_gt2j_name.c_str(),lep_pt_gt2j_title.c_str(),lep_pt_gt2j_bin_n,0,lep_pt_gt2j_max_x);
+
+
+       // float lep_energyLossPar_max_x = (isEWK) ? 100 : 500;
+       // int lep_energyLossPar_bin_n = (isEWK) ? 30 : 50;
+       // string lep_energyLossPar_name = h_proc+"_lep_energyLossPar";
+       // string lep_energyLossPar_title = lep_energyLossPar_name;
+       // h_lep_energyLossPar[c][i] = new TH1F(lep_energyLossPar_name.c_str(),lep_energyLossPar_title.c_str(),100,0,30000);
+
+       
+       string lep_eta_name = h_proc+"_lep_eta";
+       string lep_eta_title = lep_eta_name;
+       h_lep_eta[c][i] = new TH1F(lep_eta_name.c_str(),lep_eta_title.c_str(),25,-3,3);
+
+       float jet_m_max_x = (isEWK) ? 20 : 140;
+       int jet_m_bin_n = (isEWK) ? 15 : 30;
+       string jet_m_name = h_proc+"_jet_m";
+       string jet_m_title = jet_m_name;
+       h_jet_m[c][i] = new TH1F(jet_m_name.c_str(),jet_m_title.c_str(),jet_m_bin_n,0,jet_m_max_x);
+
+       string zoom_jet_m_name = h_proc+"_zoom_jet_m";
+       string zoom_jet_m_title = zoom_jet_m_name;
+       h_zoom_jet_m[c][i] = new TH1F(zoom_jet_m_name.c_str(),zoom_jet_m_title.c_str(),30,40,100);
+
+       string lead_jet_eta_name = h_proc+"_lead_jet_eta";
+       string lead_jet_eta_title = lead_jet_eta_name;
+       h_lead_jet_eta[c][i] = new TH1F(lead_jet_eta_name.c_str(),lead_jet_eta_title.c_str(),50,-3,3);
+
+       string second_jet_eta_name = h_proc+"_second_jet_eta";
+       string second_jet_eta_title = second_jet_eta_name;
+       h_second_jet_eta[c][i] = new TH1F(second_jet_eta_name.c_str(),second_jet_eta_title.c_str(),50,-3,3);
+       // string wjrw_lead_jet_eta_name = h_proc+"_wjrw_lead_jet_eta";
+       // string wjrw_lead_jet_eta_title = wjrw_lead_jet_eta_name;
+       // h_wjrw_lead_jet_eta[c][i] = new TH1F(wjrw_lead_jet_eta_name.c_str(),wjrw_lead_jet_eta_title.c_str(),50,-4.8,4.8);
+
+       // string wjrw_second_jet_eta_name = h_proc+"_wjrw_second_jet_eta";
+       // string wjrw_second_jet_eta_title = wjrw_second_jet_eta_name;
+       // h_wjrw_second_jet_eta[c][i] = new TH1F(wjrw_second_jet_eta_name.c_str(),wjrw_second_jet_eta_title.c_str(),50,-4.8,4.8);
+
+       //int dijet_m_bin_n = (isEWK) ? 30 : 60;
+       string dijet_m_name = h_proc+"_dijet_m";
+       string dijet_m_title = dijet_m_name;
+       h_dijet_m[c][i] =
+	 new TH1F(dijet_m_name.c_str(),dijet_m_title.c_str(),50,0,600);
+
+       string sig_jet_m_name = h_proc+"_sig_jet_m";
+       string sig_jet_m_title = sig_jet_m_name;
+       h_sig_jet_m[c][i] = new TH1F(sig_jet_m_name.c_str(),sig_jet_m_title.c_str(),60,0,300);
+
+
+       float dijet_pt_max_x = (isEWK) ? 110 : 700;
+       int dijet_pt_bin_n = (isEWK) ? 20 : 35;
+       // float dijet_pt_max_x = (isEWK) ? 110 : 1000;
+       // int dijet_pt_bin_n = (isEWK) ? 20 : 25;
+       string dijet_pt_name = h_proc+"_dijet_pt";
+       string dijet_pt_title = dijet_pt_name;
+       h_dijet_pt[c][i] =
+	 new TH1F(dijet_pt_name.c_str(),dijet_pt_title.c_str(),dijet_pt_bin_n,0,dijet_pt_max_x);
+
+       float rwt_dijet_pt_max_x = (isEWK) ? 110 : 1000;
+       int rwt_dijet_pt_bin_n = (isEWK) ? 20 : 25;
+       string rwt_dijet_pt_name = h_proc+"_rwt_dijet_pt";
+       string rwt_dijet_pt_title = rwt_dijet_pt_name;
+       h_rwt_dijet_pt[c][i] =
+	 new TH1F(rwt_dijet_pt_name.c_str(),rwt_dijet_pt_title.c_str(),rwt_dijet_pt_bin_n,0,rwt_dijet_pt_max_x);
+
+       string dijet_dr_name = h_proc+"_dijet_dr";
+       string dijet_dr_title = dijet_dr_name;
+       h_dijet_dr[c][i] = new TH1F(dijet_dr_name.c_str(),dijet_dr_title.c_str(),30,0,TMath::Pi()*1.8);
+
+       string dijet_dr_norwt_name = h_proc+"_dijet_dr_norwt";
+       string dijet_dr_norwt_title = dijet_dr_norwt_name;
+       h_dijet_dr_norwt[c][i] = new TH1F(dijet_dr_norwt_name.c_str(),dijet_dr_norwt_title.c_str(),30,0,TMath::Pi()*1.8);
+
+       string dijet_dr_eq2j_name = h_proc+"_dijet_dr_eq2j";
+       string dijet_dr_eq2j_title = dijet_dr_eq2j_name;
+       h_dijet_dr_eq2j[c][i] = new TH1F(dijet_dr_eq2j_name.c_str(),dijet_dr_eq2j_title.c_str(),30,0,TMath::Pi()*1.8);
+       string dijet_dr_gt2j_name = h_proc+"_dijet_dr_gt2j";
+       string dijet_dr_gt2j_title = dijet_dr_gt2j_name;
+       h_dijet_dr_gt2j[c][i] = new TH1F(dijet_dr_gt2j_name.c_str(),dijet_dr_gt2j_title.c_str(),30,0,TMath::Pi()*1.8);
+       string dijet_dr_hmu_name = h_proc+"_dijet_dr_hmu";
+       string dijet_dr_hmu_title = dijet_dr_hmu_name;
+       h_dijet_dr_hmu[c][i] = new TH1F(dijet_dr_hmu_name.c_str(),dijet_dr_hmu_title.c_str(),30,0,TMath::Pi()*1.8);
+       string dijet_dr_lmu_name = h_proc+"_dijet_dr_lmu";
+       string dijet_dr_lmu_title = dijet_dr_lmu_name;
+       h_dijet_dr_lmu[c][i] = new TH1F(dijet_dr_lmu_name.c_str(),dijet_dr_lmu_title.c_str(),30,0,TMath::Pi()*1.8);
+
+       string dijet_dphi_name = h_proc+"_dijet_dphi";
+       string dijet_dphi_title = dijet_dphi_name;
+       h_dijet_dphi[c][i] = new TH1F(dijet_dphi_name.c_str(),dijet_dphi_title.c_str(),30,0,1.4*TMath::Pi());
+       string dijet_dphi_eq2j_name = h_proc+"_dijet_dphi_eq2j";
+       string dijet_dphi_eq2j_title = dijet_dphi_eq2j_name;
+       h_dijet_dphi_eq2j[c][i] = new TH1F(dijet_dphi_eq2j_name.c_str(),dijet_dphi_eq2j_title.c_str(),30,0,1.4*TMath::Pi());
+       string dijet_dphi_gt2j_name = h_proc+"_dijet_dphi_gt2j";
+       string dijet_dphi_gt2j_title = dijet_dphi_gt2j_name;
+       h_dijet_dphi_gt2j[c][i] = new TH1F(dijet_dphi_gt2j_name.c_str(),dijet_dphi_gt2j_title.c_str(),30,0,1.4*TMath::Pi());
+
+       string dijet_deta_name = h_proc+"_dijet_deta";
+       string dijet_deta_title = dijet_deta_name;
+       h_dijet_deta[c][i] = new TH1F(dijet_deta_name.c_str(),dijet_deta_title.c_str(),20,0,10);
+       string dijet_deta_eq2j_name = h_proc+"_dijet_deta_eq2j";
+       string dijet_deta_eq2j_title = dijet_deta_eq2j_name;
+       h_dijet_deta_eq2j[c][i] = new TH1F(dijet_deta_eq2j_name.c_str(),dijet_deta_eq2j_title.c_str(),20,0,10);
+       string dijet_deta_gt2j_name = h_proc+"_dijet_deta_gt2j";
+       string dijet_deta_gt2j_title = dijet_deta_gt2j_name;
+       h_dijet_deta_gt2j[c][i] = new TH1F(dijet_deta_gt2j_name.c_str(),dijet_deta_gt2j_title.c_str(),20,0,10);
+
+
+       string jet_n_name = h_proc+"_jet_n";
+       string jet_n_title = jet_n_name;
+       h_jet_n[c][i] = new TH1F(jet_n_name.c_str(),jet_n_title.c_str(),13,0.5,13.5);
+
+       float lead_jet_pt_max_x = (isEWK) ? 100 : 700;
+       int lead_jet_pt_bin_n = (isEWK) ? 25 : 50;       
+       string lead_jet_pt_name = h_proc+"_lead_jet_pt";
+       string lead_jet_pt_title = lead_jet_pt_name;
+       h_lead_jet_pt[c][i] =
+	 new TH1F(lead_jet_pt_name.c_str(),lead_jet_pt_title.c_str(),lead_jet_pt_bin_n,0,lead_jet_pt_max_x);
+
+       float second_jet_pt_max_x = (isEWK) ? 80 : 700;
+       int second_jet_pt_bin_n = (isEWK) ? 25 : 50;       
+       string second_jet_pt_name = h_proc+"_second_jet_pt";
+       string second_jet_pt_title = second_jet_pt_name;
+       h_second_jet_pt[c][i] =
+	 new TH1F(second_jet_pt_name.c_str(),second_jet_pt_title.c_str(),second_jet_pt_bin_n,0,second_jet_pt_max_x);
+
+       string vxp_n_name = h_proc+"_vxp_n";
+       string vxp_n_title = vxp_n_name;
+       h_vxp_n[c][i] = new TH1F(vxp_n_name.c_str(),vxp_n_title.c_str(),18,0.5,18.5);
+
+       string avg_int_per_xing_name = h_proc+"_avg_int_per_xing";
+       string avg_int_per_xing_title = avg_int_per_xing_name;
+       h_avg_int_per_xing[c][i] = new TH1F(avg_int_per_xing_name.c_str(),avg_int_per_xing_title.c_str(),20,0.5,20.5);
+
+       string nrw_avg_int_per_xing_name = h_proc+"_nrw_avg_int_per_xing";
+       string nrw_avg_int_per_xing_title = nrw_avg_int_per_xing_name;
+       h_nrw_avg_int_per_xing[c][i] = new TH1F(nrw_avg_int_per_xing_name.c_str(),nrw_avg_int_per_xing_title.c_str(),20,0.5,20.5);
+       
+       string nrw_vxp_n_name = h_proc+"_nrw_vxp_n";
+       string nrw_vxp_n_title = nrw_vxp_n_name;
+       h_nrw_vxp_n[c][i] = new TH1F(nrw_vxp_n_name.c_str(),nrw_vxp_n_title.c_str(),18,0.5,18.5);
+
+       float met_max_x = (isEWK) ? 110 : 600;
+       int met_bin_n = (isEWK) ? 25 : 30;       
+       string met_name = h_proc+"_met";
+       string met_title = met_name;
+       h_met[c][i] = new TH1F(met_name.c_str(),met_title.c_str(),met_bin_n,0,met_max_x);
+
+       string set_name = h_proc+"_set";
+       string set_title = set_name;
+       h_set[c][i] = new TH1F(set_name.c_str(),set_title.c_str(),60,0,3000);
+
+
+       float met_2j_max_x = (isEWK) ? 110 : 120;
+       int met_2j_bin_n = (isEWK) ? 25 : 30;       
+       string met_2j_name = h_proc+"_met_2j";
+       string met_2j_title = met_2j_name;
+       h_met_2j[c][i] = new TH1F(met_2j_name.c_str(),met_2j_title.c_str(),met_2j_bin_n,0,met_2j_max_x);
+
+       float met_3j_max_x = (isEWK) ? 110 : 120;
+       int met_3j_bin_n = (isEWK) ? 25 : 30;       
+       string met_3j_name = h_proc+"_met_3j";
+       string met_3j_title = met_3j_name;
+       h_met_3j[c][i] = new TH1F(met_3j_name.c_str(),met_3j_title.c_str(),met_3j_bin_n,0,met_3j_max_x);
+
+       float met_4j_max_x = (isEWK) ? 110 : 120;
+       int met_4j_bin_n = (isEWK) ? 25 : 30;       
+       string met_4j_name = h_proc+"_met_4j";
+       string met_4j_title = met_4j_name;
+       h_met_4j[c][i] = new TH1F(met_4j_name.c_str(),met_4j_title.c_str(),met_4j_bin_n,0,met_4j_max_x);
+
+       string lep_met_dphi_name = h_proc+"_lep_met_dphi";
+       string lep_met_dphi_title = lep_met_dphi_name;
+       h_lep_met_dphi[c][i] = new TH1F(lep_met_dphi_name.c_str(),lep_met_dphi_title.c_str(),30,0,1.4*TMath::Pi());
+
+       string lep_nu_dr_name = h_proc+"_lep_nu_dr";
+       string lep_nu_dr_title = lep_nu_dr_name;
+       h_lep_nu_dr[c][i] =
+	 new TH1F(lep_nu_dr_name.c_str(),lep_nu_dr_title.c_str(),30,0,2.5*TMath::Pi());
+
+       string lep_lead_jet_dr_name = h_proc+"_lep_lead_jet_dr";
+       string lep_lead_jet_dr_title = lep_lead_jet_dr_name;
+       h_lep_lead_jet_dr[c][i] = new TH1F(lep_lead_jet_dr_name.c_str(),lep_lead_jet_dr_title.c_str(),30,0,2.5*TMath::Pi());
+
+       string lep_second_jet_dr_name = h_proc+"_lep_second_jet_dr";
+       string lep_second_jet_dr_title = lep_second_jet_dr_name;
+       h_lep_second_jet_dr[c][i] = new TH1F(lep_second_jet_dr_name.c_str(),lep_second_jet_dr_title.c_str(),30,0,2.5*TMath::Pi());
+
+
+       string lep_third_jet_dr_name = h_proc+"_lep_third_jet_dr";
+       string lep_third_jet_dr_title = lep_third_jet_dr_name;
+       h_lep_third_jet_dr[c][i] = new TH1F(lep_third_jet_dr_name.c_str(),lep_third_jet_dr_title.c_str(),100,0,2.5*TMath::Pi());
+
+
+       string lep_fourth_jet_dr_name = h_proc+"_lep_fourth_jet_dr";
+       string lep_fourth_jet_dr_title = lep_fourth_jet_dr_name;
+       h_lep_fourth_jet_dr[c][i] = new TH1F(lep_fourth_jet_dr_name.c_str(),lep_fourth_jet_dr_title.c_str(),100,0,2.5*TMath::Pi());
+
+       string lead_jet_met_dphi_name = h_proc+"_lead_jet_met_dphi";
+       string lead_jet_met_dphi_title = lead_jet_met_dphi_name;
+       h_lead_jet_met_dphi[c][i] = new TH1F(lead_jet_met_dphi_name.c_str(),lead_jet_met_dphi_title.c_str(),30,0,1.4*TMath::Pi());
+
+       string met_phi_name = h_proc+"_met_phi";
+       string met_phi_title = met_phi_name;
+       h_met_phi[c][i] = new TH1F(met_phi_name.c_str(),met_phi_title.c_str(),30,-TMath::Pi(),1.5*TMath::Pi());
+
+       string lep_phi_name = h_proc+"_lep_phi";
+       string lep_phi_title = lep_phi_name;
+       h_lep_phi[c][i] = new TH1F(lep_phi_name.c_str(),lep_phi_title.c_str(),30,-TMath::Pi()*1.1,1.1*TMath::Pi());
+
+       string lep_calo_iso_name = h_proc+"_lep_calo_iso";
+       string lep_calo_iso_title = lep_calo_iso_name;
+       //h_lep_calo_iso[c][i] = new TH1F(lep_calo_iso_name.c_str(),lep_calo_iso_title.c_str(),45,-0.5,2);
+       h_lep_calo_iso[c][i] = new TH1F(lep_calo_iso_name.c_str(),lep_calo_iso_title.c_str(),24,-10,30);
+
+
+       string lep_track_iso_name = h_proc+"_lep_track_iso";
+       string lep_track_iso_title = lep_track_iso_name;
+       h_lep_track_iso[c][i] = new TH1F(lep_track_iso_name.c_str(),lep_track_iso_title.c_str(),30,0,0.25);
+       string lep_d0sig_name = h_proc+"_lep_d0sig";
+       string lep_d0sig_title = lep_d0sig_name;
+       h_lep_d0sig[c][i] = new TH1F(lep_d0sig_name.c_str(),lep_d0sig_title.c_str(),45,-10,10);
+
+       string lep_absz0_name = h_proc+"_lep_absz0";
+       string lep_absz0_title = lep_absz0_name;
+       h_lep_absz0[c][i] = new TH1F(lep_absz0_name.c_str(),lep_absz0_title.c_str(),45,0,1.0);
+       
+
+       float lt_max_x = (isEWK) ? 150 : 650;
+       string lt_name = h_proc+"_lt";
+       string lt_title = lt_name;
+       h_lt[c][i] = new TH1F(lt_name.c_str(),lt_title.c_str(),50,0,lt_max_x);
+
+
+
+       float lep_met_pt_max_x = (isEWK) ? 110 : 700;
+       int lep_met_pt_bin_n = (isEWK) ? 25 : 35;
+       // float lep_met_pt_max_x = (isEWK) ? 110 : 1000;
+       // int lep_met_pt_bin_n = (isEWK) ? 25 : 25;
+       string lep_met_pt_name = h_proc+"_lep_met_pt";
+       string lep_met_pt_title = lep_met_pt_name;
+       h_lep_met_pt[c][i] =
+	 new TH1F(lep_met_pt_name.c_str(),lep_met_pt_title.c_str(),lep_met_pt_bin_n,0,lep_met_pt_max_x);
+
+       float rwt_lep_met_pt_max_x = (isEWK) ? 110 : 1000;
+       int rwt_lep_met_pt_bin_n = (isEWK) ? 25 : 25;
+       string rwt_lep_met_pt_name = h_proc+"_rwt_lep_met_pt";
+       string rwt_lep_met_pt_title = rwt_lep_met_pt_name;
+       h_rwt_lep_met_pt[c][i] =
+	 new TH1F(rwt_lep_met_pt_name.c_str(),rwt_lep_met_pt_title.c_str(),rwt_lep_met_pt_bin_n,0,rwt_lep_met_pt_max_x);
+
+       float lep_met_mt_max_x = (isEWK) ? 150 : 500;
+       float lep_met_mt_min_x = (isEWK) ? 40 : 0;       
+       int lep_met_mt_bin_n = (isEWK) ? 25 : 50;
+       string lep_met_mt_name = h_proc+"_lep_met_mt";
+       string lep_met_mt_title = lep_met_mt_name;
+       h_lep_met_mt[c][i] =
+	 new TH1F(lep_met_mt_name.c_str(),lep_met_mt_title.c_str(),lep_met_mt_bin_n,lep_met_mt_min_x,lep_met_mt_max_x);
+
+
+       float lep_met_mt_eq2j_max_x = (isEWK) ? 150 : 500;
+       float lep_met_mt_eq2j_min_x = (isEWK) ? 40 : 0;       
+       int lep_met_mt_eq2j_bin_n = (isEWK) ? 25 : 50;
+       string lep_met_mt_eq2j_name = h_proc+"_lep_met_mt_eq2j";
+       string lep_met_mt_eq2j_title = lep_met_mt_eq2j_name;
+       h_lep_met_mt_eq2j[c][i] =
+	 new TH1F(lep_met_mt_eq2j_name.c_str(),lep_met_mt_eq2j_title.c_str(),lep_met_mt_eq2j_bin_n,lep_met_mt_eq2j_min_x,lep_met_mt_eq2j_max_x);
+
+       float lep_met_mt_gt2j_max_x = (isEWK) ? 150 : 500;
+       float lep_met_mt_gt2j_min_x = (isEWK) ? 40 : 0;       
+       int lep_met_mt_gt2j_bin_n = (isEWK) ? 25 : 50;
+       string lep_met_mt_gt2j_name = h_proc+"_lep_met_mt_gt2j";
+       string lep_met_mt_gt2j_title = lep_met_mt_gt2j_name;
+       h_lep_met_mt_gt2j[c][i] =
+	 new TH1F(lep_met_mt_gt2j_name.c_str(),lep_met_mt_gt2j_title.c_str(),lep_met_mt_gt2j_bin_n,lep_met_mt_gt2j_min_x,lep_met_mt_gt2j_max_x);
+
+
+       string lep_met_jet_mt_name = h_proc+"_lep_met_jet_mt";
+       string lep_met_jet_mt_title = lep_met_jet_mt_name;
+       h_lep_met_jet_mt[c][i] = new TH1F(lep_met_jet_mt_name.c_str(),lep_met_jet_mt_title.c_str(),50,0,1800);
+
+       float lep_met_dijet_mt_max_x = (isEWK) ? 250 : 1800;
+       string lep_met_dijet_mt_name = h_proc+"_lep_met_dijet_mt";
+       string lep_met_dijet_mt_title = lep_met_dijet_mt_name;
+       h_lep_met_dijet_mt[c][i] =
+	 new TH1F(lep_met_dijet_mt_name.c_str(),lep_met_dijet_mt_title.c_str(),26,0,lep_met_dijet_mt_max_x);
+
+       float lep_nu_dijet_m_max_x = (isEWK) ? 250 : 2240;
+       string lep_nu_dijet_m_name = h_proc+"_lep_nu_dijet_m";
+       string lep_nu_dijet_m_title = lep_nu_dijet_m_name;
+       h_lep_nu_dijet_m[c][i] =
+	 new TH1F(lep_nu_dijet_m_name.c_str(),lep_nu_dijet_m_title.c_str(),28,0,lep_nu_dijet_m_max_x);
+
+       float sig_lep_nu_dijet_m_max_x = (isEWK) ? 250 : 2240;
+       string sig_lep_nu_dijet_m_name = h_proc+"_sig_lep_nu_dijet_m";
+       string sig_lep_nu_dijet_m_title = sig_lep_nu_dijet_m_name;
+       h_sig_lep_nu_dijet_m[c][i] =
+	 new TH1F(sig_lep_nu_dijet_m_name.c_str(),sig_lep_nu_dijet_m_title.c_str(),28,0,sig_lep_nu_dijet_m_max_x);
+
+       string ht_name = h_proc+"_ht";
+       string ht_title = ht_name;
+       h_ht[c][i] = new TH1F(ht_name.c_str(),ht_title.c_str(),50,0,600);
+
+       float st_max_x = (isEWK) ? 200 : 1800;
+       float st_min_x = (isEWK) ? 120 : 0;
+       int st_bin_n = (isEWK) ? 25 : 50;
+       string st_name = h_proc+"_st";
+       string st_title = st_name;
+       h_st[c][i] = new TH1F(st_name.c_str(),st_title.c_str(),st_bin_n,st_min_x,st_max_x);
+
+       string lep_met_sig_jet_mt_name = h_proc+"_lep_met_sig_jet_mt";
+       string lep_met_sig_jet_mt_title = lep_met_sig_jet_mt_name;
+       h_lep_met_sig_jet_mt[c][i] = new TH1F(lep_met_sig_jet_mt_name.c_str(),lep_met_sig_jet_mt_title.c_str(),26,0,1800);
+
+     }
+   }
+   plotFile->cd();
+   //evt_n=0;
+}
+
+
+void skimmedGWW::SlaveBegin(TTree * /*tree*/)
+{
+
+  TString option = GetOption();
+
+}
+
+Bool_t skimmedGWW::Process(Long64_t entry)
+{
+
+  b_evt_pu_weight->GetEntry(entry);
+  b_evt_alpgen_weight->GetEntry(entry);
+  //b_lep_id_sf->GetEntry(entry);
+  //b_lep_reco_sf->GetEntry(entry);
+  //b_trig_sf->GetEntry(entry);
+  //b_EventWJetsScaleIQOPT3->GetEntry(entry);
+
+  b_nGoodMuons->GetEntry(entry);
+  b_nGoodJets->GetEntry(entry);  
+  b_nGoodElectrons->GetEntry(entry);
+  b_goodNeutrinoSolution->GetEntry(entry);
+  b_nGoodVxp->GetEntry(entry);
+  b_avgIntPerXing->GetEntry(entry);  
+  b_lvjj_lep_pt->GetEntry(entry);
+  //b_lvjj_lep_sig_diff_qoverp->GetEntry(entry);
+  b_lvjj_lep_eta->GetEntry(entry);
+  b_lvjj_lep_phi->GetEntry(entry);
+  b_lvjj_lep_calo_iso->GetEntry(entry);
+  b_lvjj_lep_track_iso->GetEntry(entry);
+  b_lvjj_lep_d0sig->GetEntry(entry);
+  b_lvjj_lep_absz0->GetEntry(entry);
+
+  b_nu_pt->GetEntry(entry);
+  b_nu_phi->GetEntry(entry);
+  b_nu_eta->GetEntry(entry);
+  
+  b_lead_jet_pt->GetEntry(entry);
+  b_lead_jet_phi->GetEntry(entry);
+  b_lead_jet_eta->GetEntry(entry);
+  b_lead_jet_m->GetEntry(entry);
+
+  b_second_jet_pt->GetEntry(entry);
+  b_second_jet_phi->GetEntry(entry);
+  b_second_jet_eta->GetEntry(entry);
+  b_second_jet_m->GetEntry(entry);
+
+  b_third_jet_pt->GetEntry(entry);
+  b_third_jet_phi->GetEntry(entry);
+  b_third_jet_eta->GetEntry(entry);
+  b_third_jet_m->GetEntry(entry);
+
+  b_fourth_jet_pt->GetEntry(entry);
+  b_fourth_jet_phi->GetEntry(entry);
+  b_fourth_jet_eta->GetEntry(entry);
+  b_fourth_jet_m->GetEntry(entry);
+
+  b_lep_met_jet_mt->GetEntry(entry);
+
+  b_lep_met_dijet_mt->GetEntry(entry);
+  b_lep_nu_dijet_m->GetEntry(entry);
+  b_goodNeutrinoSolution->GetEntry(entry);
+
+  b_lep_met_sig_jet_mt->GetEntry(entry);
+
+  b_dijet_m->GetEntry(entry);
+  b_dijet_pt->GetEntry(entry);
+  b_dijet_dr->GetEntry(entry);
+
+  b_sig_jet_m->GetEntry(entry);
+  
+  b_lvjj_met_phi->GetEntry(entry);
+  b_lvjj_met_et->GetEntry(entry);
+  b_lvjj_met_set->GetEntry(entry);
+
+  b_rf_met_phi->GetEntry(entry);
+  b_rf_met_et->GetEntry(entry);
+			  
+  b_sig_jet_m->GetEntry(entry);
+  
+  b_ctrl_all->GetEntry(entry);
+  b_qcd_event->GetEntry(entry);
+  b_ctrl_ewk->GetEntry(entry);
+  b_ctrl_boost1->GetEntry(entry);    
+  b_ctrl_sig_lowm->GetEntry(entry);
+  b_ctrl_sig_highm->GetEntry(entry);
+  
+  b_lvjj_lt->GetEntry(entry);
+  b_lep_met_pt->GetEntry(entry);
+  b_lep_met_mt->GetEntry(entry);
+  b_lvjj_ht->GetEntry(entry);
+  b_lvjj_st->GetEntry(entry);
+
+  b_RunNum->GetEntry(entry);
+
+  
+  if(doPartialUnblind && is_data){
+    if(m_rand->Rndm()>(1./4.70135)) return kTRUE;
+  }
+
+  //if(is_data) cout<<"data: "<<RunNum<<endl;
+  //////////////////////////////////////////////////
+  // Triangle cut
+  ////////////////////////////////////////////////// 
+  double lep_met_dphi = lvjj_met_phi-lvjj_lep_phi;
+  
+  if(lep_met_dphi > TMath::Pi()) {
+    lep_met_dphi -= TMath::Pi();
+  }else if(lep_met_dphi < -TMath::Pi()){
+    lep_met_dphi += TMath::Pi();
+  }
+  lep_met_dphi = fabs(lep_met_dphi);
+
+
+  float x1=40.0;
+  float y1=1.5;
+  float x2=75.;
+  float y2=0.0;
+  float slope = (y2-y1) / (x2-x1);
+
+  //bool pass_tri= (nGoodElectrons) ? (lep_met_dphi > slope*(lvjj_met_et-x1)+y1) : true;
+  bool pass_tri= (lep_met_dphi > slope*(lvjj_met_et-x1)+y1);
+
+  float elec_x1=40.0;
+  float elec_y1=2.0;
+  float elec_x2=75.;
+  float elec_y2=TMath::Pi();
+  float elec_slope = (elec_y2-elec_y1) / (elec_x2-elec_x1);
+
+  bool pass_elec_tri = (nGoodElectrons) ?  (lep_met_dphi < elec_slope*(lvjj_met_et-elec_x1)+elec_y1) : true;
+
+  //bool pass_elec_tri = true;
+  
+  // lep_lead_jet_dr
+  
+  double lep_lead_jet_dphi = TVector2::Phi_mpi_pi(lvjj_lep_phi-lead_jet_phi);
+  double lep_lead_jet_deta = (lead_jet_eta-lvjj_lep_eta);
+  double lep_lead_jet_dr =
+    sqrt(lep_lead_jet_dphi*lep_lead_jet_dphi +
+	 lep_lead_jet_deta*lep_lead_jet_deta);
+
+  //////////////////////////////////////////////////
+  // Neutrino
+  //////////////////////////////////////////////////
+
+  TLorentzVector tlv_nu,tlv_lep;
+  float cur_lep_m = (nGoodElectrons) ? EL_MASS : MU_MASS;
+  tlv_lep.SetPtEtaPhiM(lvjj_lep_pt,lvjj_lep_eta,lvjj_lep_phi,cur_lep_m);
+  tlv_nu.SetPtEtaPhiM(nu_pt,nu_eta,nu_phi,0.);
+  
+
+    //////////////////////////////////////////////////
+  // tmp_ctrl_all - sets preselection levels (plots in /all)
+  // from myAnalysis:
+  // - lep_pt > 30
+  // - met > 30
+  // - jet_pt > 40
+  ////////////////////////////////////////////////// 
+  float tmp_met_cut = 40.;
+
+  bool passBaseLine = (ctrl_all && ((nGoodMuons && lvjj_met_et>30.) || (nGoodElectrons && lvjj_met_et>tmp_met_cut))  && lead_jet_pt>100. && dijet_dr<4.0 );//lower muon met for qcd estimation
+  bool passLoose = passBaseLine;
+  bool passPS = (passBaseLine && pass_tri && pass_elec_tri && lvjj_met_et>tmp_met_cut);
+
+  //no tri cut
+  bool passOption = (passPS/* && lvjj_lep_sig_diff_qoverp<10*/);
+    
+  
+  //tmp, high met cut
+  int evt_ctrls[nCtrls] = {passLoose,passPS,passOption};
+  
+  isElec = (nGoodElectrons) ? true : false;
+  procIndex = (isElec) ? 0 : 1;
+
+  //sanity
+  if(!nGoodMuons && !nGoodElectrons) cout<<"!nGoodMuons && !nGoodElectrons !?"<<endl;
+
+
+  ++evt_n;
+
+
+  double lead_jet_met_dphi = lvjj_met_phi-lead_jet_phi;
+
+  if(lead_jet_met_dphi > TMath::Pi()) {
+    lead_jet_met_dphi -= TMath::Pi();
+  }else if(lead_jet_met_dphi < -TMath::Pi()){
+    lead_jet_met_dphi += TMath::Pi();
+  }
+  lead_jet_met_dphi = fabs(lead_jet_met_dphi);
+
+  double dijet_dphi = lead_jet_phi-second_jet_phi;
+
+  if(dijet_dphi > TMath::Pi()) {
+    dijet_dphi -= TMath::Pi();
+  }else if(dijet_dphi < -TMath::Pi()){
+    dijet_dphi += TMath::Pi();
+  }
+  dijet_dphi = fabs(dijet_dphi);
+
+  float dijet_deta = fabs(lead_jet_eta-second_jet_eta);
+  
+
+  double lep_second_jet_dphi = TVector2::Phi_mpi_pi(lvjj_lep_phi-second_jet_phi);
+  double lep_second_jet_deta = (second_jet_eta-lvjj_lep_eta);
+  double lep_second_jet_dr =
+    sqrt(lep_second_jet_dphi*lep_second_jet_dphi +
+	 lep_second_jet_deta*lep_second_jet_deta);
+  
+
+  double lep_third_jet_dphi = TVector2::Phi_mpi_pi(lvjj_lep_phi-third_jet_phi);
+  double lep_third_jet_deta = (third_jet_eta-lvjj_lep_eta);
+  double lep_third_jet_dr =
+    sqrt(lep_third_jet_dphi*lep_third_jet_dphi +
+	 lep_third_jet_deta*lep_third_jet_deta);
+
+  double lep_fourth_jet_dphi = TVector2::Phi_mpi_pi(lvjj_lep_phi-fourth_jet_phi);
+  double lep_fourth_jet_deta = (fourth_jet_eta-lvjj_lep_eta);
+  double lep_fourth_jet_dr =
+    sqrt(lep_fourth_jet_dphi*lep_fourth_jet_dphi +
+	 lep_fourth_jet_deta*lep_fourth_jet_deta);
+
+
+  
+  float alpgen_rwt = (doAlpgenReweighting && cur_option.find("alpgen.w")!=string::npos) ? evt_pu_weight*evt_alpgen_weight : evt_pu_weight;
+  //tmp
+  //float alpgen_rwt = evt_pu_weight;
+  
+  sow+=alpgen_rwt;
+  
+  //////////////////////////////////////////////////
+  // Make MET histogram for QCD fit *before* ctrl_all
+  // only in "all" directory
+  //////////////////////////////////////////////////
+
+
+  // lepton and jet cuts, relaxed MET
+      
+  for(int ctrlIndex=0;ctrlIndex<nCtrls;ctrlIndex++){
+    
+    if(!evt_ctrls[ctrlIndex]) continue;
+
+    //FIXME: see passSignal
+    if(ctrls[ctrlIndex]=="sig" && !passSignal(sig_jet_m)) continue;
+
+    
+    h_evt_n[ctrlIndex]->Fill(1);
+    h_evt_pu_weight[ctrlIndex]->Fill(evt_pu_weight);
+
+
+    //////////////////////////////////////////////////
+    // Fill histograms
+    //////////////////////////////////////////////////
+
+    plotFile->cd(ctrls[ctrlIndex].c_str());
+      
+    //double evt_pu_weight = (evt_pu_weight>=0) ? EventPileUpReWeight : 1;
+
+    //////////////////////////////////////////////////
+    // Build Mt(lep,MET) for RefFINal_em object as well
+    ////////////////////////////////////////////////// 
+
+
+    scat_lep_met_dphi_met[ctrlIndex][procIndex]->Fill(lvjj_met_et,lep_met_dphi);
+    
+    h_dijet_m[ctrlIndex][procIndex]->Fill(dijet_m,alpgen_rwt);
+    h_dijet_pt[ctrlIndex][procIndex]->Fill(dijet_pt,alpgen_rwt);
+
+    
+    h_rwt_dijet_pt[ctrlIndex][procIndex]->Fill(dijet_pt,alpgen_rwt);
+    h_rwt_lep_met_pt[ctrlIndex][procIndex]->Fill(lep_met_pt,alpgen_rwt);
+    
+    h_dijet_dr[ctrlIndex][procIndex]->Fill(dijet_dr,alpgen_rwt);
+    h_dijet_dr_norwt[ctrlIndex][procIndex]->Fill(dijet_dr,evt_pu_weight);
+    h_dijet_dphi[ctrlIndex][procIndex]->Fill(dijet_dphi,alpgen_rwt);
+    h_dijet_deta[ctrlIndex][procIndex]->Fill(dijet_deta,alpgen_rwt);
+    
+    h_lep_met_dijet_mt[ctrlIndex][procIndex]->Fill(lep_met_dijet_mt,alpgen_rwt);
+    if(goodNeutrinoSolution) h_lep_nu_dijet_m[ctrlIndex][procIndex]->Fill(lep_nu_dijet_m,alpgen_rwt);      
+
+    h_avg_int_per_xing[ctrlIndex][procIndex]->Fill(avgIntPerXing,alpgen_rwt);
+    h_nrw_avg_int_per_xing[ctrlIndex][procIndex]->Fill(avgIntPerXing);
+    h_vxp_n[ctrlIndex][procIndex]->Fill(nGoodVxp,alpgen_rwt);
+    h_nrw_vxp_n[ctrlIndex][procIndex]->Fill(nGoodVxp);
+    //MET Plots
+    h_set[ctrlIndex][procIndex]->Fill(lvjj_met_set,alpgen_rwt);
+    h_met[ctrlIndex][procIndex]->Fill(lvjj_met_et,alpgen_rwt);
+    h_met_phi[ctrlIndex][procIndex]->Fill(lvjj_met_phi,alpgen_rwt);
+
+    if(nGoodJets==2) h_met_2j[0][procIndex]->Fill(lvjj_met_et,alpgen_rwt);
+    if(nGoodJets==3) h_met_3j[0][procIndex]->Fill(lvjj_met_et,alpgen_rwt);
+    if(nGoodJets>=4) h_met_4j[0][procIndex]->Fill(lvjj_met_et,alpgen_rwt);
+  
+    if(nGoodJets>0){
+      h_lep_lead_jet_dr[ctrlIndex][procIndex]->Fill(lep_lead_jet_dr,alpgen_rwt);
+    }
+    if(nGoodJets>1){
+      h_lep_second_jet_dr[ctrlIndex][procIndex]->Fill(lep_second_jet_dr,alpgen_rwt);
+    }
+    if(nGoodJets>2) h_lep_third_jet_dr[ctrlIndex][procIndex]->Fill(lep_third_jet_dr,alpgen_rwt);
+    if(nGoodJets>3) h_lep_fourth_jet_dr[ctrlIndex][procIndex]->Fill(lep_fourth_jet_dr,alpgen_rwt);
+      
+    h_lep_met_dphi[ctrlIndex][procIndex]->Fill(lep_met_dphi,alpgen_rwt);
+    h_lep_nu_dr[ctrlIndex][procIndex]->Fill(tlv_nu.DeltaR(tlv_lep),alpgen_rwt);
+
+    h_lead_jet_met_dphi[ctrlIndex][procIndex]->Fill(lead_jet_met_dphi,alpgen_rwt);
+    //Jet Plots
+    h_lead_jet_pt[ctrlIndex][procIndex]->Fill(lead_jet_pt,alpgen_rwt);
+    h_second_jet_pt[ctrlIndex][procIndex]->Fill(second_jet_pt,alpgen_rwt);
+
+    h_jet_m[ctrlIndex][procIndex]->Fill(lead_jet_m,alpgen_rwt);
+    //tmp
+    // h_jet_m[ctrlIndex][procIndex]->Fill(second_jet_m,alpgen_rwt);
+    // h_jet_m[ctrlIndex][procIndex]->Fill(third_jet_m,alpgen_rwt);
+    // h_jet_m[ctrlIndex][procIndex]->Fill(fourth_jet_m,alpgen_rwt);
+
+    h_lead_jet_eta[ctrlIndex][procIndex]->Fill(lead_jet_eta,alpgen_rwt);
+    h_second_jet_eta[ctrlIndex][procIndex]->Fill(second_jet_eta,alpgen_rwt);
+    h_zoom_jet_m[ctrlIndex][procIndex]->Fill(lead_jet_m,alpgen_rwt);
+    h_jet_n[ctrlIndex][procIndex]->Fill(nGoodJets,alpgen_rwt);
+    h_sig_jet_m[ctrlIndex][procIndex]->Fill(sig_jet_m,alpgen_rwt);
+
+    //Event Transverse Energies
+    h_lt[ctrlIndex][procIndex]->Fill(lvjj_lt,alpgen_rwt);
+
+    h_lep_met_pt[ctrlIndex][procIndex]->Fill(lep_met_pt,alpgen_rwt);
+
+    h_lep_met_mt[ctrlIndex][procIndex]->Fill(lep_met_mt,alpgen_rwt);
+    
+    h_ht[ctrlIndex][procIndex]->Fill(lvjj_ht,alpgen_rwt);
+    h_st[ctrlIndex][procIndex]->Fill(lvjj_st,alpgen_rwt);    
+
+    //Lepton and Combined (lep,met,jet) plots
+    h_lep_pt[ctrlIndex][procIndex]->Fill(lvjj_lep_pt,alpgen_rwt);
+    //h_lep_sig_diff_qoverp[ctrlIndex][procIndex]->Fill(lvjj_lep_sig_diff_qoverp,alpgen_rwt);
+    if(nGoodJets==2){
+      h_lep_pt_eq2j[ctrlIndex][procIndex]->Fill(lvjj_lep_pt,alpgen_rwt);
+      h_lep_met_mt_eq2j[ctrlIndex][procIndex]->Fill(lep_met_mt,alpgen_rwt);
+      h_dijet_dr_eq2j[ctrlIndex][procIndex]->Fill(dijet_dr,alpgen_rwt);
+      h_dijet_dphi_eq2j[ctrlIndex][procIndex]->Fill(dijet_dphi,alpgen_rwt);
+      h_dijet_deta_eq2j[ctrlIndex][procIndex]->Fill(dijet_deta,alpgen_rwt);
+    }else if(nGoodJets>2){
+      h_lep_met_mt_gt2j[ctrlIndex][procIndex]->Fill(lep_met_mt,alpgen_rwt);
+      h_lep_pt_gt2j[ctrlIndex][procIndex]->Fill(lvjj_lep_pt,alpgen_rwt);
+      h_dijet_dr_gt2j[ctrlIndex][procIndex]->Fill(dijet_dr,alpgen_rwt);
+      h_dijet_dphi_gt2j[ctrlIndex][procIndex]->Fill(dijet_dphi,alpgen_rwt);
+      h_dijet_deta_gt2j[ctrlIndex][procIndex]->Fill(dijet_deta,alpgen_rwt);
+    }
+
+    if(avgIntPerXing<=6){
+      h_dijet_dr_lmu[ctrlIndex][procIndex]->Fill(dijet_dr,alpgen_rwt);
+    }else{
+      h_dijet_dr_hmu[ctrlIndex][procIndex]->Fill(dijet_dr,alpgen_rwt);
+    }
+
+    h_lep_phi[ctrlIndex][procIndex]->Fill(lvjj_lep_phi,alpgen_rwt);
+    h_lep_calo_iso[ctrlIndex][procIndex]->Fill(lvjj_lep_calo_iso,alpgen_rwt);
+    h_lep_track_iso[ctrlIndex][procIndex]->Fill(lvjj_lep_track_iso,alpgen_rwt);
+    h_lep_d0sig[ctrlIndex][procIndex]->Fill(lvjj_lep_d0sig,alpgen_rwt);
+    h_lep_absz0[ctrlIndex][procIndex]->Fill(lvjj_lep_absz0,alpgen_rwt);
+    h_lep_eta[ctrlIndex][procIndex]->Fill(lvjj_lep_eta,alpgen_rwt);
+    h_lep_met_jet_mt[ctrlIndex][procIndex]->Fill(lep_met_jet_mt,alpgen_rwt);
+
+    h_lep_met_sig_jet_mt[ctrlIndex][procIndex]->Fill(lep_met_sig_jet_mt,alpgen_rwt);
+
+
+    if(dijet_pt>200. && lep_met_pt>200 && (dijet_m>65 && dijet_m<115)){
+      h_sig_evt_n[ctrlIndex][procIndex]->Fill(1.,alpgen_rwt);
+      h_sig_lep_nu_dijet_m[ctrlIndex][procIndex]->Fill(lep_nu_dijet_m,alpgen_rwt);      
+    }
+  }
+  return kTRUE;
+}
+
+void skimmedGWW::SlaveTerminate()
+{
+  // The SlaveTerminate() function is called after all entries or objects
+  // have been processed. When running with PROOF SlaveTerminate() is called
+  // on each slave server.
+
+}
+
+void skimmedGWW::Terminate()
+{
+  // The Terminate() function is the last function to be called during
+  // a query. It always runs on the client, it can be used to present
+  // the results graphically or save the results to file.
+
+   cout<<"Total Events processed: "<<evt_n<<endl;
+   cout<<"Total Sum of Weights: "<<sow<<endl;
+   cout<<endl;
+   // // cout<<"Total Sum of Weights (WJets): "<<sowjet<<endl;
+  // // cout<<"Fraction: "<<(1-sowjet/sow)<<endl;
+  // cout<<endl;
+  plotFile->Write("",TObject::kOverwrite);
+
+
+  //delete plotFile;
+  
+  for(int i=0;i<nCtrls;i++){
+    delete (TH1F*) h_evt_n[i];
+    delete (TH1F*) h_evt_pu_weight[i];
+
+
+    for(int j=0;j<nProcs;j++){
+
+      delete (TH2F*) scat_lep_met_dphi_met[i][j];
+      //delete (TH1F*) h_lep_sig_diff_qoverp[i][j];
+
+      delete (TH1F*) h_lep_pt[i][j];
+      delete (TH1F*) h_lep_pt_eq2j[i][j];
+      delete (TH1F*) h_lep_pt_gt2j[i][j];
+
+      //delete (TH1F*) h_lep_energyLossPar[i][j];
+	    
+      delete (TH1F*) h_lep_eta[i][j];
+      delete (TH1F*) h_lep_phi[i][j];
+      delete (TH1F*) h_lep_calo_iso[i][j];
+      delete (TH1F*) h_lep_track_iso[i][j];
+      delete (TH1F*) h_lep_d0sig[i][j];
+      delete (TH1F*) h_lep_absz0[i][j];
+      delete (TH1F*) h_lep_met_dphi[i][j];
+      delete (TH1F*) h_lep_nu_dr[i][j];
+
+      delete (TH1F*) h_lead_jet_met_dphi[i][j];
+      delete (TH1F*) h_lep_lead_jet_dr[i][j];
+      delete (TH1F*) h_lep_second_jet_dr[i][j];
+      delete (TH1F*) h_lep_third_jet_dr[i][j];
+      delete (TH1F*) h_lep_fourth_jet_dr[i][j];
+
+      delete (TH1F*) h_met_phi[i][j];
+
+      delete (TH1F*) h_sig_evt_n[i][j];
+      delete (TH1F*) h_jet_n[i][j];
+      delete (TH1F*) h_jet_m[i][j];
+      delete (TH1F*) h_lead_jet_pt[i][j];
+      delete (TH1F*) h_lead_jet_eta[i][j];
+      delete (TH1F*) h_second_jet_pt[i][j];
+      delete (TH1F*) h_second_jet_eta[i][j];
+      //delete (TH1F*) h_wjrw_lead_jet_eta[i][j];
+      //delete (TH1F*) h_wjrw_second_jet_eta[i][j];
+      delete (TH1F*) h_zoom_jet_m[i][j];
+      delete (TH1F*) h_dijet_m[i][j];
+      delete (TH1F*) h_sig_jet_m[i][j];
+      delete (TH1F*) h_dijet_pt[i][j];
+      delete (TH1F*) h_dijet_dr[i][j];
+      delete (TH1F*) h_dijet_dr_norwt[i][j];
+      delete (TH1F*) h_dijet_dr_gt2j[i][j];
+      delete (TH1F*) h_dijet_dr_eq2j[i][j];
+      delete (TH1F*) h_dijet_dr_hmu[i][j];
+      delete (TH1F*) h_dijet_dr_lmu[i][j];
+
+      delete (TH1F*) h_dijet_dphi[i][j];
+      delete (TH1F*) h_dijet_dphi_eq2j[i][j];
+      delete (TH1F*) h_dijet_dphi_gt2j[i][j];
+
+      delete (TH1F*) h_dijet_deta[i][j];
+      delete (TH1F*) h_dijet_deta_eq2j[i][j];
+      delete (TH1F*) h_dijet_deta_gt2j[i][j];
+      
+      delete (TH1F*) h_lep_met_mt[i][j];
+      delete (TH1F*) h_lep_met_mt_eq2j[i][j];
+      delete (TH1F*) h_lep_met_mt_gt2j[i][j];
+
+      delete (TH1F*) h_lep_met_pt[i][j];
+
+      delete (TH1F*) h_lep_met_jet_mt[i][j];
+      delete (TH1F*) h_lep_met_dijet_mt[i][j];
+      delete (TH1F*) h_lep_nu_dijet_m[i][j];
+
+      delete (TH1F*) h_lep_met_sig_jet_mt[i][j];
+
+      delete (TH1F*) h_vxp_n[i][j];
+      delete (TH1F*) h_avg_int_per_xing[i][j];
+      delete (TH1F*) h_nrw_vxp_n[i][j];
+
+      delete (TH1F*) h_met_2j[i][j];
+      delete (TH1F*) h_met_3j[i][j];
+      delete (TH1F*) h_met_4j[i][j];
+
+      delete (TH1F*) h_met[i][j];
+
+      delete (TH1F*) h_lt[i][j];
+      delete (TH1F*) h_ht[i][j];
+      delete (TH1F*) h_st[i][j];
+    }
+  }
+
+  plotFile->Close();
+  
+}
+
+bool skimmedGWW::passSignal(double sig_m){
+  //Signal conditions here
+  bool passed = true;
+
+  //if(lt<sig_lt) passed=false;
+
+  if(sig_m<65 || sig_m>105) passed=false;
+  
+  return passed;
+}

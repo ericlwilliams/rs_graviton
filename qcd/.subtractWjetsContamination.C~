@@ -1,0 +1,19 @@
+#include "../scripts/neg_hadd.C"
+
+// replaces qcd plot files in /plots/gww_plots/ with files with wjets contamination removed
+
+void subtractWjetsContamination(){
+
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+
+  string qcd_elec_loc = "../plots/gww_plots/qcd.elec.pu.plot.root";
+  string wjets_cont_loc = "../plots/gww_plots/merged/mc.alpgen.cont.wjets.plot.root";
+  string new_qcd_elec_loc = "../plots/gww_plots/qcd.elec.alpgen.pu.plot.root";//write to this folder
+
+  //elec
+  neg_hadd(qcd_elec_loc.c_str(),wjets_cont_loc.c_str(),new_qcd_elec_loc.c_str());
+
+
+  gROOT->ProcessLine(".q");
+}

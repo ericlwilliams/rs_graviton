@@ -1,0 +1,145 @@
+#define slidingWindowOpt_cxx
+
+#include "slidingWindowOpt.h"
+#include <TH2.h>
+#include <TStyle.h>
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <TH1.h>
+#include <TMath.h>
+
+const int nProcs=2;
+const string procs[nProcs]={"elec","muon"};
+
+const int nSignals=11;
+const int nSigs[nSignals] = {500,600,700,800,900,1000,
+			       1100,1200,1300,1400,1500};
+
+const float low_window = 150.;
+const float high_window = 100.;
+
+TH1F* h_evt_n[nSignals];
+TH1F* h_sig_n[nSignals];
+TFile* out_file;
+
+
+void slidingWindowOpt::Begin(TTree * /*tree*/)
+{
+
+   string option = GetOption();
+   cout<<"slidingWindowOpt::Begin --> "<<option<<endl;
+   string out_file_name = "../plots/"+option;
+   string cur_out_file_name = out_file_name+".sw.plots.root";
+
+   out_file = (TFile*) TFile::Open(cur_out_file_name.c_str(),"RECREATE");
+   out_file->cd();
+
+   for(int i=0;i<nSignals;i++){
+     string cur_evt_n_name = Form("h_m%i_evt_n",nSigs[i]);
+     h_evt_n[i] = new TH1F(cur_evt_n_name.c_str(),cur_evt_n_name.c_str(),1,0.5,1.5);
+
+     string cur_sig_n_name = Form("h_m%i_sig_n",nSigs[i]);
+     h_sig_n[i] = new TH1F(cur_sig_n_name.c_str(),cur_sig_n_name.c_str(),1,0.5,1.5);
+   }
+     
+
+     
+   //h_evt_n = new TH1F("h_evt_n","evt_n",1,0.5,1.5);
+   
+}
+
+void slidingWindowOpt::SlaveBegin(TTree * /*tree*/)
+{
+   // The SlaveBegin() function is called after the Begin() function.
+   // When running with PROOF SlaveBegin() is called on each slave server.
+   // The tree argument is deprecated (on PROOF 0 is passed).
+
+   TString option = GetOption();
+
+}
+
+Bool_t slidingWindowOpt::Process(Long64_t entry)
+{
+  b_evt_pu_weight->GetEntry(entry);
+  b_evt_alpgen_weight->GetEntry(entry);
+
+  b_ctrl_all->GetEntry(entry);
+  b_lvjj_met_et->GetEntry(entry);
+  b_lead_jet_pt->GetEntry(entry);
+  b_nGoodElectrons->GetEntry(entry);
+
+  b_lvjj_met_phi->GetEntry(entry);
+  b_lvjj_lep_phi->GetEntry(entry);
+  
+  b_lep_met_pt->GetEntry(entry);
+  b_dijet_pt->GetEntry(entry);
+  b_dijet_m->GetEntry(entry);
+
+  b_lep_nu_dijet_m->GetEntry(entry);
+
+  double lep_met_dphi = lvjj_met_phi-lvjj_lep_phi;
+
+  if(lep_met_dphi > TMath::Pi()) {
+    lep_met_dphi -= TMath::Pi();
+  }else if(lep_met_dphi < -TMath::Pi()){
+    lep_met_dphi += TMath::Pi();
+  }
+  lep_met_dphi = fabs(lep_met_dphi);
+
+  float x1=40.0;
+  float y1=1.5;
+  float x2=75.;
+  float y2=0.0;
+  float slope = (y2-y1) / (x2-x1);
+
+  bool pass_low_tri= (nGoodElectrons) ? (lep_met_dphi > slope*(lvjj_met_et-x1)+y1) : true;
+
+  float elec_x1=40.0;
+  float elec_y1=2.0;
+  float elec_x2=75.;
+  float elec_y2=TMath::Pi();
+  float elec_slope = (elec_y2-elec_y1) / (elec_x2-elec_x1);
+
+  bool pass_high_tri = (nGoodElectrons) ?  (lep_met_dphi < elec_slope*(lvjj_met_et-elec_x1)+elec_y1) : true;
+
+
+  if(!ctrl_all || lead_jet_pt<100. || lvjj_met_et<40. || !pass_low_tri || !pass_high_tri) return kTRUE;
+
+
+  if(dijet_pt<200. || lep_met_pt<200. || dijet_m < 65. || dijet_m>115.) return kTRUE;
+  
+  float evt_weight = evt_pu_weight*evt_alpgen_weight;
+
+  for(int i=0;i<nSignals;i++){
+    float cur_mass = (float) nSigs[i]*1.;
+
+    float cur_low_window = cur_mass-low_window;
+    float cur_high_window = cur_mass+high_window;
+
+    if(lep_nu_dijet_m>cur_low_window && lep_nu_dijet_m<cur_high_window)
+      h_sig_n[i]->Fill(1.,evt_weight);
+
+  }
+
+
+
+  
+  //h_evt_n->Fill(1.,evt_weight);
+
+   return kTRUE;
+}
+
+void slidingWindowOpt::SlaveTerminate()
+{
+
+}
+
+void slidingWindowOpt::Terminate()
+{
+
+  out_file->Write();
+  out_file->Close();
+  
+  //if(h_lep_met_mt[0]) delete h_lep_met_mt[0];
+}

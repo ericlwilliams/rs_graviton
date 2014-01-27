@@ -1,0 +1,85 @@
+#define jvf_cxx
+
+#include "jvf.h"
+#include <TH2.h>
+#include <TH1.h>
+#include <TStyle.h>
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include "defs.h"
+
+TH1* h_jet_n[nProcs];
+
+TFile* plotFile;
+void jvf::Begin(TTree * /*tree*/)
+{
+   TString option = GetOption();
+   string str_option = option.Data();
+   string file_option = str_option.substr(0,str_option.find(","));
+   string jvf_option = str_option.substr(str_option.find(",")+1);
+
+
+   string curPlotFile= file_option+".plot."+jvf_option+".root";
+   curPlotFile="../plots/"+jvf_option+"_plots/"+curPlotFile;
+
+   plotFile = (TFile*) TFile::Open(curPlotFile.c_str(),"RECREATE");
+   plotFile->cd();
+
+
+   for(int i=0;i<nProcs;i++){
+
+     string h_proc = "h_"+procs[i];
+     
+     string jet_n_name = h_proc+"_jet_n";
+     string jet_n_title = jet_n_name;
+     h_jet_n[i] = new TH1F(jet_n_name.c_str(),jet_n_title.c_str(),15,0.5,15.5);
+   }
+
+}
+
+void jvf::SlaveBegin(TTree * /*tree*/)
+{
+
+   TString option = GetOption();
+
+}
+
+Bool_t jvf::Process(Long64_t entry)
+{
+
+  b_avgIntPerXing->GetEntry(entry);
+  b_nGoodJets->GetEntry(entry);
+  b_ww_met_et->GetEntry(entry);
+  b_ctrl_all->GetEntry(entry);
+  b_nGoodElectrons->GetEntry(entry);
+
+  isElec = (nGoodElectrons) ? true : false;
+  procIndex = (isElec) ? 0 : 1;
+
+  if(!ctrl_all || ww_met_et<30.0) return kTRUE;
+
+  h_jet_n[procIndex]->Fill(nGoodJets);
+  
+
+   return kTRUE;
+}
+
+void jvf::SlaveTerminate()
+{
+   // The SlaveTerminate() function is called after all entries or objects
+   // have been processed. When running with PROOF SlaveTerminate() is called
+   // on each slave server.
+
+}
+
+void jvf::Terminate()
+{
+   // The Terminate() function is the last function to be called during
+   // a query. It always runs on the client, it can be used to present
+   // the results graphically or save the results to file.
+  plotFile->Write("",TObject::kOverwrite);
+  plotFile->Close();
+
+  //delete h_jet_n;
+}

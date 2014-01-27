@@ -1,0 +1,431 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <vector>
+
+#include <TROOT.h>
+#include <TCanvas.h>
+#include <TLegend.h>
+#include <TGraphErrors.h>
+#include <THStack.h>
+#include "TH1.h"
+#include "TF1.h"
+#include <TFile.h>
+#include "../../include/atlasstyle-00-03-04/AtlasStyle.C"
+
+void drawSignalTemplates(){
+
+  SetAtlasStyle();
+  gROOT->SetBatch();
+  const float NGmass  = 21;
+  int Gmass[NGmass] =
+    {500,550,600,650,700,750,800,850,900,950,1000,1050,1100,1150,1200,1250,1300,1350,1400,1450,1500};
+    
+  TFile* signal_template_file = TFile::Open("../files/gww_lvjj_signal_templates_vs_mass.root");
+
+  TH1F* h_evjj_signal_templates[NGmass];
+  TH1F* h_uvjj_signal_templates[NGmass];
+
+  string evjj_sig_template_name = "gww_evjj_m%i";
+  string uvjj_sig_template_name = "gww_uvjj_m%i";
+
+  int cur_color=300;
+  for(int i=0;i<NGmass;i++){
+
+    string cur_evjj_sig_hist = Form(evjj_sig_template_name.c_str(),Gmass[i]);
+    h_evjj_signal_templates[i] = (TH1F*) signal_template_file->Get(cur_evjj_sig_hist.c_str());
+    h_evjj_signal_templates[i]->SetDirectory(0);
+    //h_evjj_signal_templates[i]->SetLineColor(cur_color);
+
+    string cur_uvjj_sig_hist = Form(uvjj_sig_template_name.c_str(),Gmass[i]);
+    h_uvjj_signal_templates[i] = (TH1F*) signal_template_file->Get(cur_uvjj_sig_hist.c_str());
+    h_uvjj_signal_templates[i]->SetDirectory(0);
+    //h_uvjj_signal_templates[i]->SetLineColor(cur_color);
+
+    cur_color+=33;
+  }
+
+  signal_template_file->Close();
+  
+
+  TCanvas* tc_evjj_sig_templates =
+    new TCanvas("tc_evjj_sig_templates","tc_evjj_sig_templates",0,0,1920,1200);
+  tc_evjj_sig_templates->cd();
+
+  for(int j=0;j<NGmass;j++){
+    string draw_option = (!j) ? "HIST" : "HIST sames";
+    int line_color = kOrange+j;
+
+    TH1F* h_cur_evjj_signal_template = (TH1F*) h_evjj_signal_templates[j]->Clone();
+
+    h_cur_evjj_signal_template->GetXaxis()->SetLabelSize(0.04);
+    h_cur_evjj_signal_template->GetXaxis()->SetTitle("M(l#nujj)");
+    h_cur_evjj_signal_template->SetLineColor(line_color);
+    h_cur_evjj_signal_template->GetYaxis()->SetRangeUser(0.01,500);
+    h_cur_evjj_signal_template->Draw(draw_option.c_str());
+  }
+  tc_evjj_sig_templates->SetLogy();
+  tc_evjj_sig_templates->Update();
+
+  string cur_saveas = "../plots/evjj_signal_templates.pdf";
+  tc_evjj_sig_templates->SaveAs(cur_saveas.c_str());
+
+
+
+  TCanvas* tc_uvjj_sig_templates =
+    new TCanvas("tc_uvjj_sig_templates","tc_uvjj_sig_templates",0,0,1920,1200);
+  tc_uvjj_sig_templates->cd();
+
+  for(int j=0;j<NGmass;j++){
+    string draw_option = (!j) ? "HIST" : "HIST sames";
+    int line_color = kAzure+j;
+
+    TH1F* h_cur_uvjj_signal_template = (TH1F*) h_uvjj_signal_templates[j]->Clone();
+
+    h_cur_uvjj_signal_template->GetXaxis()->SetLabelSize(0.04);
+    h_cur_uvjj_signal_template->GetXaxis()->SetTitle("M(l#nujj)");
+    h_cur_uvjj_signal_template->SetLineColor(line_color);
+    h_cur_uvjj_signal_template->GetYaxis()->SetRangeUser(0.01,500);
+    h_cur_uvjj_signal_template->Draw(draw_option.c_str());
+  }
+  tc_uvjj_sig_templates->SetLogy();
+  tc_uvjj_sig_templates->Update();
+
+  string cur_saveas = "../plots/uvjj_signal_templates.pdf";
+  tc_uvjj_sig_templates->SaveAs(cur_saveas.c_str());
+
+
+
+
+  // m500
+  TFile* gww_m500_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m500.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m500_evjj_mass =
+    (TH1F*) gww_m500_file->Get("h_sig_highm_elec_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m500_evjj_mass = (TH1F*) h_evjj_signal_templates[0]->Clone();
+  
+  TCanvas* tc_evjj_m500_template =
+    new TCanvas("tc_evjj_m500_template","tc_evjj_m500_template",0,0,1920,1200);
+  tc_evjj_m500_template->cd();
+
+  h_gww_m500_evjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m500_evjj_mass->Draw("HIST");
+  h_temp_m500_evjj_mass->SetLineColor(kRed);
+  h_temp_m500_evjj_mass->Rebin(4);
+  h_temp_m500_evjj_mass->Draw("HIST sames");
+
+  TLegend* tl_evjj_m500_template = new TLegend(0.7,0.7,0.9,0.9,"M=500 GeV");
+  tl_evjj_m500_template->SetFillColor(0);
+  tl_evjj_m500_template->AddEntry(h_gww_m500_evjj_mass,"Full Sim","L");
+  tl_evjj_m500_template->AddEntry(h_temp_m500_evjj_mass,"template","L");
+  tl_evjj_m500_template->Draw();
+
+  tc_evjj_m500_template->Update();
+  //tc_evjj_m500_template->SetLogy();
+  
+  string cur_saveas = "../plots/evjj_m500_mass.pdf";
+  tc_evjj_m500_template->SaveAs(cur_saveas.c_str());
+  
+  
+
+  // m750
+  TFile* gww_m750_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m750.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m750_evjj_mass =
+    (TH1F*) gww_m750_file->Get("h_sig_highm_elec_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m750_evjj_mass = (TH1F*) h_evjj_signal_templates[5]->Clone();
+  
+  TCanvas* tc_evjj_m750_template =
+    new TCanvas("tc_evjj_m750_template","tc_evjj_m750_template",0,0,1920,1200);
+  tc_evjj_m750_template->cd();
+
+  h_gww_m750_evjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m750_evjj_mass->Draw("HIST");
+  h_temp_m750_evjj_mass->SetLineColor(kRed);
+  h_temp_m750_evjj_mass->Rebin(4);
+  h_temp_m750_evjj_mass->Draw("HIST sames");
+
+  TLegend* tl_evjj_m750_template = new TLegend(0.7,0.7,0.9,0.9,"M=750 GeV");
+  tl_evjj_m750_template->SetFillColor(0);
+  tl_evjj_m750_template->AddEntry(h_gww_m750_evjj_mass,"Full Sim","L");
+  tl_evjj_m750_template->AddEntry(h_temp_m750_evjj_mass,"template","L");
+  tl_evjj_m750_template->Draw();
+
+  tc_evjj_m750_template->Update();
+  //tc_evjj_m750_template->SetLogy();
+  
+  string cur_saveas = "../plots/evjj_m750_mass.pdf";
+  tc_evjj_m750_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1000
+  TFile* gww_m1000_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1000.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1000_evjj_mass =
+    (TH1F*) gww_m1000_file->Get("h_sig_highm_elec_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1000_evjj_mass = (TH1F*) h_evjj_signal_templates[10]->Clone();
+  
+  TCanvas* tc_evjj_m1000_template =
+    new TCanvas("tc_evjj_m1000_template","tc_evjj_m1000_template",0,0,1920,1200);
+  tc_evjj_m1000_template->cd();
+
+  h_gww_m1000_evjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m1000_evjj_mass->Draw("HIST");
+  h_temp_m1000_evjj_mass->SetLineColor(kRed);
+  h_temp_m1000_evjj_mass->Rebin(4);
+  h_temp_m1000_evjj_mass->Draw("HIST sames");
+
+  TLegend* tl_evjj_m1000_template = new TLegend(0.7,0.7,0.9,0.9,"M=1000 GeV");
+  tl_evjj_m1000_template->SetFillColor(0);
+  tl_evjj_m1000_template->AddEntry(h_gww_m1000_evjj_mass,"Full Sim","L");
+  tl_evjj_m1000_template->AddEntry(h_temp_m1000_evjj_mass,"template","L");
+  tl_evjj_m1000_template->Draw();
+
+  tc_evjj_m1000_template->Update();
+  //tc_evjj_m1000_template->SetLogy();
+  
+  string cur_saveas = "../plots/evjj_m1000_mass.pdf";
+  tc_evjj_m1000_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1250
+  TFile* gww_m1250_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1250.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1250_evjj_mass =
+    (TH1F*) gww_m1250_file->Get("h_sig_highm_elec_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1250_evjj_mass = (TH1F*) h_evjj_signal_templates[15]->Clone();
+  
+  TCanvas* tc_evjj_m1250_template =
+    new TCanvas("tc_evjj_m1250_template","tc_evjj_m1250_template",0,0,1920,1200);
+  tc_evjj_m1250_template->cd();
+
+  h_gww_m1250_evjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m1250_evjj_mass->Draw("HIST");
+  h_temp_m1250_evjj_mass->SetLineColor(kRed);
+  h_temp_m1250_evjj_mass->Rebin(4);
+  h_temp_m1250_evjj_mass->Draw("HIST sames");
+
+  TLegend* tl_evjj_m1250_template = new TLegend(0.3,0.7,0.5,0.9,"M=1250 GeV");
+  tl_evjj_m1250_template->SetFillColor(0);
+  tl_evjj_m1250_template->AddEntry(h_gww_m1250_evjj_mass,"Full Sim","L");
+  tl_evjj_m1250_template->AddEntry(h_temp_m1250_evjj_mass,"template","L");
+  tl_evjj_m1250_template->Draw();
+
+  tc_evjj_m1250_template->Update();
+  //tc_evjj_m1250_template->SetLogy();
+  
+  string cur_saveas = "../plots/evjj_m1250_mass.pdf";
+  tc_evjj_m1250_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1500
+  TFile* gww_m1500_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1500.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1500_evjj_mass =
+    (TH1F*) gww_m1500_file->Get("h_sig_highm_elec_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1500_evjj_mass = (TH1F*) h_evjj_signal_templates[20]->Clone();
+  
+  TCanvas* tc_evjj_m1500_template =
+    new TCanvas("tc_evjj_m1500_template","tc_evjj_m1500_template",0,0,1920,1200);
+  tc_evjj_m1500_template->cd();
+
+  h_temp_m1500_evjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_temp_m1500_evjj_mass->SetLineColor(kRed);
+  h_temp_m1500_evjj_mass->Rebin(4);
+  h_temp_m1500_evjj_mass->Draw("HIST");
+
+  h_gww_m1500_evjj_mass->Draw("HIST same");
+  
+  TLegend* tl_evjj_m1500_template = new TLegend(0.3,0.7,0.5,0.9,"M=1500 GeV");
+  tl_evjj_m1500_template->SetFillColor(0);
+  tl_evjj_m1500_template->AddEntry(h_gww_m1500_evjj_mass,"Full Sim","L");
+  tl_evjj_m1500_template->AddEntry(h_temp_m1500_evjj_mass,"template","L");
+  tl_evjj_m1500_template->Draw();
+
+  tc_evjj_m1500_template->Update();
+  //tc_evjj_m1500_template->SetLogy();
+  
+  string cur_saveas = "../plots/evjj_m1500_mass.pdf";
+  tc_evjj_m1500_template->SaveAs(cur_saveas.c_str());
+  
+  
+
+
+  // m500
+  TFile* gww_m500_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m500.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m500_uvjj_mass =
+    (TH1F*) gww_m500_file->Get("h_sig_highm_muon_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m500_uvjj_mass = (TH1F*) h_uvjj_signal_templates[0]->Clone();
+  
+  TCanvas* tc_uvjj_m500_template =
+    new TCanvas("tc_uvjj_m500_template","tc_uvjj_m500_template",0,0,1920,1200);
+  tc_uvjj_m500_template->cd();
+
+  h_gww_m500_uvjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m500_uvjj_mass->Draw("HIST");
+  h_temp_m500_uvjj_mass->SetLineColor(kRed);
+  h_temp_m500_uvjj_mass->Rebin(4);
+  h_temp_m500_uvjj_mass->Draw("HIST sames");
+
+  TLegend* tl_uvjj_m500_template = new TLegend(0.7,0.7,0.9,0.9,"M=500 GeV");
+  tl_uvjj_m500_template->SetFillColor(0);
+  tl_uvjj_m500_template->AddEntry(h_gww_m500_uvjj_mass,"Full Sim","L");
+  tl_uvjj_m500_template->AddEntry(h_temp_m500_uvjj_mass,"template","L");
+  tl_uvjj_m500_template->Draw();
+
+  tc_uvjj_m500_template->Update();
+  //tc_uvjj_m500_template->SetLogy();
+  
+  string cur_saveas = "../plots/uvjj_m500_mass.pdf";
+  tc_uvjj_m500_template->SaveAs(cur_saveas.c_str());
+  
+  
+
+  // m750
+  TFile* gww_m750_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m750.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m750_uvjj_mass =
+    (TH1F*) gww_m750_file->Get("h_sig_highm_muon_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m750_uvjj_mass = (TH1F*) h_uvjj_signal_templates[5]->Clone();
+  
+  TCanvas* tc_uvjj_m750_template =
+    new TCanvas("tc_uvjj_m750_template","tc_uvjj_m750_template",0,0,1920,1200);
+  tc_uvjj_m750_template->cd();
+
+  h_gww_m750_uvjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m750_uvjj_mass->Draw("HIST");
+  h_temp_m750_uvjj_mass->SetLineColor(kRed);
+  h_temp_m750_uvjj_mass->Rebin(4);
+  h_temp_m750_uvjj_mass->Draw("HIST sames");
+
+  TLegend* tl_uvjj_m750_template = new TLegend(0.7,0.7,0.9,0.9,"M=750 GeV");
+  tl_uvjj_m750_template->SetFillColor(0);
+  tl_uvjj_m750_template->AddEntry(h_gww_m750_uvjj_mass,"Full Sim","L");
+  tl_uvjj_m750_template->AddEntry(h_temp_m750_uvjj_mass,"template","L");
+  tl_uvjj_m750_template->Draw();
+
+  tc_uvjj_m750_template->Update();
+  //tc_uvjj_m750_template->SetLogy();
+  
+  string cur_saveas = "../plots/uvjj_m750_mass.pdf";
+  tc_uvjj_m750_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1000
+  TFile* gww_m1000_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1000.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1000_uvjj_mass =
+    (TH1F*) gww_m1000_file->Get("h_sig_highm_muon_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1000_uvjj_mass = (TH1F*) h_uvjj_signal_templates[10]->Clone();
+  
+  TCanvas* tc_uvjj_m1000_template =
+    new TCanvas("tc_uvjj_m1000_template","tc_uvjj_m1000_template",0,0,1920,1200);
+  tc_uvjj_m1000_template->cd();
+
+  h_gww_m1000_uvjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m1000_uvjj_mass->Draw("HIST");
+  h_temp_m1000_uvjj_mass->SetLineColor(kRed);
+  h_temp_m1000_uvjj_mass->Rebin(4);
+  h_temp_m1000_uvjj_mass->Draw("HIST sames");
+
+  TLegend* tl_uvjj_m1000_template = new TLegend(0.7,0.7,0.9,0.9,"M=1000 GeV");
+  tl_uvjj_m1000_template->SetFillColor(0);
+  tl_uvjj_m1000_template->AddEntry(h_gww_m1000_uvjj_mass,"Full Sim","L");
+  tl_uvjj_m1000_template->AddEntry(h_temp_m1000_uvjj_mass,"template","L");
+  tl_uvjj_m1000_template->Draw();
+
+  tc_uvjj_m1000_template->Update();
+  //tc_uvjj_m1000_template->SetLogy();
+  
+  string cur_saveas = "../plots/uvjj_m1000_mass.pdf";
+  tc_uvjj_m1000_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1250
+  TFile* gww_m1250_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1250.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1250_uvjj_mass =
+    (TH1F*) gww_m1250_file->Get("h_sig_highm_muon_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1250_uvjj_mass = (TH1F*) h_uvjj_signal_templates[15]->Clone();
+  
+  TCanvas* tc_uvjj_m1250_template =
+    new TCanvas("tc_uvjj_m1250_template","tc_uvjj_m1250_template",0,0,1920,1200);
+  tc_uvjj_m1250_template->cd();
+
+  h_gww_m1250_uvjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_gww_m1250_uvjj_mass->Draw("HIST");
+  h_temp_m1250_uvjj_mass->SetLineColor(kRed);
+  h_temp_m1250_uvjj_mass->Rebin(4);
+  h_temp_m1250_uvjj_mass->Draw("HIST sames");
+
+  TLegend* tl_uvjj_m1250_template = new TLegend(0.3,0.7,0.5,0.9,"M=1250 GeV");
+  tl_uvjj_m1250_template->SetFillColor(0);
+  tl_uvjj_m1250_template->AddEntry(h_gww_m1250_uvjj_mass,"Full Sim","L");
+  tl_uvjj_m1250_template->AddEntry(h_temp_m1250_uvjj_mass,"template","L");
+  tl_uvjj_m1250_template->Draw();
+
+  tc_uvjj_m1250_template->Update();
+  //tc_uvjj_m1250_template->SetLogy();
+  
+  string cur_saveas = "../plots/uvjj_m1250_mass.pdf";
+  tc_uvjj_m1250_template->SaveAs(cur_saveas.c_str());
+  
+  
+  // m1500
+  TFile* gww_m1500_file =
+    TFile::Open("../../plots/ctrl_plots/merged/mc.gww.lvjj.m1500.kmpl0_1.ctrl.plot.root");
+
+  TH1F* h_gww_m1500_uvjj_mass =
+    (TH1F*) gww_m1500_file->Get("h_sig_highm_muon_dijet_m_lep_nu_dijet_m");
+
+  TH1F* h_temp_m1500_uvjj_mass = (TH1F*) h_uvjj_signal_templates[20]->Clone();
+  
+  TCanvas* tc_uvjj_m1500_template =
+    new TCanvas("tc_uvjj_m1500_template","tc_uvjj_m1500_template",0,0,1920,1200);
+  tc_uvjj_m1500_template->cd();
+
+  h_temp_m1500_uvjj_mass->GetXaxis()->SetTitle("M(e#nujj) [GeV]");
+  h_temp_m1500_uvjj_mass->SetLineColor(kRed);
+  h_temp_m1500_uvjj_mass->Rebin(4);
+  h_temp_m1500_uvjj_mass->Draw("HIST");
+
+  h_gww_m1500_uvjj_mass->Draw("HIST sames");
+
+  TLegend* tl_uvjj_m1500_template = new TLegend(0.3,0.7,0.5,0.9,"M=1500 GeV");
+  tl_uvjj_m1500_template->SetFillColor(0);
+  tl_uvjj_m1500_template->AddEntry(h_gww_m1500_uvjj_mass,"Full Sim","L");
+  tl_uvjj_m1500_template->AddEntry(h_temp_m1500_uvjj_mass,"template","L");
+  tl_uvjj_m1500_template->Draw();
+
+  tc_uvjj_m1500_template->Update();
+  //tc_uvjj_m1500_template->SetLogy();
+  
+  string cur_saveas = "../plots/uvjj_m1500_mass.pdf";
+  tc_uvjj_m1500_template->SaveAs(cur_saveas.c_str());
+  
+  
+
+
+
+  gROOT->ProcessLine(".q");
+  return;
+}

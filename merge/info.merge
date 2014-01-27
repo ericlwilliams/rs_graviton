@@ -1,0 +1,184 @@
+
+Processing merge.C...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In mergeGWW.C, gww
+
+
+Scaling and Merging qcd.alpgen
+myhadd(qcd.alpgen,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/qcd.alpgen.plot.root
+wwFileInfo adding ../plots/gww_plots/qcd.elec.alpgen.pu.plot.root
+wwXSec initialized for run #: 111111, process: qcd (elec)
+wwFileInfo adding ../plots/gww_plots/qcd.muon.alpgen.pu.plot.root
+wwXSec initialized for run #: 111112, process: qcd (muon)
+
+
+Scaling and Merging mc.alpgen.wjets
+myhadd(mc.alpgen.wjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.wjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np0.pu.plot.root
+wwXSec initialized for run #: 107680, process: W->e#nu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np1.pu.plot.root
+wwXSec initialized for run #: 107681, process: W->e#nu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np2.pu.plot.root
+wwXSec initialized for run #: 107682, process: W->e#nu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np3.pu.plot.root
+wwXSec initialized for run #: 107683, process: W->e#nu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np4.pu.plot.root
+wwXSec initialized for run #: 107684, process: W->e#nu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np5.pu.plot.root
+wwXSec initialized for run #: 107685, process: W->e#nu+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np0.pu.plot.root
+wwXSec initialized for run #: 107690, process: W->mu#nu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np1.pu.plot.root
+wwXSec initialized for run #: 107691, process: W->mu#nu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np2.pu.plot.root
+wwXSec initialized for run #: 107692, process: W->mu#nu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np3.pu.plot.root
+wwXSec initialized for run #: 107693, process: W->mu#nu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np4.pu.plot.root
+wwXSec initialized for run #: 107694, process: W->mu#nu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np5.pu.plot.root
+wwXSec initialized for run #: 107695, process: W->mu#nu+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np0.pu.plot.root
+wwXSec initialized for run #: 107700, process: W->#tau#nu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np1.pu.plot.root
+wwXSec initialized for run #: 107701, process: W->#tau#nu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np2.pu.plot.root
+wwXSec initialized for run #: 107702, process: W->#tau#nu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np3.pu.plot.root
+wwXSec initialized for run #: 107703, process: W->#tau#nu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np4.pu.plot.root
+wwXSec initialized for run #: 107704, process: W->#tau#nu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np5.pu.plot.root
+wwXSec initialized for run #: 107705, process: W->#tau#nu+5p
+
+
+Scaling and Merging mc.herwig.ww
+myhadd(mc.herwig.ww,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.ww.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.ww.pu.plot.root
+wwXSec initialized for run #: 105985, process: pp->WW->all
+
+
+Scaling and Merging mc.herwig.wz
+myhadd(mc.herwig.wz,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.wz.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.wz.pu.plot.root
+wwXSec initialized for run #: 105987, process: pp->WZ->all
+
+
+Scaling and Merging mc.herwig.zz
+myhadd(mc.herwig.zz,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.zz.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.zz.pu.plot.root
+wwXSec initialized for run #: 105986, process: pp->ZZ->all
+
+
+Scaling and Merging mc.herwig.vv
+myhadd(mc.herwig.vv,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.vv.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.ww.pu.plot.root
+wwXSec initialized for run #: 105985, process: pp->WW->all
+wwFileInfo adding ../plots/gww_plots/mc.herwig.wz.pu.plot.root
+wwXSec initialized for run #: 105987, process: pp->WZ->all
+wwFileInfo adding ../plots/gww_plots/mc.herwig.zz.pu.plot.root
+wwXSec initialized for run #: 105986, process: pp->ZZ->all
+
+
+Scaling and Merging mc.alpgen.zjets
+myhadd(mc.alpgen.zjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.zjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np0.pu.plot.root
+wwXSec initialized for run #: 107650, process: Z->ee+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np1.pu.plot.root
+wwXSec initialized for run #: 107651, process: Z->ee+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np2.pu.plot.root
+wwXSec initialized for run #: 107652, process: Z->ee+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np3.pu.plot.root
+wwXSec initialized for run #: 107653, process: Z->ee+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np4.pu.plot.root
+wwXSec initialized for run #: 107654, process: Z->ee+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np5.pu.plot.root
+wwXSec initialized for run #: 107655, process: Z->ee+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np0.pu.plot.root
+wwXSec initialized for run #: 107660, process: Z->mumu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np1.pu.plot.root
+wwXSec initialized for run #: 107661, process: Z->mumu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np2.pu.plot.root
+wwXSec initialized for run #: 107662, process: Z->mumu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np3.pu.plot.root
+wwXSec initialized for run #: 107663, process: Z->mumu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np4.pu.plot.root
+wwXSec initialized for run #: 107664, process: Z->mumu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np5.pu.plot.root
+wwXSec initialized for run #: 107665, process: Z->mumu+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np0.pu.plot.root
+wwXSec initialized for run #: 107670, process: Z->#tau#tau+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np1.pu.plot.root
+wwXSec initialized for run #: 107671, process: Z->#tau#tau+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np2.pu.plot.root
+wwXSec initialized for run #: 107672, process: Z->#tau#tau+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np3.pu.plot.root
+wwXSec initialized for run #: 107673, process: Z->#tau#tau+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np4.pu.plot.root
+wwXSec initialized for run #: 107674, process: Z->#tau#tau+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np5.pu.plot.root
+wwXSec initialized for run #: 107675, process: Z->#tau#tau+5p
+
+
+Scaling and Merging mc.mcatnlo.ttbar
+myhadd(mc.mcatnlo.ttbar,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.mcatnlo.ttbar.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.t1.pu.plot.root
+wwXSec initialized for run #: 105200, process: tT (no had w/ PU)
+
+
+Scaling and Merging mc.mcatnlo.top
+myhadd(mc.mcatnlo.top,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.mcatnlo.top.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.t1.pu.plot.root
+wwXSec initialized for run #: 105200, process: tT (no had w/ PU)
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.enu.pu.plot.root
+wwXSec initialized for run #: 108340, process: st.tchan.enu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.unu.pu.plot.root
+wwXSec initialized for run #: 108341, process: st.tchan.unu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.tnu.pu.plot.root
+wwXSec initialized for run #: 108342, process: st.tchan.tnu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.enu.pu.plot.root
+wwXSec initialized for run #: 108343, process: st.schan.enu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.unu.pu.plot.root
+wwXSec initialized for run #: 108344, process: st.schan.unu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.tnu.pu.plot.root
+wwXSec initialized for run #: 108345, process: st.schan.tnu.pu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.wt.pu.plot.root
+wwXSec initialized for run #: 108346, process: st.wt.pu
+Merged output written to ../plots/gww_plots/merged

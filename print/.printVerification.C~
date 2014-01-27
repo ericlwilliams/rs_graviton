@@ -1,0 +1,18 @@
+void printVerification();
+
+  // gROOT->SetStyle("Plain");  
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(1);
+  // gStyle->SetPadTickX(1);
+  // gStyle->SetPadTickY(1);
+
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In printVerfication.C"<<endl;

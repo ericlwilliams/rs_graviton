@@ -1,0 +1,9 @@
+#!/bin/zsh -
+
+
+r runPS.C
+cp ../plots/gww_plots/qcd.elec.pu.plot.root ../plots/gww_plots/qcd.elec.alpgen.pu.plot.root
+cp ../plots/gww_plots/qcd.muon.pu.plot.root ../plots/gww_plots/qcd.muon.alpgen.pu.plot.root
+
+'mv' ../plots/gww_plots/qcd.elec.pu.plot.root ../plots/gww_plots/qcd.elec.sherpa.pu.plot.root
+'mv' ../plots/gww_plots/qcd.muon.pu.plot.root ../plots/gww_plots/qcd.muon.sherpa.pu.plot.root

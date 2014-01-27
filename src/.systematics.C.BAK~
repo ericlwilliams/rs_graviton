@@ -1,0 +1,1468 @@
+#define systematics_cxx
+#include "systematics.h"
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <TH2.h>
+#include <TStyle.h>
+#include <TMath.h>
+#include <TVector2.h>
+#include <TLorentzVector.h>
+#include "../include/systematics_defs.h"
+
+//#include "defs.h"
+const double GeV=1000.;
+const float EL_MASS = 0.000511;
+const float MU_MASS = .105658;
+const float W_MASS = 80.398;
+
+bool calcJES=true;
+
+TH1F* h_pass_sig[nProcs][nSys][nMods][nRegions];
+TH1F* h_lep_met_dijet_mt[nProcs][nSys][nMods][nRegions];
+
+bool isElec=true;
+int procIndex=0;
+
+//tmp
+float lowm_ctr[nMods][nProcs];
+
+TFile* plotFile;
+void systematics::Begin(TTree * /*tree*/)
+{
+  TString option = GetOption();
+  cout<<"systematics::Begin: "<<option<<endl;
+
+  string curFile = (string) option;
+  string curPlotFile= curFile+".plot.root";
+
+  curPlotFile="../plots/systematics_plots/"+curPlotFile;
+   
+  plotFile = (TFile*) TFile::Open(curPlotFile.c_str(),"RECREATE");
+  plotFile->cd();
+
+   
+  for(int p=0;p<nProcs;p++){
+    string cur_proc = procs[p];
+
+    for(int s=0;s<nSys;s++){
+      string cur_sys = systs[s];
+
+	  
+      for(int m=0;m<nMods;m++){
+	string cur_mod = modulations[m];
+
+
+	for(int r=0;r<nRegions;r++){
+	  string cur_region = regions[r];
+	   
+	  string hist_name = Form("h_%s_%s_%s_%s_",cur_proc.c_str(),cur_sys.c_str(),cur_mod.c_str(),cur_region.c_str());
+
+
+	  string cur_hist_name;
+
+	  // pass_sig
+	  cur_hist_name = hist_name+"pass_sig";
+	  h_pass_sig[p][s][m][r] = new TH1F(cur_hist_name.c_str(),cur_hist_name.c_str(),1,0.5,1.5);
+
+	  
+	  cur_hist_name = hist_name+"lep_met_dijet_mt";
+	  h_lep_met_dijet_mt[p][s][m][r] = new TH1F(cur_hist_name.c_str(),cur_hist_name.c_str(),26,0,1800);
+
+	}
+      }
+    }
+  }
+}
+  
+
+void systematics::SlaveBegin(TTree * /*tree*/)
+{
+  TString option = GetOption();
+
+}
+
+Bool_t systematics::Process(Long64_t entry)
+{
+
+  b_EventPileUpReWeight->GetEntry(entry);
+
+  //tochange evt_weight_id_sf_up
+  b_evt_weight_id_sf_up->GetEntry(entry);
+  b_evt_weight_id_sf_down->GetEntry(entry);  
+
+  b_evt_weight_reco_sf_up->GetEntry(entry);
+  b_evt_weight_reco_sf_down->GetEntry(entry);  
+  
+  b_EventWeightUpTrigSF->GetEntry(entry);
+  b_evt_weight_trig_sf_down->GetEntry(entry);  
+  
+  b_nGoodElectrons->GetEntry(entry);
+  b_nGoodJets->GetEntry(entry);
+
+  //lead_jet
+  b_lead_jet_pt->GetEntry(entry);
+  b_lead_jet_eta->GetEntry(entry);
+  b_lead_jet_phi->GetEntry(entry);
+  b_lead_jet_m->GetEntry(entry);
+
+  b_lead_jet_rel_up_jes->GetEntry(entry);
+  b_lead_jet_rel_down_jes->GetEntry(entry);
+
+  //second_jet
+  b_second_jet_pt->GetEntry(entry);
+  b_second_jet_eta->GetEntry(entry);
+  b_second_jet_phi->GetEntry(entry);
+  b_second_jet_m->GetEntry(entry);
+
+  b_second_jet_rel_up_jes->GetEntry(entry);
+  b_second_jet_rel_down_jes->GetEntry(entry);
+
+  b_lep_met_pt->GetEntry(entry);
+  //  b_ctrl_sig_lowm->GetEntry(entry);
+  b_lnuj_lep_pt->GetEntry(entry);
+  b_lnuj_lep_phi->GetEntry(entry);
+
+  b_lnuj_lep_les_up->GetEntry(entry);
+  b_lnuj_lep_les_down->GetEntry(entry);
+  
+  b_lnuj_lep_ler_up->GetEntry(entry);
+  b_lnuj_lep_ler_down->GetEntry(entry);
+
+  b_lnuj_lep_mspt_down->GetEntry(entry);
+  b_lnuj_lep_mspt_up->GetEntry(entry);  
+
+  b_lnuj_lep_idpt_down->GetEntry(entry);
+  b_lnuj_lep_idpt_up->GetEntry(entry);  
+
+  
+  b_ww_met_et->GetEntry(entry);
+  b_ww_met_etx->GetEntry(entry);
+  b_ww_met_ety->GetEntry(entry);
+
+  b_ww_ootpu_up_met_et->GetEntry(entry);
+  b_ww_ootpu_up_met_etx->GetEntry(entry);
+  b_ww_ootpu_up_met_ety->GetEntry(entry);
+
+  b_ww_ootpu_down_met_et->GetEntry(entry);
+  b_ww_ootpu_down_met_etx->GetEntry(entry);
+  b_ww_ootpu_down_met_ety->GetEntry(entry);
+
+  b_ww_intpu_up_met_et->GetEntry(entry);
+  b_ww_intpu_up_met_etx->GetEntry(entry);
+  b_ww_intpu_up_met_ety->GetEntry(entry);
+
+  b_ww_intpu_down_met_et->GetEntry(entry);
+  b_ww_intpu_down_met_etx->GetEntry(entry);
+  b_ww_intpu_down_met_ety->GetEntry(entry);
+
+  b_ww_refutrk_up_met_et->GetEntry(entry);
+  b_ww_refutrk_up_met_etx->GetEntry(entry);
+  b_ww_refutrk_up_met_ety->GetEntry(entry);
+
+  b_ww_refutrk_down_met_et->GetEntry(entry);
+  b_ww_refutrk_down_met_etx->GetEntry(entry);
+  b_ww_refutrk_down_met_ety->GetEntry(entry);
+
+  b_ww_lhco_up_met_et->GetEntry(entry);
+  b_ww_lhco_up_met_etx->GetEntry(entry);
+  b_ww_lhco_up_met_ety->GetEntry(entry);
+
+  b_ww_lhco_down_met_et->GetEntry(entry);
+  b_ww_lhco_down_met_etx->GetEntry(entry);
+  b_ww_lhco_down_met_ety->GetEntry(entry);
+
+  b_ww_uboy_up_met_et->GetEntry(entry);
+  b_ww_uboy_up_met_etx->GetEntry(entry);
+  b_ww_uboy_up_met_ety->GetEntry(entry);
+
+  b_ww_uboy_down_met_et->GetEntry(entry);
+  b_ww_uboy_down_met_etx->GetEntry(entry);
+  b_ww_uboy_down_met_ety->GetEntry(entry);
+
+  // b_ww_em_met_et->GetEntry(entry);
+  // b_ww_em_met_etx->GetEntry(entry);
+  // b_ww_em_met_ety->GetEntry(entry);
+  
+  b_ww_met_et->GetEntry(entry);
+  b_ww_met_etx->GetEntry(entry);
+  b_ww_met_ety->GetEntry(entry);
+
+  b_ww_lc_topo_met_et->GetEntry(entry);
+  b_ww_lc_topo_met_etx->GetEntry(entry);
+  b_ww_lc_topo_met_ety->GetEntry(entry);
+
+  b_ww_lc_topo_up_met_et->GetEntry(entry);
+  b_ww_lc_topo_up_met_etx->GetEntry(entry);
+  b_ww_lc_topo_up_met_ety->GetEntry(entry);
+
+  b_ww_lc_topo_down_met_et->GetEntry(entry);
+  b_ww_lc_topo_down_met_etx->GetEntry(entry);
+  b_ww_lc_topo_down_met_ety->GetEntry(entry);
+
+  // No MET propagation in JES/JER anymore
+  // b_ww_corr_up_met_et->GetEntry(entry);
+  // b_ww_corr_up_met_etx->GetEntry(entry);
+  // b_ww_corr_up_met_ety->GetEntry(entry);
+
+  // b_ww_corr_down_met_et->GetEntry(entry);
+  // b_ww_corr_down_met_etx->GetEntry(entry);
+  // b_ww_corr_down_met_ety->GetEntry(entry);
+
+  // b_ww_jer_met_et->GetEntry(entry);
+  // b_ww_jer_met_etx->GetEntry(entry);
+  // b_ww_jer_met_ety->GetEntry(entry);
+
+  b_lead_jet_jer_scale->GetEntry(entry);
+  //b_lead_jet_jer_syst
+  b_second_jet_jer_scale->GetEntry(entry);
+  //b_second_jet_jer_syst
+  
+  //b_ctrl_all->GetEntry(entry);
+
+
+  
+  double sys_lep_px = lnuj_lep_pt*cos(lnuj_lep_phi);
+  double sys_lep_py = lnuj_lep_pt*sin(lnuj_lep_phi);
+  double sys_lep_pt = lnuj_lep_pt;
+
+  double sys_nom_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_nom_lep_met_py = sys_lep_py+ww_met_ety;
+  double sys_nom_lep_met_pt = sqrt(pow(sys_nom_lep_met_px,2.)+pow(sys_nom_lep_met_py,2.));
+
+  TLorentzVector tlv_lead_jet,tlv_second_jet;
+  tlv_lead_jet.SetPtEtaPhiM(lead_jet_pt,lead_jet_eta,lead_jet_phi,lead_jet_m);
+  tlv_second_jet.SetPtEtaPhiM(second_jet_pt,second_jet_eta,second_jet_phi,second_jet_m);
+
+  //////////////////////////////////////////////////
+  // LES
+  //////////////////////////////////////////////////
+
+
+  double sys_les_up_lep_px = sys_lep_px*lnuj_lep_les_up;
+  double sys_les_up_lep_py = sys_lep_py*lnuj_lep_les_up;
+  double sys_les_up_lep_pt = sqrt(pow(sys_les_up_lep_px,2.)+pow(sys_les_up_lep_py,2.));
+
+  double sys_les_up_lep_met_px = sys_les_up_lep_px+ww_met_etx;
+  double sys_les_up_lep_met_py = sys_les_up_lep_py+ww_met_ety;
+  double sys_les_up_lep_met_pt = sqrt(pow(sys_les_up_lep_met_px,2.)+pow(sys_les_up_lep_met_py,2.));
+  
+  double sys_les_down_lep_px = sys_lep_px*lnuj_lep_les_down;
+  double sys_les_down_lep_py = sys_lep_py*lnuj_lep_les_down;
+  double sys_les_down_lep_pt = sqrt(pow(sys_les_down_lep_px,2.)+pow(sys_les_down_lep_py,2.));
+
+  double sys_les_lep_pt[nMods] ={sys_lep_pt,sys_les_up_lep_pt,sys_les_down_lep_pt};
+   
+  double sys_les_down_lep_met_px = sys_les_down_lep_px+ww_met_etx;
+  double sys_les_down_lep_met_py = sys_les_down_lep_py+ww_met_ety;
+  double sys_les_down_lep_met_pt = sqrt(pow(sys_les_down_lep_met_px,2.)+pow(sys_les_down_lep_met_py,2.));
+  
+  double sys_les_lep_met_pt[nMods]={sys_nom_lep_met_pt,sys_les_up_lep_met_pt,sys_les_down_lep_met_pt};
+  
+  //////////////////////////////////////////////////
+  // LER
+  //////////////////////////////////////////////////
+
+  double sys_ler_up_lep_px = sys_lep_px*lnuj_lep_ler_up;
+  double sys_ler_up_lep_py = sys_lep_py*lnuj_lep_ler_up;
+  double sys_ler_up_lep_pt = sqrt(pow(sys_ler_up_lep_px,2.)+pow(sys_ler_up_lep_py,2.));
+
+  double sys_ler_up_lep_met_px = sys_ler_up_lep_px+ww_met_etx;
+  double sys_ler_up_lep_met_py = sys_ler_up_lep_py+ww_met_ety;
+  double sys_ler_up_lep_met_pt = sqrt(pow(sys_ler_up_lep_met_px,2.)+pow(sys_ler_up_lep_met_py,2.));
+  
+  double sys_ler_down_lep_px = sys_lep_px*lnuj_lep_ler_down;
+  double sys_ler_down_lep_py = sys_lep_py*lnuj_lep_ler_down;
+  double sys_ler_down_lep_pt = sqrt(pow(sys_ler_down_lep_px,2.)+pow(sys_ler_down_lep_py,2.));
+
+  double sys_ler_lep_pt[nMods] ={sys_lep_pt,sys_ler_up_lep_pt,sys_ler_down_lep_pt};
+   
+  double sys_ler_down_lep_met_px = sys_ler_down_lep_px+ww_met_etx;
+  double sys_ler_down_lep_met_py = sys_ler_down_lep_py+ww_met_ety;
+  double sys_ler_down_lep_met_pt = sqrt(pow(sys_ler_down_lep_met_px,2.)+pow(sys_ler_down_lep_met_py,2.));
+  
+  double sys_ler_lep_met_pt[nMods]={sys_nom_lep_met_pt,sys_ler_up_lep_met_pt,sys_ler_down_lep_met_pt};
+  
+  //////////////////////////////////////////////////
+  // JER
+  ////////////////////////////////////////////////// 
+
+  // No more JER propagation to MET
+  // double sys_jer_lep_met_px = sys_lep_px+ww_jer_met_etx;
+  // double sys_jer_lep_met_py = sys_lep_py+ww_jer_met_ety;
+  // double sys_jer_smear_lep_met_pt = sqrt(pow(sys_jer_lep_met_px,2.)+pow(sys_jer_lep_met_py,2.));
+
+  double sys_jer_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_jer_lep_met_py = sys_lep_py+ww_met_ety;
+  double sys_jer_smear_lep_met_pt = sqrt(pow(sys_jer_lep_met_px,2.)+pow(sys_jer_lep_met_py,2.));
+
+  // 'up'== 'down' in smearing cases
+  double sys_jer_lep_met_pt[nMods]={sys_nom_lep_met_pt,sys_jer_smear_lep_met_pt,sys_jer_smear_lep_met_pt};
+
+  // No more JER propagation to MET
+  //double sys_jer_met_et[nMods]={ww_met_et,ww_jer_met_et,ww_jer_met_et};
+  double sys_jer_met_et[nMods]={ww_met_et,ww_met_et,ww_met_et};
+
+  double sys_jer_lead_jet_smear_pt = fabs(1-lead_jet_jer_scale);
+  double sys_jer_lead_jet_smear_up_pt = 1+sys_jer_lead_jet_smear_pt;
+  double sys_jer_lead_jet_smear_down_pt = 1-sys_jer_lead_jet_smear_pt;
+
+  double sys_jer_second_jet_smear_pt = fabs(1-second_jet_jer_scale);
+  double sys_jer_second_jet_smear_up_pt = 1+sys_jer_second_jet_smear_pt;
+  double sys_jer_second_jet_smear_down_pt = 1-sys_jer_second_jet_smear_pt;
+
+
+  
+  TLorentzVector tlv_jer_up_lead_jet,tlv_jer_up_second_jet;
+  tlv_jer_up_lead_jet.SetPtEtaPhiM(lead_jet_pt*sys_jer_lead_jet_smear_up_pt,lead_jet_eta,lead_jet_phi,lead_jet_m);
+  tlv_jer_up_second_jet.SetPtEtaPhiM(second_jet_pt*sys_jer_second_jet_smear_up_pt,second_jet_eta,second_jet_phi,second_jet_m);
+
+  TLorentzVector tlv_jer_down_lead_jet,tlv_jer_down_second_jet;
+  tlv_jer_down_lead_jet.SetPtEtaPhiM(lead_jet_pt*sys_jer_lead_jet_smear_down_pt,lead_jet_eta,lead_jet_phi,lead_jet_m);
+  tlv_jer_down_second_jet.SetPtEtaPhiM(second_jet_pt*sys_jer_second_jet_smear_down_pt,second_jet_eta,second_jet_phi,second_jet_m);
+
+  // 'up' == 'down' in smearing cases
+  TLorentzVector sys_jer_lead_jet_tlv[nMods] = {tlv_lead_jet,tlv_jer_up_lead_jet,tlv_jer_down_lead_jet};
+  TLorentzVector sys_jer_second_jet_tlv[nMods] = {tlv_second_jet,tlv_jer_up_second_jet,tlv_jer_down_second_jet};
+
+
+
+  //////////////////////////////////////////////////
+  // MSPT
+  //////////////////////////////////////////////////
+
+  double sys_mspt_up_lep_px = sys_lep_px*lnuj_lep_mspt_up;
+  double sys_mspt_up_lep_py = sys_lep_py*lnuj_lep_mspt_up;
+  double sys_mspt_up_lep_pt = sqrt(pow(sys_mspt_up_lep_px,2.)+pow(sys_mspt_up_lep_py,2.));
+
+  double sys_mspt_down_lep_px = sys_lep_px*lnuj_lep_mspt_down;
+  double sys_mspt_down_lep_py = sys_lep_py*lnuj_lep_mspt_down;
+  double sys_mspt_down_lep_pt = sqrt(pow(sys_mspt_down_lep_px,2.)+pow(sys_mspt_down_lep_py,2.));
+
+  double sys_mspt_lep_pt[nMods] ={sys_lep_pt,sys_mspt_up_lep_pt,sys_mspt_down_lep_pt};
+
+
+  double sys_mspt_up_lep_met_px = sys_mspt_up_lep_px+ww_met_etx;
+  double sys_mspt_up_lep_met_py = sys_mspt_up_lep_py+ww_met_ety;
+  double sys_mspt_up_lep_met_pt = sqrt(pow(sys_mspt_up_lep_met_px,2.)+pow(sys_mspt_up_lep_met_py,2.));
+
+  double sys_mspt_down_lep_met_px = sys_mspt_down_lep_px+ww_met_etx;
+  double sys_mspt_down_lep_met_py = sys_mspt_down_lep_py+ww_met_ety;
+  double sys_mspt_down_lep_met_pt = sqrt(pow(sys_mspt_down_lep_met_px,2.)+pow(sys_mspt_down_lep_met_py,2.));
+
+
+
+  double sys_mspt_lep_met_pt[nMods] = {sys_nom_lep_met_pt,sys_mspt_up_lep_met_pt,sys_mspt_down_lep_met_pt};
+
+  //////////////////////////////////////////////////
+  // IDPT
+  //////////////////////////////////////////////////
+
+  double sys_idpt_up_lep_px = sys_lep_px*lnuj_lep_idpt_up;
+  double sys_idpt_up_lep_py = sys_lep_py*lnuj_lep_idpt_up;
+  double sys_idpt_up_lep_pt = sqrt(pow(sys_idpt_up_lep_px,2.)+pow(sys_idpt_up_lep_py,2.));
+
+  double sys_idpt_down_lep_px = sys_lep_px*lnuj_lep_idpt_down;
+  double sys_idpt_down_lep_py = sys_lep_py*lnuj_lep_idpt_down;
+  double sys_idpt_down_lep_pt = sqrt(pow(sys_idpt_down_lep_px,2.)+pow(sys_idpt_down_lep_py,2.));
+
+
+
+  double sys_idpt_lep_pt[nMods] ={sys_lep_pt,sys_idpt_up_lep_pt,sys_idpt_down_lep_pt};
+
+
+  double sys_idpt_up_lep_met_px = sys_idpt_up_lep_px+ww_met_etx;
+  double sys_idpt_up_lep_met_py = sys_idpt_up_lep_py+ww_met_ety;
+  double sys_idpt_up_lep_met_pt = sqrt(pow(sys_idpt_up_lep_met_px,2.)+pow(sys_idpt_up_lep_met_py,2.));
+
+  double sys_idpt_down_lep_met_px = sys_idpt_down_lep_px+ww_met_etx;
+  double sys_idpt_down_lep_met_py = sys_idpt_down_lep_py+ww_met_ety;
+  double sys_idpt_down_lep_met_pt = sqrt(pow(sys_idpt_down_lep_met_px,2.)+pow(sys_idpt_down_lep_met_py,2.));
+
+  double sys_idpt_lep_met_pt[nMods] = {sys_nom_lep_met_pt,sys_idpt_up_lep_met_pt,sys_idpt_down_lep_met_pt};
+  
+  
+  //////////////////////////////////////////////////
+  // JES
+  //////////////////////////////////////////////////
+
+  // No JES MET propigation
+  //double sys_jes_met_et[nMods]= {ww_met_et,ww_corr_up_met_et,ww_corr_down_met_et};
+  
+  // double sys_jes_up_lep_met_px = sys_lep_px+ww_corr_up_met_etx;
+  // double sys_jes_up_lep_met_py = sys_lep_py+ww_corr_up_met_ety;
+  // double sys_jes_up_lep_met_pt = sqrt(pow(sys_jes_up_lep_met_px,2.)+pow(sys_jes_up_lep_met_py,2.));
+  
+  // double sys_jes_down_lep_met_px = sys_lep_px+ww_corr_down_met_etx;
+  // double sys_jes_down_lep_met_py = sys_lep_py+ww_corr_down_met_ety;
+  // double sys_jes_down_lep_met_pt = sqrt(pow(sys_jes_down_lep_met_px,2.)+pow(sys_jes_down_lep_met_py,2.));
+
+  // Pt(lep+MEt) vector
+  // No JES MET propigation
+  //double sys_jes_lep_met_pt[nMods] = {sys_nom_lep_met_pt,sys_jes_up_lep_met_pt,sys_jes_down_lep_met_pt};
+  double sys_jes_lep_met_pt[nMods] = {sys_nom_lep_met_pt,sys_nom_lep_met_pt,sys_nom_lep_met_pt};
+
+
+  TLorentzVector tlv_jes_up_lead_jet, tlv_jes_down_lead_jet;
+  tlv_jes_up_lead_jet.SetPtEtaPhiM(lead_jet_pt*(1.+lead_jet_rel_up_jes),lead_jet_eta,lead_jet_phi,lead_jet_m);
+  tlv_jes_down_lead_jet.SetPtEtaPhiM(lead_jet_pt*(1.+lead_jet_rel_down_jes),lead_jet_eta,lead_jet_phi,lead_jet_m);
+
+  TLorentzVector tlv_jes_up_second_jet,tlv_jes_down_second_jet;
+  tlv_jes_up_second_jet.SetPtEtaPhiM(second_jet_pt*(1.+second_jet_rel_up_jes),second_jet_eta,second_jet_phi,second_jet_m);
+  tlv_jes_down_second_jet.SetPtEtaPhiM(second_jet_pt*(1.+second_jet_rel_down_jes),second_jet_eta,second_jet_phi,second_jet_m);
+  
+  TLorentzVector sys_jes_lead_jet_tlv[nMods] = {tlv_lead_jet,tlv_jes_up_lead_jet,tlv_jes_down_lead_jet};
+  
+  TLorentzVector sys_jes_second_jet_tlv[nMods] = {tlv_second_jet,tlv_jes_up_second_jet,tlv_jes_down_second_jet};
+
+  //////////////////////////////////////////////////
+  // idsf
+  ////////////////////////////////////////////////// 
+
+  float sys_idsf_evt_weight[nMods] = {EventPileUpReWeight,evt_weight_id_sf_up,evt_weight_id_sf_down};
+  
+  //////////////////////////////////////////////////
+  // recosf
+  ////////////////////////////////////////////////// 
+
+  float sys_recosf_evt_weight[nMods] = {EventPileUpReWeight,evt_weight_reco_sf_up,evt_weight_reco_sf_down};
+  
+  //////////////////////////////////////////////////
+  // trigsf
+  ////////////////////////////////////////////////// 
+
+  float sys_trigsf_evt_weight[nMods] = {EventPileUpReWeight,EventWeightUpTrigSF,evt_weight_trig_sf_down};
+
+
+  //////////////////////////////////////////////////
+  // TOPO
+  //////////////////////////////////////////////////
+  //MET modulation
+  double sys_topo_met_et[nMods]= {ww_lc_topo_met_et,ww_lc_topo_up_met_et,ww_lc_topo_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_topo_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_topo_lep_met_px = sys_lep_px+ww_lc_topo_met_etx;
+  double sys_topo_lep_met_py = sys_lep_py+ww_lc_topo_met_ety;
+  double cur_topo_lep_met_pt = sqrt(pow(sys_topo_lep_met_px,2.)+pow(sys_topo_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_topo_up_lep_met_px = sys_lep_px+ww_lc_topo_up_met_etx;
+  double sys_topo_up_lep_met_py = sys_lep_py+ww_lc_topo_up_met_ety;
+  double cur_topo_up_lep_met_pt = sqrt(pow(sys_topo_up_lep_met_px,2.)+pow(sys_topo_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_topo_down_lep_met_px = sys_lep_px+ww_lc_topo_down_met_etx;
+  double sys_topo_down_lep_met_py = sys_lep_py+ww_lc_topo_down_met_ety;
+  double cur_topo_down_lep_met_pt = sqrt(pow(sys_topo_down_lep_met_px,2.)+pow(sys_topo_down_lep_met_py,2.));
+  
+  double sys_topo_lep_met_pt[nMods]={cur_topo_lep_met_pt,cur_topo_up_lep_met_pt,cur_topo_down_lep_met_pt};
+  
+  //////////////////////////////////////////////////
+  // ootpu
+  //////////////////////////////////////////////////
+
+  //MET modulation
+  double sys_ootpu_met_et[nMods]= {ww_met_et,ww_ootpu_up_met_et,ww_ootpu_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_ootpu_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_ootpu_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_ootpu_lep_met_py = sys_lep_py+ww_met_ety;
+  double cur_ootpu_lep_met_pt = sqrt(pow(sys_ootpu_lep_met_px,2.)+pow(sys_ootpu_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_ootpu_up_lep_met_px = sys_lep_px+ww_ootpu_up_met_etx;
+  double sys_ootpu_up_lep_met_py = sys_lep_py+ww_ootpu_up_met_ety;
+  double cur_ootpu_up_lep_met_pt = sqrt(pow(sys_ootpu_up_lep_met_px,2.)+pow(sys_ootpu_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_ootpu_down_lep_met_px = sys_lep_px+ww_ootpu_down_met_etx;
+  double sys_ootpu_down_lep_met_py = sys_lep_py+ww_ootpu_down_met_ety;
+  double cur_ootpu_down_lep_met_pt = sqrt(pow(sys_ootpu_down_lep_met_px,2.)+pow(sys_ootpu_down_lep_met_py,2.));
+  
+  double sys_ootpu_lep_met_pt[nMods]={cur_ootpu_lep_met_pt,cur_ootpu_up_lep_met_pt,cur_ootpu_down_lep_met_pt};
+
+  //////////////////////////////////////////////////
+  // intpu
+  //////////////////////////////////////////////////
+
+  //MET modulation
+  double sys_intpu_met_et[nMods]= {ww_met_et,ww_intpu_up_met_et,ww_intpu_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_intpu_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_intpu_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_intpu_lep_met_py = sys_lep_py+ww_met_ety;
+  double cur_intpu_lep_met_pt = sqrt(pow(sys_intpu_lep_met_px,2.)+pow(sys_intpu_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_intpu_up_lep_met_px = sys_lep_px+ww_intpu_up_met_etx;
+  double sys_intpu_up_lep_met_py = sys_lep_py+ww_intpu_up_met_ety;
+  double cur_intpu_up_lep_met_pt = sqrt(pow(sys_intpu_up_lep_met_px,2.)+pow(sys_intpu_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_intpu_down_lep_met_px = sys_lep_px+ww_intpu_down_met_etx;
+  double sys_intpu_down_lep_met_py = sys_lep_py+ww_intpu_down_met_ety;
+  double cur_intpu_down_lep_met_pt = sqrt(pow(sys_intpu_down_lep_met_px,2.)+pow(sys_intpu_down_lep_met_py,2.));
+  
+  double sys_intpu_lep_met_pt[nMods]={cur_intpu_lep_met_pt,cur_intpu_up_lep_met_pt,cur_intpu_down_lep_met_pt};
+
+  //////////////////////////////////////////////////
+  // refutrk
+  //////////////////////////////////////////////////
+
+  //MET modulation
+  double sys_refutrk_met_et[nMods]= {ww_met_et,ww_refutrk_up_met_et,ww_refutrk_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_refutrk_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_refutrk_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_refutrk_lep_met_py = sys_lep_py+ww_met_ety;
+  double cur_refutrk_lep_met_pt = sqrt(pow(sys_refutrk_lep_met_px,2.)+pow(sys_refutrk_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_refutrk_up_lep_met_px = sys_lep_px+ww_refutrk_up_met_etx;
+  double sys_refutrk_up_lep_met_py = sys_lep_py+ww_refutrk_up_met_ety;
+  double cur_refutrk_up_lep_met_pt = sqrt(pow(sys_refutrk_up_lep_met_px,2.)+pow(sys_refutrk_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_refutrk_down_lep_met_px = sys_lep_px+ww_refutrk_down_met_etx;
+  double sys_refutrk_down_lep_met_py = sys_lep_py+ww_refutrk_down_met_ety;
+  double cur_refutrk_down_lep_met_pt = sqrt(pow(sys_refutrk_down_lep_met_px,2.)+pow(sys_refutrk_down_lep_met_py,2.));
+  
+  double sys_refutrk_lep_met_pt[nMods]={cur_refutrk_lep_met_pt,cur_refutrk_up_lep_met_pt,cur_refutrk_down_lep_met_pt};
+
+
+  //////////////////////////////////////////////////
+  // lhco
+  //////////////////////////////////////////////////
+
+  //MET modulation
+  double sys_lhco_met_et[nMods]= {ww_met_et,ww_lhco_up_met_et,ww_lhco_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_lhco_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_lhco_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_lhco_lep_met_py = sys_lep_py+ww_met_ety;
+  double cur_lhco_lep_met_pt = sqrt(pow(sys_lhco_lep_met_px,2.)+pow(sys_lhco_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_lhco_up_lep_met_px = sys_lep_px+ww_lhco_up_met_etx;
+  double sys_lhco_up_lep_met_py = sys_lep_py+ww_lhco_up_met_ety;
+  double cur_lhco_up_lep_met_pt = sqrt(pow(sys_lhco_up_lep_met_px,2.)+pow(sys_lhco_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_lhco_down_lep_met_px = sys_lep_px+ww_lhco_down_met_etx;
+  double sys_lhco_down_lep_met_py = sys_lep_py+ww_lhco_down_met_ety;
+  double cur_lhco_down_lep_met_pt = sqrt(pow(sys_lhco_down_lep_met_px,2.)+pow(sys_lhco_down_lep_met_py,2.));
+  
+  double sys_lhco_lep_met_pt[nMods]={cur_lhco_lep_met_pt,cur_lhco_up_lep_met_pt,cur_lhco_down_lep_met_pt};
+
+  
+  //////////////////////////////////////////////////
+  // uboy
+  //////////////////////////////////////////////////
+
+  //MET modulation
+  double sys_uboy_met_et[nMods]= {ww_met_et,ww_uboy_up_met_et,ww_uboy_down_met_et};
+  
+  // MET modulation leaves lepton pt unchanged
+  double sys_uboy_lep_pt[nMods] ={sys_lep_pt,sys_lep_pt,sys_lep_pt};
+
+  // Pt(lep,MET) nom
+  double sys_uboy_lep_met_px = sys_lep_px+ww_met_etx;
+  double sys_uboy_lep_met_py = sys_lep_py+ww_met_ety;
+  double cur_uboy_lep_met_pt = sqrt(pow(sys_uboy_lep_met_px,2.)+pow(sys_uboy_lep_met_py,2.));
+
+  // Pt(lep,MET) up
+  double sys_uboy_up_lep_met_px = sys_lep_px+ww_uboy_up_met_etx;
+  double sys_uboy_up_lep_met_py = sys_lep_py+ww_uboy_up_met_ety;
+  double cur_uboy_up_lep_met_pt = sqrt(pow(sys_uboy_up_lep_met_px,2.)+pow(sys_uboy_up_lep_met_py,2.));
+
+  // Pt(lep,MET) down
+  double sys_uboy_down_lep_met_px = sys_lep_px+ww_uboy_down_met_etx;
+  double sys_uboy_down_lep_met_py = sys_lep_py+ww_uboy_down_met_ety;
+  double cur_uboy_down_lep_met_pt = sqrt(pow(sys_uboy_down_lep_met_px,2.)+pow(sys_uboy_down_lep_met_py,2.));
+  
+  double sys_uboy_lep_met_pt[nMods]={cur_uboy_lep_met_pt,cur_uboy_up_lep_met_pt,cur_uboy_down_lep_met_pt};
+
+  
+  
+  //////////////////////////////////////////////////                                                                   
+  // Combined Kinematics                                                                                               
+  //////////////////////////////////////////////////                                                                   
+  //Mt(lep,met,j,j)
+
+  float sys_nom_lep_met_dijet_Pt =
+    sys_lep_pt+ww_met_et+sys_jes_lead_jet_tlv[nNom].Pt()+sys_jes_second_jet_tlv[nNom].Pt();
+  float sys_nom_lep_met_dijet_Px =
+    sys_lep_px+ww_met_etx+sys_jes_lead_jet_tlv[nNom].Px()+sys_jes_second_jet_tlv[nNom].Px();
+  float sys_nom_lep_met_dijet_Py =
+    sys_lep_py+ww_met_ety+sys_jes_lead_jet_tlv[nNom].Py()+sys_jes_second_jet_tlv[nNom].Py();
+
+  float sys_nom_lep_met_dijet_mt  =
+    sqrt(sys_nom_lep_met_dijet_Pt*sys_nom_lep_met_dijet_Pt -
+	 sys_nom_lep_met_dijet_Px*sys_nom_lep_met_dijet_Px -
+	 sys_nom_lep_met_dijet_Py*sys_nom_lep_met_dijet_Py);
+
+  // No MET propagation in JES/JER anymore
+  
+  // float sys_up_lep_met_dijet_Pt =
+  //   sys_lep_pt+ww_corr_up_met_et+sys_jes_lead_jet_tlv[nUp].Pt()+sys_jes_second_jet_tlv[nUp].Pt();
+  // float sys_up_lep_met_dijet_Px =
+  //   sys_lep_px+ww_corr_up_met_etx+sys_jes_lead_jet_tlv[nUp].Px()+sys_jes_second_jet_tlv[nUp].Px();
+  // float sys_up_lep_met_dijet_Py =
+  //   sys_lep_py+ww_corr_up_met_ety+sys_jes_lead_jet_tlv[nUp].Py()+sys_jes_second_jet_tlv[nUp].Py();
+
+  // float sys_up_lep_met_dijet_mt  = sqrt(sys_up_lep_met_dijet_Pt*sys_up_lep_met_dijet_Pt -
+  // 					sys_up_lep_met_dijet_Px*sys_up_lep_met_dijet_Px -
+  // 					sys_up_lep_met_dijet_Py*sys_up_lep_met_dijet_Py);
+
+  // float sys_down_lep_met_dijet_Pt =
+  //   sys_lep_pt+ww_corr_down_met_et+sys_jes_lead_jet_tlv[nDown].Pt()+sys_jes_second_jet_tlv[nDown].Pt();
+  // float sys_down_lep_met_dijet_Px =
+  //   sys_lep_px+ww_corr_down_met_etx+sys_jes_lead_jet_tlv[nDown].Px()+sys_jes_second_jet_tlv[nDown].Px();
+  // float sys_down_lep_met_dijet_Py =
+  //   sys_lep_py+ww_corr_down_met_ety+sys_jes_lead_jet_tlv[nDown].Py()+sys_jes_second_jet_tlv[nDown].Py();
+
+  // float sys_down_lep_met_dijet_mt  = sqrt(sys_down_lep_met_dijet_Pt*sys_down_lep_met_dijet_Pt -
+  // 					  sys_down_lep_met_dijet_Px*sys_down_lep_met_dijet_Px -
+  // 					  sys_down_lep_met_dijet_Py*sys_down_lep_met_dijet_Py);
+
+
+  // float sys_jes_lep_met_dijet_mt[nMods] =
+  //   {sys_nom_lep_met_dijet_mt,sys_up_lep_met_dijet_mt,sys_down_lep_met_dijet_mt};
+
+  float sys_jes_lep_met_dijet_mt[nMods] =
+    {sys_nom_lep_met_dijet_mt,sys_nom_lep_met_dijet_mt,sys_nom_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  //JER
+  //////////////////////////////////////////////////
+
+  // No more MET propigation to MET
+  
+  // float sys_jer_lep_met_dijet_Pt =
+  //   sys_lep_pt+ww_jer_met_et+sys_jer_lead_jet_tlv[nUp].Pt()+sys_jer_second_jet_tlv[nUp].Pt();
+  // float sys_jer_lep_met_dijet_Px =
+  //   sys_lep_px+ww_jer_met_etx+sys_jer_lead_jet_tlv[nUp].Px()+sys_jer_second_jet_tlv[nUp].Px();
+  // float sys_jer_lep_met_dijet_Py =
+  //   sys_lep_py+ww_jer_met_ety+sys_jer_lead_jet_tlv[nUp].Py()+sys_jer_second_jet_tlv[nUp].Py();
+
+  // float sys_jer_smear_lep_met_dijet_mt  = sqrt(sys_jer_lep_met_dijet_Pt*sys_jer_lep_met_dijet_Pt -
+  // 					       sys_jer_lep_met_dijet_Px*sys_jer_lep_met_dijet_Px -
+  // 					       sys_jer_lep_met_dijet_Py*sys_jer_lep_met_dijet_Py);
+
+
+  // // 'up'== 'down' in smearing cases
+  // float sys_jer_lep_met_dijet_mt[nMods]=
+  //   {sys_nom_lep_met_dijet_mt,sys_jer_smear_lep_met_dijet_mt,sys_jer_smear_lep_met_dijet_mt};
+  float sys_jer_lep_met_dijet_mt[nMods]=
+    {sys_nom_lep_met_dijet_mt,sys_nom_lep_met_dijet_mt,sys_nom_lep_met_dijet_mt};
+
+
+  //////////////////////////////////////////////////
+  // MSUP
+  ////////////////////////////////////////////////// 
+  float sys_mspt_up_lep_met_dijet_Pt = sys_mspt_up_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_mspt_up_lep_met_dijet_Px = sys_mspt_up_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_mspt_up_lep_met_dijet_Py = sys_mspt_up_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_mspt_up_lep_met_dijet_mt  = sqrt(sys_mspt_up_lep_met_dijet_Pt*sys_mspt_up_lep_met_dijet_Pt -
+					     sys_mspt_up_lep_met_dijet_Px*sys_mspt_up_lep_met_dijet_Px -
+					     sys_mspt_up_lep_met_dijet_Py*sys_mspt_up_lep_met_dijet_Py);
+
+  float sys_mspt_down_lep_met_dijet_Pt = sys_mspt_down_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_mspt_down_lep_met_dijet_Px = sys_mspt_down_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_mspt_down_lep_met_dijet_Py = sys_mspt_down_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_mspt_down_lep_met_dijet_mt  = sqrt(sys_mspt_down_lep_met_dijet_Pt*sys_mspt_down_lep_met_dijet_Pt -
+					       sys_mspt_down_lep_met_dijet_Px*sys_mspt_down_lep_met_dijet_Px -
+					       sys_mspt_down_lep_met_dijet_Py*sys_mspt_down_lep_met_dijet_Py);
+
+
+  float sys_mspt_lep_met_dijet_mt[nMods] =
+    {sys_nom_lep_met_dijet_mt,sys_mspt_up_lep_met_dijet_mt,sys_mspt_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // IDUP
+  ////////////////////////////////////////////////// 
+  float sys_idpt_up_lep_met_dijet_Pt = sys_idpt_up_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_idpt_up_lep_met_dijet_Px = sys_idpt_up_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_idpt_up_lep_met_dijet_Py = sys_idpt_up_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_idpt_up_lep_met_dijet_mt  = sqrt(sys_idpt_up_lep_met_dijet_Pt*sys_idpt_up_lep_met_dijet_Pt -
+					     sys_idpt_up_lep_met_dijet_Px*sys_idpt_up_lep_met_dijet_Px -
+					     sys_idpt_up_lep_met_dijet_Py*sys_idpt_up_lep_met_dijet_Py);
+
+  float sys_idpt_down_lep_met_dijet_Pt = sys_idpt_down_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_idpt_down_lep_met_dijet_Px = sys_idpt_down_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_idpt_down_lep_met_dijet_Py = sys_idpt_down_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_idpt_down_lep_met_dijet_mt  = sqrt(sys_idpt_down_lep_met_dijet_Pt*sys_idpt_down_lep_met_dijet_Pt -
+					       sys_idpt_down_lep_met_dijet_Px*sys_idpt_down_lep_met_dijet_Px -
+					       sys_idpt_down_lep_met_dijet_Py*sys_idpt_down_lep_met_dijet_Py);
+
+
+
+
+  float sys_idpt_lep_met_dijet_mt[nMods] =
+    {sys_nom_lep_met_dijet_mt,sys_idpt_up_lep_met_dijet_mt,sys_idpt_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // LES
+  ////////////////////////////////////////////////// 
+  float sys_les_up_lep_met_dijet_Pt = sys_les_up_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_les_up_lep_met_dijet_Px = sys_les_up_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_les_up_lep_met_dijet_Py = sys_les_up_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_les_up_lep_met_dijet_mt  = sqrt(sys_les_up_lep_met_dijet_Pt*sys_les_up_lep_met_dijet_Pt -
+					    sys_les_up_lep_met_dijet_Px*sys_les_up_lep_met_dijet_Px -
+					    sys_les_up_lep_met_dijet_Py*sys_les_up_lep_met_dijet_Py);
+  float sys_les_down_lep_met_dijet_Pt = sys_les_down_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_les_down_lep_met_dijet_Px = sys_les_down_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_les_down_lep_met_dijet_Py = sys_les_down_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_les_down_lep_met_dijet_mt  = sqrt(sys_les_down_lep_met_dijet_Pt*sys_les_down_lep_met_dijet_Pt -
+					      sys_les_down_lep_met_dijet_Px*sys_les_down_lep_met_dijet_Px -
+					      sys_les_down_lep_met_dijet_Py*sys_les_down_lep_met_dijet_Py);
+
+
+  float sys_les_lep_met_dijet_mt[nMods] =
+    {sys_nom_lep_met_dijet_mt,sys_les_up_lep_met_dijet_mt,sys_les_down_lep_met_dijet_mt};
+
+
+  //////////////////////////////////////////////////
+  // LER
+  ////////////////////////////////////////////////// 
+  float sys_ler_up_lep_met_dijet_Pt = sys_ler_up_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_ler_up_lep_met_dijet_Px = sys_ler_up_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_ler_up_lep_met_dijet_Py = sys_ler_up_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_ler_up_lep_met_dijet_mt  = sqrt(sys_ler_up_lep_met_dijet_Pt*sys_ler_up_lep_met_dijet_Pt -
+					    sys_ler_up_lep_met_dijet_Px*sys_ler_up_lep_met_dijet_Px -
+					    sys_ler_up_lep_met_dijet_Py*sys_ler_up_lep_met_dijet_Py);
+  float sys_ler_down_lep_met_dijet_Pt = sys_ler_down_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_ler_down_lep_met_dijet_Px = sys_ler_down_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_ler_down_lep_met_dijet_Py = sys_ler_down_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_ler_down_lep_met_dijet_mt  = sqrt(sys_ler_down_lep_met_dijet_Pt*sys_ler_down_lep_met_dijet_Pt -
+					      sys_ler_down_lep_met_dijet_Px*sys_ler_down_lep_met_dijet_Px -
+					      sys_ler_down_lep_met_dijet_Py*sys_ler_down_lep_met_dijet_Py);
+
+
+  float sys_ler_lep_met_dijet_mt[nMods] =
+    {sys_nom_lep_met_dijet_mt,sys_ler_up_lep_met_dijet_mt,sys_ler_down_lep_met_dijet_mt};
+
+
+  //////////////////////////////////////////////////
+  // TOPO
+  ////////////////////////////////////////////////// 
+  float sys_topo_nom_lep_met_dijet_Pt = sys_lep_pt+ww_lc_topo_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_topo_nom_lep_met_dijet_Px = sys_lep_px+ww_lc_topo_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_topo_nom_lep_met_dijet_Py = sys_lep_py+ww_lc_topo_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_topo_nom_lep_met_dijet_mt  = sqrt(sys_topo_nom_lep_met_dijet_Pt*sys_topo_nom_lep_met_dijet_Pt -
+					      sys_topo_nom_lep_met_dijet_Px*sys_topo_nom_lep_met_dijet_Px -
+					      sys_topo_nom_lep_met_dijet_Py*sys_topo_nom_lep_met_dijet_Py);
+
+  float sys_topo_up_lep_met_dijet_Pt = sys_lep_pt+ww_lc_topo_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_topo_up_lep_met_dijet_Px = sys_lep_px+ww_lc_topo_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_topo_up_lep_met_dijet_Py = sys_lep_py+ww_lc_topo_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_topo_up_lep_met_dijet_mt  = sqrt(sys_topo_up_lep_met_dijet_Pt*sys_topo_up_lep_met_dijet_Pt -
+					     sys_topo_up_lep_met_dijet_Px*sys_topo_up_lep_met_dijet_Px -
+					     sys_topo_up_lep_met_dijet_Py*sys_topo_up_lep_met_dijet_Py);
+
+  float sys_topo_down_lep_met_dijet_Pt = sys_lep_pt+ww_lc_topo_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_topo_down_lep_met_dijet_Px = sys_lep_px+ww_lc_topo_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_topo_down_lep_met_dijet_Py = sys_lep_py+ww_lc_topo_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_topo_down_lep_met_dijet_mt  = sqrt(sys_topo_down_lep_met_dijet_Pt*sys_topo_down_lep_met_dijet_Pt -
+					       sys_topo_down_lep_met_dijet_Px*sys_topo_down_lep_met_dijet_Px -
+					       sys_topo_down_lep_met_dijet_Py*sys_topo_down_lep_met_dijet_Py);
+
+
+  float sys_topo_lep_met_dijet_mt[nMods] =
+    {sys_topo_nom_lep_met_dijet_mt,sys_topo_up_lep_met_dijet_mt,sys_topo_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // OOTPU
+  ////////////////////////////////////////////////// 
+
+  float sys_ootpu_nom_lep_met_dijet_Pt = sys_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_ootpu_nom_lep_met_dijet_Px = sys_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_ootpu_nom_lep_met_dijet_Py = sys_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_ootpu_nom_lep_met_dijet_mt  = sqrt(sys_ootpu_nom_lep_met_dijet_Pt*sys_ootpu_nom_lep_met_dijet_Pt -
+					      sys_ootpu_nom_lep_met_dijet_Px*sys_ootpu_nom_lep_met_dijet_Px -
+					      sys_ootpu_nom_lep_met_dijet_Py*sys_ootpu_nom_lep_met_dijet_Py);
+
+  float sys_ootpu_up_lep_met_dijet_Pt = sys_lep_pt+ww_ootpu_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_ootpu_up_lep_met_dijet_Px = sys_lep_px+ww_ootpu_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_ootpu_up_lep_met_dijet_Py = sys_lep_py+ww_ootpu_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_ootpu_up_lep_met_dijet_mt  = sqrt(sys_ootpu_up_lep_met_dijet_Pt*sys_ootpu_up_lep_met_dijet_Pt -
+					     sys_ootpu_up_lep_met_dijet_Px*sys_ootpu_up_lep_met_dijet_Px -
+					     sys_ootpu_up_lep_met_dijet_Py*sys_ootpu_up_lep_met_dijet_Py);
+
+  float sys_ootpu_down_lep_met_dijet_Pt = sys_lep_pt+ww_ootpu_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_ootpu_down_lep_met_dijet_Px = sys_lep_px+ww_ootpu_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_ootpu_down_lep_met_dijet_Py = sys_lep_py+ww_ootpu_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_ootpu_down_lep_met_dijet_mt  = sqrt(sys_ootpu_down_lep_met_dijet_Pt*sys_ootpu_down_lep_met_dijet_Pt -
+					       sys_ootpu_down_lep_met_dijet_Px*sys_ootpu_down_lep_met_dijet_Px -
+					       sys_ootpu_down_lep_met_dijet_Py*sys_ootpu_down_lep_met_dijet_Py);
+
+
+  float sys_ootpu_lep_met_dijet_mt[nMods] =
+    {sys_ootpu_nom_lep_met_dijet_mt,sys_ootpu_up_lep_met_dijet_mt,sys_ootpu_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // INTPU
+  ////////////////////////////////////////////////// 
+
+  float sys_intpu_nom_lep_met_dijet_Pt = sys_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_intpu_nom_lep_met_dijet_Px = sys_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_intpu_nom_lep_met_dijet_Py = sys_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_intpu_nom_lep_met_dijet_mt  = sqrt(sys_intpu_nom_lep_met_dijet_Pt*sys_intpu_nom_lep_met_dijet_Pt -
+					      sys_intpu_nom_lep_met_dijet_Px*sys_intpu_nom_lep_met_dijet_Px -
+					      sys_intpu_nom_lep_met_dijet_Py*sys_intpu_nom_lep_met_dijet_Py);
+
+  float sys_intpu_up_lep_met_dijet_Pt = sys_lep_pt+ww_intpu_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_intpu_up_lep_met_dijet_Px = sys_lep_px+ww_intpu_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_intpu_up_lep_met_dijet_Py = sys_lep_py+ww_intpu_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_intpu_up_lep_met_dijet_mt  = sqrt(sys_intpu_up_lep_met_dijet_Pt*sys_intpu_up_lep_met_dijet_Pt -
+					     sys_intpu_up_lep_met_dijet_Px*sys_intpu_up_lep_met_dijet_Px -
+					     sys_intpu_up_lep_met_dijet_Py*sys_intpu_up_lep_met_dijet_Py);
+
+  float sys_intpu_down_lep_met_dijet_Pt = sys_lep_pt+ww_intpu_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_intpu_down_lep_met_dijet_Px = sys_lep_px+ww_intpu_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_intpu_down_lep_met_dijet_Py = sys_lep_py+ww_intpu_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_intpu_down_lep_met_dijet_mt  = sqrt(sys_intpu_down_lep_met_dijet_Pt*sys_intpu_down_lep_met_dijet_Pt -
+					       sys_intpu_down_lep_met_dijet_Px*sys_intpu_down_lep_met_dijet_Px -
+					       sys_intpu_down_lep_met_dijet_Py*sys_intpu_down_lep_met_dijet_Py);
+
+
+  float sys_intpu_lep_met_dijet_mt[nMods] =
+    {sys_intpu_nom_lep_met_dijet_mt,sys_intpu_up_lep_met_dijet_mt,sys_intpu_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // REFUTRK
+  ////////////////////////////////////////////////// 
+
+  float sys_refutrk_nom_lep_met_dijet_Pt = sys_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_refutrk_nom_lep_met_dijet_Px = sys_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_refutrk_nom_lep_met_dijet_Py = sys_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_refutrk_nom_lep_met_dijet_mt  = sqrt(sys_refutrk_nom_lep_met_dijet_Pt*sys_refutrk_nom_lep_met_dijet_Pt -
+					      sys_refutrk_nom_lep_met_dijet_Px*sys_refutrk_nom_lep_met_dijet_Px -
+					      sys_refutrk_nom_lep_met_dijet_Py*sys_refutrk_nom_lep_met_dijet_Py);
+
+  float sys_refutrk_up_lep_met_dijet_Pt = sys_lep_pt+ww_refutrk_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_refutrk_up_lep_met_dijet_Px = sys_lep_px+ww_refutrk_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_refutrk_up_lep_met_dijet_Py = sys_lep_py+ww_refutrk_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_refutrk_up_lep_met_dijet_mt  = sqrt(sys_refutrk_up_lep_met_dijet_Pt*sys_refutrk_up_lep_met_dijet_Pt -
+					     sys_refutrk_up_lep_met_dijet_Px*sys_refutrk_up_lep_met_dijet_Px -
+					     sys_refutrk_up_lep_met_dijet_Py*sys_refutrk_up_lep_met_dijet_Py);
+
+  float sys_refutrk_down_lep_met_dijet_Pt = sys_lep_pt+ww_refutrk_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_refutrk_down_lep_met_dijet_Px = sys_lep_px+ww_refutrk_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_refutrk_down_lep_met_dijet_Py = sys_lep_py+ww_refutrk_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_refutrk_down_lep_met_dijet_mt  = sqrt(sys_refutrk_down_lep_met_dijet_Pt*sys_refutrk_down_lep_met_dijet_Pt -
+					       sys_refutrk_down_lep_met_dijet_Px*sys_refutrk_down_lep_met_dijet_Px -
+					       sys_refutrk_down_lep_met_dijet_Py*sys_refutrk_down_lep_met_dijet_Py);
+
+
+  float sys_refutrk_lep_met_dijet_mt[nMods] =
+    {sys_refutrk_nom_lep_met_dijet_mt,sys_refutrk_up_lep_met_dijet_mt,sys_refutrk_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // LHCO
+  ////////////////////////////////////////////////// 
+
+  float sys_lhco_nom_lep_met_dijet_Pt = sys_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_lhco_nom_lep_met_dijet_Px = sys_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_lhco_nom_lep_met_dijet_Py = sys_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_lhco_nom_lep_met_dijet_mt  = sqrt(sys_lhco_nom_lep_met_dijet_Pt*sys_lhco_nom_lep_met_dijet_Pt -
+					      sys_lhco_nom_lep_met_dijet_Px*sys_lhco_nom_lep_met_dijet_Px -
+					      sys_lhco_nom_lep_met_dijet_Py*sys_lhco_nom_lep_met_dijet_Py);
+
+  float sys_lhco_up_lep_met_dijet_Pt = sys_lep_pt+ww_lhco_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_lhco_up_lep_met_dijet_Px = sys_lep_px+ww_lhco_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_lhco_up_lep_met_dijet_Py = sys_lep_py+ww_lhco_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_lhco_up_lep_met_dijet_mt  = sqrt(sys_lhco_up_lep_met_dijet_Pt*sys_lhco_up_lep_met_dijet_Pt -
+					     sys_lhco_up_lep_met_dijet_Px*sys_lhco_up_lep_met_dijet_Px -
+					     sys_lhco_up_lep_met_dijet_Py*sys_lhco_up_lep_met_dijet_Py);
+
+  float sys_lhco_down_lep_met_dijet_Pt = sys_lep_pt+ww_lhco_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_lhco_down_lep_met_dijet_Px = sys_lep_px+ww_lhco_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_lhco_down_lep_met_dijet_Py = sys_lep_py+ww_lhco_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_lhco_down_lep_met_dijet_mt  = sqrt(sys_lhco_down_lep_met_dijet_Pt*sys_lhco_down_lep_met_dijet_Pt -
+					       sys_lhco_down_lep_met_dijet_Px*sys_lhco_down_lep_met_dijet_Px -
+					       sys_lhco_down_lep_met_dijet_Py*sys_lhco_down_lep_met_dijet_Py);
+
+
+  float sys_lhco_lep_met_dijet_mt[nMods] =
+    {sys_lhco_nom_lep_met_dijet_mt,sys_lhco_up_lep_met_dijet_mt,sys_lhco_down_lep_met_dijet_mt};
+
+  //////////////////////////////////////////////////
+  // UBOY
+  ////////////////////////////////////////////////// 
+
+  float sys_uboy_nom_lep_met_dijet_Pt = sys_lep_pt+ww_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_uboy_nom_lep_met_dijet_Px = sys_lep_px+ww_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_uboy_nom_lep_met_dijet_Py = sys_lep_py+ww_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_uboy_nom_lep_met_dijet_mt  = sqrt(sys_uboy_nom_lep_met_dijet_Pt*sys_uboy_nom_lep_met_dijet_Pt -
+					      sys_uboy_nom_lep_met_dijet_Px*sys_uboy_nom_lep_met_dijet_Px -
+					      sys_uboy_nom_lep_met_dijet_Py*sys_uboy_nom_lep_met_dijet_Py);
+
+  float sys_uboy_up_lep_met_dijet_Pt = sys_lep_pt+ww_uboy_up_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_uboy_up_lep_met_dijet_Px = sys_lep_px+ww_uboy_up_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_uboy_up_lep_met_dijet_Py = sys_lep_py+ww_uboy_up_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_uboy_up_lep_met_dijet_mt  = sqrt(sys_uboy_up_lep_met_dijet_Pt*sys_uboy_up_lep_met_dijet_Pt -
+					     sys_uboy_up_lep_met_dijet_Px*sys_uboy_up_lep_met_dijet_Px -
+					     sys_uboy_up_lep_met_dijet_Py*sys_uboy_up_lep_met_dijet_Py);
+
+  float sys_uboy_down_lep_met_dijet_Pt = sys_lep_pt+ww_uboy_down_met_et+tlv_lead_jet.Pt()+tlv_second_jet.Pt();
+  float sys_uboy_down_lep_met_dijet_Px = sys_lep_px+ww_uboy_down_met_etx+tlv_lead_jet.Px()+tlv_second_jet.Px();
+  float sys_uboy_down_lep_met_dijet_Py = sys_lep_py+ww_uboy_down_met_ety+tlv_lead_jet.Py()+tlv_second_jet.Py();
+  float sys_uboy_down_lep_met_dijet_mt  = sqrt(sys_uboy_down_lep_met_dijet_Pt*sys_uboy_down_lep_met_dijet_Pt -
+					       sys_uboy_down_lep_met_dijet_Px*sys_uboy_down_lep_met_dijet_Px -
+					       sys_uboy_down_lep_met_dijet_Py*sys_uboy_down_lep_met_dijet_Py);
+
+
+  float sys_uboy_lep_met_dijet_mt[nMods] =
+    {sys_uboy_nom_lep_met_dijet_mt,sys_uboy_up_lep_met_dijet_mt,sys_uboy_down_lep_met_dijet_mt};
+
+
+    
+  isElec = nGoodElectrons;
+  procIndex= !isElec; // = 0-elec, 1-muon
+
+  
+  //"up","down","nom"
+  for(int m=0;m<nMods;m++){
+
+    //////////////////////////////////////////////////
+    // JES
+    //////////////////////////////////////////////////
+
+    //int jes_reg=-1;    
+    bool jes_pass_lowm=false;
+    bool jes_pass_highm=false;
+
+    // cout<<"jes:\t"<<modulations[m]<<endl;
+    // cout<<" lep_pt:\t"<<lnuj_lep_pt<<endl;
+    // cout<<" jet1_pt:\t"<<sys_jes_lead_jet_tlv[m].Pt()<<endl;
+    // cout<<" jet2_pt:\t"<<sys_jes_lead_jet_tlv[m].Pt()<<endl;
+    // cout<<" ww_met:\t"<<ww_met_et<<endl;
+    
+	
+    if(lnuj_lep_pt>lep_pt_cut && sys_jes_lead_jet_tlv[m].Pt()>25. &&
+       sys_jes_second_jet_tlv[m].Pt()>25. &&
+       ww_met_et>30.){
+
+
+	// cout<<"Pt(lv): "<<sys_jes_lep_met_pt[m]<<endl;
+	// cout<<"Pt(jj): "<<(sys_jes_lead_jet_tlv[m]+sys_jes_second_jet_tlv[m]).Pt()<<endl;
+	// cout<<"M(jj): "<<(sys_jes_lead_jet_tlv[m]+sys_jes_second_jet_tlv[m]).M()<<endl;
+	// cout<<endl;
+
+      
+      if( PassSigLowM(sys_jes_lep_met_pt[m], sys_jes_lead_jet_tlv[m], sys_jes_second_jet_tlv[m]) ){
+	//cout<<"PassSigLowM"<<endl;
+	jes_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_jes_lep_met_pt[m], sys_jes_lead_jet_tlv[m], sys_jes_second_jet_tlv[m]) ){
+	jes_pass_highm=true;
+      }
+    }
+  
+    if(jes_pass_lowm){
+      h_pass_sig[procIndex][nJES][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nJES][m][nLowM]->Fill(sys_jes_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(jes_pass_highm){
+      h_pass_sig[procIndex][nJES][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nJES][m][nHighM]->Fill(sys_jes_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+
+    // if(jes_reg>=0){
+    //   h_pass_sig[procIndex][nJES][m][jes_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nJES][m][jes_reg]->Fill(sys_jes_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+
+    //////////////////////////////////////////////////
+    // LES
+    //////////////////////////////////////////////////
+    //int les_reg=-1;
+    bool les_pass_lowm=false;
+    bool les_pass_highm=false;
+
+    if(sys_les_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+          
+      if( PassSigLowM(sys_les_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//les_reg=nLowM;
+	les_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_les_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//les_reg=nHighM;
+	les_pass_highm=true;
+      }
+    }
+
+    if(les_pass_lowm){
+      h_pass_sig[procIndex][nLES][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLES][m][nLowM]->Fill(sys_les_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(les_pass_highm){
+      h_pass_sig[procIndex][nLES][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLES][m][nHighM]->Fill(sys_les_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    // if(les_reg>=0){
+
+    //   h_pass_sig[procIndex][nLES][m][les_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nLES][m][les_reg]->Fill(sys_les_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+
+    //////////////////////////////////////////////////
+    // LER
+    //////////////////////////////////////////////////
+    //int ler_reg=-1;
+    bool ler_pass_lowm=false;
+    bool ler_pass_highm=false;
+
+    if(sys_ler_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+       //ww_met_et>met_cut){
+
+      
+      if( PassSigLowM(sys_ler_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//ler_reg=nLowM;
+	ler_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_ler_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//ler_reg=nHighM;
+	ler_pass_highm=true;
+      }
+    }
+    
+    if(ler_pass_lowm){
+      h_pass_sig[procIndex][nLER][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLER][m][nLowM]->Fill(sys_ler_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(ler_pass_highm){
+      h_pass_sig[procIndex][nLER][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLER][m][nHighM]->Fill(sys_ler_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    // if(ler_reg>=0){
+
+    //   h_pass_sig[procIndex][nLER][m][ler_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nLER][m][ler_reg]->Fill(sys_ler_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+
+
+    
+    //////////////////////////////////////////////////
+    // IDSF, RECOSF, TRIGSF
+    //////////////////////////////////////////////////
+    //int sf_reg=-1;
+    bool sf_pass_lowm=false;
+    bool sf_pass_highm=false;
+
+    if(lnuj_lep_pt>lep_pt_cut &&
+       tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+      //ww_met_et>met_cut){
+
+      if( PassSigLowM(sys_nom_lep_met_pt, tlv_lead_jet, tlv_second_jet) ){
+	//sf_reg=nLowM;
+	sf_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_nom_lep_met_pt, tlv_lead_jet, tlv_second_jet) ){
+	//sf_reg=nHighM;
+	sf_pass_highm=true;
+      }
+    }
+
+
+    if(sf_pass_lowm){
+      //idsf
+      h_pass_sig[procIndex][nIDSF][m][nLowM]->Fill(1.,sys_idsf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nIDSF][m][nLowM]->Fill(sys_nom_lep_met_dijet_mt,sys_idsf_evt_weight[m]);
+
+      //recosf
+      h_pass_sig[procIndex][nRECOSF][m][nLowM]->Fill(1.,sys_recosf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nRECOSF][m][nLowM]->Fill(sys_nom_lep_met_dijet_mt,sys_recosf_evt_weight[m]);
+
+      //trigsf
+      h_pass_sig[procIndex][nTRIGSF][m][nLowM]->Fill(1.,sys_trigsf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nTRIGSF][m][nLowM]->Fill(sys_nom_lep_met_dijet_mt,sys_trigsf_evt_weight[m]);
+    }    
+
+    if(sf_pass_highm){
+      //idsf
+      h_pass_sig[procIndex][nIDSF][m][nHighM]->Fill(1.,sys_idsf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nIDSF][m][nHighM]->Fill(sys_nom_lep_met_dijet_mt,sys_idsf_evt_weight[m]);
+
+      //recosf
+      h_pass_sig[procIndex][nRECOSF][m][nHighM]->Fill(1.,sys_recosf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nRECOSF][m][nHighM]->Fill(sys_nom_lep_met_dijet_mt,sys_recosf_evt_weight[m]);
+
+      //trigsf
+      h_pass_sig[procIndex][nTRIGSF][m][nHighM]->Fill(1.,sys_trigsf_evt_weight[m]);
+      h_lep_met_dijet_mt[procIndex][nTRIGSF][m][nHighM]->Fill(sys_nom_lep_met_dijet_mt,sys_trigsf_evt_weight[m]);
+    }    
+
+    //////////////////////////////////////////////////
+    // MSPT
+    //////////////////////////////////////////////////
+    //int mspt_reg=-1;
+    bool mspt_pass_lowm=false;
+    bool mspt_pass_highm=false;
+
+    if(sys_mspt_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+       //ww_met_et>met_cut){
+
+      
+      if( PassSigLowM(sys_mspt_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//mspt_reg=nLowM;
+	mspt_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_mspt_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//mspt_reg=nHighM;
+	mspt_pass_highm=true;
+      }
+    }
+
+    if(mspt_pass_lowm){
+      h_pass_sig[procIndex][nMSPT][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nMSPT][m][nLowM]->Fill(sys_mspt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(mspt_pass_highm){
+      h_pass_sig[procIndex][nMSPT][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nMSPT][m][nHighM]->Fill(sys_mspt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    // if(mspt_reg>=0){
+
+    //   h_pass_sig[procIndex][nMSPT][m][mspt_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nMSPT][m][mspt_reg]->Fill(sys_mspt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+    
+
+    //////////////////////////////////////////////////
+    // IDPT
+    //////////////////////////////////////////////////
+    //int idpt_reg=-1;
+    bool idpt_pass_lowm=false;
+    bool idpt_pass_highm=false;
+
+    if(sys_idpt_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+       //ww_met_et>met_cut){
+
+      
+      if( PassSigLowM(sys_idpt_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//idpt_reg=nLowM;
+	idpt_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_idpt_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//idpt_reg=nHighM;
+	idpt_pass_highm=true;
+      }
+    }
+
+    if(idpt_pass_lowm){
+      h_pass_sig[procIndex][nIDPT][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nIDPT][m][nLowM]->Fill(sys_idpt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(idpt_pass_highm){
+      h_pass_sig[procIndex][nIDPT][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nIDPT][m][nHighM]->Fill(sys_idpt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    // if(idpt_reg>=0){
+
+    //   h_pass_sig[procIndex][nIDPT][m][idpt_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nIDPT][m][idpt_reg]->Fill(sys_idpt_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+
+    
+    //////////////////////////////////////////////////
+    // JER
+    //////////////////////////////////////////////////
+    //int jer_reg=-1;
+    bool jer_pass_lowm=false;
+    bool jer_pass_highm=false;
+    if(sys_lep_pt>30. &&
+       sys_jer_lead_jet_tlv[m].Pt()>jet_pt_cut && sys_jer_second_jet_tlv[m].Pt()>jet_pt_cut &&
+       ww_met_et>met_cut){
+       //sys_jer_met_et[m]>met_cut){
+
+      
+      if( PassSigLowM(sys_jer_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//jer_reg=nLowM;
+	jer_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_jer_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//jer_reg=nHighM;
+	jer_pass_highm=true;
+      }
+    }
+
+    if(jer_pass_lowm){
+      h_pass_sig[procIndex][nJER][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nJER][m][nLowM]->Fill(sys_jer_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(jer_pass_highm){
+      h_pass_sig[procIndex][nJER][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nJER][m][nHighM]->Fill(sys_jer_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    // if(jer_reg>=0){
+    //   h_pass_sig[procIndex][nJER][m][jer_reg]->Fill(1.,EventPileUpReWeight);
+    //   h_lep_met_dijet_mt[procIndex][nJER][m][jer_reg]->Fill(sys_jer_lep_met_dijet_mt[m],EventPileUpReWeight);
+    // }
+
+    //////////////////////////////////////////////////
+    // TOPO
+    //////////////////////////////////////////////////
+    //int topo_reg=-1;
+    bool topo_pass_lowm=false;
+    bool topo_pass_highm=false;
+    if(sys_topo_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_topo_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_topo_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//lowm_ctr[m][procIndex]+=EventPileUpReWeight;
+	//topo_reg=nLowM;
+	topo_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_topo_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	//topo_reg=nHighM;
+	topo_pass_highm=true;
+      }
+    }
+    
+    if(topo_pass_lowm){
+      h_pass_sig[procIndex][nTOPO][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nTOPO][m][nLowM]->Fill(sys_topo_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(topo_pass_highm){
+      h_pass_sig[procIndex][nTOPO][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nTOPO][m][nHighM]->Fill(sys_topo_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    //////////////////////////////////////////////////
+    // OOTPU
+    //////////////////////////////////////////////////
+  
+
+    bool ootpu_pass_lowm=false;
+    bool ootpu_pass_highm=false;
+
+    if(sys_ootpu_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_ootpu_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_ootpu_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	ootpu_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_ootpu_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	ootpu_pass_highm=true;
+      }
+    }
+    
+    if(ootpu_pass_lowm){
+      h_pass_sig[procIndex][nOOTPU][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nOOTPU][m][nLowM]->Fill(sys_ootpu_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(ootpu_pass_highm){
+      h_pass_sig[procIndex][nOOTPU][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nOOTPU][m][nHighM]->Fill(sys_ootpu_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    //////////////////////////////////////////////////
+    // INTPU
+    //////////////////////////////////////////////////
+  
+
+    bool intpu_pass_lowm=false;
+    bool intpu_pass_highm=false;
+
+    if(sys_intpu_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_intpu_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_intpu_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	intpu_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_intpu_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	intpu_pass_highm=true;
+      }
+    }
+    
+    if(intpu_pass_lowm){
+      h_pass_sig[procIndex][nINTPU][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nINTPU][m][nLowM]->Fill(sys_intpu_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(intpu_pass_highm){
+      h_pass_sig[procIndex][nINTPU][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nINTPU][m][nHighM]->Fill(sys_intpu_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    //////////////////////////////////////////////////
+    // REFUTRK
+    //////////////////////////////////////////////////
+  
+
+    bool refutrk_pass_lowm=false;
+    bool refutrk_pass_highm=false;
+
+    if(sys_refutrk_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_refutrk_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_refutrk_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	refutrk_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_refutrk_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	refutrk_pass_highm=true;
+      }
+    }
+    
+    if(refutrk_pass_lowm){
+      h_pass_sig[procIndex][nREFUTRK][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nREFUTRK][m][nLowM]->Fill(sys_refutrk_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(refutrk_pass_highm){
+      h_pass_sig[procIndex][nREFUTRK][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nREFUTRK][m][nHighM]->Fill(sys_refutrk_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+
+    //////////////////////////////////////////////////
+    // LHCO
+    //////////////////////////////////////////////////
+  
+    bool lhco_pass_lowm=false;
+    bool lhco_pass_highm=false;
+
+    if(sys_lhco_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_lhco_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_lhco_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	lhco_pass_lowm=true;
+      }
+      if( PassSigHighM(sys_lhco_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	lhco_pass_highm=true;
+      }
+    }
+    
+    if(lhco_pass_lowm){
+      h_pass_sig[procIndex][nLHCO][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLHCO][m][nLowM]->Fill(sys_lhco_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(lhco_pass_highm){
+      h_pass_sig[procIndex][nLHCO][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nLHCO][m][nHighM]->Fill(sys_lhco_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+    //////////////////////////////////////////////////
+    // UBOY
+    //////////////////////////////////////////////////
+  
+
+    bool uboy_pass_lowm=false;
+    bool uboy_pass_highm=false;
+    if(sys_uboy_lep_pt[m]>lep_pt_cut && tlv_lead_jet.Pt()>jet_pt_cut &&
+       tlv_second_jet.Pt()>jet_pt_cut &&
+       sys_uboy_met_et[m]>met_cut){
+
+      if( PassSigLowM(sys_uboy_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	uboy_pass_lowm=true;
+      }
+
+      if( PassSigHighM(sys_uboy_lep_met_pt[m], tlv_lead_jet, tlv_second_jet) ){
+	uboy_pass_highm=true;
+      }
+
+    }
+    
+    if(uboy_pass_lowm){
+      h_pass_sig[procIndex][nUBOY][m][nLowM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nUBOY][m][nLowM]->Fill(sys_uboy_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+    if(uboy_pass_highm){
+      h_pass_sig[procIndex][nUBOY][m][nHighM]->Fill(1.,EventPileUpReWeight);
+      h_lep_met_dijet_mt[procIndex][nUBOY][m][nHighM]->Fill(sys_uboy_lep_met_dijet_mt[m],EventPileUpReWeight);
+    }
+
+
+
+  }// end mods
+
+  return kTRUE;
+}
+
+bool systematics::PassSigLowM(float cur_lep_met_pt,TLorentzVector cur_tlv_lead_jet,TLorentzVector cur_tlv_second_jet){
+
+  bool good_sig_lowm=false;
+  if(cur_lep_met_pt>50.){
+    float cur_dijet_pt = (cur_tlv_lead_jet+cur_tlv_second_jet).Pt();
+    if(cur_dijet_pt>50.){
+      float cur_dijet_m = (cur_tlv_lead_jet+cur_tlv_second_jet).M();
+      if(cur_dijet_m>65. && cur_dijet_m<115.){
+	good_sig_lowm=true;
+      }
+    }
+  }
+  return good_sig_lowm;
+}
+
+bool systematics::PassSigHighM(float cur_lep_met_pt,TLorentzVector cur_tlv_lead_jet,TLorentzVector cur_tlv_second_jet){
+  bool good_sig_lowm=false;
+
+  if(cur_lep_met_pt>200.){
+    float cur_dijet_pt = (cur_tlv_lead_jet+cur_tlv_second_jet).Pt();
+    if(cur_dijet_pt>200.){
+      float cur_dijet_m = (cur_tlv_lead_jet+cur_tlv_second_jet).M();
+      if(cur_dijet_m>65. && cur_dijet_m<115.){
+	good_sig_lowm=true;
+      }
+    }
+  }
+  return good_sig_lowm;
+}
+
+
+void systematics::SlaveTerminate()
+{
+
+}
+
+void systematics::Terminate()
+{
+
+  plotFile->Write("",TObject::kOverwrite);
+
+  for(int p=0;p<nProcs;p++){
+    for(int s=0;s<nSys;s++){
+      for(int m=0;m<nMods;m++){
+	for(int r=0;r<nRegions;r++){
+
+	  delete h_pass_sig[p][s][m][r];
+	  delete h_lep_met_dijet_mt[p][s][m][r];
+	}
+      }
+    }
+  }
+}

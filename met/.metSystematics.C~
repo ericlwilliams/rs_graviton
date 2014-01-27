@@ -1,0 +1,108 @@
+#include "../include/lnuj_bkgd_list.h"
+
+void metSystematics(){
+
+  
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In metSystematics.C"<<endl;
+
+  const int nProcs = 2;
+  string procs[nProcs] = {"elec", "muon"};
+
+  TH1F* bkgd_ww_mets[nProcs];
+  TH1F* bkgd_ww_lc_mets[nProcs];
+  TH1F* bkgd_ww_em_mets[nProcs];
+
+  TH1F* data_ww_mets[nProcs];
+  TH1F* data_ww_lc_mets[nProcs];
+  TH1F* data_ww_em_mets[nProcs];
+
+  //////////////////////////////////////////////////
+  // Get Data histograms
+  ////////////////////////////////////////////////// 
+  
+  string data_name = "../plots/gww_plots/merged/data11.lnuj.plot.root";
+  TFile* data_file = (TFile*) TFile::Open(data_name.c_str());
+
+  TDirectory* data_all = data_file->GetDirectory("all");
+  
+  
+  for(int p=0;p<nProcs;p++){
+    string cur_proc = procs[p];
+
+    
+    for(int s=0;s<nBkgds;s++){
+
+      if(bkgd_list[s].find("gww")!=string::npos) continue;
+    
+      
+      string cur_file = "../plots/gww_plots/merged/"+bkgd_list[s];
+      cur_file+=".plot.root";
+      cout<<"Loading :"<<bkgd_list[s]<<endl;
+      TFile* bkgd_file = (TFile*) TFile::Open(cur_file.c_str());
+
+
+      TDirectory* bkgd_all = bkgd_file->GetDirectory("all");
+
+      string bkgd_ww_met_hist = "h_"+cur_proc+"_ww_met";
+      TH1F* bkgd_ww_met = (TH1F*) bkgd_all->Get(bkgd_ww_met_hist.c_str());
+
+      string bkgd_ww_lc_met_hist = "h_"+cur_proc+"_ww_lc_met";
+      TH1F* bkgd_ww_lc_met = (TH1F*) bkgd_all->Get(bkgd_ww_lc_met_hist.c_str());
+
+      string bkgd_ww_em_met_hist = "h_"+cur_proc+"_ww_em_met";
+      TH1F* bkgd_ww_em_met = (TH1F*) bkgd_all->Get(bkgd_ww_em_met_hist.c_str());
+
+      
+      
+      if(!bkgd_ww_met || !bkgd_ww_lc_met || !bkgd_ww_em_met) {
+	cout<<"No histogram "<<bkgd_ww_met_hist<<" in "<<cur_file<<endl;
+	return;
+      }
+      
+      if(!s){
+	bkgd_ww_mets[p]=bkgd_ww_met;
+	bkgd_ww_em_mets[p]=bkgd_ww_em_met;
+	bkgd_ww_lc_mets[p]=bkgd_ww_lc_met;	
+
+      }else{
+	bkgd_ww_mets[p]->Add(bkgd_ww_met);
+	bkgd_ww_em_mets[p]->Add(bkgd_ww_em_met);
+	bkgd_ww_lc_mets[p]->Add(bkgd_ww_lc_met);
+      }
+    }
+
+    string data_ww_met_hist = "h_"+cur_proc+"_ww_met";
+    TH1F* data_ww_met = (TH1F*) data_all->Get(data_ww_met_hist.c_str());
+    
+    string data_ww_lc_met_hist = "h_"+cur_proc+"_ww_lc_met";
+    TH1F* data_ww_lc_met = (TH1F*) data_all->Get(data_ww_lc_met_hist.c_str());
+    
+    string data_ww_em_met_hist = "h_"+cur_proc+"_ww_em_met";
+    TH1F* data_ww_em_met = (TH1F*) data_all->Get(data_ww_em_met_hist.c_str());
+    
+    data_ww_mets[p]=data_ww_met;
+    data_ww_lc_mets[p]=data_ww_lc_met;
+    data_ww_em_mets[p]=data_ww_em_met;    
+
+  }
+
+
+  cout<<"yields"<<endl;
+  for(int i=0;i<nProcs;i++){
+    cout<<procs[i]<<endl;
+    cout<<"ww_met:\t\t S/sqrt(B):\t "<<data_ww_mets[i]->GetEntries()/sqrt(bkgd_ww_mets[i]->Integral());
+    cout<<"  \t S/B: "<<data_ww_mets[i]->GetEntries()/bkgd_ww_mets[i]->Integral()<<endl;
+    cout<<"ww_lc_met:\t S/sqrt(B):\t "<<data_ww_lc_mets[i]->GetEntries()/sqrt(bkgd_ww_lc_mets[i]->Integral());
+    cout<<"  \t S/B: "<<data_ww_lc_mets[i]->GetEntries()/bkgd_ww_lc_mets[i]->Integral()<<endl;
+    cout<<"ww_em_met:\t S/sqrt(B):\t "<<data_ww_em_mets[i]->GetEntries()/sqrt(bkgd_ww_em_mets[i]->Integral());
+    cout<<"  \t S/B: "<<data_ww_em_mets[i]->GetEntries()/bkgd_ww_em_mets[i]->Integral()<<endl;
+
+  }
+  // bkgd_muon_ww_met->SetLineColor(kRed);
+  // bkgd_muon_ww_met->Draw();  
+  // bkgd_elec_ww_met->Draw("sames");
+
+}

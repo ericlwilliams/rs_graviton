@@ -1,0 +1,12 @@
+void runSignalShapes(){
+
+  gROOT->ProcessLine(".L ../src/signalShapes.C+");
+
+  signalShapes* sigShape = new signalShapes();
+
+  sigShape->getSignalShapes();
+
+  gROOT->ProcessLine(".q");
+
+  return;
+}

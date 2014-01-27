@@ -1,0 +1,5 @@
+void testMakeSignalTemplate(){
+
+    cout<<"testing signalShapes::makeSignalTemplate"<<endl;
+
+}

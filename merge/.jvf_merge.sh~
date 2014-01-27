@@ -1,0 +1,4 @@
+#!/bin/zsh -
+
+r 'merge.C("jvf")'
+r 'merge.C("nojvf")'

@@ -1,0 +1,13 @@
+void testMakeSignalTemplate(){
+
+  string test_sys = "jes_nom";
+  
+  gROOT->ProcessLine(".L ../src/signalShapes.C+");
+  signalShapes* sigShape = new signalShapes();
+  cout<<"testing signalShapes::makeSignalTemplate"<<endl;
+  cout<<"sigShape::makeSigTemplate: "<<test_sys<<endl;
+  sigShape->makeSigTemplate(test_sys.c_str());
+
+
+  return;
+}

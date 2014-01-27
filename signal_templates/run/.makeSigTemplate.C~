@@ -1,0 +1,218 @@
+//#include "utils.h"
+#include <iomanip>
+
+void makeSigTemplate(int opt=0, int pstype=0) {
+
+  //gROOT->SetStyle("ATLAS");
+  gROOT->ForceStyle();
+
+  gStyle->SetPalette(1);
+  gStyle->SetCanvasBorderMode(0);
+  gStyle->SetPadBorderMode(0);
+  gStyle->SetCanvasColor(0);
+  gStyle->SetFrameLineWidth(2);
+  gStyle->SetPadColor(0);
+  gStyle->SetTitleW(0.97);
+  gStyle->SetTitleH(0.07);
+  gStyle->SetTitleY(0.99);
+  gStyle->SetStatX(0.96);
+  gStyle->SetStatY(0.9);
+  gStyle->SetStatW(0.27);
+  gStyle->SetStatH(0.15);
+  gStyle->SetHistLineWidth(1);
+  gStyle->SetLineWidth(1);
+  gStyle->SetTitleSize(0.055,"X");
+  gStyle->SetTitleSize(0.055,"Y");
+  gStyle->SetTitleOffset(1.0,"X");
+  gStyle->SetTitleOffset(0.9,"Y");
+  gStyle->SetLabelSize(0.05,"X");
+  gStyle->SetLabelSize(0.05,"Y");
+  gStyle->SetOptStat(1111110);
+  gStyle->SetOptFit(1);
+
+  char name[200], title[200];
+
+  TFile* _f[1000];
+  
+  int hcol[]  = {41,50,38,30,14,4,3,2,1,45,28,28,19,17,5,8,12};
+  int mtyp[5] = {20,25,22,23,22};
+  
+ 
+  if (opt == 0) {
+
+    gStyle->SetOptTitle(0);
+    gStyle->SetOptStat(0);
+    gStyle->SetOptFit(0);
+    TCanvas *c0[100];
+    /*
+    for (int i=0;i<100;i++) {
+      sprintf(name,"c0_%i",i);
+      c0[i] = new TCanvas(name,"",0,0,1000,800);
+      c0[i]->SetRightMargin(0.02);
+      c0[i]->SetTopMargin(0.1);
+      c0[i]->SetBottomMargin(0.1);
+    }
+    */
+
+    //====================================================================
+    //Bool_t writeTemplate = false;
+    Bool_t writeTemplate = true;
+    //====================================================================
+
+
+    //sprintf(name,"../files/Mllqq_Resolution_GZZ.root");
+    sprintf(name,"../files/gww.lvjj.signal.root");
+    _f[0]  = new TFile(name);
+    // sprintf(name,"./Mllqq_Resolution_WprWZ.root");
+    // _f[1]  = new TFile(name);
+    
+    //---------------------------------------------------
+    // Graviton cross sections from Thomas
+    /*
+    TF1 *cs_GZZ_log;
+    TF1 *cs_GZZ;
+    cs_GZZ_log = new TF1("gzz", "pol4", 0, 1500);
+    cs_GZZ_log->SetParameters(10.1777, -0.0243033, 1.98431e-05, -9.56736e-09, 1.8097e-12);
+    cs_GZZ = ConvertLogToExp(cs_GZZ_log);
+    //double xsec = cs_GZZ->Eval(mass);
+    for (int i=0;i<NGmass;i++) {
+      Xsec[i]=cs_GZZ->Eval(Gmass[i]);    // Total x-section
+      cout << Xsec[i]*2*0.7*0.1 << ",";  // Branch to ll+qq
+    }
+    cout << endl;
+    */
+
+    // const float NGmass  = 26;
+    // float Gmass[NGmass] = {350,375,400,425,450,475,500,530,560,590,620,650,680,710,740,775,810,845,880,920,960,1000,1050,1100,1150,1200};    
+    // float Xsec[NGmass]  = {5.77286,4.13524,3.00171,2.20658,1.64167,1.2354,0.939787,0.686053,0.507798,0.380746,0.288941,0.221742,0.17195,0.134628,0.106349,0.0816091,0.0632602,0.0494859,0.0390294,0.0300233,0.0232906,0.0182011,0.0134931,0.0100874,0.00759481,0.00575254};  // sigma*Br(ZZ->llqq) [pb]
+
+    const float NGmass  = 21;
+    float Gmass[NGmass] =
+      {500,550,600,650,700,750,800,850,900,950,1000,1050,1100,1150,1200,1250,1300,1350,1400,1450,1500};
+    float Xsec[NGmass]  = {5.593, 4.5972, 3.6014, 2.6434, 1.6476, 0.614, 0.5136, 0.4132, 0.3128, 0.2124, 0.112, 0.095, .078, 0.061, 0.044, 0.027, 0.02314, 0.01928, 0.01542, 0.01156, 0.0077};
+ 
+    //---------------------------------------------------
+    // Graviton acceptance*efficiency (Alex)
+    /*
+    const float NGmass_sample = 6;
+    float Gmass_sample[NGmass_sample]         = {350,500,750,1000,1250,1500};
+    float Acc_lowmass_GZZmumu[NGmass_sample]  = {0.0149,0.1909,0.4493,0.4814,0.5036,0.4668};
+    float Acc_highmass_GZZmumu[NGmass_sample] = {0.0027,0.1106,0.2775,0.2188,0.1533,0.0972};
+    TGraph *gAcc_lowmass_GZZmumu  = new TGraph(NGmass_sample,Gmass_sample,Acc_lowmass_GZZmumu);
+    TGraph *gAcc_highmass_GZZmumu = new TGraph(NGmass_sample,Gmass_sample,Acc_highmass_GZZmumu);
+    */
+
+    // TGraphErrors *gGZZ_acc_lowmass_ele = (TGraphErrors*)_f[0]->Get("AccVsMass_GZZ_ele_LowMass");
+    // TGraphErrors *gGZZ_acc_lowmass_muo = (TGraphErrors*)_f[0]->Get("AccVsMass_GZZ_muo_LowMass");
+    // TGraphErrors *gGZZ_acc_highmass_ele = (TGraphErrors*)_f[0]->Get("AccVsMass_GZZ_ele_HighMass");
+    // TGraphErrors *gGZZ_acc_highmass_muo = (TGraphErrors*)_f[0]->Get("AccVsMass_GZZ_muo_HighMass");
+
+    
+    TGraphErrors *gGWW_acc_highmass_ele = (TGraphErrors*)_f[0]->Get("gww_lvjj_signal_elec_acc");
+    TGraphErrors *gGWW_acc_highmass_muo = (TGraphErrors*)_f[0]->Get("gww_lvjj_signal_muon_acc");
+
+    float Acc_ele_highmass[NGmass];
+    float Acc_muo_highmass[NGmass];
+    for (int i=0;i<NGmass;i++) {
+      Acc_ele_highmass[i]=gGWW_acc_highmass_ele->Eval(Gmass[i]);
+      Acc_muo_highmass[i]=gGWW_acc_highmass_muo->Eval(Gmass[i]); 
+    }
+
+    //---------------------------------------------------
+    // 4-body mass resolution (Same for low mass and high mass)
+
+    TGraphErrors *gGWW_ele = (TGraphErrors*)_f[0]->Get("gww_lvjj_signal_elec_sigma");
+    TGraphErrors *gGWW_muo = (TGraphErrors*)_f[0]->Get("gww_lvjj_signal_muon_sigma");
+    float Resol_ele[NGmass],Resol_muo[NGmass];
+    for (int i=0;i<NGmass;i++) {
+      Resol_ele[i]=gGWW_ele->Eval(Gmass[i]); 
+      Resol_muo[i]=gGWW_muo->Eval(Gmass[i]); 
+    }
+    
+
+    //---------------------------------------------------
+    // Make 4-body mass templates (1 fb-1)
+    //... Gaussian core with interpolated resolution (Same for low mass and high mass)
+    //... Normalization : sigma*Br*Acc*efficiency * luminosity
+    
+    float Data_Lumi = 4701.35;   // 2011
+
+    TH1F* Mevjj_GWW_highmass_template[NGmass];
+    TH1F* Muvjj_GWW_highmass_template[NGmass];
+
+    for (int i=0;i<NGmass;i++) {
+      //... evjj
+
+      TF1* f1_gauss = new TF1("f1_gauss","gaus",Gmass[i]-3*Resol_ele[i],Gmass[i]+3*Resol_ele[i]);
+      f1_gauss->SetParameter(0,100);  // Arbitrary for now
+      f1_gauss->SetParameter(1,Gmass[i]);
+      f1_gauss->SetParameter(2,Resol_ele[i]);
+
+      //... uvjj
+      TF1* f2_gauss = new TF1("f2_gauss","gaus",Gmass[i]-3*Resol_muo[i],Gmass[i]+3*Resol_muo[i]);
+      f2_gauss->SetParameter(0,100);  // Arbitrary for now
+      f2_gauss->SetParameter(1,Gmass[i]);
+      f2_gauss->SetParameter(2,Resol_muo[i]);
+      
+      sprintf(name,"gww_evjj_m%i",Gmass[i]);
+      sprintf(title,"Mevjj (GWWevjj, HighMass) : MG=%iGeV",Gmass[i]);
+      Mevjj_GWW_highmass_template[i] = new TH1F(name,title,120,0.,2400);
+      sprintf(name,"gww_uvjj_m%i",Gmass[i]);
+      sprintf(title,"Muvjj (GWWuvjj, HighMass) : MG=%iGeV",Gmass[i]);
+      Muvjj_GWW_highmass_template[i] = new TH1F(name,title,120,0.,2400.);
+      for (int ibin=0;ibin<112;ibin++) {
+	float x = 10+ibin*20;   // bin-center
+	float y1 = f1_gauss->Eval(x);
+	Mevjj_GWW_highmass_template[i]->SetBinContent(ibin+1,y1);
+	float y2 = f2_gauss->Eval(x);
+	Muvjj_GWW_highmass_template[i]->SetBinContent(ibin+1,y2);
+      }
+      
+      //... Normalization
+      float  Nin  = 30000;
+      float  MC_Lumi = Nin/Xsec[i];
+      float  MC_wgt  = Data_Lumi/MC_Lumi;
+
+      
+      // float  Ntot_ele = Mevjj_GWW_highmass_template[i]->Integral(0,36);// 40 GeV bins
+      // float  Ntot_muo = Muvjj_GWW_highmass_template[i]->Integral(0,36);      
+
+      float  Ntot_ele = Mevjj_GWW_highmass_template[i]->Integral(0,85);// 20 GeV bins; 0->1700
+      float  Ntot_muo = Muvjj_GWW_highmass_template[i]->Integral(0,85);      
+
+
+      double Norm_ele_highmass = Acc_ele_highmass[i]*Xsec[i]*Data_Lumi;
+      double Norm_muo_highmass = Acc_muo_highmass[i]*Xsec[i]*Data_Lumi;
+
+      for (int ibin=0;ibin<112;ibin++) {
+
+	float y3    =
+	  (Norm_ele_highmass/Ntot_ele)*Mevjj_GWW_highmass_template[i]->GetBinContent(ibin+1);
+	float nevt3 =
+	  (Nin*Acc_ele_highmass[i]/Ntot_ele)*Mevjj_GWW_highmass_template[i]->GetBinContent(ibin+1);
+	float dy3   = sqrt(nevt3)*MC_wgt;
+	Mevjj_GWW_highmass_template[i]->SetBinContent(ibin+1,y3);
+	Mevjj_GWW_highmass_template[i]->SetBinError(ibin+1,dy3);	
+
+	float y4    = (Norm_muo_highmass/Ntot_muo)*Muvjj_GWW_highmass_template[i]->GetBinContent(ibin+1);
+	float nevt4 = (Nin*Acc_muo_highmass[i]/Ntot_muo)*Muvjj_GWW_highmass_template[i]->GetBinContent(ibin+1);
+	float dy4   = sqrt(nevt4)*MC_wgt;
+	Muvjj_GWW_highmass_template[i]->SetBinContent(ibin+1,y4);
+	Muvjj_GWW_highmass_template[i]->SetBinError(ibin+1,dy4);	
+      }
+    }
+
+    if (writeTemplate) {
+      TFile* output2 = new TFile("../files/gww_lvjj_signal_templates_vs_mass.root","RECREATE");
+      for (int i=0;i<NGmass;i++) {
+	Mevjj_GWW_highmass_template[i]->Write();
+	Muvjj_GWW_highmass_template[i]->Write();
+      }
+      output2->Close();
+    }
+    
+  }
+
+  gROOT->ProcessLine(".q");
+}
+

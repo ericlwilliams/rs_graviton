@@ -1,0 +1,28 @@
+#include "../include/print_list.h"
+#include "../include/wwFileInfo.h"
+#include "../include/HistogramPainter.h"
+#include <string>
+#include <TLine.h>
+
+string proc_type="gww";
+string print_type=".png";
+string color_scheme="conf";//normal, conf, thesis(?)
+
+void selPrint(bool drawData=true){
+
+  // gROOT->SetStyle("Plain");  
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(1);
+  // gStyle->SetPadTickX(1);
+  // gStyle->SetPadTickY(1);
+
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In selPrint.C"<<endl;

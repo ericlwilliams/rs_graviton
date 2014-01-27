@@ -1,0 +1,114 @@
+\documentclass{beamer}
+\usefonttheme[stillsansseriftext]{serif}
+\useoutertheme{infolines} %% only for those without footer
+\usetheme[height=7mm]{Rochester}
+%\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{} %% get rid of navigation icons
+
+\input{/Users/elw/Dropbox/eMacs/talks/beamer/lvjj_common/lvjj_defs.tex}
+
+\author{E.~Williams}
+\institute{Columbia U.}
+\title{}
+
+\begin{document}
+
+\newcolumntype{d}{D{|}{\,,\,}{6,6}}
+
+\begin{frame}{G* signal efficiencies}\tiny
+
+\DTLloaddb[,keys={metcut,rsg500,rsg750,rsg1000,rsg1250,rsg1500,wp500,wp600,wp700,wp800,wp900,wp1000,wp1100,wp1200,wp1300,wp1400,wp1500}]{elec_met_cuts}{./../logs/elec_met_cut_efficiencies.csv}
+
+% rsg table
+\begin{table}[h]
+  \caption{\scriptsize $A$ (acceptance), $\frac{S}{B}$ and $\frac{S}{\sqrt{B}}$ of G* sample in signal region with varying E$_{T}^{miss}$ cuts}
+  %\begin{tabular}{l d d d d d d}
+\begin{tabular}{l c c c c c c }
+
+    \toprule
+    E$_{T}^{miss}$ & \multicolumn{1}{c}{$500$~GeV} & \multicolumn{1}{c}{$750$~GeV} & %
+    \multicolumn{1}{c}{$1000$~GeV} & \multicolumn{1}{c}{$1250$~GeV} & \multicolumn{1}{c}{$1500$~GeV} %
+    \tabularnewline
+    cut & \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} %
+    %cut & & & & &%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{elec_met_cuts}{%
+    \metcut=metcut,\rsgOne=rsg500,\rsgTwo=rsg750,\rsgThree=rsg1000,\rsgFour=rsg1250,\rsgFive=rsg1500}{%
+      \tabularnewline
+      \metcut & \rsgOne & \rsgTwo & \rsgThree & \rsgFour & \rsgFive}%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{W' signal efficiencies}\tiny
+
+\vskip-2em
+% wprime table
+\begin{table}[h]
+  \caption{\scriptsize $A$ (acceptance), $\frac{S}{B}$ and $\frac{S}{\sqrt{B}}$ of W' sample in signal region with varying E$_{T}^{miss}$ cuts}
+  %\begin{tabular}{l d d d d d}
+  \begin{tabular}{l c c c c c}
+    \toprule
+    E$_{T}^{miss}$ & \multicolumn{1}{c}{$500$~GeV} & \multicolumn{1}{c}{$750$~GeV} & %
+    \multicolumn{1}{c}{$1000$~GeV} & \multicolumn{1}{c}{$1250$~GeV} & \multicolumn{1}{c}{$1500$~GeV} %
+    \tabularnewline
+    cut & \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} %
+    %cut & & & & &%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{elec_met_cuts}{%
+    \metcut=metcut,\wpOne=wp500,\wpTwo=wp600,\wpThree=wp700,\wpFour=wp800,\wpFive=wp900}{%
+      \tabularnewline
+      \metcut & \wpOne & \wpTwo & \wpThree & \wpFour & \wpFive}%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\vskip-2em
+% wprime table
+\begin{table}[h]
+  \caption{\scriptsize $A$ (acceptance), $\frac{S}{B}$ and $\frac{S}{\sqrt{B}}$ of W' sample in signal region with varying E$_{T}^{miss}$ cuts}
+  %\begin{tabular}{l d d d d d}
+  \begin{tabular}{l c c c c c}
+    \toprule
+    E$_{T}^{miss}$ & \multicolumn{1}{c}{$500$~GeV} & \multicolumn{1}{c}{$750$~GeV} & %
+    \multicolumn{1}{c}{$1000$~GeV} & \multicolumn{1}{c}{$1250$~GeV} & \multicolumn{1}{c}{$1500$~GeV} %
+    \tabularnewline
+    cut & \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} & %
+    \multicolumn{1}{c}{$A$/$\frac{S}{B}$/$\frac{S}{\sqrt{B}}$} %
+    %cut & & & & &%
+    \tabularnewline
+    \midrule
+    \DTLforeach*{elec_met_cuts}{%
+    \metcut=metcut,\wpOne=wp1000,\wpTwo=wp1100,\wpThree=wp1200,\wpFour=wp1300,\wpFive=wp1400}{%
+      \tabularnewline
+      \metcut & \wpOne & \wpTwo & \wpThree & \wpFour & \wpFive}%
+    \tabularnewline
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+\end{document}

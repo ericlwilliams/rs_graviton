@@ -1,0 +1,33 @@
+void plotQCDSanityCheck(){
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+
+  TFile* qcd_noscale = TFile::Open("./plots/qcd.noscale.root");
+  TFile* qcd_scale = TFile::Open("./plots/qcd.scale.root");
+
+  TH1F* qcd_noscale_muon_mt = (TH1F*) qcd_noscale->Get("ps/h_muon_lep_met_mt");
+  TH1F* qcd_scale_muon_mt = (TH1F*) qcd_scale->Get("ps/h_muon_lep_met_mt");
+
+  TCanvas* tc_muon_lep_met_mt = new TCanvas("tc_muon_lep_met_mt","tc_muon_lep_met_mt",0,0,1920,1200);
+  tc_muon_lep_met_mt->cd();
+
+  qcd_noscale_muon_mt->Draw("hist");
+
+  qcd_scale_muon_mt->SetLineColor(kRed);
+  qcd_scale_muon_mt->Draw("hist sames");
+
+  TLegend* lgnd_muon_lep_met_mt = new TLegend(0.01,0.5,0.99,0.9);
+  lgnd_muon_lep_met_mt->SetFillColor(0);
+  lgnd_muon_lep_met_mt->SetBorderSize(0);
+  lgnd_muon_lep_met_mt->SetTextSize(0.3);
+  lgnd_muon_lep_met_mt->AddEntry(qcd_noscale_muon_mt,"No QCD scaling","F");
+  lgnd_muon_lep_met_mt->AddEntry(qcd_scale_muon_Mt,"After QCD scaling","F");  
+  lgnd_muon_lep_met_mt->Draw();
+
+  
+  return;
+}

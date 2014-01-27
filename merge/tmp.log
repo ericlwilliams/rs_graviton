@@ -1,0 +1,2502 @@
+
+Processing merge.C...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In mergeGWW.C, gww
+
+
+Scaling and Merging qcd.alpgen
+myhadd(qcd.alpgen,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/qcd.alpgen.plot.root
+wwFileInfo adding ../plots/gww_plots/qcd.elec.alpgen.pu.plot.root
+wwXSec initialized for run #: 111111, process: qcd (elec)
+wwFileInfo adding ../plots/gww_plots/qcd.muon.alpgen.pu.plot.root
+wwXSec initialized for run #: 111112, process: qcd (muon)
+
+
+Scaling and Merging qcd.sherpa
+myhadd(qcd.sherpa,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/qcd.sherpa.plot.root
+wwFileInfo adding ../plots/gww_plots/qcd.elec.sherpa.pu.plot.root
+wwXSec initialized for run #: 111111, process: qcd (elec)
+wwFileInfo adding ../plots/gww_plots/qcd.muon.sherpa.pu.plot.root
+wwXSec initialized for run #: 111112, process: qcd (muon)
+
+
+Scaling and Merging mc.alpgen.wjets
+myhadd(mc.alpgen.wjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.wjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np0.pu.plot.root
+wwXSec initialized for run #: 107680, process: W \rightarrow e\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np1.pu.plot.root
+wwXSec initialized for run #: 107681, process: W \rightarrow e\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np2.pu.plot.root
+wwXSec initialized for run #: 107682, process: W \rightarrow e\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np3.pu.plot.root
+wwXSec initialized for run #: 107683, process: W \rightarrow e\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np4.pu.plot.root
+wwXSec initialized for run #: 107684, process: W \rightarrow e\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np5.pu.plot.root
+wwXSec initialized for run #: 107685, process: W \rightarrow e\nu+5lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np0.pu.plot.root
+wwXSec initialized for run #: 107690, process: W \rightarrow \mu\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np1.pu.plot.root
+wwXSec initialized for run #: 107691, process: W \rightarrow \mu\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np2.pu.plot.root
+wwXSec initialized for run #: 107692, process: W \rightarrow \mu\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np3.pu.plot.root
+wwXSec initialized for run #: 107693, process: W \rightarrow \mu\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np4.pu.plot.root
+wwXSec initialized for run #: 107694, process: W \rightarrow \mu\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np5.pu.plot.root
+wwXSec initialized for run #: 107695, process: W \rightarrow \mu\nu+5lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np0.pu.plot.root
+wwXSec initialized for run #: 107700, process: W \rightarrow \tau\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np1.pu.plot.root
+wwXSec initialized for run #: 107701, process: W \rightarrow \tau\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np2.pu.plot.root
+wwXSec initialized for run #: 107702, process: W \rightarrow \tau\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np3.pu.plot.root
+wwXSec initialized for run #: 107703, process: W \rightarrow \tau\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np4.pu.plot.root
+wwXSec initialized for run #: 107704, process: W \rightarrow \tau\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np5.pu.plot.root
+wwXSec initialized for run #: 107705, process: W \rightarrow \tau\nu+5lp
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+W \rightarrow e\nu+0lp, 3.89689e+07
+W \rightarrow e\nu+1lp, 7.33946e+06
+W \rightarrow e\nu+2lp, 2.12616e+06
+W \rightarrow e\nu+3lp, 572740
+W \rightarrow e\nu+4lp, 144394
+W \rightarrow e\nu+5lp, 39303.5
+W \rightarrow \mu\nu+0lp, 3.8947e+07
+W \rightarrow \mu\nu+1lp, 7.3367e+06
+W \rightarrow \mu\nu+2lp, 2.12404e+06
+W \rightarrow \mu\nu+3lp, 572205
+W \rightarrow \mu\nu+4lp, 144498
+W \rightarrow \mu\nu+5lp, 39326.8
+W \rightarrow \tau\nu+0lp, 3.74804e+07
+W \rightarrow \tau\nu+1lp, 7.33108e+06
+W \rightarrow \tau\nu+2lp, 2.12325e+06
+W \rightarrow \tau\nu+3lp, 572823
+W \rightarrow \tau\nu+4lp, 144442
+W \rightarrow \tau\nu+5lp, 39326.8
+
+
+Scaling and Merging mc.sherpa.wjets
+myhadd(mc.sherpa.wjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.sherpa.wjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wenu.pu.plot.root
+wwXSec initialized for run #: 119128, process: W \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wunu.pu.plot.root
+wwXSec initialized for run #: 114611, process: W \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wtnu.pu.plot.root
+wwXSec initialized for run #: 119930, process: W \rightarrow \tau\nu
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+W \rightarrow e\nu, 4.89836e+07
+W \rightarrow \mu\nu, 4.938e+07
+W \rightarrow \tau\nu, 4.8999e+07
+
+
+Scaling and Merging mc.herwig.vv
+myhadd(mc.herwig.vv,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.vv.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.ww.pu.plot.root
+wwXSec initialized for run #: 105985, process: WW \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.herwig.wz.pu.plot.root
+wwXSec initialized for run #: 105987, process: WZ \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.herwig.zz.pu.plot.root
+wwXSec initialized for run #: 105986, process: ZZ \rightarrow \ell+X
+
+
+Scaling and Merging mc.alpgen.zjets
+myhadd(mc.alpgen.zjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.zjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np0.pu.plot.root
+wwXSec initialized for run #: 107650, process: Z \rightarrow ee+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np1.pu.plot.root
+wwXSec initialized for run #: 107651, process: Z \rightarrow ee+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np2.pu.plot.root
+wwXSec initialized for run #: 107652, process: Z \rightarrow ee+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np3.pu.plot.root
+wwXSec initialized for run #: 107653, process: Z \rightarrow ee+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np4.pu.plot.root
+wwXSec initialized for run #: 107654, process: Z \rightarrow ee+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np5.pu.plot.root
+wwXSec initialized for run #: 107655, process: Z \rightarrow ee+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np0.pu.plot.root
+wwXSec initialized for run #: 107660, process: Z \rightarrow \mu\mu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np1.pu.plot.root
+wwXSec initialized for run #: 107661, process: Z \rightarrow \mu\mu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np2.pu.plot.root
+wwXSec initialized for run #: 107662, process: Z \rightarrow \mu\mu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np3.pu.plot.root
+wwXSec initialized for run #: 107663, process: Z \rightarrow \mu\mu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np4.pu.plot.root
+wwXSec initialized for run #: 107664, process: Z \rightarrow \mu\mu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np5.pu.plot.root
+wwXSec initialized for run #: 107665, process: Z \rightarrow \mu\mu+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np0.pu.plot.root
+wwXSec initialized for run #: 107670, process: Z \rightarrow \tau\tau+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np1.pu.plot.root
+wwXSec initialized for run #: 107671, process: Z \rightarrow \tau\tau+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np2.pu.plot.root
+wwXSec initialized for run #: 107672, process: Z \rightarrow \tau\tau+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np3.pu.plot.root
+wwXSec initialized for run #: 107673, process: Z \rightarrow \tau\tau+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np4.pu.plot.root
+wwXSec initialized for run #: 107674, process: Z \rightarrow \tau\tau+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np5.pu.plot.root
+wwXSec initialized for run #: 107675, process: Z \rightarrow \tau\tau+5p
+
+
+Scaling and Merging mc.sherpa.zjets
+myhadd(mc.sherpa.zjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.sherpa.zjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.zee.pu.plot.root
+wwXSec initialized for run #: 114609, process: Z \rightarrow ee
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.zuu.pu.plot.root
+wwXSec initialized for run #: 119127, process: Z \rightarrow \mu\mu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.ztt.pu.plot.root
+wwXSec initialized for run #: 119931, process: Z \rightarrow \tau\tau
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+Z \rightarrow ee, 5.04613e+06
+Z \rightarrow \mu\mu, 5.04455e+06
+Z \rightarrow \tau\tau, 5.04761e+06
+
+
+Scaling and Merging mc.mcatnlo.top
+myhadd(mc.mcatnlo.top,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.mcatnlo.top.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.t1.pu.plot.root
+wwXSec initialized for run #: 105200, process: t\bar{t} \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.enu.pu.plot.root
+wwXSec initialized for run #: 108340, process: tqb \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.unu.pu.plot.root
+wwXSec initialized for run #: 108341, process: tqb \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.tnu.pu.plot.root
+wwXSec initialized for run #: 108342, process: tqb \rightarrow \tau\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.enu.pu.plot.root
+wwXSec initialized for run #: 108343, process: tb \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.unu.pu.plot.root
+wwXSec initialized for run #: 108344, process: tb \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.tnu.pu.plot.root
+wwXSec initialized for run #: 108345, process: tb \rightarrow \tau\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.wt.pu.plot.root
+wwXSec initialized for run #: 108346, process: tW \rightarrow \ell+X
+
+
+Scaling and Merging mc.rsg.m500.kmpl0_1
+myhadd(mc.rsg.m500.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m500.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115724, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=500~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115724, process: G->ZZ->lljj (mG=500,kMpl=0.1)
+
+
+Scaling and Merging mc.rsg.m750.kmpl0_1
+myhadd(mc.rsg.m750.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m750.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m750.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115725, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=750~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m750.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115725, process: G->ZZ->lljj (mG=750,kMpl=0.1)
+
+
+Scaling and Merging mc.rsg.m1000.kmpl0_1
+myhadd(mc.rsg.m1000.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1000.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1000.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115726, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1000~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1000.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115726, process: G->ZZ->lljj (mG=1000,kMpl=0.1)
+
+
+Scaling and Merging mc.rsg.m1250.kmpl0_1
+myhadd(mc.rsg.m1250.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1250.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1250.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115727, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1250~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1250.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115727, process: G->ZZ->lljj (mG=1250,kMpl=0.1)
+
+
+Scaling and Merging mc.rsg.m1500.kmpl0_1
+myhadd(mc.rsg.m1500.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1500.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115728, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1500~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115728, process: G->ZZ->lljj (mG=1500,kMpl=0.1)
+
+
+Scaling and Merging mc.wprime.wz.m500
+myhadd(mc.wprime.wz.m500,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m500.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m500.pu.plot.root
+wwXSec initialized for run #: 105708, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=500~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m500.pu.plot.root
+wwXSec initialized for run #: 115622, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=500~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m500.pu.plot.root
+wwXSec initialized for run #: 115631, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=500~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m600
+myhadd(mc.wprime.wz.m600,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m600.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m600.pu.plot.root
+wwXSec initialized for run #: 115640, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=600~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m600.pu.plot.root
+wwXSec initialized for run #: 115623, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=600~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m600.pu.plot.root
+wwXSec initialized for run #: 115632, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=600~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m700
+myhadd(mc.wprime.wz.m700,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m700.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m700.pu.plot.root
+wwXSec initialized for run #: 115641, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=700~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m700.pu.plot.root
+wwXSec initialized for run #: 115624, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=700~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m700.pu.plot.root
+wwXSec initialized for run #: 115633, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=700~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m800
+myhadd(mc.wprime.wz.m800,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m800.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m800.pu.plot.root
+wwXSec initialized for run #: 115642, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=800~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m800.pu.plot.root
+wwXSec initialized for run #: 115625, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=800~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m800.pu.plot.root
+wwXSec initialized for run #: 115634, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=800~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m900
+myhadd(mc.wprime.wz.m900,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m900.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m900.pu.plot.root
+wwXSec initialized for run #: 115643, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=900~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m900.pu.plot.root
+wwXSec initialized for run #: 115626, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=900~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m900.pu.plot.root
+wwXSec initialized for run #: 115635, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=900~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1000
+myhadd(mc.wprime.wz.m1000,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1000.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1000.pu.plot.root
+wwXSec initialized for run #: 105709, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1000~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1100
+myhadd(mc.wprime.wz.m1100,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1100.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1100.pu.plot.root
+wwXSec initialized for run #: 115644, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1100~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1100.pu.plot.root
+wwXSec initialized for run #: 115627, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1100~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1100.pu.plot.root
+wwXSec initialized for run #: 115636, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1100~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1200
+myhadd(mc.wprime.wz.m1200,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1200.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1200.pu.plot.root
+wwXSec initialized for run #: 115645, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1200~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1200.pu.plot.root
+wwXSec initialized for run #: 115628, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1200~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1200.pu.plot.root
+wwXSec initialized for run #: 115637, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1200~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1300
+myhadd(mc.wprime.wz.m1300,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1300.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1300.pu.plot.root
+wwXSec initialized for run #: 115646, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1300~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1300.pu.plot.root
+wwXSec initialized for run #: 115629, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1300~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1300.pu.plot.root
+wwXSec initialized for run #: 115638, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1300~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1400
+myhadd(mc.wprime.wz.m1400,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1400.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1400.pu.plot.root
+wwXSec initialized for run #: 115647, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1400~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1400.pu.plot.root
+wwXSec initialized for run #: 115630, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1400~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1400.pu.plot.root
+wwXSec initialized for run #: 115639, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1400~\rm{GeV})
+
+
+Scaling and Merging mc.wprime.wz.m1500
+myhadd(mc.wprime.wz.m1500,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1500.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1500.pu.plot.root
+wwXSec initialized for run #: 105710, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1500~\rm{GeV})
+Merged output written to ../plots/gww_plots/merged

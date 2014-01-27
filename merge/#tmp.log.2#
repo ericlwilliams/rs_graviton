@@ -1,0 +1,2244 @@
+
+Processing merge.C...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In mergeGWW.C, gww
+
+
+Scaling and Merging qcd.alpgen
+myhadd(qcd.alpgen,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/qcd.alpgen.plot.root
+wwFileInfo adding ../plots/gww_plots/qcd.elec.alpgen.pu.plot.root
+wwXSec initialized for run #: 111111, process: qcd (elec)
+wwFileInfo adding ../plots/gww_plots/qcd.muon.alpgen.pu.plot.root
+wwXSec initialized for run #: 111112, process: qcd (muon)
+1
+1
+1
+1
+1.00004
+1.99535
+1
+1
+1.16645
+1.00004
+1
+1
+1
+1
+1.00008
+1
+1.00057
+1.00057
+1.00057
+1.00057
+1
+1
+1.00275
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1.00004
+1.00004
+1
+1
+1.00012
+1
+1.00032
+1.00661
+1
+1
+1.00012
+
+
+Scaling and Merging qcd.sherpa
+myhadd(qcd.sherpa,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/qcd.sherpa.plot.root
+wwFileInfo adding ../plots/gww_plots/qcd.elec.sherpa.pu.plot.root
+wwXSec initialized for run #: 111111, process: qcd (elec)
+wwFileInfo adding ../plots/gww_plots/qcd.muon.sherpa.pu.plot.root
+wwXSec initialized for run #: 111112, process: qcd (muon)
+1
+1
+1
+1
+1.00004
+1.99535
+1
+1
+1.16645
+1.00004
+1
+1
+1
+1
+1.00008
+1
+1.00057
+1.00057
+1.00057
+1.00057
+1
+1
+1.00275
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1.00004
+1.00004
+1
+1
+1.00012
+1
+1.00032
+1.00661
+1
+1
+1.00012
+
+
+Scaling and Merging mc.alpgen.wjets
+myhadd(mc.alpgen.wjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.wjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np0.pu.plot.root
+wwXSec initialized for run #: 107680, process: W \rightarrow e\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np1.pu.plot.root
+wwXSec initialized for run #: 107681, process: W \rightarrow e\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np2.pu.plot.root
+wwXSec initialized for run #: 107682, process: W \rightarrow e\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np3.pu.plot.root
+wwXSec initialized for run #: 107683, process: W \rightarrow e\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np4.pu.plot.root
+wwXSec initialized for run #: 107684, process: W \rightarrow e\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wenu.np5.pu.plot.root
+wwXSec initialized for run #: 107685, process: W \rightarrow e\nu+5lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np0.pu.plot.root
+wwXSec initialized for run #: 107690, process: W \rightarrow \mu\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np1.pu.plot.root
+wwXSec initialized for run #: 107691, process: W \rightarrow \mu\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np2.pu.plot.root
+wwXSec initialized for run #: 107692, process: W \rightarrow \mu\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np3.pu.plot.root
+wwXSec initialized for run #: 107693, process: W \rightarrow \mu\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np4.pu.plot.root
+wwXSec initialized for run #: 107694, process: W \rightarrow \mu\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wunu.np5.pu.plot.root
+wwXSec initialized for run #: 107695, process: W \rightarrow \mu\nu+5lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np0.pu.plot.root
+wwXSec initialized for run #: 107700, process: W \rightarrow \tau\nu+0lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np1.pu.plot.root
+wwXSec initialized for run #: 107701, process: W \rightarrow \tau\nu+1lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np2.pu.plot.root
+wwXSec initialized for run #: 107702, process: W \rightarrow \tau\nu+2lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np3.pu.plot.root
+wwXSec initialized for run #: 107703, process: W \rightarrow \tau\nu+3lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np4.pu.plot.root
+wwXSec initialized for run #: 107704, process: W \rightarrow \tau\nu+4lp
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.wtnu.np5.pu.plot.root
+wwXSec initialized for run #: 107705, process: W \rightarrow \tau\nu+5lp
+11.6018
+11.6018
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+12.3017
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6018
+11.6018
+11.6972
+11.6972
+11.6385
+11.6385
+11.6972
+11.6972
+11.6972
+11.5213
+12.0165
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.6972
+11.7797
+11.6972
+11.7797
+11.6972
+11.6972
+11.6972
+11.7797
+
+
+Scaling and Merging mc.sherpa.wjets
+myhadd(mc.sherpa.wjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.sherpa.wjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wenu.pu.plot.root
+wwXSec initialized for run #: 119128, process: W \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wunu.pu.plot.root
+wwXSec initialized for run #: 114611, process: W \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.wtnu.pu.plot.root
+wwXSec initialized for run #: 119930, process: W \rightarrow \tau\nu
+28.9385
+28.9385
+77.1988
+77.1975
+77.1981
+85.7842
+77.1975
+77.1975
+78.7259
+77.1981
+77.1975
+77.1975
+77.1975
+77.1975
+77.2027
+77.1988
+77.1975
+77.1975
+28.9385
+28.9385
+77.198
+77.1975
+77.5675
+77.1899
+77.1975
+77.1975
+77.1975
+77.3536
+77.4303
+77.1975
+77.1975
+77.1975
+77.1981
+77.1981
+77.1987
+77.1981
+77.1982
+77.1975
+
+77.184
+77.1975
+77.1943
+77.3224
+77.1986
+77.1975
+77.184
+
+
+Scaling and Merging mc.herwig.vv
+myhadd(mc.herwig.vv,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.herwig.vv.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.herwig.ww.pu.plot.root
+wwXSec initialized for run #: 105985, process: WW \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.herwig.wz.pu.plot.root
+wwXSec initialized for run #: 105987, process: WZ \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.herwig.zz.pu.plot.root
+wwXSec initialized for run #: 105986, process: ZZ \rightarrow \ell+X
+0.0800192
+0.0800192
+0.0798481
+0.0798226
+0.0798518
+0.15973
+0.0798226
+0.0798226
+0.0876881
+0.0798333
+0.0798226
+0.0798226
+0.0798226
+0.0798226
+0.0798294
+0.0798225
+0.0798347
+0.0798226
+0.0800192
+0.0800302
+0.0798306
+0.0798226
+0.0857358
+0.0798571
+0.0798226
+0.0798226
+0.0798226
+0.0799117
+0.0800071
+0.0798226
+0.0798226
+0.0798226
+0.0798306
+0.0798306
+0.0798839
+0.0798369
+0.0798946
+0.0798264
+0.0798114
+0.0798263
+0.0798447
+0.0800918
+0.0798299
+0.0798263
+0.0798114
+0.0823964
+0.0823909
+0.082412
+0.159804
+0.0823909
+0.0823909
+0.0900976
+0.0824057
+0.0823909
+0.0823909
+0.0823909
+0.0823909
+0.0823943
+0.0823909
+0.0823909
+0.0823909
+0.0800192
+0.0800192
+0.0823997
+0.0823909
+0.0878075
+0.0823839
+0.0823909
+0.0823909
+0.0823909
+0.0825314
+0.0826707
+0.0823909
+0.0823909
+0.0823909
+0.0823997
+0.0823997
+0.0824194
+0.0824039
+0.0824133
+0.0823943
+0.0823412
+0.0823943
+0.0823742
+0.0825974
+0.0823976
+0.0823943
+0.0823412
+
+
+Scaling and Merging mc.alpgen.zjets
+myhadd(mc.alpgen.zjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.alpgen.zjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np0.pu.plot.root
+wwXSec initialized for run #: 107650, process: Z \rightarrow ee+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np1.pu.plot.root
+wwXSec initialized for run #: 107651, process: Z \rightarrow ee+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np2.pu.plot.root
+wwXSec initialized for run #: 107652, process: Z \rightarrow ee+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np3.pu.plot.root
+wwXSec initialized for run #: 107653, process: Z \rightarrow ee+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np4.pu.plot.root
+wwXSec initialized for run #: 107654, process: Z \rightarrow ee+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zee.np5.pu.plot.root
+wwXSec initialized for run #: 107655, process: Z \rightarrow ee+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np0.pu.plot.root
+wwXSec initialized for run #: 107660, process: Z \rightarrow \mu\mu+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np1.pu.plot.root
+wwXSec initialized for run #: 107661, process: Z \rightarrow \mu\mu+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np2.pu.plot.root
+wwXSec initialized for run #: 107662, process: Z \rightarrow \mu\mu+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np3.pu.plot.root
+wwXSec initialized for run #: 107663, process: Z \rightarrow \mu\mu+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np4.pu.plot.root
+wwXSec initialized for run #: 107664, process: Z \rightarrow \mu\mu+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.zuu.np5.pu.plot.root
+wwXSec initialized for run #: 107665, process: Z \rightarrow \mu\mu+5p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np0.pu.plot.root
+wwXSec initialized for run #: 107670, process: Z \rightarrow \tau\tau+0p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np1.pu.plot.root
+wwXSec initialized for run #: 107671, process: Z \rightarrow \tau\tau+1p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np2.pu.plot.root
+wwXSec initialized for run #: 107672, process: Z \rightarrow \tau\tau+2p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np3.pu.plot.root
+wwXSec initialized for run #: 107673, process: Z \rightarrow \tau\tau+3p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np4.pu.plot.root
+wwXSec initialized for run #: 107674, process: Z \rightarrow \tau\tau+4p
+wwFileInfo adding ../plots/gww_plots/mc.alpgen.ztt.np5.pu.plot.root
+wwXSec initialized for run #: 107675, process: Z \rightarrow \tau\tau+5p
+0.593433
+0.593433
+0.594152
+0.594152
+0.599943
+1.18589
+0.594152
+0.594152
+0.692665
+0.5989
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.593433
+0.593433
+0.594152
+0.594152
+0.594305
+0.594305
+0.594152
+0.594152
+0.594152
+0.588741
+0.597016
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.594152
+0.59388
+0.594152
+0.59388
+0.594152
+0.594152
+0.594152
+0.59388
+
+
+Scaling and Merging mc.sherpa.zjets
+myhadd(mc.sherpa.zjets,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.sherpa.zjets.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.zee.pu.plot.root
+wwXSec initialized for run #: 114609, process: Z \rightarrow ee
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.zuu.pu.plot.root
+wwXSec initialized for run #: 119127, process: Z \rightarrow \mu\mu
+wwFileInfo adding ../plots/gww_plots/mc.sherpa.ztt.pu.plot.root
+wwXSec initialized for run #: 119931, process: Z \rightarrow \tau\tau
+2.52238
+2.52238
+6.54204
+6.54204
+6.54499
+7.46427
+6.54204
+6.54204
+6.68571
+6.54363
+6.54204
+6.54204
+6.54204
+6.54204
+6.54216
+6.54204
+6.54217
+6.54204
+2.52238
+2.52274
+6.54204
+6.54204
+6.52486
+6.5246
+6.54204
+6.54204
+6.54204
+6.68101
+6.71985
+6.54204
+6.54204
+6.54204
+6.54204
+6.54204
+6.54204
+6.54204
+6.54204
+6.54204
+6.51942
+6.54204
+6.51978
+6.55154
+6.54215
+6.54204
+6.51942
+
+
+Scaling and Merging mc.mcatnlo.top
+myhadd(mc.mcatnlo.top,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.mcatnlo.top.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.t1.pu.plot.root
+wwXSec initialized for run #: 105200, process: t\bar{t} \rightarrow \ell+X
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.enu.pu.plot.root
+wwXSec initialized for run #: 108340, process: tqb \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.unu.pu.plot.root
+wwXSec initialized for run #: 108341, process: tqb \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.tchan.tnu.pu.plot.root
+wwXSec initialized for run #: 108342, process: tqb \rightarrow \tau\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.enu.pu.plot.root
+wwXSec initialized for run #: 108343, process: tb \rightarrow e\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.unu.pu.plot.root
+wwXSec initialized for run #: 108344, process: tb \rightarrow \mu\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.schan.tnu.pu.plot.root
+wwXSec initialized for run #: 108345, process: tb \rightarrow \tau\nu
+wwFileInfo adding ../plots/gww_plots/mc.mcatnlo.st.wt.pu.plot.root
+wwXSec initialized for run #: 108346, process: tW \rightarrow \ell+X
+0.42569
+0.425704
+0.542874
+0.542852
+0.542919
+0.972943
+0.542852
+0.542852
+0.612181
+0.542881
+0.542853
+0.542852
+0.542855
+0.542855
+0.542951
+0.542853
+0.542874
+0.542852
+0.42569
+0.425719
+0.542859
+0.542852
+0.584351
+0.543517
+0.542852
+0.542852
+0.542852
+0.54436
+0.548377
+0.542852
+0.542852
+0.542852
+0.542858
+0.542858
+0.54292
+0.542919
+0.542871
+0.542853
+0.543191
+0.542861
+0.54343
+0.553021
+0.542909
+0.542854
+0.54319
+0.561654
+0.561629
+0.56166
+0.973407
+0.561629
+0.561629
+0.628077
+0.561646
+0.561629
+0.561629
+0.561629
+0.561629
+0.561657
+0.561629
+0.561625
+0.561629
+0.42569
+0.425707
+0.561641
+0.561629
+0.598127
+0.562375
+0.561629
+0.561629
+0.561629
+0.562662
+0.567944
+0.561629
+0.561629
+0.561629
+0.561641
+0.561641
+0.561663
+0.561645
+0.561669
+0.561628
+0.560123
+0.561629
+0.56034
+0.570852
+0.561635
+0.561629
+0.560144
+
+
+Scaling and Merging mc.rsg.m500.kmpl0_1
+myhadd(mc.rsg.m500.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m500.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115724, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=500~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115724, process: G->ZZ->lljj (mG=500,kMpl=0.1)
+0.876489
+0.876489
+0.87558
+0.874831
+0.874832
+1.73625
+0.874831
+0.874831
+1.02956
+0.874831
+0.875319
+0.874831
+0.874831
+0.874831
+0.87572
+0.874831
+0.874831
+0.874831
+0.876489
+0.876489
+0.875025
+0.874831
+1.21242
+0.874222
+0.874832
+0.874831
+0.874831
+0.875906
+0.878235
+0.874832
+0.874831
+0.874831
+0.875025
+0.875025
+0.875319
+0.875319
+0.874831
+0.875319
+0.875047
+0.875319
+0.876147
+0.893962
+0.875509
+0.875319
+0.875047
+0.911705
+0.911407
+0.911407
+1.73584
+0.911407
+0.911407
+1.07
+0.911408
+0.911408
+0.911407
+0.911407
+0.911407
+0.912157
+0.911407
+0.911408
+0.911408
+0.876489
+0.876489
+0.911407
+0.911407
+1.22614
+0.911132
+0.911407
+0.911408
+0.911407
+0.909417
+0.913722
+0.911408
+0.911407
+0.911407
+0.911407
+0.911407
+0.911912
+0.911912
+0.911408
+0.911407
+0.909334
+0.911705
+0.910684
+0.934525
+0.911705
+0.911407
+0.909334
+
+
+Scaling and Merging mc.rsg.m750.kmpl0_1
+myhadd(mc.rsg.m750.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m750.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m750.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115725, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=750~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m750.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115725, process: G->ZZ->lljj (mG=750,kMpl=0.1)
+0.096221
+0.096221
+0.0959868
+0.0958782
+0.0958783
+0.178716
+0.0958782
+0.0958782
+0.121459
+0.0958783
+0.0958783
+0.0958783
+0.0958783
+0.0958783
+0.0960229
+0.0958782
+0.0958783
+0.0958782
+0.096221
+0.096221
+0.0959184
+0.0958782
+0.15421
+0.0958824
+0.0958783
+0.0958782
+0.0958782
+0.0958115
+0.0956551
+0.0958783
+0.0958782
+0.0958782
+0.0959184
+0.0959184
+0.0960465
+0.0960465
+0.0958782
+0.0958782
+0.0958299
+0.0959281
+0.0961437
+0.104798
+0.0959662
+0.0958783
+0.0958299
+0.100707
+0.100507
+0.100507
+0.179705
+0.100507
+0.100507
+0.124829
+0.100507
+0.100507
+0.100507
+0.100507
+0.100507
+0.100567
+0.100507
+0.100507
+0.100507
+0.096221
+0.096221
+0.100528
+0.100507
+0.153021
+0.100576
+0.100507
+0.100507
+0.100507
+0.100576
+0.100853
+0.100507
+0.100507
+0.100507
+0.100528
+0.100528
+0.100703
+0.100639
+0.100598
+0.100507
+0.100314
+0.10055
+0.100607
+0.109527
+0.10055
+0.100507
+0.100314
+
+
+Scaling and Merging mc.rsg.m1000.kmpl0_1
+myhadd(mc.rsg.m1000.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1000.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1000.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115726, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1000~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1000.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115726, process: G->ZZ->lljj (mG=1000,kMpl=0.1)
+0.0175517
+0.0175517
+0.0176701
+0.0175154
+0.0175154
+0.0280541
+0.0175154
+0.0175154
+0.0255709
+0.0175154
+0.0175188
+0.0175154
+0.0175154
+0.0175154
+0.0176483
+0.017519
+0.0175154
+0.0175154
+0.0175517
+0.0175517
+0.0175346
+0.0175154
+0.0294824
+0.0175128
+0.0175154
+0.0175154
+0.0175154
+0.0175299
+0.0175049
+0.0175154
+0.0175154
+0.0175154
+0.0175346
+0.0175346
+0.0177986
+0.0177826
+0.017522
+0.0175223
+0.0175249
+0.0175491
+0.0178253
+0.0224214
+0.0175981
+0.0175223
+0.0175249
+0.0184133
+0.0182015
+0.0182015
+0.0286551
+0.0182015
+0.0182015
+0.025655
+0.0182015
+0.0182059
+0.0182015
+0.0182014
+0.0182014
+0.018282
+0.0182063
+0.0182015
+0.0182015
+0.0175517
+0.0175517
+0.0182503
+0.0182015
+0.0296181
+0.0182632
+0.0182015
+0.0182015
+0.0182015
+0.0181927
+0.0181937
+0.0182015
+0.0182015
+0.0182015
+0.0182503
+0.0182503
+0.0184524
+0.018375
+0.0182727
+0.0182094
+0.0182044
+0.0182329
+0.018421
+0.0228846
+0.0182618
+0.0182094
+0.0182044
+
+
+Scaling and Merging mc.rsg.m1250.kmpl0_1
+myhadd(mc.rsg.m1250.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1250.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1250.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115727, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1250~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1250.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115727, process: G->ZZ->lljj (mG=1250,kMpl=0.1)
+0.00423122
+0.00423122
+0.00452471
+0.00421325
+0.00421722
+0.00594167
+0.00421325
+0.00421325
+0.00670531
+0.00421325
+0.00421627
+0.00421325
+0.00421325
+0.00421325
+0.00442016
+0.00422017
+0.00421429
+0.00421325
+0.00423122
+0.00423223
+0.00429991
+0.00421325
+0.00740785
+0.00422458
+0.00421325
+0.00421325
+0.00421325
+0.0042205
+0.00423375
+0.00421325
+0.00421325
+0.00421325
+0.00429991
+0.00429991
+0.00483011
+0.00479548
+0.00422223
+0.00421627
+0.00422577
+0.00426786
+0.0045109
+0.00666852
+0.00431249
+0.00421627
+0.00422577
+0.00466004
+0.00440446
+0.0044067
+0.00620505
+0.00440446
+0.00440446
+0.00669848
+0.00440446
+0.00440538
+0.00440446
+0.00440446
+0.00440446
+0.00454437
+0.00440548
+0.00440446
+0.00440446
+0.00423122
+0.00423122
+0.00446679
+0.00440446
+0.00734728
+0.00443875
+0.00440446
+0.00440446
+0.00440446
+0.00439944
+0.00439939
+0.00440446
+0.00440446
+0.00440446
+0.00446679
+0.00446679
+0.00483692
+0.00476355
+0.00444068
+0.00441376
+0.00441054
+0.004438
+0.00463361
+0.00650797
+0.00447651
+0.00441376
+0.00441054
+
+
+Scaling and Merging mc.rsg.m1500.kmpl0_1
+myhadd(mc.rsg.m1500.kmpl0_1,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.rsg.m1500.kmpl0_1.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.gww.lvjj.m1500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115728, process: G^{*} \rightarrow WW \rightarrow \ell\nu jj $\\$ (M_{G^{*}}=1500~\rm{GeV}; k/\overline{M}_{pl}=0.1)
+wwFileInfo adding ../plots/gww_plots/mc.gzz.lljj.m1500.kmpl0_1.pu.plot.root
+wwXSec initialized for run #: 115728, process: G->ZZ->lljj (mG=1500,kMpl=0.1)
+0.00120668
+0.00120668
+0.00140429
+0.00120189
+0.00120309
+0.00156885
+0.00120189
+0.00120189
+0.00203356
+0.00120189
+0.00120554
+0.00120189
+0.00120189
+0.00120189
+0.00154019
+0.00120458
+0.00120216
+0.00120189
+0.00120668
+0.00120699
+0.00130478
+0.00120252
+0.00216841
+0.00120753
+0.00120189
+0.00120189
+0.00120189
+0.0012005
+0.0012027
+0.00120189
+0.00120189
+0.00120189
+0.00130478
+0.00130478
+0.00176671
+0.00175038
+0.00120724
+0.00120918
+0.00121762
+0.00126396
+0.00147048
+0.00209731
+0.00130803
+0.00120918
+0.00122004
+0.00140296
+0.00125011
+0.00125153
+0.00164422
+0.00125011
+0.00125011
+0.00200102
+0.00125011
+0.00125203
+0.00125011
+0.00125011
+0.00125011
+0.00151759
+0.00125289
+0.00125011
+0.00125011
+0.00120668
+0.00120668
+0.00133296
+0.00125011
+0.00216183
+0.00126825
+0.00125011
+0.00125011
+0.00125011
+0.00125095
+0.00125499
+0.00125011
+0.00125011
+0.00125011
+0.00133296
+0.00133296
+0.00170908
+0.00168205
+0.00126841
+0.00125808
+0.00126249
+0.00130564
+0.00148597
+0.00204719
+0.00134141
+0.00125808
+0.00126249
+
+
+Scaling and Merging mc.wprime.wz.m500
+myhadd(mc.wprime.wz.m500,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m500.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m500.pu.plot.root
+wwXSec initialized for run #: 105708, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=500~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m500.pu.plot.root
+wwXSec initialized for run #: 115622, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=500~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m500.pu.plot.root
+wwXSec initialized for run #: 115631, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=500~\rm{GeV})
+0.313128
+0.313128
+0.312
+0.312
+0.312
+0.622861
+0.312
+0.312
+0.336094
+0.312
+0.312
+0.312
+0.311999
+0.311999
+0.312
+0.312
+0.312
+0.312
+0.313128
+0.313128
+0.312
+0.312
+0.431228
+0.31181
+0.312
+0.312
+0.312
+0.313227
+0.312714
+0.312
+0.312
+0.312
+0.312
+0.312
+0.312
+0.312
+0.312
+0.312
+0.312559
+0.312
+0.31272
+0.316552
+0.312
+0.312
+0.312559
+0.325353
+0.325353
+0.325353
+0.623381
+0.325353
+0.325353
+0.346012
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.313128
+0.313128
+0.325353
+0.325353
+0.440874
+0.325364
+0.325353
+0.325353
+0.325353
+0.326014
+0.324558
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.325353
+0.323836
+0.325353
+0.324014
+0.328121
+0.325353
+0.325353
+0.323836
+
+
+Scaling and Merging mc.wprime.wz.m600
+myhadd(mc.wprime.wz.m600,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m600.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m600.pu.plot.root
+wwXSec initialized for run #: 115640, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=600~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m600.pu.plot.root
+wwXSec initialized for run #: 115623, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=600~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m600.pu.plot.root
+wwXSec initialized for run #: 115632, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=600~\rm{GeV})
+0.145773
+0.145773
+0.145309
+0.145309
+0.145309
+0.28832
+0.145309
+0.145309
+0.155336
+0.145309
+0.145374
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145773
+0.145773
+0.145309
+0.145309
+0.223817
+0.145333
+0.145309
+0.145309
+0.145309
+0.145822
+0.148514
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145309
+0.145318
+0.145374
+0.145396
+0.147425
+0.145374
+0.145309
+0.145318
+0.151498
+0.151498
+0.151498
+0.288312
+0.151498
+0.151498
+0.1637
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151539
+0.151498
+0.151498
+0.151498
+0.145773
+0.145773
+0.151498
+0.151498
+0.221636
+0.151513
+0.151498
+0.151498
+0.151498
+0.151109
+0.152243
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151498
+0.151787
+0.151498
+0.151881
+0.153213
+0.151498
+0.151498
+0.151787
+
+
+Scaling and Merging mc.wprime.wz.m700
+myhadd(mc.wprime.wz.m700,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m700.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m700.pu.plot.root
+wwXSec initialized for run #: 115641, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=700~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m700.pu.plot.root
+wwXSec initialized for run #: 115624, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=700~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m700.pu.plot.root
+wwXSec initialized for run #: 115633, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=700~\rm{GeV})
+0.0724627
+0.0724627
+0.0722427
+0.0722427
+0.0722427
+0.139843
+0.0722427
+0.0722427
+0.0786278
+0.0722427
+0.0722427
+0.0722427
+0.0722426
+0.0722426
+0.0722427
+0.0722427
+0.0722427
+0.0722427
+0.0724627
+0.0724627
+0.0722427
+0.0722427
+0.11669
+0.0723061
+0.0722427
+0.0722427
+0.0722427
+0.0723843
+0.0723293
+0.0722427
+0.0722427
+0.0722427
+0.0722427
+0.0722427
+0.0722713
+0.0722713
+0.0722692
+0.0722427
+0.0721329
+0.0722427
+0.0721911
+0.0743955
+0.0722427
+0.0722427
+0.0721329
+0.07515
+0.0751004
+0.0751004
+0.141025
+0.0751004
+0.0751004
+0.0811245
+0.0751004
+0.0751004
+0.0751004
+0.0751004
+0.0751004
+0.0751568
+0.0751568
+0.0751299
+0.0751004
+0.0724627
+0.0724924
+0.0751272
+0.0751004
+0.118298
+0.075138
+0.0751004
+0.0751004
+0.0751004
+0.0750918
+0.0752891
+0.0751004
+0.0751004
+0.0751004
+0.0751272
+0.0751272
+0.0751551
+0.0751283
+0.0751591
+0.0751272
+0.0751288
+0.0751543
+0.0751661
+0.0767461
+0.0751836
+0.0751272
+0.0751288
+
+
+Scaling and Merging mc.wprime.wz.m800
+myhadd(mc.wprime.wz.m800,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m800.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m800.pu.plot.root
+wwXSec initialized for run #: 115642, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=800~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m800.pu.plot.root
+wwXSec initialized for run #: 115625, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=800~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m800.pu.plot.root
+wwXSec initialized for run #: 115634, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=800~\rm{GeV})
+0.0394059
+0.0394059
+0.0391955
+0.0391955
+0.0391955
+0.073279
+0.0391955
+0.0391955
+0.0438313
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.03921
+0.0391955
+0.0391955
+0.0391955
+0.0394059
+0.0394059
+0.0391955
+0.0391955
+0.0665085
+0.0392013
+0.0391955
+0.0391955
+0.0391955
+0.0391263
+0.0392915
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.0391955
+0.0392117
+0.0391955
+0.0392062
+0.0391955
+0.039244
+0.0408666
+0.0392115
+0.0391955
+0.0392062
+0.0411627
+0.0411163
+0.0411163
+0.0742445
+0.0411163
+0.0411163
+0.0452235
+0.0411163
+0.0411163
+0.0411163
+0.0411163
+0.0411163
+0.0411306
+0.0411163
+0.0411163
+0.0411163
+0.0394059
+0.0394059
+0.0411301
+0.0411163
+0.0665091
+0.0411812
+0.0411163
+0.0411163
+0.0411163
+0.0409474
+0.0403768
+0.0411163
+0.0411163
+0.0411163
+0.0411302
+0.0411302
+0.0411801
+0.0411337
+0.0411461
+0.0411302
+0.041265
+0.0411302
+0.0413412
+0.0427843
+0.0411302
+0.0411302
+0.041265
+
+
+Scaling and Merging mc.wprime.wz.m900
+myhadd(mc.wprime.wz.m900,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m900.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m900.pu.plot.root
+wwXSec initialized for run #: 115643, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=900~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m900.pu.plot.root
+wwXSec initialized for run #: 115626, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=900~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m900.pu.plot.root
+wwXSec initialized for run #: 115635, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=900~\rm{GeV})
+0.0228676
+0.0228676
+0.0228158
+0.0228073
+0.0228073
+0.0408833
+0.0228073
+0.0228073
+0.0266006
+0.0228073
+0.0228073
+0.0228073
+0.0228073
+0.0228073
+0.0228254
+0.0228073
+0.0228073
+0.0228073
+0.0228676
+0.0228676
+0.0228227
+0.0228073
+0.0394881
+0.0228101
+0.0228073
+0.0228073
+0.0228073
+0.0228864
+0.0230408
+0.0228073
+0.0228073
+0.0228073
+0.0228227
+0.0228227
+0.0228844
+0.0228844
+0.0228073
+0.0228073
+0.0228243
+0.0228151
+0.0229192
+0.0245914
+0.0228151
+0.0228073
+0.0228243
+0.0239325
+0.0238358
+0.0238358
+0.0412297
+0.0238358
+0.0238358
+0.0275932
+0.0238358
+0.0238358
+0.0238358
+0.0238358
+0.0238358
+0.0238446
+0.0238358
+0.0238358
+0.0238358
+0.0228676
+0.0228676
+0.0238358
+0.0238358
+0.0400447
+0.0238693
+0.0238358
+0.0238358
+0.0238358
+0.0239759
+0.0240079
+0.0238358
+0.0238358
+0.0238358
+0.0238358
+0.0238358
+0.0239098
+0.023876
+0.0238657
+0.0238358
+0.0236881
+0.0238448
+0.0237068
+0.0256985
+0.0238448
+0.0238448
+0.0236881
+
+
+Scaling and Merging mc.wprime.wz.m1000
+myhadd(mc.wprime.wz.m1000,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1000.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1000.pu.plot.root
+wwXSec initialized for run #: 105709, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1000~\rm{GeV})
+0.0132452
+0.0132452
+0.013257
+0.0131951
+0.0131951
+0.0218146
+0.013195
+0.013195
+0.0164966
+0.0131951
+0.0131951
+0.0131951
+0.013195
+0.013195
+0.0132244
+0.0131951
+0.0131951
+0.013195
+0.0132452
+0.0132452
+0.013195
+0.013195
+0.0232599
+0.0132092
+0.013195
+0.0131951
+0.013195
+0.0132132
+0.0131907
+0.013195
+0.013195
+0.013195
+0.013195
+0.013195
+0.0132713
+0.0132507
+0.0132088
+0.0131951
+0.0131908
+0.0132018
+0.013249
+0.0151385
+0.0132141
+0.013195
+0.0131908
+0.0138864
+0.0137942
+0.0137942
+0.0225252
+0.0137942
+0.0137942
+0.0166679
+0.0137942
+0.0138017
+0.0137942
+0.0137942
+0.0137942
+0.013844
+0.0138018
+0.0137942
+0.0137942
+0.0132452
+0.0132452
+0.0138072
+0.0137942
+0.0233083
+0.0138077
+0.0137942
+0.0137942
+0.0137942
+0.0138064
+0.0139722
+0.0137942
+0.0137942
+0.0137942
+0.0138072
+0.0138072
+0.0138833
+0.0138509
+0.0138125
+0.0138017
+0.0137827
+0.0138283
+0.0138141
+0.0155635
+0.0138414
+0.0138017
+0.0137827
+
+
+Scaling and Merging mc.wprime.wz.m1100
+myhadd(mc.wprime.wz.m1100,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1100.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1100.pu.plot.root
+wwXSec initialized for run #: 115644, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1100~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1100.pu.plot.root
+wwXSec initialized for run #: 115627, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1100~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1100.pu.plot.root
+wwXSec initialized for run #: 115636, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1100~\rm{GeV})
+0.00682718
+0.00682718
+0.0068451
+0.00678437
+0.00678437
+0.0105855
+0.00678437
+0.00678437
+0.00888672
+0.00678437
+0.00678437
+0.00678437
+0.00678437
+0.00678437
+0.00681836
+0.00678808
+0.00678437
+0.00678437
+0.00682718
+0.00682718
+0.00679123
+0.00678437
+0.0122345
+0.00678548
+0.00678437
+0.00678437
+0.00678437
+0.00678702
+0.00682607
+0.00678437
+0.00678437
+0.00678437
+0.00679123
+0.00679123
+0.00691715
+0.0069136
+0.00678437
+0.00678437
+0.0067951
+0.00679124
+0.00682378
+0.00859436
+0.00679744
+0.00678437
+0.0067951
+0.00724257
+0.0071237
+0.0071237
+0.0110003
+0.0071237
+0.0071237
+0.00911822
+0.0071237
+0.0071237
+0.0071237
+0.0071237
+0.0071237
+0.00715285
+0.0071237
+0.0071237
+0.0071237
+0.00682718
+0.00682718
+0.00713928
+0.0071237
+0.012167
+0.00715483
+0.0071237
+0.0071237
+0.0071237
+0.00712712
+0.00711857
+0.0071237
+0.0071237
+0.0071237
+0.00713928
+0.00713928
+0.00726669
+0.00723029
+0.00715136
+0.00712762
+0.00713455
+0.00713974
+0.00719879
+0.0087103
+0.00714098
+0.00712762
+0.00713455
+
+
+Scaling and Merging mc.wprime.wz.m1200
+myhadd(mc.wprime.wz.m1200,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1200.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1200.pu.plot.root
+wwXSec initialized for run #: 115645, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1200~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1200.pu.plot.root
+wwXSec initialized for run #: 115628, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1200~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1200.pu.plot.root
+wwXSec initialized for run #: 115637, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1200~\rm{GeV})
+0.00266292
+0.00266292
+0.00273668
+0.00265011
+0.00265011
+0.00394267
+0.00265011
+0.00265011
+0.0037128
+0.00265011
+0.00265011
+0.00265011
+0.00265011
+0.00265011
+0.0026905
+0.00265163
+0.00265011
+0.00265011
+0.00266292
+0.00266292
+0.00265603
+0.00265011
+0.00481914
+0.00265298
+0.00265011
+0.00265011
+0.00265011
+0.00264737
+0.00263273
+0.00265011
+0.00265011
+0.00265011
+0.00265603
+0.00265603
+0.00283403
+0.00282228
+0.00265296
+0.00265162
+0.00264754
+0.00266016
+0.00269875
+0.00374423
+0.00266148
+0.00265162
+0.00264754
+0.0028874
+0.00279264
+0.00279264
+0.00401458
+0.00279264
+0.00279264
+0.0037702
+0.00279264
+0.00279264
+0.00279264
+0.00279264
+0.00279264
+0.00283529
+0.00279454
+0.00279264
+0.00279264
+0.00266292
+0.00266292
+0.00280141
+0.00279264
+0.00480091
+0.00280449
+0.00279264
+0.00279264
+0.00279264
+0.00279445
+0.00280425
+0.00279264
+0.00279264
+0.00279264
+0.00280141
+0.00280141
+0.00294216
+0.00292201
+0.00280572
+0.00279439
+0.00280056
+0.0028011
+0.00281592
+0.00373579
+0.00280494
+0.00279439
+0.00280056
+
+
+Scaling and Merging mc.wprime.wz.m1300
+myhadd(mc.wprime.wz.m1300,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1300.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1300.pu.plot.root
+wwXSec initialized for run #: 115646, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1300~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1300.pu.plot.root
+wwXSec initialized for run #: 115629, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1300~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1300.pu.plot.root
+wwXSec initialized for run #: 115638, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1300~\rm{GeV})
+0.000641746
+0.000641746
+0.000682452
+0.000639488
+0.000639842
+0.000907937
+0.000639488
+0.000639488
+0.000944096
+0.000639488
+0.000639488
+0.000639488
+0.000639488
+0.000639488
+0.000674003
+0.000641106
+0.000639488
+0.000639488
+0.000641746
+0.000641746
+0.000648135
+0.000639488
+0.00117745
+0.000640888
+0.000639488
+0.000639488
+0.000639488
+0.000641908
+0.000642726
+0.000639488
+0.000639488
+0.000639488
+0.000648135
+0.000648135
+0.000765768
+0.000755108
+0.000640979
+0.000639488
+0.000639604
+0.000643041
+0.000662906
+0.000993096
+0.00064499
+0.000639488
+0.000639604
+0.000702191
+0.000671614
+0.000672479
+0.000932625
+0.000671614
+0.000671614
+0.000955857
+0.000671614
+0.000671614
+0.000671614
+0.000671614
+0.000671614
+0.000700263
+0.000671614
+0.000671614
+0.000671614
+0.000641746
+0.000641746
+0.000677829
+0.000671614
+0.00116414
+0.000674793
+0.000671614
+0.000671614
+0.000671614
+0.000676228
+0.000676863
+0.000671614
+0.000671614
+0.000671614
+0.000677829
+0.000677829
+0.000761687
+0.000751552
+0.000674906
+0.000672105
+0.000670809
+0.000674527
+0.000690242
+0.000977992
+0.000678749
+0.000672105
+0.000670809
+
+
+Scaling and Merging mc.wprime.wz.m1400
+myhadd(mc.wprime.wz.m1400,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1400.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1400.pu.plot.root
+wwXSec initialized for run #: 115647, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1400~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qqee.m1400.pu.plot.root
+wwXSec initialized for run #: 115630, process: W^{'} \rightarrow WZ \rightarrow ee jj $\\$ (M_{W'}=1400~\rm{GeV})
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.qquu.m1400.pu.plot.root
+wwXSec initialized for run #: 115639, process: W^{'} \rightarrow WZ \rightarrow \mu\mu jj $\\$ (M_{W'}=1400~\rm{GeV})
+7.42236e-05
+7.42236e-05
+8.08326e-05
+7.41535e-05
+7.43344e-05
+9.99641e-05
+7.41535e-05
+7.41535e-05
+0.000115633
+7.41535e-05
+7.42404e-05
+7.41535e-05
+7.41535e-05
+7.41535e-05
+8.38312e-05
+7.41535e-05
+7.42105e-05
+7.41535e-05
+7.42236e-05
+7.42703e-05
+7.61927e-05
+7.41535e-05
+0.000138351
+7.42486e-05
+7.41535e-05
+7.41535e-05
+7.41535e-05
+7.42616e-05
+7.47324e-05
+7.41535e-05
+7.41535e-05
+7.41535e-05
+7.61927e-05
+7.61927e-05
+9.86396e-05
+9.76219e-05
+7.42616e-05
+7.42984e-05
+7.45234e-05
+7.52594e-05
+7.93713e-05
+0.000123062
+7.62715e-05
+7.42984e-05
+7.459e-05
+8.30501e-05
+7.68193e-05
+7.69335e-05
+0.000103409
+7.68193e-05
+7.68193e-05
+0.000114675
+7.68193e-05
+7.6872e-05
+7.68193e-05
+7.68193e-05
+7.68193e-05
+8.40447e-05
+7.68786e-05
+7.68193e-05
+7.68193e-05
+7.42236e-05
+7.42236e-05
+7.83405e-05
+7.68193e-05
+0.000137397
+7.73013e-05
+7.68193e-05
+7.68193e-05
+7.68193e-05
+7.65265e-05
+7.82497e-05
+7.68193e-05
+7.68193e-05
+7.68193e-05
+7.83405e-05
+7.83405e-05
+9.81458e-05
+9.66162e-05
+7.72719e-05
+7.69286e-05
+7.67781e-05
+7.76105e-05
+8.10004e-05
+0.000120244
+7.79944e-05
+7.69286e-05
+7.68536e-05
+
+
+Scaling and Merging mc.wprime.wz.m1500
+myhadd(mc.wprime.wz.m1500,gww)
+
+MERGING: gww
+
+Opening ../plots/gww_plots/merged/mc.wprime.wz.m1500.plot.root
+wwFileInfo adding ../plots/gww_plots/mc.wprime.wz.lvqq.m1500.pu.plot.root
+wwXSec initialized for run #: 105710, process: W^{'} \rightarrow WZ \rightarrow \ell\nu jj $\\$ (M_{W'}=1500~\rm{GeV})
+3.05793e-06
+3.05793e-06
+3.06223e-06
+3.05786e-06
+3.05788e-06
+3.06722e-06
+3.05786e-06
+3.05786e-06
+3.07626e-06
+3.05786e-06
+3.05788e-06
+3.05786e-06
+3.05786e-06
+3.05786e-06
+3.0658e-06
+3.05786e-06
+3.05786e-06
+3.05786e-06
+3.05793e-06
+3.05793e-06
+3.05935e-06
+3.05786e-06
+3.08403e-06
+3.05794e-06
+3.05786e-06
+3.05786e-06
+3.05786e-06
+3.05787e-06
+3.05796e-06
+3.05786e-06
+3.05786e-06
+3.05786e-06
+3.05935e-06
+3.05935e-06
+3.07289e-06
+3.07244e-06
+3.05794e-06
+3.05796e-06
+3.05813e-06
+3.05903e-06
+3.06245e-06
+3.08049e-06
+3.05935e-06
+3.05796e-06
+3.05813e-06
+3.06311e-06
+3.05925e-06
+3.05927e-06
+3.06897e-06
+3.05925e-06
+3.05925e-06
+3.07696e-06
+3.05925e-06
+3.05928e-06
+3.05925e-06
+3.05925e-06
+3.05925e-06
+3.06627e-06
+3.05925e-06
+3.05925e-06
+3.05925e-06
+3.05793e-06
+3.05793e-06
+3.06058e-06
+3.05925e-06
+3.0842e-06
+3.05957e-06
+3.05925e-06
+3.05925e-06
+3.05925e-06
+3.05925e-06
+3.05977e-06
+3.05925e-06
+3.05925e-06
+3.05925e-06
+3.06058e-06
+3.06058e-06
+3.07199e-06
+3.07141e-06
+3.05957e-06
+3.05944e-06
+3.05934e-06
+3.06014e-06
+3.06275e-06
+3.07936e-06
+3.06055e-06
+3.05944e-06
+3.05941e-06
+Merged output written to ../plots/gww_plots/merged

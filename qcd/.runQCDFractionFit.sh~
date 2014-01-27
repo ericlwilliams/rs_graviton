@@ -1,0 +1,10 @@
+#!/bin/zsh -
+
+#echo "Subtracting W+jets contamination"
+#root subtractWjetsContamination.C
+
+## replaces qcd plot file in /plots/gww_plots/merged with merged file with wjets contamination removed
+##  --> this is the file that doQCDFractionFit runs over
+#hadd -f ../plots/gww_plots/merged/qcd.alpgen.plot.root ../plots/gww_plots/qcd.elec.alpgen.pu.plot.root ../plots/gww_plots/qcd.muon.alpgen.pu.plot.root
+
+r doQCDFractionFit.C

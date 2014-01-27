@@ -1,0 +1,5 @@
+#!/bin/zsh -
+
+src getSel.sh
+
+src merge_selection.sh

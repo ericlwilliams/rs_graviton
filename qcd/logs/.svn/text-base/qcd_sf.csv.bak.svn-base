@@ -1,0 +1,30 @@
+alpgen, lep_met_mt
+qcd_elec_sf: 0.338704  #pm 0.0644447 %
+qcd_muon_sf: 0.218749 #pm 0.332427 %
+vjets_elec_sf: 1.09488 #pm 0.00534306 %
+vjets_muon_sf: 1.02936 #pm 0.00545717 %
+alpgen, loose_lep_met_mt
+qcd_elec_sf: 0.765356  #pm 0.00444997 %
+qcd_muon_sf: 2.1342 #pm 0.00694654 %
+vjets_elec_sf: 1.17197 #pm 0.00224395 %
+vjets_muon_sf: 1.01639 #pm 0.00243386 %
+alpgen, loose_met
+qcd_elec_sf: 1.28851  #pm 0.00412873 %
+qcd_muon_sf: 3.18448 #pm 0.00816315 %
+vjets_elec_sf: 0.859527 #pm 0.00379037 %
+vjets_muon_sf: 0.883726 #pm 0.00385851 %
+sherpa, lep_met_mt
+qcd_elec_sf: 0.346201  #pm 0.063702 %
+qcd_muon_sf: 0.500981 #pm 0.126813 %
+vjets_elec_sf: 1.34248 #pm 0.00562514 %
+vjets_muon_sf: 1.24115 #pm 0.00567997 %
+sherpa, loose_lep_met_mt
+qcd_elec_sf: 0.723558  #pm 0.00487643 %
+qcd_muon_sf: 2.11431 #pm 0.00695318 %
+vjets_elec_sf: 1.34864 #pm 0.00246632 %
+vjets_muon_sf: 1.16243 #pm 0.00253985 %
+sherpa, loose_met
+qcd_elec_sf: 1.24538  #pm 0.0041431 %
+qcd_muon_sf: 3.25916 #pm 0.00785017 %
+vjets_elec_sf: 0.995246 #pm 0.00380037 %
+vjets_muon_sf: 0.99323 #pm 0.00384651 %

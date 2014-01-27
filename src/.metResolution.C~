@@ -1,0 +1,108 @@
+#define metResolution_cxx
+#include "metResolution.h"
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <TH2.h>
+#include <TStyle.h>
+#include <TMath.h>
+#include <TVector2.h>
+#include <TLorentzVector.h>
+
+const int nProcs=2;
+string procs[nProcs] = {"el","mu"};
+
+bool isElec=true;
+int procIndex=0;
+
+
+TH1F* h_ht[nProcs];
+TH1F* h_met[nProcs];
+TH1F* h_mex[nProcs];
+TH1F* h_mey[nProcs];
+
+TFile* plotFile;
+
+void metResolution::Begin(TTree * /*tree*/)
+{
+   TString option = GetOption();
+  cout<<"metResoution::Begin: "<<option<<endl;
+
+  string curFile = (string) option;
+  string curPlotFile= curFile+"met.resolution.plot.root";
+
+  curPlotFile="../plots/met_resolution_plots/"+curPlotFile;
+   
+  plotFile = (TFile*) TFile::Open(curPlotFile.c_str(),"RECREATE");
+  plotFile->cd();
+
+   for(int p=0;p<nProcs;p++){
+     string cur_proc=procs[p];
+
+     string cur_name = "h_"+cur_proc;
+
+     string hist_name=cur_name+"_ht";
+     h_ht[p]=new TH1F(hist_name.c_str(),hist_name.c_str(),100,0,1800);
+
+     hist_name=cur_name+"_met";
+     h_met[p]=new TH1F(hist_name.c_str(),hist_name.c_str(),100,0,500);
+
+     hist_name=cur_name+"_mex";
+     h_mex[p]=new TH1F(hist_name.c_str(),hist_name.c_str(),100,-500,500);
+
+     hist_name=cur_name+"_mey";
+     h_mey[p]=new TH1F(hist_name.c_str(),hist_name.c_str(),100,-500,500);
+
+     
+   }
+   
+}
+
+void metResolution::SlaveBegin(TTree * /*tree*/)
+{
+   TString option = GetOption();
+
+}
+
+Bool_t metResolution::Process(Long64_t entry)
+{
+
+  b_ctrl_all->GetEntry(entry);
+  if(!ctrl_all) return kTRUE;
+
+  
+  b_EventPileUpReWeight->GetEntry(entry);
+  
+  b_nGoodElectrons->GetEntry(entry);
+  b_nGoodJets->GetEntry(entry);
+
+  b_ww_met_etx->GetEntry(entry);
+  b_ww_met_ety->GetEntry(entry);
+  b_ww_ht->GetEntry(entry);
+
+
+  isElec = nGoodElectrons;
+  procIndex= !isElec; // = 0-elec, 1-muon
+
+  float ww_met = sqrt((ww_met_etx*ww_met_etx)+(ww_met_ety*ww_met_ety));
+
+  h_ht[procIndex]->Fill(ww_ht);
+  h_met[procIndex]->Fill(ww_met);
+  h_mey[procIndex]->Fill(ww_met_ety);
+  h_mex[procIndex]->Fill(ww_met_etx);
+
+  
+  return kTRUE;
+}
+
+void metResolution::SlaveTerminate()
+{
+
+}
+
+void metResolution::Terminate()
+{
+
+
+  plotFile->Write("",TObject::kOverwrite);
+}

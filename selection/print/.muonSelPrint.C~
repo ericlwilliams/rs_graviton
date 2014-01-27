@@ -1,0 +1,856 @@
+#include <TLine.h>
+
+
+void elecSelPrint(bool drawData=true){
+
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasStyle.C");
+  SetAtlasStyle();
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasUtils.C");
+  gROOT->LoadMacro("../../include/atlasstyle-00-03-04/AtlasLabels.C");
+  
+  gROOT->SetBatch();
+  
+  cout<<endl;
+  cout<<"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"<<endl;
+  cout<<"In selPrint.C"<<endl;
+
+
+  TFile* data_sel_plots =
+    (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.data.selection.root");
+  
+  TFile* mc_alpgen_wjets_sel_plots =
+    (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.alpgen.wjets.selection.root");
+  TFile* mc_alpgen_zjets_sel_plots =
+    (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.alpgen.zjets.selection.root");
+  TFile* mc_alpgen_top_sel_plots =
+    (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.mcatnlo.top.selection.root");
+  TFile* mc_alpgen_vv_sel_plots =
+    (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.herwig.vv.selection.root");
+
+  // TFile* gww_m350_sel_plots =
+  //   (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.gww.lvjj.m350.kmpl0_1.pu.skim.root");
+  // TFile* gww_m1000_sel_plots =
+  //   (TFile*) TFile::Open("../../plots/selection_plots/merged/sel.gww.lvjj.m1000.kmpl0_1.pu.skim.root");
+
+
+  TDirectory* dir_data_elec = (TDirectory*) data_sel_plots->GetDirectory("elec");
+    
+  TDirectory* dir_wjets_elec = (TDirectory*) mc_alpgen_wjets_sel_plots->GetDirectory("elec");
+  TDirectory* dir_zjets_elec = (TDirectory*) mc_alpgen_zjets_sel_plots->GetDirectory("elec");
+  TDirectory* dir_top_elec = (TDirectory*) mc_alpgen_top_sel_plots->GetDirectory("elec");
+  TDirectory* dir_vv_elec = (TDirectory*) mc_alpgen_vv_sel_plots->GetDirectory("elec");
+  // TDirectory* dir_gww_m350_elec = (TDirectory*) gww_m350_sel_plots->GetDirectory("elec");
+  // TDirectory* dir_gww_m1000_elec = (TDirectory*) gww_m1000_sel_plots->GetDirectory("elec");
+
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_etiso30
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_etiso30 = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_etiso30");
+  h_bkgd_elec_nm1_rel_etiso30->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_etiso30"));
+  h_bkgd_elec_nm1_rel_etiso30->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_etiso30"));
+  h_bkgd_elec_nm1_rel_etiso30->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_etiso30"));
+
+  TH1F* h_data_elec_nm1_rel_etiso30 = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_etiso30");
+  int n_data_elec_nm1_rel_etiso30 = h_data_elec_nm1_rel_etiso30->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_etiso30 = new TCanvas("tc_elec_nm1_rel_etiso30","tc_elec_nm1_rel_etiso30",0,0,1920,1200);
+  tc_elec_nm1_rel_etiso30->cd();
+
+  h_data_elec_nm1_rel_etiso30->Scale(1/h_data_elec_nm1_rel_etiso30->Integral());
+  h_data_elec_nm1_rel_etiso30->SetLineColor(kRed);
+  h_data_elec_nm1_rel_etiso30->GetXaxis()->SetTitle("elec_nm1_rel_etiso30");
+  h_data_elec_nm1_rel_etiso30->Draw();
+  h_bkgd_elec_nm1_rel_etiso30->Scale(1/h_bkgd_elec_nm1_rel_etiso30->Integral());
+  h_bkgd_elec_nm1_rel_etiso30->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_etiso30 = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_etiso30->SetFillColor(0);
+  lgnd_elec_nm1_rel_etiso30->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_etiso30->AddEntry(h_data_elec_nm1_rel_etiso30,"Data","L");
+  lgnd_elec_nm1_rel_etiso30->AddEntry(h_bkgd_elec_nm1_rel_etiso30,"Backgrounds","L");
+  lgnd_elec_nm1_rel_etiso30->Draw();
+  
+  tc_elec_nm1_rel_etiso30->Update();
+  
+  TLine *elec_nm1_rel_etiso30_cut = new TLine(0.14,tc_elec_nm1_rel_etiso30->GetUymin(),0.14,tc_elec_nm1_rel_etiso30->GetUymax());
+  elec_nm1_rel_etiso30_cut->SetLineColor(kBlue);
+  elec_nm1_rel_etiso30_cut->Draw();
+
+  tc_elec_nm1_rel_etiso30->SetLogy();
+  tc_elec_nm1_rel_etiso30->SaveAs("../canvases/latest/h_elec_nm1_rel_etiso30.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_etiso30
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_etiso30 = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_etiso30");
+  h_bkgd_elec_sel_rel_etiso30->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_etiso30"));
+  h_bkgd_elec_sel_rel_etiso30->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_etiso30"));
+  h_bkgd_elec_sel_rel_etiso30->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_etiso30"));
+
+  TH1F* h_data_elec_sel_rel_etiso30 = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_etiso30");
+  int n_data_elec_sel_rel_etiso30 = h_data_elec_sel_rel_etiso30->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_etiso30 = new TCanvas("tc_elec_sel_rel_etiso30","tc_elec_sel_rel_etiso30",0,0,1920,1200);
+  tc_elec_sel_rel_etiso30->cd();
+
+  h_data_elec_sel_rel_etiso30->Scale(1/h_data_elec_sel_rel_etiso30->Integral());
+  h_data_elec_sel_rel_etiso30->SetLineColor(kRed);
+  h_data_elec_sel_rel_etiso30->GetXaxis()->SetTitle("elec_sel_rel_etiso30");
+  h_data_elec_sel_rel_etiso30->Draw();
+
+  h_bkgd_elec_sel_rel_etiso30->Scale(1/h_bkgd_elec_sel_rel_etiso30->Integral());
+  h_bkgd_elec_sel_rel_etiso30->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_etiso30 = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_etiso30->SetFillColor(0);
+  lgnd_elec_sel_rel_etiso30->SetTextSize(0.03);
+  lgnd_elec_sel_rel_etiso30->AddEntry(h_data_elec_sel_rel_etiso30,"Data","L");
+  lgnd_elec_sel_rel_etiso30->AddEntry(h_bkgd_elec_sel_rel_etiso30,"Backgrounds","L");
+  lgnd_elec_sel_rel_etiso30->Draw();
+  
+  tc_elec_sel_rel_etiso30->Update();
+  
+  tc_elec_sel_rel_etiso30->SetLogy();
+  tc_elec_sel_rel_etiso30->SaveAs("../canvases/latest/h_elec_sel_rel_etiso30.png");
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_ptiso30
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_ptiso30 = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_ptiso30");
+  h_bkgd_elec_nm1_rel_ptiso30->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_ptiso30"));
+  h_bkgd_elec_nm1_rel_ptiso30->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_ptiso30"));
+  h_bkgd_elec_nm1_rel_ptiso30->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_ptiso30"));
+
+  TH1F* h_data_elec_nm1_rel_ptiso30 = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_ptiso30");
+  int n_data_elec_nm1_rel_ptiso30 = h_data_elec_nm1_rel_ptiso30->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_ptiso30 = new TCanvas("tc_elec_nm1_rel_ptiso30","tc_elec_nm1_rel_ptiso30",0,0,1920,1200);
+  tc_elec_nm1_rel_ptiso30->cd();
+
+  h_data_elec_nm1_rel_ptiso30->Scale(1/h_data_elec_nm1_rel_ptiso30->Integral());
+  h_data_elec_nm1_rel_ptiso30->SetLineColor(kRed);
+  h_data_elec_nm1_rel_ptiso30->GetXaxis()->SetTitle("elec_nm1_rel_ptiso30");
+  h_data_elec_nm1_rel_ptiso30->Draw();
+
+  h_bkgd_elec_nm1_rel_ptiso30->Scale(1/h_bkgd_elec_nm1_rel_ptiso30->Integral());
+  h_bkgd_elec_nm1_rel_ptiso30->Draw("sames");
+
+
+  TLegend* lgnd_elec_nm1_rel_ptiso30 = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_ptiso30->SetFillColor(0);
+  lgnd_elec_nm1_rel_ptiso30->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_ptiso30->AddEntry(h_data_elec_nm1_rel_ptiso30,"Data","L");
+  lgnd_elec_nm1_rel_ptiso30->AddEntry(h_bkgd_elec_nm1_rel_ptiso30,"Backgrounds","L");
+  lgnd_elec_nm1_rel_ptiso30->Draw();
+  
+  tc_elec_nm1_rel_ptiso30->Update();
+  
+  //  cout<<h_data_elec_nm1_rel_ptiso30->GetYaxis()->GetXmax()<<endl;
+  TLine *elec_nm1_rel_ptiso30_cut = new TLine(0.13,tc_elec_nm1_rel_ptiso30->GetUymin(),0.13,tc_elec_nm1_rel_ptiso30->GetUymax());
+  elec_nm1_rel_ptiso30_cut->SetLineColor(kBlue);
+  elec_nm1_rel_ptiso30_cut->Draw();
+
+  tc_elec_nm1_rel_ptiso30->SetLogy();
+  tc_elec_nm1_rel_ptiso30->SaveAs("../canvases/latest/h_elec_nm1_rel_ptiso30.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_ptiso30
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_ptiso30 = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_ptiso30");
+  h_bkgd_elec_sel_rel_ptiso30->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_ptiso30"));
+  h_bkgd_elec_sel_rel_ptiso30->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_ptiso30"));
+  h_bkgd_elec_sel_rel_ptiso30->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_ptiso30"));
+
+  TH1F* h_data_elec_sel_rel_ptiso30 = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_ptiso30");
+  int n_data_elec_sel_rel_ptiso30 = h_data_elec_sel_rel_ptiso30->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_ptiso30 = new TCanvas("tc_elec_sel_rel_ptiso30","tc_elec_sel_rel_ptiso30",0,0,1920,1200);
+  tc_elec_sel_rel_ptiso30->cd();
+
+  h_data_elec_sel_rel_ptiso30->Scale(1/h_data_elec_sel_rel_ptiso30->Integral());
+  h_data_elec_sel_rel_ptiso30->SetLineColor(kRed);
+  h_data_elec_sel_rel_ptiso30->GetXaxis()->SetTitle("elec_sel_rel_ptiso30");
+  h_data_elec_sel_rel_ptiso30->Draw();
+
+  //h_bkgd_elec_sel_rel_ptiso30->Scale(n_data_elec_sel_rel_ptiso30/h_bkgd_elec_sel_rel_ptiso30->Integral());
+  h_bkgd_elec_sel_rel_ptiso30->Scale(1/h_bkgd_elec_sel_rel_ptiso30->Integral());
+  //h_bkgd_elec_sel_rel_ptiso30->GetYaxis()->SetRangeUser(0.0001,0.9);
+  h_bkgd_elec_sel_rel_ptiso30->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_ptiso30 = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_ptiso30->SetFillColor(0);
+  lgnd_elec_sel_rel_ptiso30->SetTextSize(0.03);
+  lgnd_elec_sel_rel_ptiso30->AddEntry(h_data_elec_sel_rel_ptiso30,"Data","L");
+  lgnd_elec_sel_rel_ptiso30->AddEntry(h_bkgd_elec_sel_rel_ptiso30,"Backgrounds","L");
+  lgnd_elec_sel_rel_ptiso30->Draw();
+  
+  tc_elec_sel_rel_ptiso30->Update();
+  
+  tc_elec_sel_rel_ptiso30->SetLogy();
+  tc_elec_sel_rel_ptiso30->SaveAs("../canvases/latest/h_elec_sel_rel_ptiso30.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_etiso30_0bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_etiso30_0bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_etiso30_0bin");
+  h_bkgd_elec_sel_rel_etiso30_0bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_etiso30_0bin"));
+  h_bkgd_elec_sel_rel_etiso30_0bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_etiso30_0bin"));
+  h_bkgd_elec_sel_rel_etiso30_0bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_etiso30_0bin"));
+
+  TH1F* h_data_elec_sel_rel_etiso30_0bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_etiso30_0bin");
+  int n_data_elec_sel_rel_etiso30_0bin = h_data_elec_sel_rel_etiso30_0bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_etiso30_0bin = new TCanvas("tc_elec_sel_rel_etiso30_0bin","tc_elec_sel_rel_etiso30_0bin",0,0,1920,1200);
+  tc_elec_sel_rel_etiso30_0bin->cd();
+
+  h_data_elec_sel_rel_etiso30_0bin->Scale(1/h_data_elec_sel_rel_etiso30_0bin->Integral());
+  h_data_elec_sel_rel_etiso30_0bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_etiso30_0bin->GetXaxis()->SetTitle("elec_sel_rel_etiso30_0bin");
+  h_data_elec_sel_rel_etiso30_0bin->Draw();
+  h_bkgd_elec_sel_rel_etiso30_0bin->Scale(1/h_bkgd_elec_sel_rel_etiso30_0bin->Integral());
+  h_bkgd_elec_sel_rel_etiso30_0bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_etiso30_0bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_etiso30_0bin->SetFillColor(0);
+  lgnd_elec_sel_rel_etiso30_0bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_etiso30_0bin->AddEntry(h_data_elec_sel_rel_etiso30_0bin,"Data","L");
+  lgnd_elec_sel_rel_etiso30_0bin->AddEntry(h_bkgd_elec_sel_rel_etiso30_0bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_etiso30_0bin->Draw();
+  
+  tc_elec_sel_rel_etiso30_0bin->Update();
+  
+  TLine *elec_sel_rel_etiso30_0bin_cut = new TLine(0.14,tc_elec_sel_rel_etiso30_0bin->GetUymin(),0.14,tc_elec_sel_rel_etiso30_0bin->GetUymax());
+  elec_sel_rel_etiso30_0bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_etiso30_0bin_cut->Draw();
+
+  tc_elec_sel_rel_etiso30_0bin->SetLogy();
+  tc_elec_sel_rel_etiso30_0bin->SaveAs("../canvases/latest/h_elec_sel_rel_etiso30_0bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_etiso30_1bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_etiso30_1bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_etiso30_1bin");
+  h_bkgd_elec_sel_rel_etiso30_1bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_etiso30_1bin"));
+  h_bkgd_elec_sel_rel_etiso30_1bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_etiso30_1bin"));
+  h_bkgd_elec_sel_rel_etiso30_1bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_etiso30_1bin"));
+
+  TH1F* h_data_elec_sel_rel_etiso30_1bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_etiso30_1bin");
+  int n_data_elec_sel_rel_etiso30_1bin = h_data_elec_sel_rel_etiso30_1bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_etiso30_1bin = new TCanvas("tc_elec_sel_rel_etiso30_1bin","tc_elec_sel_rel_etiso30_1bin",0,0,1920,1200);
+  tc_elec_sel_rel_etiso30_1bin->cd();
+
+  h_data_elec_sel_rel_etiso30_1bin->Scale(1/h_data_elec_sel_rel_etiso30_1bin->Integral());
+  h_data_elec_sel_rel_etiso30_1bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_etiso30_1bin->GetXaxis()->SetTitle("elec_sel_rel_etiso30_1bin");
+  h_data_elec_sel_rel_etiso30_1bin->Draw();
+  h_bkgd_elec_sel_rel_etiso30_1bin->Scale(1/h_bkgd_elec_sel_rel_etiso30_1bin->Integral());
+  h_bkgd_elec_sel_rel_etiso30_1bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_etiso30_1bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_etiso30_1bin->SetFillColor(0);
+  lgnd_elec_sel_rel_etiso30_1bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_etiso30_1bin->AddEntry(h_data_elec_sel_rel_etiso30_1bin,"Data","L");
+  lgnd_elec_sel_rel_etiso30_1bin->AddEntry(h_bkgd_elec_sel_rel_etiso30_1bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_etiso30_1bin->Draw();
+  
+  tc_elec_sel_rel_etiso30_1bin->Update();
+  
+  TLine *elec_sel_rel_etiso30_1bin_cut = new TLine(0.14,tc_elec_sel_rel_etiso30_1bin->GetUymin(),0.14,tc_elec_sel_rel_etiso30_1bin->GetUymax());
+  elec_sel_rel_etiso30_1bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_etiso30_1bin_cut->Draw();
+
+  tc_elec_sel_rel_etiso30_1bin->SetLogy();
+  tc_elec_sel_rel_etiso30_1bin->SaveAs("../canvases/latest/h_elec_sel_rel_etiso30_1bin.png");
+
+//////////////////////////////////////////////////
+  // elec_sel_rel_etiso30_2bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_etiso30_2bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_etiso30_2bin");
+  h_bkgd_elec_sel_rel_etiso30_2bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_etiso30_2bin"));
+  h_bkgd_elec_sel_rel_etiso30_2bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_etiso30_2bin"));
+  h_bkgd_elec_sel_rel_etiso30_2bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_etiso30_2bin"));
+
+  TH1F* h_data_elec_sel_rel_etiso30_2bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_etiso30_2bin");
+  int n_data_elec_sel_rel_etiso30_2bin = h_data_elec_sel_rel_etiso30_2bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_etiso30_2bin = new TCanvas("tc_elec_sel_rel_etiso30_2bin","tc_elec_sel_rel_etiso30_2bin",0,0,1920,1200);
+  tc_elec_sel_rel_etiso30_2bin->cd();
+
+  h_data_elec_sel_rel_etiso30_2bin->Scale(1/h_data_elec_sel_rel_etiso30_2bin->Integral());
+  h_data_elec_sel_rel_etiso30_2bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_etiso30_2bin->GetXaxis()->SetTitle("elec_sel_rel_etiso30_2bin");
+  h_data_elec_sel_rel_etiso30_2bin->Draw();
+  h_bkgd_elec_sel_rel_etiso30_2bin->Scale(1/h_bkgd_elec_sel_rel_etiso30_2bin->Integral());
+  h_bkgd_elec_sel_rel_etiso30_2bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_etiso30_2bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_etiso30_2bin->SetFillColor(0);
+  lgnd_elec_sel_rel_etiso30_2bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_etiso30_2bin->AddEntry(h_data_elec_sel_rel_etiso30_2bin,"Data","L");
+  lgnd_elec_sel_rel_etiso30_2bin->AddEntry(h_bkgd_elec_sel_rel_etiso30_2bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_etiso30_2bin->Draw();
+  
+  tc_elec_sel_rel_etiso30_2bin->Update();
+  
+  TLine *elec_sel_rel_etiso30_2bin_cut = new TLine(0.14,tc_elec_sel_rel_etiso30_2bin->GetUymin(),0.14,tc_elec_sel_rel_etiso30_2bin->GetUymax());
+  elec_sel_rel_etiso30_2bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_etiso30_2bin_cut->Draw();
+
+  tc_elec_sel_rel_etiso30_2bin->SetLogy();
+  tc_elec_sel_rel_etiso30_2bin->SaveAs("../canvases/latest/h_elec_sel_rel_etiso30_2bin.png");
+
+//////////////////////////////////////////////////
+  // elec_sel_rel_etiso30_3bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_etiso30_3bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_etiso30_3bin");
+  h_bkgd_elec_sel_rel_etiso30_3bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_etiso30_3bin"));
+  h_bkgd_elec_sel_rel_etiso30_3bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_etiso30_3bin"));
+  h_bkgd_elec_sel_rel_etiso30_3bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_etiso30_3bin"));
+
+  TH1F* h_data_elec_sel_rel_etiso30_3bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_etiso30_3bin");
+  int n_data_elec_sel_rel_etiso30_3bin = h_data_elec_sel_rel_etiso30_3bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_etiso30_3bin = new TCanvas("tc_elec_sel_rel_etiso30_3bin","tc_elec_sel_rel_etiso30_3bin",0,0,1920,1200);
+  tc_elec_sel_rel_etiso30_3bin->cd();
+
+  h_data_elec_sel_rel_etiso30_3bin->Scale(1/h_data_elec_sel_rel_etiso30_3bin->Integral());
+  h_data_elec_sel_rel_etiso30_3bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_etiso30_3bin->GetXaxis()->SetTitle("elec_sel_rel_etiso30_3bin");
+  h_data_elec_sel_rel_etiso30_3bin->Draw();
+  h_bkgd_elec_sel_rel_etiso30_3bin->Scale(1/h_bkgd_elec_sel_rel_etiso30_3bin->Integral());
+  h_bkgd_elec_sel_rel_etiso30_3bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_etiso30_3bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_etiso30_3bin->SetFillColor(0);
+  lgnd_elec_sel_rel_etiso30_3bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_etiso30_3bin->AddEntry(h_data_elec_sel_rel_etiso30_3bin,"Data","L");
+  lgnd_elec_sel_rel_etiso30_3bin->AddEntry(h_bkgd_elec_sel_rel_etiso30_3bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_etiso30_3bin->Draw();
+  
+  tc_elec_sel_rel_etiso30_3bin->Update();
+  
+  TLine *elec_sel_rel_etiso30_3bin_cut = new TLine(0.14,tc_elec_sel_rel_etiso30_3bin->GetUymin(),0.14,tc_elec_sel_rel_etiso30_3bin->GetUymax());
+  elec_sel_rel_etiso30_3bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_etiso30_3bin_cut->Draw();
+
+  tc_elec_sel_rel_etiso30_3bin->SetLogy();
+  tc_elec_sel_rel_etiso30_3bin->SaveAs("../canvases/latest/h_elec_sel_rel_etiso30_3bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_etiso30_0bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_etiso30_0bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_etiso30_0bin");
+  h_bkgd_elec_nm1_rel_etiso30_0bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_etiso30_0bin"));
+  h_bkgd_elec_nm1_rel_etiso30_0bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_etiso30_0bin"));
+  h_bkgd_elec_nm1_rel_etiso30_0bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_etiso30_0bin"));
+
+  TH1F* h_data_elec_nm1_rel_etiso30_0bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_etiso30_0bin");
+  int n_data_elec_nm1_rel_etiso30_0bin = h_data_elec_nm1_rel_etiso30_0bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_etiso30_0bin = new TCanvas("tc_elec_nm1_rel_etiso30_0bin","tc_elec_nm1_rel_etiso30_0bin",0,0,1920,1200);
+  tc_elec_nm1_rel_etiso30_0bin->cd();
+
+  h_data_elec_nm1_rel_etiso30_0bin->Scale(1/h_data_elec_nm1_rel_etiso30_0bin->Integral());
+  h_data_elec_nm1_rel_etiso30_0bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_etiso30_0bin->GetXaxis()->SetTitle("elec_nm1_rel_etiso30_0bin");
+  h_data_elec_nm1_rel_etiso30_0bin->Draw();
+  h_bkgd_elec_nm1_rel_etiso30_0bin->Scale(1/h_bkgd_elec_nm1_rel_etiso30_0bin->Integral());
+  h_bkgd_elec_nm1_rel_etiso30_0bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_etiso30_0bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_etiso30_0bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_etiso30_0bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_etiso30_0bin->AddEntry(h_data_elec_nm1_rel_etiso30_0bin,"Data","L");
+  lgnd_elec_nm1_rel_etiso30_0bin->AddEntry(h_bkgd_elec_nm1_rel_etiso30_0bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_etiso30_0bin->Draw();
+  
+  tc_elec_nm1_rel_etiso30_0bin->Update();
+  
+  TLine *elec_nm1_rel_etiso30_0bin_cut = new TLine(0.14,tc_elec_nm1_rel_etiso30_0bin->GetUymin(),0.14,tc_elec_nm1_rel_etiso30_0bin->GetUymax());
+  elec_nm1_rel_etiso30_0bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_etiso30_0bin_cut->Draw();
+
+  tc_elec_nm1_rel_etiso30_0bin->SetLogy();
+  tc_elec_nm1_rel_etiso30_0bin->SaveAs("../canvases/latest/h_elec_nm1_rel_etiso30_0bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_etiso30_1bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_etiso30_1bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_etiso30_1bin");
+  h_bkgd_elec_nm1_rel_etiso30_1bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_etiso30_1bin"));
+  h_bkgd_elec_nm1_rel_etiso30_1bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_etiso30_1bin"));
+  h_bkgd_elec_nm1_rel_etiso30_1bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_etiso30_1bin"));
+
+  TH1F* h_data_elec_nm1_rel_etiso30_1bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_etiso30_1bin");
+  int n_data_elec_nm1_rel_etiso30_1bin = h_data_elec_nm1_rel_etiso30_1bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_etiso30_1bin = new TCanvas("tc_elec_nm1_rel_etiso30_1bin","tc_elec_nm1_rel_etiso30_1bin",0,0,1920,1200);
+  tc_elec_nm1_rel_etiso30_1bin->cd();
+
+  h_data_elec_nm1_rel_etiso30_1bin->Scale(1/h_data_elec_nm1_rel_etiso30_1bin->Integral());
+  h_data_elec_nm1_rel_etiso30_1bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_etiso30_1bin->GetXaxis()->SetTitle("elec_nm1_rel_etiso30_1bin");
+  h_data_elec_nm1_rel_etiso30_1bin->Draw();
+  h_bkgd_elec_nm1_rel_etiso30_1bin->Scale(1/h_bkgd_elec_nm1_rel_etiso30_1bin->Integral());
+  h_bkgd_elec_nm1_rel_etiso30_1bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_etiso30_1bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_etiso30_1bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_etiso30_1bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_etiso30_1bin->AddEntry(h_data_elec_nm1_rel_etiso30_1bin,"Data","L");
+  lgnd_elec_nm1_rel_etiso30_1bin->AddEntry(h_bkgd_elec_nm1_rel_etiso30_1bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_etiso30_1bin->Draw();
+  
+  tc_elec_nm1_rel_etiso30_1bin->Update();
+  
+  TLine *elec_nm1_rel_etiso30_1bin_cut = new TLine(0.14,tc_elec_nm1_rel_etiso30_1bin->GetUymin(),0.14,tc_elec_nm1_rel_etiso30_1bin->GetUymax());
+  elec_nm1_rel_etiso30_1bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_etiso30_1bin_cut->Draw();
+
+  tc_elec_nm1_rel_etiso30_1bin->SetLogy();
+  tc_elec_nm1_rel_etiso30_1bin->SaveAs("../canvases/latest/h_elec_nm1_rel_etiso30_1bin.png");
+
+//////////////////////////////////////////////////
+  // elec_nm1_rel_etiso30_2bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_etiso30_2bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_etiso30_2bin");
+  h_bkgd_elec_nm1_rel_etiso30_2bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_etiso30_2bin"));
+  h_bkgd_elec_nm1_rel_etiso30_2bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_etiso30_2bin"));
+  h_bkgd_elec_nm1_rel_etiso30_2bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_etiso30_2bin"));
+
+  TH1F* h_data_elec_nm1_rel_etiso30_2bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_etiso30_2bin");
+  int n_data_elec_nm1_rel_etiso30_2bin = h_data_elec_nm1_rel_etiso30_2bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_etiso30_2bin = new TCanvas("tc_elec_nm1_rel_etiso30_2bin","tc_elec_nm1_rel_etiso30_2bin",0,0,1920,1200);
+  tc_elec_nm1_rel_etiso30_2bin->cd();
+
+  h_data_elec_nm1_rel_etiso30_2bin->Scale(1/h_data_elec_nm1_rel_etiso30_2bin->Integral());
+  h_data_elec_nm1_rel_etiso30_2bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_etiso30_2bin->GetXaxis()->SetTitle("elec_nm1_rel_etiso30_2bin");
+  h_data_elec_nm1_rel_etiso30_2bin->Draw();
+  h_bkgd_elec_nm1_rel_etiso30_2bin->Scale(1/h_bkgd_elec_nm1_rel_etiso30_2bin->Integral());
+  h_bkgd_elec_nm1_rel_etiso30_2bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_etiso30_2bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_etiso30_2bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_etiso30_2bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_etiso30_2bin->AddEntry(h_data_elec_nm1_rel_etiso30_2bin,"Data","L");
+  lgnd_elec_nm1_rel_etiso30_2bin->AddEntry(h_bkgd_elec_nm1_rel_etiso30_2bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_etiso30_2bin->Draw();
+  
+  tc_elec_nm1_rel_etiso30_2bin->Update();
+  
+  TLine *elec_nm1_rel_etiso30_2bin_cut = new TLine(0.14,tc_elec_nm1_rel_etiso30_2bin->GetUymin(),0.14,tc_elec_nm1_rel_etiso30_2bin->GetUymax());
+  elec_nm1_rel_etiso30_2bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_etiso30_2bin_cut->Draw();
+
+  tc_elec_nm1_rel_etiso30_2bin->SetLogy();
+  tc_elec_nm1_rel_etiso30_2bin->SaveAs("../canvases/latest/h_elec_nm1_rel_etiso30_2bin.png");
+
+//////////////////////////////////////////////////
+  // elec_nm1_rel_etiso30_3bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_etiso30_3bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_etiso30_3bin");
+  h_bkgd_elec_nm1_rel_etiso30_3bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_etiso30_3bin"));
+  h_bkgd_elec_nm1_rel_etiso30_3bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_etiso30_3bin"));
+  h_bkgd_elec_nm1_rel_etiso30_3bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_etiso30_3bin"));
+
+  TH1F* h_data_elec_nm1_rel_etiso30_3bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_etiso30_3bin");
+  int n_data_elec_nm1_rel_etiso30_3bin = h_data_elec_nm1_rel_etiso30_3bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_etiso30_3bin = new TCanvas("tc_elec_nm1_rel_etiso30_3bin","tc_elec_nm1_rel_etiso30_3bin",0,0,1920,1200);
+  tc_elec_nm1_rel_etiso30_3bin->cd();
+
+  h_data_elec_nm1_rel_etiso30_3bin->Scale(1/h_data_elec_nm1_rel_etiso30_3bin->Integral());
+  h_data_elec_nm1_rel_etiso30_3bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_etiso30_3bin->GetXaxis()->SetTitle("elec_nm1_rel_etiso30_3bin");
+  h_data_elec_nm1_rel_etiso30_3bin->Draw();
+  h_bkgd_elec_nm1_rel_etiso30_3bin->Scale(1/h_bkgd_elec_nm1_rel_etiso30_3bin->Integral());
+  h_bkgd_elec_nm1_rel_etiso30_3bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_etiso30_3bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_etiso30_3bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_etiso30_3bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_etiso30_3bin->AddEntry(h_data_elec_nm1_rel_etiso30_3bin,"Data","L");
+  lgnd_elec_nm1_rel_etiso30_3bin->AddEntry(h_bkgd_elec_nm1_rel_etiso30_3bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_etiso30_3bin->Draw();
+  
+  tc_elec_nm1_rel_etiso30_3bin->Update();
+  
+  TLine *elec_nm1_rel_etiso30_3bin_cut = new TLine(0.14,tc_elec_nm1_rel_etiso30_3bin->GetUymin(),0.14,tc_elec_nm1_rel_etiso30_3bin->GetUymax());
+  elec_nm1_rel_etiso30_3bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_etiso30_3bin_cut->Draw();
+
+  tc_elec_nm1_rel_etiso30_3bin->SetLogy();
+  tc_elec_nm1_rel_etiso30_3bin->SaveAs("../canvases/latest/h_elec_nm1_rel_etiso30_3bin.png");
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_ptiso30_0bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_ptiso30_0bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_ptiso30_0bin");
+  h_bkgd_elec_sel_rel_ptiso30_0bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_ptiso30_0bin"));
+  h_bkgd_elec_sel_rel_ptiso30_0bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_ptiso30_0bin"));
+  h_bkgd_elec_sel_rel_ptiso30_0bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_ptiso30_0bin"));
+
+  TH1F* h_data_elec_sel_rel_ptiso30_0bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_ptiso30_0bin");
+  int n_data_elec_sel_rel_ptiso30_0bin = h_data_elec_sel_rel_ptiso30_0bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_ptiso30_0bin = new TCanvas("tc_elec_sel_rel_ptiso30_0bin","tc_elec_sel_rel_ptiso30_0bin",0,0,1920,1200);
+  tc_elec_sel_rel_ptiso30_0bin->cd();
+
+  h_data_elec_sel_rel_ptiso30_0bin->Scale(1/h_data_elec_sel_rel_ptiso30_0bin->Integral());
+  h_data_elec_sel_rel_ptiso30_0bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_ptiso30_0bin->GetXaxis()->SetTitle("elec_sel_rel_ptiso30_0bin");
+  h_data_elec_sel_rel_ptiso30_0bin->Draw();
+  h_bkgd_elec_sel_rel_ptiso30_0bin->Scale(1/h_bkgd_elec_sel_rel_ptiso30_0bin->Integral());
+  h_bkgd_elec_sel_rel_ptiso30_0bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_ptiso30_0bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_ptiso30_0bin->SetFillColor(0);
+  lgnd_elec_sel_rel_ptiso30_0bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_ptiso30_0bin->AddEntry(h_data_elec_sel_rel_ptiso30_0bin,"Data","L");
+  lgnd_elec_sel_rel_ptiso30_0bin->AddEntry(h_bkgd_elec_sel_rel_ptiso30_0bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_ptiso30_0bin->Draw();
+  
+  tc_elec_sel_rel_ptiso30_0bin->Update();
+  
+  TLine *elec_sel_rel_ptiso30_0bin_cut = new TLine(0.14,tc_elec_sel_rel_ptiso30_0bin->GetUymin(),0.14,tc_elec_sel_rel_ptiso30_0bin->GetUymax());
+  elec_sel_rel_ptiso30_0bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_ptiso30_0bin_cut->Draw();
+
+  tc_elec_sel_rel_ptiso30_0bin->SetLogy();
+  tc_elec_sel_rel_ptiso30_0bin->SaveAs("../canvases/latest/h_elec_sel_rel_ptiso30_0bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_sel_rel_ptiso30_1bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_ptiso30_1bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_ptiso30_1bin");
+  h_bkgd_elec_sel_rel_ptiso30_1bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_ptiso30_1bin"));
+  h_bkgd_elec_sel_rel_ptiso30_1bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_ptiso30_1bin"));
+  h_bkgd_elec_sel_rel_ptiso30_1bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_ptiso30_1bin"));
+
+  TH1F* h_data_elec_sel_rel_ptiso30_1bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_ptiso30_1bin");
+  int n_data_elec_sel_rel_ptiso30_1bin = h_data_elec_sel_rel_ptiso30_1bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_ptiso30_1bin = new TCanvas("tc_elec_sel_rel_ptiso30_1bin","tc_elec_sel_rel_ptiso30_1bin",0,0,1920,1200);
+  tc_elec_sel_rel_ptiso30_1bin->cd();
+
+  h_data_elec_sel_rel_ptiso30_1bin->Scale(1/h_data_elec_sel_rel_ptiso30_1bin->Integral());
+  h_data_elec_sel_rel_ptiso30_1bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_ptiso30_1bin->GetXaxis()->SetTitle("elec_sel_rel_ptiso30_1bin");
+  h_data_elec_sel_rel_ptiso30_1bin->Draw();
+  h_bkgd_elec_sel_rel_ptiso30_1bin->Scale(1/h_bkgd_elec_sel_rel_ptiso30_1bin->Integral());
+  h_bkgd_elec_sel_rel_ptiso30_1bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_ptiso30_1bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_ptiso30_1bin->SetFillColor(0);
+  lgnd_elec_sel_rel_ptiso30_1bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_ptiso30_1bin->AddEntry(h_data_elec_sel_rel_ptiso30_1bin,"Data","L");
+  lgnd_elec_sel_rel_ptiso30_1bin->AddEntry(h_bkgd_elec_sel_rel_ptiso30_1bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_ptiso30_1bin->Draw();
+  
+  tc_elec_sel_rel_ptiso30_1bin->Update();
+  
+  TLine *elec_sel_rel_ptiso30_1bin_cut = new TLine(0.14,tc_elec_sel_rel_ptiso30_1bin->GetUymin(),0.14,tc_elec_sel_rel_ptiso30_1bin->GetUymax());
+  elec_sel_rel_ptiso30_1bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_ptiso30_1bin_cut->Draw();
+
+  tc_elec_sel_rel_ptiso30_1bin->SetLogy();
+  tc_elec_sel_rel_ptiso30_1bin->SaveAs("../canvases/latest/h_elec_sel_rel_ptiso30_1bin.png");
+
+//////////////////////////////////////////////////
+  // elec_sel_rel_ptiso30_2bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_ptiso30_2bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_ptiso30_2bin");
+  h_bkgd_elec_sel_rel_ptiso30_2bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_ptiso30_2bin"));
+  h_bkgd_elec_sel_rel_ptiso30_2bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_ptiso30_2bin"));
+  h_bkgd_elec_sel_rel_ptiso30_2bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_ptiso30_2bin"));
+
+  TH1F* h_data_elec_sel_rel_ptiso30_2bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_ptiso30_2bin");
+  int n_data_elec_sel_rel_ptiso30_2bin = h_data_elec_sel_rel_ptiso30_2bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_ptiso30_2bin = new TCanvas("tc_elec_sel_rel_ptiso30_2bin","tc_elec_sel_rel_ptiso30_2bin",0,0,1920,1200);
+  tc_elec_sel_rel_ptiso30_2bin->cd();
+
+  h_data_elec_sel_rel_ptiso30_2bin->Scale(1/h_data_elec_sel_rel_ptiso30_2bin->Integral());
+  h_data_elec_sel_rel_ptiso30_2bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_ptiso30_2bin->GetXaxis()->SetTitle("elec_sel_rel_ptiso30_2bin");
+  h_data_elec_sel_rel_ptiso30_2bin->Draw();
+  h_bkgd_elec_sel_rel_ptiso30_2bin->Scale(1/h_bkgd_elec_sel_rel_ptiso30_2bin->Integral());
+  h_bkgd_elec_sel_rel_ptiso30_2bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_ptiso30_2bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_ptiso30_2bin->SetFillColor(0);
+  lgnd_elec_sel_rel_ptiso30_2bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_ptiso30_2bin->AddEntry(h_data_elec_sel_rel_ptiso30_2bin,"Data","L");
+  lgnd_elec_sel_rel_ptiso30_2bin->AddEntry(h_bkgd_elec_sel_rel_ptiso30_2bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_ptiso30_2bin->Draw();
+  
+  tc_elec_sel_rel_ptiso30_2bin->Update();
+  
+  TLine *elec_sel_rel_ptiso30_2bin_cut = new TLine(0.14,tc_elec_sel_rel_ptiso30_2bin->GetUymin(),0.14,tc_elec_sel_rel_ptiso30_2bin->GetUymax());
+  elec_sel_rel_ptiso30_2bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_ptiso30_2bin_cut->Draw();
+
+  tc_elec_sel_rel_ptiso30_2bin->SetLogy();
+  tc_elec_sel_rel_ptiso30_2bin->SaveAs("../canvases/latest/h_elec_sel_rel_ptiso30_2bin.png");
+
+//////////////////////////////////////////////////
+  // elec_sel_rel_ptiso30_3bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_sel_rel_ptiso30_3bin = (TH1F*) dir_wjets_elec->Get("h_elec_sel_rel_ptiso30_3bin");
+  h_bkgd_elec_sel_rel_ptiso30_3bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_sel_rel_ptiso30_3bin"));
+  h_bkgd_elec_sel_rel_ptiso30_3bin->Add((TH1F*) dir_top_elec->Get("h_elec_sel_rel_ptiso30_3bin"));
+  h_bkgd_elec_sel_rel_ptiso30_3bin->Add((TH1F*) dir_vv_elec->Get("h_elec_sel_rel_ptiso30_3bin"));
+
+  TH1F* h_data_elec_sel_rel_ptiso30_3bin = (TH1F*) dir_data_elec->Get("h_elec_sel_rel_ptiso30_3bin");
+  int n_data_elec_sel_rel_ptiso30_3bin = h_data_elec_sel_rel_ptiso30_3bin->GetEntries();
+  
+  TCanvas* tc_elec_sel_rel_ptiso30_3bin = new TCanvas("tc_elec_sel_rel_ptiso30_3bin","tc_elec_sel_rel_ptiso30_3bin",0,0,1920,1200);
+  tc_elec_sel_rel_ptiso30_3bin->cd();
+
+  h_data_elec_sel_rel_ptiso30_3bin->Scale(1/h_data_elec_sel_rel_ptiso30_3bin->Integral());
+  h_data_elec_sel_rel_ptiso30_3bin->SetLineColor(kRed);
+  h_data_elec_sel_rel_ptiso30_3bin->GetXaxis()->SetTitle("elec_sel_rel_ptiso30_3bin");
+  h_data_elec_sel_rel_ptiso30_3bin->Draw();
+  h_bkgd_elec_sel_rel_ptiso30_3bin->Scale(1/h_bkgd_elec_sel_rel_ptiso30_3bin->Integral());
+  h_bkgd_elec_sel_rel_ptiso30_3bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_sel_rel_ptiso30_3bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_sel_rel_ptiso30_3bin->SetFillColor(0);
+  lgnd_elec_sel_rel_ptiso30_3bin->SetTextSize(0.03);
+  lgnd_elec_sel_rel_ptiso30_3bin->AddEntry(h_data_elec_sel_rel_ptiso30_3bin,"Data","L");
+  lgnd_elec_sel_rel_ptiso30_3bin->AddEntry(h_bkgd_elec_sel_rel_ptiso30_3bin,"Backgrounds","L");
+  lgnd_elec_sel_rel_ptiso30_3bin->Draw();
+  
+  tc_elec_sel_rel_ptiso30_3bin->Update();
+  
+  TLine *elec_sel_rel_ptiso30_3bin_cut = new TLine(0.14,tc_elec_sel_rel_ptiso30_3bin->GetUymin(),0.14,tc_elec_sel_rel_ptiso30_3bin->GetUymax());
+  elec_sel_rel_ptiso30_3bin_cut->SetLineColor(kBlue);
+  elec_sel_rel_ptiso30_3bin_cut->Draw();
+
+  tc_elec_sel_rel_ptiso30_3bin->SetLogy();
+  tc_elec_sel_rel_ptiso30_3bin->SaveAs("../canvases/latest/h_elec_sel_rel_ptiso30_3bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_ptiso30_0bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_ptiso30_0bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_ptiso30_0bin");
+  h_bkgd_elec_nm1_rel_ptiso30_0bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_ptiso30_0bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_0bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_ptiso30_0bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_0bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_ptiso30_0bin"));
+
+  TH1F* h_data_elec_nm1_rel_ptiso30_0bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_ptiso30_0bin");
+  int n_data_elec_nm1_rel_ptiso30_0bin = h_data_elec_nm1_rel_ptiso30_0bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_ptiso30_0bin = new TCanvas("tc_elec_nm1_rel_ptiso30_0bin","tc_elec_nm1_rel_ptiso30_0bin",0,0,1920,1200);
+  tc_elec_nm1_rel_ptiso30_0bin->cd();
+
+  h_data_elec_nm1_rel_ptiso30_0bin->Scale(1/h_data_elec_nm1_rel_ptiso30_0bin->Integral());
+  h_data_elec_nm1_rel_ptiso30_0bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_ptiso30_0bin->GetXaxis()->SetTitle("elec_nm1_rel_ptiso30_0bin");
+  h_data_elec_nm1_rel_ptiso30_0bin->Draw();
+  h_bkgd_elec_nm1_rel_ptiso30_0bin->Scale(1/h_bkgd_elec_nm1_rel_ptiso30_0bin->Integral());
+  h_bkgd_elec_nm1_rel_ptiso30_0bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_ptiso30_0bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_ptiso30_0bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_ptiso30_0bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_ptiso30_0bin->AddEntry(h_data_elec_nm1_rel_ptiso30_0bin,"Data","L");
+  lgnd_elec_nm1_rel_ptiso30_0bin->AddEntry(h_bkgd_elec_nm1_rel_ptiso30_0bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_ptiso30_0bin->Draw();
+  
+  tc_elec_nm1_rel_ptiso30_0bin->Update();
+  
+  TLine *elec_nm1_rel_ptiso30_0bin_cut = new TLine(0.14,tc_elec_nm1_rel_ptiso30_0bin->GetUymin(),0.14,tc_elec_nm1_rel_ptiso30_0bin->GetUymax());
+  elec_nm1_rel_ptiso30_0bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_ptiso30_0bin_cut->Draw();
+
+  tc_elec_nm1_rel_ptiso30_0bin->SetLogy();
+  tc_elec_nm1_rel_ptiso30_0bin->SaveAs("../canvases/latest/h_elec_nm1_rel_ptiso30_0bin.png");
+
+
+  //////////////////////////////////////////////////
+  // elec_nm1_rel_ptiso30_1bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_ptiso30_1bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_ptiso30_1bin");
+  h_bkgd_elec_nm1_rel_ptiso30_1bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_ptiso30_1bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_1bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_ptiso30_1bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_1bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_ptiso30_1bin"));
+
+  TH1F* h_data_elec_nm1_rel_ptiso30_1bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_ptiso30_1bin");
+  int n_data_elec_nm1_rel_ptiso30_1bin = h_data_elec_nm1_rel_ptiso30_1bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_ptiso30_1bin = new TCanvas("tc_elec_nm1_rel_ptiso30_1bin","tc_elec_nm1_rel_ptiso30_1bin",0,0,1920,1200);
+  tc_elec_nm1_rel_ptiso30_1bin->cd();
+
+  h_data_elec_nm1_rel_ptiso30_1bin->Scale(1/h_data_elec_nm1_rel_ptiso30_1bin->Integral());
+  h_data_elec_nm1_rel_ptiso30_1bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_ptiso30_1bin->GetXaxis()->SetTitle("elec_nm1_rel_ptiso30_1bin");
+  h_data_elec_nm1_rel_ptiso30_1bin->Draw();
+  h_bkgd_elec_nm1_rel_ptiso30_1bin->Scale(1/h_bkgd_elec_nm1_rel_ptiso30_1bin->Integral());
+  h_bkgd_elec_nm1_rel_ptiso30_1bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_ptiso30_1bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_ptiso30_1bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_ptiso30_1bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_ptiso30_1bin->AddEntry(h_data_elec_nm1_rel_ptiso30_1bin,"Data","L");
+  lgnd_elec_nm1_rel_ptiso30_1bin->AddEntry(h_bkgd_elec_nm1_rel_ptiso30_1bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_ptiso30_1bin->Draw();
+  
+  tc_elec_nm1_rel_ptiso30_1bin->Update();
+  
+  TLine *elec_nm1_rel_ptiso30_1bin_cut = new TLine(0.14,tc_elec_nm1_rel_ptiso30_1bin->GetUymin(),0.14,tc_elec_nm1_rel_ptiso30_1bin->GetUymax());
+  elec_nm1_rel_ptiso30_1bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_ptiso30_1bin_cut->Draw();
+
+  tc_elec_nm1_rel_ptiso30_1bin->SetLogy();
+  tc_elec_nm1_rel_ptiso30_1bin->SaveAs("../canvases/latest/h_elec_nm1_rel_ptiso30_1bin.png");
+
+//////////////////////////////////////////////////
+  // elec_nm1_rel_ptiso30_2bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_ptiso30_2bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_ptiso30_2bin");
+  h_bkgd_elec_nm1_rel_ptiso30_2bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_ptiso30_2bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_2bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_ptiso30_2bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_2bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_ptiso30_2bin"));
+
+  TH1F* h_data_elec_nm1_rel_ptiso30_2bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_ptiso30_2bin");
+  int n_data_elec_nm1_rel_ptiso30_2bin = h_data_elec_nm1_rel_ptiso30_2bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_ptiso30_2bin = new TCanvas("tc_elec_nm1_rel_ptiso30_2bin","tc_elec_nm1_rel_ptiso30_2bin",0,0,1920,1200);
+  tc_elec_nm1_rel_ptiso30_2bin->cd();
+
+  h_data_elec_nm1_rel_ptiso30_2bin->Scale(1/h_data_elec_nm1_rel_ptiso30_2bin->Integral());
+  h_data_elec_nm1_rel_ptiso30_2bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_ptiso30_2bin->GetXaxis()->SetTitle("elec_nm1_rel_ptiso30_2bin");
+  h_data_elec_nm1_rel_ptiso30_2bin->Draw();
+  h_bkgd_elec_nm1_rel_ptiso30_2bin->Scale(1/h_bkgd_elec_nm1_rel_ptiso30_2bin->Integral());
+  h_bkgd_elec_nm1_rel_ptiso30_2bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_ptiso30_2bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_ptiso30_2bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_ptiso30_2bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_ptiso30_2bin->AddEntry(h_data_elec_nm1_rel_ptiso30_2bin,"Data","L");
+  lgnd_elec_nm1_rel_ptiso30_2bin->AddEntry(h_bkgd_elec_nm1_rel_ptiso30_2bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_ptiso30_2bin->Draw();
+  
+  tc_elec_nm1_rel_ptiso30_2bin->Update();
+  
+  TLine *elec_nm1_rel_ptiso30_2bin_cut = new TLine(0.14,tc_elec_nm1_rel_ptiso30_2bin->GetUymin(),0.14,tc_elec_nm1_rel_ptiso30_2bin->GetUymax());
+  elec_nm1_rel_ptiso30_2bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_ptiso30_2bin_cut->Draw();
+
+  tc_elec_nm1_rel_ptiso30_2bin->SetLogy();
+  tc_elec_nm1_rel_ptiso30_2bin->SaveAs("../canvases/latest/h_elec_nm1_rel_ptiso30_2bin.png");
+
+//////////////////////////////////////////////////
+  // elec_nm1_rel_ptiso30_3bin
+  //////////////////////////////////////////////////
+  
+  TH1F* h_bkgd_elec_nm1_rel_ptiso30_3bin = (TH1F*) dir_wjets_elec->Get("h_elec_nm1_rel_ptiso30_3bin");
+  h_bkgd_elec_nm1_rel_ptiso30_3bin->Add((TH1F*) dir_zjets_elec->Get("h_elec_nm1_rel_ptiso30_3bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_3bin->Add((TH1F*) dir_top_elec->Get("h_elec_nm1_rel_ptiso30_3bin"));
+  h_bkgd_elec_nm1_rel_ptiso30_3bin->Add((TH1F*) dir_vv_elec->Get("h_elec_nm1_rel_ptiso30_3bin"));
+
+  TH1F* h_data_elec_nm1_rel_ptiso30_3bin = (TH1F*) dir_data_elec->Get("h_elec_nm1_rel_ptiso30_3bin");
+  int n_data_elec_nm1_rel_ptiso30_3bin = h_data_elec_nm1_rel_ptiso30_3bin->GetEntries();
+  
+  TCanvas* tc_elec_nm1_rel_ptiso30_3bin = new TCanvas("tc_elec_nm1_rel_ptiso30_3bin","tc_elec_nm1_rel_ptiso30_3bin",0,0,1920,1200);
+  tc_elec_nm1_rel_ptiso30_3bin->cd();
+
+  h_data_elec_nm1_rel_ptiso30_3bin->Scale(1/h_data_elec_nm1_rel_ptiso30_3bin->Integral());
+  h_data_elec_nm1_rel_ptiso30_3bin->SetLineColor(kRed);
+  h_data_elec_nm1_rel_ptiso30_3bin->GetXaxis()->SetTitle("elec_nm1_rel_ptiso30_3bin");
+  h_data_elec_nm1_rel_ptiso30_3bin->Draw();
+  h_bkgd_elec_nm1_rel_ptiso30_3bin->Scale(1/h_bkgd_elec_nm1_rel_ptiso30_3bin->Integral());
+  h_bkgd_elec_nm1_rel_ptiso30_3bin->Draw("sames");
+
+
+
+  TLegend* lgnd_elec_nm1_rel_ptiso30_3bin = new TLegend(0.6,0.78,0.8,0.9);
+  lgnd_elec_nm1_rel_ptiso30_3bin->SetFillColor(0);
+  lgnd_elec_nm1_rel_ptiso30_3bin->SetTextSize(0.03);
+  lgnd_elec_nm1_rel_ptiso30_3bin->AddEntry(h_data_elec_nm1_rel_ptiso30_3bin,"Data","L");
+  lgnd_elec_nm1_rel_ptiso30_3bin->AddEntry(h_bkgd_elec_nm1_rel_ptiso30_3bin,"Backgrounds","L");
+  lgnd_elec_nm1_rel_ptiso30_3bin->Draw();
+  
+  tc_elec_nm1_rel_ptiso30_3bin->Update();
+  
+  TLine *elec_nm1_rel_ptiso30_3bin_cut = new TLine(0.14,tc_elec_nm1_rel_ptiso30_3bin->GetUymin(),0.14,tc_elec_nm1_rel_ptiso30_3bin->GetUymax());
+  elec_nm1_rel_ptiso30_3bin_cut->SetLineColor(kBlue);
+  elec_nm1_rel_ptiso30_3bin_cut->Draw();
+
+  tc_elec_nm1_rel_ptiso30_3bin->SetLogy();
+  tc_elec_nm1_rel_ptiso30_3bin->SaveAs("../canvases/latest/h_elec_nm1_rel_ptiso30_3bin.png");
+
+
+  gROOT->ProcessLine(".q");
+  return;
+}
+  

@@ -1,0 +1,10 @@
+alpgen, lep_met_mt
+qcd_elec_sf: 0.0706938  #pm 0.305214 %
+qcd_muon_sf: 0.0793837 #pm 0.479996 %
+vjets_elec_sf: 1.04532 #pm 0.0270525 %
+vjets_muon_sf: 1.05454 #pm 0.0196858 %
+sherpa, lep_met_mt
+qcd_elec_sf: 0.0610374  #pm 0.384846 %
+qcd_muon_sf: 0.118643 #pm 1.40628 %
+vjets_elec_sf: 1.28096 #pm 0.0287482 %
+vjets_muon_sf: 1.26881 #pm 0.0602998 %

@@ -1,0 +1,84 @@
+#include <vector>
+void runQCDFractionFit(){
+
+  const int nVars=1;
+  string vars[nVars]={"lep_met_mt"};//,"loose_lep_met_mt","loose_met"};
+  //string vars[nVars]={"loose_met"};
+
+  const int nGenerators=2;
+  string generators[nGenerators]={"alpgen","sherpa"};
+
+  string exec = ".x qcdFractionFit.C(";
+
+  const int nProcs=2; // elec,muon
+
+  float qcd_sf[nProcs][nGenerators][nVars]={0.};
+  float qcd_err[nProcs][nGenerators][nVars]={0.};
+  float vjets_sf[nProcs][nGenerators][nVars]={0.};
+  float vjets_err[nProcs][nGenerators][nVars]={0.};
+  
+  vector<pair<float,float> >* ret;
+  for(int i=0;i<nGenerators;i++){
+    string cur_generator=generators[i];
+    for(int j=0;j<nVars;j++){
+      string cur_var = vars[j];
+
+      string cur_exec = exec+"\""+cur_generator+"\",\""+cur_var+"\")";
+      cout<<"Scaling using "<<cur_generator<<" and "<<cur_var<<" distribution"<<endl;
+
+      ret = (vector<pair<float,float> >*) gROOT->ProcessLine(cur_exec.c_str());
+      //elec
+      qcd_sf[0][i][j] = ret->at(0).first;
+      qcd_err[0][i][j] = ret->at(0).second;
+      //muon
+      qcd_sf[1][i][j] = ret->at(1).first;
+      qcd_err[1][i][j] = ret->at(1).second;
+
+      //elec
+      vjets_sf[0][i][j] = ret->at(2).first;
+      vjets_err[0][i][j] = ret->at(2).second;
+      //muon
+      vjets_sf[1][i][j] = ret->at(3).first;
+      vjets_err[1][i][j] = ret->at(3).second;
+      
+    }
+  }
+  //////////////////////////////////////////////////
+  // Output File
+  // for each variable, print info
+  //////////////////////////////////////////////////
+  string out_file_name = "./logs/qcd_sf.csv";
+  std::ofstream out_file(out_file_name.c_str());
+  
+  for(int g=0;g<nGenerators;g++){
+      string gen_out_file_name = "./logs/"+generators[g]+"_qcd_sf.csv";
+      std::ofstream gen_out_file(gen_out_file_name.c_str());
+      gen_out_file.precision(3);
+      gen_out_file.setf(ios::fixed,ios::floatfield);
+      gen_out_file<<"qcd_elec,qcd_elec_err,qcd_muon,qcd_muon_err,vjets_elec,vjets_elec_err,vjets_muon,vjets_muon_err"<<endl;
+    for(int v=0;v<nVars;v++){
+
+
+      out_file<<generators[g]<<", "<<vars[v]<<endl;
+      out_file<<"qcd_elec_sf: "<<qcd_sf[0][g][v]<<"  #pm "<<qcd_err[0][g][v]<<" %"<<endl;
+      out_file<<"qcd_muon_sf: "<<qcd_sf[1][g][v]<<" #pm "<<qcd_err[1][g][v]<<" %"<<endl;
+      out_file<<"vjets_elec_sf: "<<vjets_sf[0][g][v]<<" #pm "<<vjets_err[0][g][v]<<" %"<<endl;
+      out_file<<"vjets_muon_sf: "<<vjets_sf[1][g][v]<<" #pm "<<vjets_err[1][g][v]<<" %"<<endl;
+
+      //write absolute uncertainty
+      gen_out_file<<qcd_sf[0][g][v]<<","<<qcd_err[0][g][v]*qcd_sf[0][g][v]<<","
+		  <<qcd_sf[1][g][v]<<","<<qcd_err[1][g][v]*qcd_sf[1][g][v]<<","
+		  <<vjets_sf[0][g][v]<<","<<vjets_err[0][g][v]*vjets_sf[0][g][v]<<","
+		  <<vjets_sf[1][g][v]<<","<<vjets_err[1][g][v]*vjets_sf[1][g][v]<<endl;
+      
+    }
+
+    gen_out_file.close();
+  }
+  cout<<endl;
+  cout<<"See ./logs/qcd_sf.csv and ./logs/{generator}_qcd_sf.csv for scaling values"<<endl;
+  
+  out_file.close();
+  gROOT->ProcessLine(".q");
+  return;
+}

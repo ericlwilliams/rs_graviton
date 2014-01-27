@@ -1,0 +1,9 @@
+#!/bin/zsh -
+
+r runSystematics.C
+
+cp ../plots/systematics_plots/qcd.elec.pu.plot.root ../plots/systematics_plots/qcd.elec.alpgen.pu.plot.root
+cp ../plots/systematics_plots/qcd.muon.pu.plot.root ../plots/systematics_plots/qcd.muon.alpgen.pu.plot.root
+
+'mv' ../plots/systematics_plots/qcd.elec.pu.plot.root ../plots/systematics_plots/qcd.elec.sherpa.pu.plot.root
+'mv' ../plots/systematics_plots/qcd.muon.pu.plot.root ../plots/systematics_plots/qcd.muon.sherpa.pu.plot.root

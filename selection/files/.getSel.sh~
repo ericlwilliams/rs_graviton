@@ -1,0 +1,3 @@
+#!/bin/bash -
+
+rsync -vhtPL karthur.nevis.columbia.edu:~/skims_ln/lnuj/*.sel.* .

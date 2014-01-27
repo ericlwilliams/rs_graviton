@@ -1,0 +1,332 @@
+#include <string.h>
+#include "TChain.h"
+#include "TFile.h"
+#include "TH1.h"
+#include "TTree.h"
+#include "TKey.h"
+#include "Riostream.h"
+#include "../include/wwXSec.h"
+#include "../include/wwFileInfo.h"
+#include "../src/lvjjHelper.h"
+
+
+TObjArray *FileList;
+TFile *Target;
+wwFileInfo *fileInfo;
+
+TFile *vjets_fn;
+TF1* fn_highsb_sf;
+
+TObjArray *XSections;
+
+double invPB=-1;
+double elec_lumi=-1;
+double muon_lumi=-1;
+
+//////////////////////////////////////////////////
+// in lvjjHelper
+////////////////////////////////////////////////// 
+// bool doPartialUnblind=true;
+
+void MergeRootfile( TDirectory *target, TObjArray *sourcelist,bool isSystematics);
+
+bool ToScale(string filename);
+
+
+void myhadd(string filename="lnuj",string analy="gww", bool skimmed=true) {
+   // in an interactive ROOT session, edit the file names
+   // Target and FileList, then
+   // root > .L hadd.C
+   // root > hadd()
+
+  std::cout<<std::endl;
+  std::cout<<"MERGING: "<<analy<<std::endl;
+  std::cout<<std::endl;
+
+  string result= "../plots/"+analy+"_plots/merged/";
+  result+=filename;
+
+  elec_lumi = (lvjjHelper::doPartialUnblind) ? 1000.0 : 4701.35276016;
+  muon_lumi = (lvjjHelper::doPartialUnblind) ? 1000.0 : 4701.35276016;
+
+  if(lvjj::useSidebandScale){
+    vjets_fn = (TFile*) TFile::Open("../wjets/files/vjets_systematics_functions.root","READ");
+    fn_highsb_sf = (TF1*) vjets_fn->Get("fn_highsb");
+    vjets_fn->Close();
+  }
+  
+  invPB=(elec_lumi+muon_lumi)/2.0;    
+
+  bool is_sys=false;
+  
+  if(analy=="gww"){
+    result+=".plot.root";
+
+  }else if(analy=="ctrl"){
+    result+=".ctrl.plot.root";
+  }else if(analy=="sys_wjets"){
+    result+=".sys.wjets.plot.root";
+  }else if(analy=="systematics"){
+    is_sys=true;
+    result+=".systematics.plot.root";
+  }else if(analy=="limit"){
+    result+=".limit.plot.root";
+  }else if(analy=="selection"){
+    result+=".selection.root";
+  }else if(analy=="jvf"){
+    result+=".jvf.root";    
+  }else if(analy=="nojvf"){
+    result+=".nojvf.root";    
+  }else{
+    cout<<"Cannot locate "<<result<<endl;
+  }
+  if(invPB<0) {
+    cout<<"Integrated Luminosity not set!"<<endl;
+    break;
+  }
+
+  cout<<"Opening "<<result<<endl;
+  
+  Target = TFile::Open( result.c_str(), "RECREATE" );
+  
+  FileList = new TObjArray();
+
+  fileInfo = new wwFileInfo(filename.c_str(),analy.c_str(),false,skimmed);
+
+  // FileList - list of files to be merged into Target
+  FileList = (TObjArray*) fileInfo->PlotsList();
+
+  XSections = (TObjArray*) fileInfo->XSecs();
+
+  // just for printing
+  // for(int i=0;i<XSections->GetEntries();i++){
+  //   cout<<"proc: "<<((wwXSec*) XSections->At(i))->RunDir();
+  //   cout<<" xsec: "<<((wwXSec*) XSections->At(i))->XSec();
+  //   cout<<" sow: "<<((wwXSec*) XSections->At(i))->Nevt()<<endl;
+  // }
+  
+  MergeRootfile( Target, FileList,is_sys);
+
+}   
+
+void MergeRootfile( TDirectory *target, TObjArray *sourcelist,bool isSystematics ) {
+
+
+  TString path( (char*)strstr( target->GetPath(), ":" ) );
+  path.Remove( 0, 2 );
+    
+  TFile *first_source = (TFile*)sourcelist->First();
+  //float first_local_sf = ((TH1F*) first_source->Get("all/h_all_evt_pu_weight"))->GetMean();
+  // float first_local_nentries = ((TH1F*) first_source->Get("all/h_all_evt_pu_weight"))->GetEntries();
+  // float first_local_sow = first_local_sf*first_local_nentries;
+  
+  first_source->cd( path );
+  TDirectory *current_sourcedir = gDirectory;
+  //gain time, do not add the objects in the list in memory
+  Bool_t status = TH1::AddDirectoryStatus();
+  TH1::AddDirectory(kFALSE);
+
+  bool is_systematics=isSystematics;
+
+  TChain *globChain = 0;
+  TIter nextkey( current_sourcedir->GetListOfKeys() );
+  TKey *key, *oldkey=0;
+  while ( (key = (TKey*)nextkey())) {// loop over all histograms in all subdirectoris of this directory
+
+    //keep only the highest cycle number for each key, IGNORE oldkey=0
+    if (oldkey && !strcmp(oldkey->GetName(),key->GetName())) continue;
+
+    // read object from first source file
+    first_source->cd( path );
+    TObject *obj = key->ReadObj();
+
+  
+    if ( obj->IsA()->InheritsFrom( "TH1" ) ) {
+      // descendant of TH1 -> merge it
+
+      int file_ctr=0;
+  
+      TH1 *h1 = (TH1*)obj;
+
+      string hist_name = h1->GetName();
+      bool scale_hist = ToScale(hist_name);
+
+      //h1->Sumw2();
+      bool is_elec = (hist_name.find("elec")!=string::npos);
+      bool is_muon = (hist_name.find("muon")!=string::npos);
+
+
+      float cur_lumi = -1;
+      if(is_elec){
+	cur_lumi = elec_lumi;
+      }else if(is_muon){
+      	cur_lumi = muon_lumi;
+      }else{
+	cur_lumi = invPB;
+      }
+      
+      double Nexp=0;
+      double Nevt=0;
+      double wwScale=0;
+      double wwScaleTest=0;
+
+
+      bool is_wjets = (bool) ((wwXSec*) XSections->At(file_ctr))->IsWJets();
+
+      if(scale_hist) {// always true 
+	
+	wwScale =((wwXSec*) XSections->At(file_ctr))->GetScale(cur_lumi,hist_name,is_systematics);  
+
+
+	//cout<<"%% "<<is_vjets<<endl;
+	
+	if(h1->Integral()!=0 && h1->GetEntries()!=0){
+
+	  if(lvjjHelper::useSidebandScale && is_wjets &&
+	     ((hist_name.find("dijet_m_lep_nu_dijet_m")!=string::npos) ||
+	     (hist_name.find("dijet_m_lep_pt")!=string::npos) ||
+	     (hist_name.find("dijet_m_lead_jet_pt")!=string::npos) ||
+	     (hist_name.find("dijet_m_second_jet_pt")!=string::npos) ||
+	     (hist_name.find("dijet_m_met")!=string::npos) ||
+	     (hist_name.find("dijet_m_dijet_pt")!=string::npos) ||
+	      (hist_name.find("dijet_m_lep_met_pt")!=string::npos))){
+
+	    //cout<<"1-!! "<<h1->Integral()<<" --> "<<is_vjets<<endl;
+	    
+	    lvjjHelper::WjetsScale(h1,fn_highsb_sf,hist_name,wwScale);
+	    
+	    //cout<<"1-?? "<<h1->Integral()<<endl;
+	    //cout<<endl;
+	  }else{
+	    h1->Scale(wwScale);
+	  }
+      	}
+      }
+
+      // loop over all source files and add the content of the
+      // correspondant histogram to the one pointed to by "h1"
+      TFile *nextsource = (TFile*)sourcelist->After( first_source );
+
+      
+      while ( nextsource ) {
+	++file_ctr;
+        // make sure we are at the correct directory level by cd'ing to path
+	//float next_local_sf =((TH1F*) nextsource->Get("all/h_all_evt_pu_weight"))->GetMean();
+
+        nextsource->cd( path );
+	//std::cout<<"Next source: "<<nextsource->GetName()<<", "<<path<<std::endl;
+        TKey *key2 = (TKey*)gDirectory->GetListOfKeys()->FindObject(h1->GetName());
+        if (key2) {
+           TH1 *h2 = (TH1*)key2->ReadObj();
+	   
+	   if(scale_hist) {
+
+	     wwScale =
+	       ((wwXSec*) XSections->At(file_ctr))->GetScale(cur_lumi,hist_name,is_systematics);
+
+	     if(h2->Integral()!=0 && h2->GetEntries()!=0){
+	       
+	       if(lvjjHelper::useSidebandScale && is_wjets &&
+		  ((hist_name.find("dijet_m_lep_nu_dijet_m")!=string::npos) ||
+		  (hist_name.find("dijet_m_lep_pt")!=string::npos) ||
+		  (hist_name.find("dijet_m_lead_jet_pt")!=string::npos) ||
+		  (hist_name.find("dijet_m_second_jet_pt")!=string::npos) ||
+		  (hist_name.find("dijet_m_met")!=string::npos) ||
+		  (hist_name.find("dijet_m_dijet_pt")!=string::npos) ||
+		   (hist_name.find("dijet_m_lep_met_pt")!=string::npos))){
+
+		 //cout<<"2-!! "<<h2->Integral()<<endl;
+	    
+		 lvjjHelper::WjetsScale(h2,fn_highsb_sf,hist_name,wwScale);
+	    
+		 //cout<<"2-?? "<<h2->Integral()<<endl;
+		 //cout<<endl;
+	       }else{
+
+		 h2->Scale(wwScale);
+	       }
+	     }
+	   }      
+
+           h1->Add( h2 );
+           delete h2;
+        }
+
+        nextsource = (TFile*)sourcelist->After( nextsource );
+      }
+    }
+    else if ( obj->IsA()->InheritsFrom( "TTree" ) ) {
+      
+      // loop over all source files create a chain of Trees "globChain"
+      const char* obj_name= obj->GetName();
+
+      globChain = new TChain(obj_name);
+      globChain->Add(first_source->GetName());
+      TFile *nextsource = (TFile*)sourcelist->After( first_source );
+      //      const char* file_name = nextsource->GetName();
+      // cout << "file name  " << file_name << endl;
+     while ( nextsource ) {
+     	  
+       globChain->Add(nextsource->GetName());
+       nextsource = (TFile*)sourcelist->After( nextsource );
+     }
+
+    } else if ( obj->IsA()->InheritsFrom( "TDirectory" ) ) {
+      // it's a subdirectory
+
+      //cout << "Found subdirectory " << obj->GetName() << endl;
+
+      // create a new subdir of same name and title in the target file
+      target->cd();
+      TDirectory *newdir = target->mkdir( obj->GetName(), obj->GetTitle() );
+
+      // newdir is now the starting point of another round of merging
+      // newdir still knows its depth within the target file via
+      // GetPath(), so we can still figure out where we are in the recursion
+      MergeRootfile( newdir, sourcelist,is_systematics);
+
+    } else {
+
+      // object is of no type that we know or can handle
+      cout << "Unknown object type, name: " 
+           << obj->GetName() << " title: " << obj->GetTitle() << endl;
+    }
+
+    // now write the merged histogram (which is "in" obj) to the target file
+    // note that this will just store obj in the current directory level,
+    // which is not persistent until the complete directory itself is stored
+    // by "target->Write()" below
+    if ( obj ) {
+      target->cd();
+
+      //!!if the object is a tree, it is stored in globChain...
+      if(obj->IsA()->InheritsFrom( "TTree" )){
+	globChain->Merge(target->GetFile(),0,"keep");
+      }else{
+	obj->Write( key->GetName() );
+      }
+    }
+
+  } // while ( ( TKey *key = (TKey*)nextkey() ) )
+
+  // save modifications to target file
+  target->SaveSelf(kTRUE);
+  TH1::AddDirectory(status);
+}
+
+bool ToScale(string histname){
+  bool scale_return=true;
+  
+  //std::cout<<histname<<std::endl;
+  // //if(histname.find("h_evt_n")==0)
+
+  // //    histname.find("h_L")==0 ||
+  // //    //histname.find("h_all")==0 ||
+  // //    histname.find("h_pass")==0) scale_return=false;
+    
+
+
+  return scale_return;
+}
+
+

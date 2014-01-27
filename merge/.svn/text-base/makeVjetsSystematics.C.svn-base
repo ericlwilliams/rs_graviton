@@ -1,0 +1,90 @@
+// Only to be run AFTER makeLimitWithSystmatics.C
+// Open envelope function files
+// Open nominal w/z+jets signal lep_nu_dijet_m
+// Scale v_jets lep_nu_dijet_m up/down by envelope functions
+#include <TFile>
+#include <TF1>
+
+void makeVjetsSystematics(){
+
+  string wjets_file_loc = "../plots/systematics_plots/merged/mc.alpgen.wjets.systematics.plot.root";
+  TFile* wjets_file = (TFile*) TFile::Open(wjets_file_loc.c_str(),"R");
+
+  //  TH1F* h_wjets_
+  TH1F* h_wjets_el_lep_nu_dijet_m = (TH1F*) wjets_file->Get("h_el_jes_nom_highm_lep_nu_dijet_m");
+  h_wjets_el_lep_nu_dijet_m->SetDirectory(0);
+  TH1F* h_wjets_mu_lep_nu_dijet_m = (TH1F*) wjets_file->Get("h_mu_jes_nom_highm_lep_nu_dijet_m");
+  h_wjets_mu_lep_nu_dijet_m->SetDirectory(0);
+  wjets_file->Close();
+
+  string zjets_file_loc = "../plots/systematics_plots/merged/mc.alpgen.zjets.systematics.plot.root";
+  TFile* zjets_file = (TFile*) TFile::Open(zjets_file_loc.c_str(),"R");
+  TH1F* h_zjets_el_lep_nu_dijet_m = (TH1F*) zjets_file->Get("h_el_jes_nom_highm_lep_nu_dijet_m");
+  h_zjets_el_lep_nu_dijet_m->SetDirectory(0);
+  TH1F* h_zjets_mu_lep_nu_dijet_m = (TH1F*) zjets_file->Get("h_mu_jes_nom_highm_lep_nu_dijet_m");
+  h_zjets_mu_lep_nu_dijet_m->SetDirectory(0);
+  zjets_file->Close();
+
+  string vjets_sys_fn_file_loc = "../wjets/files/vjets_systematics_functions.root";
+  TFile* vjets_sys_fn_file = (TFile*) TFile::Open(vjets_sys_fn_file_loc.c_str(),"R");
+  TF1* fn_lowsb = (TF1*) vjets_sys_fn_file->Get("fn_lowsb");
+  TF1* fn_highsb = (TF1*) vjets_sys_fn_file->Get("fn_highsb");
+
+
+  TH1F* h_wjets_el_vjets_lowsb_lep_nu_dijet_m = (TH1F*) h_wjets_el_lep_nu_dijet_m->Clone();
+  TH1F* h_wjets_el_vjets_highsb_lep_nu_dijet_m = (TH1F*) h_wjets_el_lep_nu_dijet_m->Clone();
+  //wjets
+  for(int i=1; i<=h_wjets_el_vjets_lowsb_lep_nu_dijet_m->GetNbinsX();i++){
+
+    float cur_bin_center = h_wjets_el_vjets_lowsb_lep_nu_dijet_m->GetBinCenter(i);
+    float cur_highsb = fn_highsb->Eval(cur_bin_center);
+    float cur_lowsb = fn_lowsb->Eval(cur_bin_center);
+
+    float cur_el_lowsb_content = h_wjets_el_vjets_lowsb_lep_nu_dijet_m->GetBinContent(i);
+    h_wjets_el_vjets_lowsb_lep_nu_dijet_m->SetBinContent(i,cur_el_lowsb_content*fn_lowsb->Eval(cur_bin_center));
+
+    float cur_el_highsb_content = h_wjets_el_vjets_highsb_lep_nu_dijet_m->GetBinContent(i);
+    h_wjets_el_vjets_highsb_lep_nu_dijet_m->SetBinContent(i,cur_el_highsb_content*fn_highsb->Eval(cur_bin_center));
+
+  }
+
+
+  //zjets  
+  TH1F* h_zjets_el_vjets_lowsb_lep_nu_dijet_m = (TH1F*) h_zjets_el_lep_nu_dijet_m->Clone();
+  TH1F* h_zjets_el_vjets_highsb_lep_nu_dijet_m = (TH1F*) h_zjets_el_lep_nu_dijet_m->Clone();
+
+  for(int i=1; i<=h_zjets_el_vjets_lowsb_lep_nu_dijet_m->GetNbinsX();i++){
+
+    float cur_bin_center = h_zjets_el_vjets_lowsb_lep_nu_dijet_m->GetBinCenter(i);
+    float cur_highsb = fn_highsb->Eval(cur_bin_center);
+    float cur_lowsb = fn_lowsb->Eval(cur_bin_center);
+
+    float cur_el_lowsb_content = h_zjets_el_vjets_lowsb_lep_nu_dijet_m->GetBinContent(i);
+    h_zjets_el_vjets_lowsb_lep_nu_dijet_m->SetBinContent(i,cur_el_lowsb_content*fn_lowsb->Eval(cur_bin_center));
+
+    float cur_el_highsb_content = h_zjets_el_vjets_highsb_lep_nu_dijet_m->GetBinContent(i);
+    h_zjets_el_vjets_highsb_lep_nu_dijet_m->SetBinContent(i,cur_el_highsb_content*fn_highsb->Eval(cur_bin_center));
+
+  }
+
+  
+  TFile* evjj_lep_nu_dijet_m = (TFile*) TFile::Open("./limit_files/evjj_highm_lep_nu_dijet_m.root","READ");
+  evjj_lep_nu_dijet_m->ReadAll();
+
+
+  TFile* evjj_wjets_lowsb_lep_nu_dijet_m =
+    (TFile*) TFile::Open("./limit_files/evjj_highm_vjets_lowsb_lep_nu_dijet_m.root","RECREATE");
+  evjj_lep_nu_dijet_m->GetList()->Write();
+
+  h_wjets_el_vjets_lowsb_lep_nu_dijet_m->Rebin(4);
+  h_wjets_el_vjets_lowsb_lep_nu_dijet_m->Write("wjets",TObject::kOverwrite);
+  h_zjets_el_vjets_lowsb_lep_nu_dijet_m->Rebin(4);
+  h_zjets_el_vjets_lowsb_lep_nu_dijet_m->Write("zjets",TObject::kOverwrite);
+
+  
+  evjj_wjets_lowsb_lep_nu_dijet_m->Close();
+  evjj_lep_nu_dijet_m->Close();
+  
+
+  return;
+}

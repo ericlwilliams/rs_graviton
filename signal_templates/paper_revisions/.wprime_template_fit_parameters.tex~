@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[margin=1cm]{geometry}
+\usepackage[font=small,labelfont=bf,tableposition=top]{caption}
+\usepackage{dcolumn}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{datatool}
+\usepackage{booktabs}
+
+
+\begin{document}
+
+\includegraphics[width=\textwidth]{../../systematics/results/total/lvjj_signal_systematics.pdf}
+\newpage
+
+\begin{centering}\LARGE
+NOMINAL Signal Template Fits\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_jes_nom_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_jes_nom_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+\begin{centering}\LARGE
+JES UP\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_jes_up_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_jes_up_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+\begin{centering}\LARGE
+JES DOWN\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_jes_down_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_jes_down_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+JER UP\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_jer_up_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_jer_up_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+JER DOWN\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_jer_down_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_jer_down_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+LES UP\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_les_up_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_les_up_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+LES DOWN\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_les_down_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_les_down_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+LER UP\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_ler_up_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_ler_up_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+\begin{centering}\LARGE
+LER DOWN\\
+\vskip+2em
+$e\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/evjj_ler_down_fit_parameters.pdf}\\
+\vskip+2em
+$\mu\nu jj$\\
+\includegraphics[width=0.85\textwidth]{../wprime_plots/uvjj_ler_down_fit_parameters.pdf}\\
+\end{centering}
+\newpage
+
+
+\end{document}

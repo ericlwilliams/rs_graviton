@@ -1,0 +1,12 @@
+void testMakeCrystalBallParameterFits(){
+
+  string test_sys = "jes_nom";
+  
+  gROOT->ProcessLine(".L ../src/signalShapes.C+");
+  signalShapes* sigShape = new signalShapes();
+  cout<<"sigShape::makeSignalParameterFits: "<<test_sys<<endl;
+  sigShape->makeSigTemplate(test_sys.c_str());
+
+
+  return;
+}
